@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/nf-validation/example/master/assets/schema_input.json",
+  "title": "nf-validation example - params.input schema",
+  "description": "Schema for the file provided with params.input",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "donor_id": {
+        "type": "string",
+        "default": "value"
+      },
+      "sample_id": {
+        "type": "string",
+        "unique": true
+      },
+      "project_number": {
+        "type": "number"
+      },
+      "bam": {
+        "type": "string"
+      },
+      "pindel": {
+        "type": "string"
+      },
+      "caveman_c": {
+        "type": "string"
+      }
+    },
+    "required": ["donor_id", "sample_id", "bam"]
+  }
+}
