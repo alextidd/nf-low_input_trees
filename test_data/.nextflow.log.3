@@ -1,66 +1,110 @@
-Mar-27 10:00:40.607 [main] DEBUG nextflow.cli.Launcher - Setting http proxy: ProxyConfig[protocol=http; host=wwwcache.sanger.ac.uk; port=3128]
-Mar-27 10:00:40.632 [main] DEBUG nextflow.cli.Launcher - Setting https proxy: ProxyConfig[protocol=https; host=wwwcache.sanger.ac.uk; port=3128]
-Mar-27 10:00:40.632 [main] DEBUG nextflow.cli.Launcher - $> /software/team205//nextflow-23.04.1-all run ../main.nf --sample_sheet sample_sheet.csv --genome_fasta genome_fasta/NC_001422.1.fasta --outdir output -with-report -resume -offline -plugins /nfs/users/nfs_a/at31/.nextflow/plugins/nf-validation-1.1.3
-Mar-27 10:00:40.680 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 23.04.1
-Mar-27 10:00:40.697 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/nfs/users/nfs_a/at31/.nextflow/plugins; core-plugins: nf-amazon@1.16.2,nf-azure@1.0.1,nf-codecommit@0.1.4,nf-console@1.0.5,nf-ga4gh@1.0.5,nf-google@1.7.3,nf-tower@1.5.12,nf-wave@0.8.2
-Mar-27 10:00:40.707 [main] INFO  org.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
-Mar-27 10:00:40.708 [main] INFO  org.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
-Mar-27 10:00:40.711 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
-Mar-27 10:00:40.721 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
-Mar-27 10:00:40.735 [main] DEBUG nextflow.config.ConfigBuilder - Found config home: /nfs/users/nfs_a/at31/.nextflow/config
-Mar-27 10:00:40.735 [main] DEBUG nextflow.config.ConfigBuilder - Found config base: /lustre/scratch126/casm/team154pc/at31/chemo_trees/nf-chemo-trees/nextflow.config
-Mar-27 10:00:40.736 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /nfs/users/nfs_a/at31/.nextflow/config
-Mar-27 10:00:40.737 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /lustre/scratch126/casm/team154pc/at31/chemo_trees/nf-chemo-trees/nextflow.config
-Mar-27 10:00:40.757 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
-Mar-27 10:00:41.453 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
-Mar-27 10:00:41.586 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declararion
-Mar-27 10:00:41.593 [main] INFO  nextflow.cli.CmdRun - Launching `../main.nf` [distraught_mclean] DSL2 - revision: a3af9f3ca0
-Mar-27 10:00:41.594 [main] WARN  nextflow.plugin.PluginsFacade - Nextflow self-contained distribution allows only core plugins -- User config plugins will be ignored: /nfs/users/nfs_a/at31/.nextflow/plugins/nf-validation-1.1.3
-Mar-27 10:00:41.607 [main] DEBUG nextflow.secret.LocalSecretsProvider - Secrets store: /nfs/users/nfs_a/at31/.nextflow/secrets/store.json
-Mar-27 10:00:41.611 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@3fa7df1] - activable => nextflow.secret.LocalSecretsProvider@3fa7df1
-Mar-27 10:00:41.678 [main] DEBUG nextflow.Session - Session UUID: f097d51b-c951-4cfa-a0d0-166e087b2da8
-Mar-27 10:00:41.678 [main] DEBUG nextflow.Session - Run name: distraught_mclean
-Mar-27 10:00:41.678 [main] DEBUG nextflow.Session - Executor pool size: 64
-Mar-27 10:00:41.690 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=192; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
-Mar-27 10:00:41.717 [main] DEBUG nextflow.cli.CmdRun - 
-  Version: 23.04.1 build 5867
-  Created: 15-04-2023 07:31 UTC (08:31 BST)
-  System: Linux 4.15.0-219-generic
-  Runtime: Groovy 3.0.16 on OpenJDK 64-Bit Server VM 17.0.3-internal+0-adhoc..src
+Mar-28 14:46:27.353 [main] DEBUG nextflow.cli.Launcher - Setting http proxy: ProxyConfig[protocol=http; host=wwwcache.sanger.ac.uk; port=3128]
+Mar-28 14:46:27.409 [main] DEBUG nextflow.cli.Launcher - Setting https proxy: ProxyConfig[protocol=https; host=wwwcache.sanger.ac.uk; port=3128]
+Mar-28 14:46:27.410 [main] DEBUG nextflow.cli.Launcher - $> nextflow run ../main.nf --sample_sheet sample_sheet.csv --outdir out --genome GRCh38 -resume
+Mar-28 14:46:27.523 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 23.10.1
+Mar-28 14:46:27.547 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/nfs/users/nfs_a/at31/.nextflow/plugins; core-plugins: nf-amazon@2.1.4,nf-azure@1.3.3,nf-cloudcache@0.3.0,nf-codecommit@0.1.5,nf-console@1.0.6,nf-ga4gh@1.1.0,nf-google@1.8.3,nf-tower@1.6.3,nf-wave@1.0.1
+Mar-28 14:46:27.560 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Mar-28 14:46:27.561 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Mar-28 14:46:27.565 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+Mar-28 14:46:27.578 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Mar-28 14:46:27.602 [main] DEBUG nextflow.config.ConfigBuilder - Found config base: /lustre/scratch126/casm/team154pc/at31/chemo_trees/nf-chemo-trees/nextflow.config
+Mar-28 14:46:27.605 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /lustre/scratch126/casm/team154pc/at31/chemo_trees/nf-chemo-trees/nextflow.config
+Mar-28 14:46:27.636 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Mar-28 14:46:29.004 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declararion
+Mar-28 14:46:29.026 [main] INFO  nextflow.cli.CmdRun - Launching `../main.nf` [thirsty_bernard] DSL2 - revision: a4b0ea1379
+Mar-28 14:46:29.027 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins declared=[nf-validation@1.1.3]
+Mar-28 14:46:29.028 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Mar-28 14:46:29.028 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[nf-validation@1.1.3]
+Mar-28 14:46:29.028 [main] DEBUG nextflow.plugin.PluginUpdater - Installing plugin nf-validation version: 1.1.3
+Mar-28 14:46:29.050 [main] INFO  org.pf4j.AbstractPluginManager - Plugin 'nf-validation@1.1.3' resolved
+Mar-28 14:46:29.051 [main] INFO  org.pf4j.AbstractPluginManager - Start plugin 'nf-validation@1.1.3'
+Mar-28 14:46:29.063 [main] DEBUG nextflow.plugin.BasePlugin - Plugin started nf-validation@1.1.3
+Mar-28 14:46:29.080 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /nfs/users/nfs_a/at31/.nextflow/secrets/store.json
+Mar-28 14:46:29.085 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@7c112f5f] - activable => nextflow.secret.LocalSecretsProvider@7c112f5f
+Mar-28 14:46:29.151 [main] DEBUG nextflow.Session - Session UUID: be45dc9e-5147-4b7e-973b-65049b38a938
+Mar-28 14:46:29.151 [main] DEBUG nextflow.Session - Run name: thirsty_bernard
+Mar-28 14:46:29.152 [main] DEBUG nextflow.Session - Executor pool size: 4
+Mar-28 14:46:29.160 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Mar-28 14:46:29.164 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Mar-28 14:46:29.204 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 23.10.1 build 5891
+  Created: 12-01-2024 22:01 UTC (22:01 BST)
+  System: Linux 5.4.0-171-generic
+  Runtime: Groovy 3.0.19 on OpenJDK 64-Bit Server VM 17.0.1+12
   Encoding: UTF-8 (UTF-8)
-  Process: 62113@farm5-head2 [10.160.12.32]
-  CPUs: 64 - Mem: 754.6 GB (31.7 GB) - Swap: 1.4 TB (1.4 TB)
-Mar-27 10:00:41.750 [main] DEBUG nextflow.Session - Work-dir: /lustre/scratch126/casm/team154pc/at31/chemo_trees/nf-chemo-trees/test_data/work [lustre]
-Mar-27 10:00:41.750 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /lustre/scratch126/casm/team154pc/at31/chemo_trees/nf-chemo-trees/bin
-Mar-27 10:00:41.776 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[GoogleLifeSciencesExecutor, AwsBatchExecutor, GoogleBatchExecutor]
-Mar-27 10:00:41.786 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
-Mar-27 10:00:41.789 [main] DEBUG nextflow.Session - Observer factory: TowerFactory
-Mar-27 10:00:41.813 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
-Mar-27 10:00:41.822 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 65; maxThreads: 1000
-Mar-27 10:00:41.925 [main] DEBUG nextflow.Session - Session start
-Mar-27 10:00:42.079 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
-Mar-27 10:00:42.143 [main] DEBUG nextflow.plugin.PluginUpdater - Installing plugin nf-validation version: latest
-Mar-27 10:00:42.413 [main] INFO  org.pf4j.AbstractPluginManager - Plugin 'nf-validation@1.1.3' resolved
-Mar-27 10:00:42.413 [main] INFO  org.pf4j.AbstractPluginManager - Start plugin 'nf-validation@1.1.3'
-Mar-27 10:00:42.421 [main] DEBUG nextflow.plugin.BasePlugin - Plugin started nf-validation@1.1.3
-Mar-27 10:00:42.421 [main] DEBUG nextflow.script.IncludeDef - Loading included plugin extensions with names: [validateParameters:validateParameters, paramsHelp:paramsHelp, paramsSummaryLog:paramsSummaryLog, fromSamplesheet:fromSamplesheet]; plugin Id: nf-validation
-Mar-27 10:00:42.458 [main] INFO  nextflow.Nextflow - 
-Usage:
+  Process: 115273@node-14-07 [10.160.20.44]
+  CPUs: 4 - Mem: 2 TB (1.6 TB) - Swap: 1.3 TB (1.3 TB)
+Mar-28 14:46:29.253 [main] DEBUG nextflow.Session - Work-dir: /lustre/scratch126/casm/team154pc/at31/chemo_trees/nf-chemo-trees/test_data/work [lustre]
+Mar-28 14:46:29.254 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /lustre/scratch126/casm/team154pc/at31/chemo_trees/nf-chemo-trees/bin
+Mar-28 14:46:29.265 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Mar-28 14:46:29.275 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Mar-28 14:46:29.318 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Mar-28 14:46:29.328 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 5; maxThreads: 1000
+Mar-28 14:46:29.423 [main] DEBUG nextflow.Session - Session start
+Mar-28 14:46:29.759 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Mar-28 14:46:29.772 [main] DEBUG nextflow.script.IncludeDef - Loading included plugin extensions with names: [validateParameters:validateParameters, paramsHelp:paramsHelp, paramsSummaryLog:paramsSummaryLog, fromSamplesheet:fromSamplesheet]; plugin Id: nf-validation
+Mar-28 14:46:29.913 [main] WARN  nextflow.script.ScriptBinding - Access to undefined parameter `monochromeLogs` -- Initialise it to a default value eg. `params.monochromeLogs = some_value`
+Mar-28 14:46:29.928 [main] INFO  nextflow.Nextflow - [1mCore Nextflow options[0m
+  [0;34mrunName     : [0;32mthirsty_bernard[0m
+  [0;34mlaunchDir   : [0;32m/lustre/scratch126/casm/team154pc/at31/chemo_trees/nf-chemo-trees/test_data[0m
+  [0;34mworkDir     : [0;32m/lustre/scratch126/casm/team154pc/at31/chemo_trees/nf-chemo-trees/test_data/work[0m
+  [0;34mprojectDir  : [0;32m/lustre/scratch126/casm/team154pc/at31/chemo_trees/nf-chemo-trees[0m
+  [0;34muserName    : [0;32mat31[0m
+  [0;34mprofile     : [0;32mstandard[0m
+  [0;34mconfigFiles : [0;32m[0m
 
-nextflow run nf-chemotrees <ARGUMENTS>
+[1mInput/output options[0m
+  [0;34msample_sheet: [0;32msample_sheet.csv[0m
+  [0;34moutdir      : [0;32mout[0m
 
-Required Arguments:
+[1mReference genome options[0m
+  [0;34mgenome      : [0;32mGRCh38[0m
 
-  Input Data:
-  --sample_sheet        Single file with the location of all input data. Must be formatted
-                        as a CSV containing columns: sample_id,donor_id,bam_file,...
+!! Only displaying parameters that differ from the pipeline defaults !!
+-[2m----------------------------------------------------[0m-
+Mar-28 14:46:30.002 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_6bdff24012a1c39c: /lustre/scratch126/casm/team154pc/at31/chemo_trees/nf-chemo-trees/./subworkflows/local/utils_nfcore_chemotrees_pipeline/main.nf
+  Script_69c1fca9fc07527c: /lustre/scratch126/casm/team154pc/at31/chemo_trees/nf-chemo-trees/main.nf
+Mar-28 14:46:30.003 [main] DEBUG nextflow.Session - Session aborted -- Cause: No such property: fasta for class: nextflow.script.WorkflowBinding
+Mar-28 14:46:30.019 [main] DEBUG nextflow.Session - The following nodes are still active:
+  [operator] splitCsv
+  [operator] map
 
-  Reference Data:
-  --genome_fasta        Reference genome to use for alignment, in FASTA format
-
-  Output Location:
-  --out_dir             Output directory
-
-Optional Arguments:
-  --...
-
+Mar-28 14:46:30.028 [main] ERROR nextflow.cli.Launcher - @unknown
+groovy.lang.MissingPropertyException: No such property: fasta for class: nextflow.script.WorkflowBinding
+	at groovy.lang.Binding.getVariable(Binding.java:61)
+	at nextflow.script.WorkflowBinding.getVariable(WorkflowBinding.groovy:140)
+	at groovy.lang.Binding.getProperty(Binding.java:116)
+	at nextflow.script.WorkflowBinding.getProperty(WorkflowBinding.groovy:129)
+	at org.codehaus.groovy.runtime.InvokerHelper.getProperty(InvokerHelper.java:190)
+	at groovy.lang.Closure.getPropertyTryThese(Closure.java:320)
+	at groovy.lang.Closure.getPropertyDelegateFirst(Closure.java:310)
+	at groovy.lang.Closure.getProperty(Closure.java:296)
+	at org.codehaus.groovy.runtime.callsite.PogoGetPropertySite.getProperty(PogoGetPropertySite.java:49)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callGroovyObjectGetProperty(AbstractCallSite.java:341)
+	at Script_69c1fca9fc07527c$_runScript_closure2$_closure6.doCall(Script_69c1fca9fc07527c:69)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:274)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1030)
+	at groovy.lang.Closure.call(Closure.java:427)
+	at groovy.lang.Closure.call(Closure.java:406)
+	at nextflow.script.WorkflowDef.run0(WorkflowDef.groovy:204)
+	at nextflow.script.WorkflowDef.run(WorkflowDef.groovy:188)
+	at nextflow.script.BindableDef.invoke_a(BindableDef.groovy:51)
+	at nextflow.script.IterableDef$invoke_a.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:139)
+	at nextflow.script.BaseScript.run0(BaseScript.groovy:183)
+	at nextflow.script.BaseScript.run(BaseScript.groovy:192)
+	at nextflow.script.ScriptParser.runScript(ScriptParser.groovy:236)
+	at nextflow.script.ScriptRunner.run(ScriptRunner.groovy:242)
+	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:137)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:372)
+	at nextflow.cli.Launcher.run(Launcher.groovy:500)
+	at nextflow.cli.Launcher.main(Launcher.groovy:672)

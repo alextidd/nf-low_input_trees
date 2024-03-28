@@ -3,60 +3,71 @@
 // using DSL-2
 nextflow.enable.dsl=2
 
-//export NXF_PLUGINS_DIR=~/.nextflow/plugins/
-
 // all of the default parameters are being set in `nextflow.config`
 
-// import sub-workflows
-include { validate_manifest } from './modules/manifest'
+// import functions / modules / subworkflows / workflows
 include { validateParameters; paramsHelp; paramsSummaryLog; fromSamplesheet } from 'plugin/nf-validation'
+include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_chemotrees_pipeline'
 
-// Function which prints help message text
-def helpMessage() {
-    log.info"""
-Usage:
+// genome parameter values
+params.fasta = getGenomeAttribute('fasta')
 
-nextflow run nf-chemotrees <ARGUMENTS>
+// hairpin step
+process HAIRPIN {
+  tag "${meta.donor_id}:${meta.sample_id}"
+  
+  input:
+  tuple val(meta), path(caveman_vcf), path(pindel_vcf), path(bam), path(bai), path(bas), path(met)
+  path fasta
 
-Required Arguments:
-
-  Input Data:
-  --sample_sheet        Single file with the location of all input data. Must be formatted
-                        as a CSV containing columns: sample_id,donor_id,bam_file,...
-
-  Reference Data:
-  --genome_fasta        Reference genome to use for alignment, in FASTA format
-
-  Output Location:
-  --out_dir             Output directory
-
-Optional Arguments:
-  --...
-    """.stripIndent()
+  script:
+  """
+  module load hairpin
+  hairpin \
+    -v ${caveman_vcf} \
+    -b ${bam} \
+    -g ${fasta} 
+  """
 }
-
 
 // Main workflow
 workflow {
 
-    // Show help message if the user specifies the --help flag at runtime
-    // or if any required params are not provided
-    if ( params.help || params.output_folder == false || params.genome_fasta == false ){
-        // Invoke the function above which prints the help message
-        helpMessage()
-        // Exit out and do not run anything else
-        exit 1
+  // Print help message, supply typical command line usage for the pipeline
+  if (params.help) {
+    log.info paramsHelp("nextflow run nf-chemo-trees --sample_sheet sample_sheet.csv")
+    exit 0
+  }
+
+  // validate the input parameters
+  //validateParameters()
+
+  // print summary of supplied parameters
+  log.info paramsSummaryLog(workflow)
+
+  // create a new channel of metadata from a sample sheet
+  //ch_input = Channel.fromSamplesheet("sample_sheet")
+  //ch_input.view()
+
+  // get metadata + bam paths
+  ch_input = \
+    Channel.fromPath(params.sample_sheet, checkIfExists: true)
+    | splitCsv(header: true)
+    | map { row ->
+        meta = [sample_id: row.sample_id, donor_id: row.donor_id]
+        [meta, 
+          file(row.caveman_vcf, checkIfExists: true),
+          file(row.pindel_vcf, checkIfExists: true),
+          file(row.bam, checkIfExists: true),
+          file(row.bam + ".bai", checkIfExists: true),
+          file(row.bam + ".bas", checkIfExists: true),
+          file(row.bam + ".met.gz", checkIfExists: true)
+        ]
     }
 
-    // validate the input parameters
-    validateParameters()
-
-    // print summary of supplied parameters
-    log.info paramsSummaryLog(workflow)
-
-    // create a new channel of metadata from a sample sheet
-    ch_input = Channel.fromSamplesheet(params.sample_sheet)
-    ch_input.view()
-    
+  view(params.fasta)
+  
+  // run hairpin
+  HAIRPIN(ch_input, params.fasta)
 
 }
