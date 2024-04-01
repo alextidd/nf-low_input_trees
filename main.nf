@@ -7,26 +7,31 @@ nextflow.enable.dsl=2
 
 // import functions / modules / subworkflows / workflows
 include { validateParameters; paramsHelp; paramsSummaryLog; fromSamplesheet } from 'plugin/nf-validation'
-include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_chemotrees_pipeline'
 
-// genome parameter values
-params.fasta = getGenomeAttribute('fasta')
-
-// hairpin step
+// run hairpin
 process HAIRPIN {
   tag "${meta.donor_id}:${meta.sample_id}"
-  
+  label "normal10gb"
+
   input:
   tuple val(meta), path(caveman_vcf), path(pindel_vcf), path(bam), path(bai), path(bas), path(met)
   path fasta
 
   script:
   """
-  module load hairpin
-  hairpin \
-    -v ${caveman_vcf} \
-    -b ${bam} \
-    -g ${fasta} 
+  # module load hairpin
+  # hairpin \
+  #   -v ${caveman_vcf} \
+  #   -b ${bam}
+  
+  # run singularity images
+  singularity pull shub://MathijsSanders/SangerLCMFilteringSingularity
+  singularity run --bind /nfs,/lustre --app preselect SangerLCMFilteringSingularity_latest.sif -v ${caveman_vcf} > filtered.vcf
+  singularity run --bind /nfs,/lustre --app imitateANNOVAR SangerLCMFilteringSingularity_latest.sif -v filtered.vcf > filtered.annovar
+  singularity run --bind /nfs,/lustre --app annotateBAMStatistics SangerLCMFilteringSingularity_latest.sif -a filtered.annovar -b ${bam} -t $task.cpus > annotated.annovar
+  singularity run --bind /nfs,/lustre --app additionalBAMStatistics SangerLCMFilteringSingularity_latest.sif -a annotated.annovar -b ${bam} -t $task.cpus -r $params.fasta \
+    -s /lustre/scratch126/casm/team154pc/at31/chemo_trees/data/reference/snp_database > fully_annotated.annovar
+  singularity run --bind /nfs,/lustre --app filtering SangerLCMFilteringSingularity_latest.sif -a fully_annotated.annovar -v ${caveman_vcf} -o out/ -p ${meta.donor_id}
   """
 }
 
