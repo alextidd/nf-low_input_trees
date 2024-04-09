@@ -1,3 +1,0 @@
-donor_id,sample_id,project_number,bam,pindel_vcf,caveman_vcf
-PD56034,PD56034ct,2966,/nfs/cancer_ref01/nst_links/live//2966/PD56034ct//PD56034ct.sample.dupmarked.bam,/nfs/cancer_ref01/nst_links/live//2966/PD56034ct//PD56034ct.pindel.annot.vcf.gz,/nfs/cancer_ref01/nst_links/live//2966/PD56034ct//PD56034ct.caveman_c.annot.vcf.gz
-PD56034,PD56034cu,2966,/nfs/cancer_ref01/nst_links/live//2966/PD56034cu//PD56034cu.sample.dupmarked.bam,/nfs/cancer_ref01/nst_links/live//2966/PD56034cu//PD56034cu.pindel.annot.vcf.gz,/nfs/cancer_ref01/nst_links/live//2966/PD56034cu//PD56034cu.caveman_c.annot.vcf.gz
