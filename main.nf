@@ -160,14 +160,14 @@ process filtering {
 // Main workflow
 workflow {
 
-    // Print help message, supply typical command line usage for the pipeline
+    // print help message, supply typical command line usage for the pipeline
     if (params.help) {
     log.info paramsHelp("nextflow run nf-chemo-trees --sample_sheet sample_sheet.csv")
     exit 0
     }
 
     // validate the input parameters
-    //validateParameters()
+    // validateParameters()
 
     // print summary of supplied parameters
     log.info paramsSummaryLog(workflow)
