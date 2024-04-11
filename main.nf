@@ -10,7 +10,13 @@ include { validateParameters; paramsHelp; paramsSummaryLog; fromSamplesheet } fr
 
 process preselect {
     tag "${meta.donor_id}:${meta.sample_id}"
-    label "normal10gb"
+    label "normal"
+    publishDir "${params.outdir}/${meta.donor_id}/${meta.sample_id}/${vcf_type}", 
+      mode: "copy",
+      pattern: "*.pre.vcf"
+    publishDir "${params.outdir}/${meta.donor_id}/${meta.sample_id}/${vcf_type}", 
+      mode: "symlink",
+      pattern: "*.{annot.vcf.gz,sample.dupmarked.bam}"
 
     input:
     tuple val(meta), val(vcf_type), path(vcf), 
@@ -25,16 +31,19 @@ process preselect {
     """
     module load singularity
     singularity run \
-    --bind /nfs,/lustre \
-    --app preselect ${params.sif} \
-    --vcf-file ${vcf} \
-    > ${meta.sample_id}.pre.vcf
+      --bind /nfs,/lustre \
+      --app preselect ${params.sif} \
+      --vcf-file ${vcf} \
+      > ${meta.sample_id}.pre.vcf
     """
 }
 
 process imitateANNOVAR {
     tag "${meta.donor_id}:${meta.sample_id}"
-    label "normal10gb"
+    label "normal"
+    publishDir "${params.outdir}/${meta.donor_id}/${meta.sample_id}/${vcf_type}", 
+      mode: "copy",
+      pattern: "*.pre.annovar.txt"
 
     input:
     tuple val(meta), val(vcf_type), path(vcf), 
@@ -51,16 +60,19 @@ process imitateANNOVAR {
     """
     module load singularity
     singularity run \
-    --bind /nfs,/lustre \
-    --app imitateANNOVAR ${params.sif} \
-    --vcf-file ${pre_vcf} \
-    > ${meta.sample_id}.pre.annovar.txt
+      --bind /nfs,/lustre \
+      --app imitateANNOVAR ${params.sif} \
+      --vcf-file ${pre_vcf} \
+      > ${meta.sample_id}.pre.annovar.txt
     """
 }
 
 process annotateBAMStatistics {
   tag "${meta.donor_id}:${meta.sample_id}"
-  label "normal10gb"
+  label "normal"
+  publishDir "${params.outdir}/${meta.donor_id}/${meta.sample_id}/${vcf_type}", 
+    mode: "copy",
+    pattern: "*.pre.annovar.annot.txt"
 
   input:
   tuple val(meta), val(vcf_type), path(vcf), 
@@ -90,8 +102,11 @@ process annotateBAMStatistics {
 
 process additionalBAMStatistics {
   tag "${meta.donor_id}:${meta.sample_id}"
-  label "normal10gb"
-
+  label "normal"
+  publishDir "${params.outdir}/${meta.donor_id}/${meta.sample_id}/${vcf_type}", 
+    mode: "copy",
+    pattern: "*.pre.annovar.annot.full.txt"
+  
   input:
   tuple val(meta), val(vcf_type), path(vcf), 
         path(bam), path(bai), path(bas), path(met),
@@ -124,7 +139,10 @@ process additionalBAMStatistics {
 
 process filtering {
   tag "${meta.donor_id}:${meta.sample_id}"
-  label "normal10gb"
+  label "week"
+  publishDir "${params.outdir}/${meta.donor_id}/${meta.sample_id}/${vcf_type}", 
+    mode: "copy",
+    pattern: "*.pre.annovar.annot.full.txt"
 
   input:
   tuple val(meta), val(vcf_type), path(vcf), 

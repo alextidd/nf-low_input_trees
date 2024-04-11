@@ -61,7 +61,8 @@
                     "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
                     "description": "Path to FASTA genome file.",
                     "help_text": "This parameter is *mandatory* if `--genome` is not specified. If you don't have a BWA index available this will be generated for you automatically. Combine with `--save_reference` to save BWA index for future runs.",
-                    "fa_icon": "far fa-file-code"
+                    "fa_icon": "far fa-file-code",
+                    "default": "/lustre/scratch126/casm/team273jn/share/pileups/reference_data/hg38/genome.fa"
                 },
                 "igenomes_ignore": {
                     "type": "boolean",
@@ -244,6 +245,32 @@
                     "description": "Validation of parameters in lenient more.",
                     "hidden": true,
                     "help_text": "Allows string values that are parseable as numbers or booleans. For further information see [JSONSchema docs](https://github.com/everit-org/json-schema#lenient-mode)."
+                },
+                "validationS3PathCheck": {
+                    "type": "boolean"
+                },
+                "validationSkipDuplicateCheck": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "lcm_filtering_options": {
+            "title": "LCM filtering options",
+            "type": "object",
+            "description": "",
+            "default": "",
+            "properties": {
+                "snp_database": {
+                    "type": "string",
+                    "default": "/lustre/scratch126/casm/team273jn/share/pileups/reference_data/hg38/SNP.vcf.gz"
+                },
+                "sif": {
+                    "type": "string",
+                    "default": "/lustre/scratch126/casm/team273jn/lcm/bin/SangerLCMFilteringSingularity_latest.sif"
+                },
+                "fragment_threshold": {
+                    "type": "integer",
+                    "default": 4
                 }
             }
         },
@@ -376,6 +403,9 @@
         },
         {
             "$ref": "#/definitions/generic_options"
+        },
+        {
+            "$ref": "#/definitions/lcm_filtering_options"
         },
         {
             "$ref": "#/definitions/sequoia_options"
