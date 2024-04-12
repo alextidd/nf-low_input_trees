@@ -102,7 +102,7 @@ process annotateBAMStatistics {
 
 process additionalBAMStatistics {
   tag "${meta.donor_id}:${meta.sample_id}"
-  label "normal"
+  label "normal10gb"
   publishDir "${params.outdir}/${meta.donor_id}/${meta.sample_id}/${vcf_type}", 
     mode: "copy",
     pattern: "*.pre.annovar.annot.full.txt"
@@ -142,7 +142,7 @@ process filtering {
   label "week"
   publishDir "${params.outdir}/${meta.donor_id}/${meta.sample_id}/${vcf_type}", 
     mode: "copy",
-    pattern: "*.pre.annovar.annot.full.txt"
+    pattern: "*{passed,filtered}.txt"
 
   input:
   tuple val(meta), val(vcf_type), path(vcf), 
