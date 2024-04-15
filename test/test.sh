@@ -4,8 +4,8 @@ cd $wd
 
 # run the workflow on the hg38 test data
 nextflow run ../main.nf \
-    --sample_sheet data/sample_sheet.csv \
-    --outdir out/ \
+    --sample_sheet data/GRCh38/sample_sheet.csv \
+    --outdir out/GRCh38/ \
     -c /lustre/scratch125/casm/team268im/at31/RA_som_mut/scomatic/config/LSF.config
 
 # run the workflow on hg37 test data
