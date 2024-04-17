@@ -230,13 +230,11 @@ workflow {
     | preselect
     | imitateANNOVAR
     | annotateBAMStatistics
-    | combine(params.fasta, params.snp_database)
-    | view
-
+    
     // stage fasta and snp database
-    additionalBAMStatistics(
+    additionalBAMStatistics (
       annotateBAMStatistics.out,
-      params.fasta, 
+      params.fasta,
       params.snp_database)
     | filtering
 
