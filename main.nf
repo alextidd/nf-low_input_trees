@@ -137,10 +137,10 @@ process additionalBAMStatistics {
 
 process filtering {
   tag "${meta.sample_id}:${vcf_type}"
-  label "week"
+  label "normal"
   publishDir "${params.outdir}/${meta.donor_id}/${meta.sample_id}/${vcf_type}", 
     mode: "copy",
-    pattern: "*{passed,filtered}.txt"
+    pattern: "*{passed,filtered}.vcf"
 
   input:
   tuple val(meta), 
@@ -173,6 +173,22 @@ process filtering {
   """
 }
 
+process SNV_analysis {
+  tag "${meta.sample_id}:${vcf_type}"
+  label "normal"
+  publishDir "${params.outdir}/${meta.donor_id}/${meta.sample_id}/${vcf_type}", 
+    mode: "copy"
+
+  
+
+  script:
+  """
+  module load cgpVAFcommand/2.5.0
+  createVafCmd.pl
+  """
+
+}
+
 // Main workflow
 workflow {
 
@@ -196,7 +212,7 @@ workflow {
     Channel.fromPath(params.sample_sheet, checkIfExists: true)
     | splitCsv(header: true)
     | map { row ->
-        meta = [sample_id: row.sample_id, donor_id: row.donor_id]
+        meta = [sample_id: row.sample_id, donor_id: row.donor_id, project_number: row.project_number]
         [meta, 
         file(row.caveman_vcf, checkIfExists: true),
         file(row.pindel_vcf, checkIfExists: true),
