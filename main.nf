@@ -10,6 +10,7 @@ include { validateParameters; paramsHelp; paramsSummaryLog; fromSamplesheet } fr
 
 process preselect {
     tag "${meta.sample_id}:${vcf_type}"
+    container "${params.sif}"
     label "normal"
     publishDir "${params.outdir}/${meta.donor_id}/${meta.sample_id}/${vcf_type}", 
       mode: "copy",
@@ -39,6 +40,7 @@ process preselect {
 
 process imitateANNOVAR {
     tag "${meta.sample_id}:${vcf_type}"
+    container "${params.sif}"
     label "normal"
     publishDir "${params.outdir}/${meta.donor_id}/${meta.sample_id}/${vcf_type}", 
       mode: "copy",
@@ -67,6 +69,7 @@ process imitateANNOVAR {
 
 process annotateBAMStatistics {
   tag "${meta.sample_id}:${vcf_type}"
+  container "${params.sif}"
   label "normal"
   publishDir "${params.outdir}/${meta.donor_id}/${meta.sample_id}/${vcf_type}", 
     mode: "copy",
@@ -99,6 +102,7 @@ process annotateBAMStatistics {
 
 process additionalBAMStatistics {
   tag "${meta.sample_id}:${vcf_type}"
+  container "${params.sif}"
   label "normal10gb"
   publishDir "${params.outdir}/${meta.donor_id}/${meta.sample_id}/${vcf_type}", 
     mode: "copy",
@@ -159,15 +163,25 @@ process filtering {
         path(pre_annovar), 
         path(pre_annovar_annot), 
         path(pre_annovar_annot_full), 
-        path("${meta.sample_id}_passed.txt"),
-        path("${meta.sample_id}_filtered")
+        path("${meta.sample_id}_passed.vcf"),
+        path("${meta.sample_id}_filtered.vcf")
 
   script:
   """
-  /bin/bash /code/runScriptFiltering.sh \
-    --annotated-file ${pre_annovar_annot_full} \
-    --vcf-file ${pre_vcf} \
-    --output-dir ./ \
+  #/bin/bash /code/runScriptFiltering.sh \
+  #  --annotated-file ${pre_annovar_annot_full} \
+  #  --vcf-file ${pre_vcf} \
+  #  --output-directory ./ \
+  #  --prefix ${meta.sample_id} \
+  #  --fragment-threshold ${params.fragment_threshold}
+  module load singularity
+  singularity run \
+    --bind /nfs,/lustre \
+    --app filtering \
+    /lustre/scratch126/casm/team273jn/lcm/bin/SangerLCMFilteringSingularity_latest.sif \
+    -a ${pre_annovar_annot_full} \
+    -v ${pre_vcf} \
+    -o ./ \
     --prefix ${meta.sample_id} \
     --fragment-threshold ${params.fragment_threshold}
   """
