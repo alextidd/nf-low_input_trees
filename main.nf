@@ -10,7 +10,6 @@ include { validateParameters; paramsHelp; paramsSummaryLog; fromSamplesheet } fr
 
 process preselect {
     tag "${meta.sample_id}:${vcf_type}"
-    container "${params.sif}"
     label "normal"
     publishDir "${params.outdir}/${meta.donor_id}/${meta.sample_id}/${vcf_type}", 
       mode: "copy",
@@ -40,7 +39,6 @@ process preselect {
 
 process imitateANNOVAR {
     tag "${meta.sample_id}:${vcf_type}"
-    container "${params.sif}"
     label "normal"
     publishDir "${params.outdir}/${meta.donor_id}/${meta.sample_id}/${vcf_type}", 
       mode: "copy",
@@ -69,7 +67,6 @@ process imitateANNOVAR {
 
 process annotateBAMStatistics {
   tag "${meta.sample_id}:${vcf_type}"
-  container "${params.sif}"
   label "normal"
   publishDir "${params.outdir}/${meta.donor_id}/${meta.sample_id}/${vcf_type}", 
     mode: "copy",
@@ -102,7 +99,6 @@ process annotateBAMStatistics {
 
 process additionalBAMStatistics {
   tag "${meta.sample_id}:${vcf_type}"
-  container "${params.sif}"
   label "normal10gb"
   publishDir "${params.outdir}/${meta.donor_id}/${meta.sample_id}/${vcf_type}", 
     mode: "copy",
