@@ -168,20 +168,10 @@ process filtering {
 
   script:
   """
-  #/bin/bash /code/runScriptFiltering.sh \
-  #  --annotated-file ${pre_annovar_annot_full} \
-  #  --vcf-file ${pre_vcf} \
-  #  --output-directory ./ \
-  #  --prefix ${meta.sample_id} \
-  #  --fragment-threshold ${params.fragment_threshold}
-  module load singularity
-  singularity run \
-    --bind /nfs,/lustre \
-    --app filtering \
-    /lustre/scratch126/casm/team273jn/lcm/bin/SangerLCMFilteringSingularity_latest.sif \
-    -a ${pre_annovar_annot_full} \
-    -v ${pre_vcf} \
-    -o ./ \
+  /bin/bash /code/runScriptFiltering.sh \
+    --annotated-file ${pre_annovar_annot_full} \
+    --vcf-file ${pre_vcf} \
+    --output-directory ./ \
     --prefix ${meta.sample_id} \
     --fragment-threshold ${params.fragment_threshold}
   """
