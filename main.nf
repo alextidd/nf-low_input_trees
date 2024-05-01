@@ -26,7 +26,7 @@ process hairpin_preselect {
 
     output:
     tuple val(meta), 
-          val(vcf_type), path(vcf), 
+          val(vcf_type), path(vcf),
           path(bam), path(bai), path(bas), path(met),
           path("${meta.sample_id}.pre.vcf")
 
@@ -47,13 +47,13 @@ process hairpin_imitateANNOVAR {
 
     input:
     tuple val(meta), 
-          val(vcf_type), path(vcf), 
+          val(vcf_type), path(vcf),
           path(bam), path(bai), path(bas), path(met),
           path(pre_vcf)
 
     output:
     tuple val(meta), 
-          val(vcf_type), path(vcf), 
+          val(vcf_type), path(vcf),
           path(bam), path(bai), path(bas), path(met),
           path(pre_vcf), 
           path("${meta.sample_id}.pre.annovar.txt")
@@ -82,7 +82,7 @@ process hairpin_annotateBAMStatistics {
 
   output:
   tuple val(meta), 
-        val(vcf_type), path(vcf), 
+        val(vcf_type), path(vcf),
         path(bam), path(bai), path(bas), path(met),
         path(pre_vcf), 
         path(pre_annovar), 
@@ -107,7 +107,7 @@ process hairpin_additionalBAMStatistics {
   
   input:
   tuple val(meta), 
-        val(vcf_type), path(vcf), 
+        val(vcf_type), path(vcf),
         path(bam), path(bai), path(bas), path(met),
         path(pre_vcf), 
         path(pre_annovar), 
@@ -117,7 +117,7 @@ process hairpin_additionalBAMStatistics {
 
   output:
   tuple val(meta), 
-        val(vcf_type), path(vcf), 
+        val(vcf_type), path(vcf),
         path(bam), path(bai), path(bas), path(met),
         path(pre_vcf), 
         path(pre_annovar), 
@@ -145,7 +145,7 @@ process hairpin_filtering {
 
   input:
   tuple val(meta), 
-        val(vcf_type), path(vcf), 
+        val(vcf_type), path(vcf),
         path(bam), path(bai), path(bas), path(met),
         path(pre_vcf), 
         path(pre_annovar), 
@@ -155,6 +155,7 @@ process hairpin_filtering {
   output:
   tuple val(meta), 
         val(vcf_type), path(vcf),
+        path(bam), path(bai),
         path("${meta.sample_id}_passed.vcf"),
         path("${meta.sample_id}_filtered.vcf")
 
@@ -176,13 +177,15 @@ process post_filtering {
 
   input:
   tuple val(meta),
-        val(vcf_type), path(vcf),
+        val(vcf_type), path(vcf), 
+        path(bam), path(bai),
         path(passed_vcf),
         path(filtered_vcf)
 
   output:
   tuple val(meta),
-        val(vcf_type), path(vcf), 
+        val(vcf_type), path(vcf),
+        path(bam), path(bai),
         path("${passed_vcf}.pass_flags")
 
   script:
@@ -229,13 +232,15 @@ process pileup {
   
   input:
   tuple val(meta),
-        val(vcf_type), path(vcf),
+        val(vcf_type), path(vcfs),
+        path(bams), path(bais),
         val(sample_ids),
         path(vcf_pass_flags)
 
   output:
   tuple val(meta),
-        val(vcf_type), path(vcf),
+        val(vcf_type), path(vcfs),
+        path(bams), path(bais),
         val(sample_ids),
         path("${meta.donor_id}.bed")
 
@@ -246,15 +251,66 @@ process pileup {
   """
 }
 
-process cgpVAFcommand {
-  tag "${meta.donor_id}:${vcf_type}"
+process run_cgpVAF {
+  tag "${meta.donor_id}:${vcf_type}:${chr}"
   label "normal"
-  publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/", 
-    mode: "copy"
 
   input:
   tuple val(meta),
-        val(vcf_type), path(vcf),
+        val(vcf_type), path(vcfs),
+        path(bams), path(bais),
+        val(sample_ids),
+        path(bed),
+        val(chr)
+  tuple path(fasta), path(fai)
+  tuple path(high_depth_bed), path(high_depth_tbi)
+  tuple val(cgpVAF_normal_name), path(cgpVAF_normal_bam), path(cgpVAF_normal_bai)
+
+  output:
+  tuple val(meta),
+        val(vcf_type), path(vcfs),
+        path("*_vaf.tsv")
+
+  script:
+  """
+  # module
+  module load cgpVAFcommand/2.5.0
+
+  # rename BAMs
+  for file in ${meta.donor_id}*.bam ; do
+    mv ${file} ${file/.*/}.bam
+    mv ${file}.bai ${file/.*/}.bam.bai
+  done
+
+  # get variant type / ext
+  [[ "$vcf_type" == "pindel" ]] && variant_type="indel" && vcf_extension=".pindel.annot.vcf.gz"
+  [[ "$vcf_type" == "caveman" ]] && variant_type="snp" && vcf_extension=".caveman_c.annot.vcf.gz"
+
+  # run
+  cgpVaf.pl \
+    --inputDir ./ \
+    --outDir ./ \
+    --variant_type \$variant_type \
+    --vcfExtension \$vcf_extension \
+    --normal_name ${cgpVAF_normal_name} \
+    --tumour_name ${sample_ids.join(' ')} \
+    --bedIntervals ${bed} \
+    -pid ${meta.project_id} \
+    --bed_only 1 \
+    --high_depth_bed ${high_depth_bed} \
+    --map_quality 30 \
+    --genome ${fasta} \
+    --chromosome ${chr}
+  """
+}
+
+process cgpVAFcommand {
+  tag "${meta.donor_id}:${vcf_type}"
+  label "normal"
+
+  input:
+  tuple val(meta),
+        val(vcf_type), 
         val(sample_ids),
         path(bed)
   tuple path(fasta), path(fai)
@@ -263,7 +319,9 @@ process cgpVAFcommand {
   output:
   tuple val(meta),
         val(vcf_type),
-        path("output/PDv38is_wgs/*/*_vaf.tsv")
+        val(sample_ids),
+        path(bed),
+        path("output/*_vaf.tsv")
 
   script:
   """
@@ -290,55 +348,6 @@ process cgpVAFcommand {
   """
 }
 
-process run_cgpVAF {
-  tag "${meta.donor_id}:${vcf_type}:${chr}"
-  label "normal"
-
-  input:
-  tuple val(meta),
-        val(vcf_type), path(vcf),
-        val(sample_ids),
-        path(bed),
-        val(chr)
-  tuple path(fasta), path(fai)
-  tuple path(high_depth_bed), path(high_depth_tbi)
-  
-  output:
-  tuple val(meta),
-        val(vcf_type), path(vcf),
-        path("*_vaf.tsv")
-
-  script:
-  """
-  # module
-  module load cgpVAFcommand/2.5.0
-
-  # get variant type / ext
-  [[ "$vcf_type" == "pindel" ]] && variant_type="indel" && vcf_extension=".pindel.annot.vcf.gz"
-  [[ "$vcf_type" == "caveman" ]] && variant_type="snp" && vcf_extension=".caveman_c.annot.vcf.gz"
-
-  # get normal reference name
-  [[ "${params.genome_build}" == "GRCh37" ]] && normal_name="PDv37is_wgs"
-  [[ "${params.genome_build}" == "GRCh38" ]] && normal_name="PDv38is_wgs"
-
-  # run
-  cgpVaf.pl \
-    --inputDir ./ \
-    --outDir ./ \
-    --variant_type \$variant_type \
-    --vcfExtension \$vcf_extension \
-    --normal_name \$normal_name \
-    --tumour_name ${sample_ids.join(' ')} \
-    --bedIntervals ${bed} \
-    -pid ${meta.project_id} \
-    --bed_only 1 \
-    --high_depth_bed ${high_depth_bed} \
-    --map_quality 30 \
-    --genome ${fasta} \
-    --chromosome ${chr}
-  """
-}
-
 process concat_cgpVAF {
   tag "${meta.donor_id}:${vcf_type}"
   label "normal"
@@ -346,7 +355,8 @@ process concat_cgpVAF {
   input:
   tuple val(meta),
         val(vcf_type),
-        path(chr_vafs)
+        path(bed),
+        path(cgpVAF_out)
 
   output:
   tuple val(meta),
@@ -358,10 +368,14 @@ process concat_cgpVAF {
   # module
   module load cgpVAFcommand/2.5.0
 
+  # get variant type
+  [[ "${vcf_type}" == "pindel" ]] && variant_type="indel"
+  [[ "${vcf_type}" == "caveman" ]] && variant_type="snp"
+
   # run
   cgpVaf.pl \
     --inputDir ./ \
-    --outDir ./output/PDv38is_wgs/snp/ \
+    --outDir ./output/ \
     --variant_type \$variant_type \
     --vcfExtension .caveman_c.annot.vcf.gz \
     --normal_name PDv38is_wgs \
@@ -390,6 +404,11 @@ workflow preprocess {
   Channel.fromPath(params.high_depth_bed, checkIfExists: true)
   | map { bed -> [bed, file(bed + ".tbi", checkIfExists: true)] }
   | set { ch_high_depth_bed }
+
+  // get normal bam + bai for cgpVAF
+  Channel.fromPath(params.cgpVAF_normal_bam, checkIfExists: true)
+  | map { bam -> [params.cgpVAF_normal_name, bam, file(bam + ".bai", checkIfExists: true)] }
+  | set { ch_cgpVAF_normal_bam }
 
   // get metadata + bam paths
   Channel.fromPath(params.sample_sheet, checkIfExists: true)
@@ -428,6 +447,7 @@ workflow preprocess {
   ch_input = ch_input
   ch_fasta = ch_fasta
   ch_high_depth_bed = ch_high_depth_bed
+  ch_cgpVAF_normal_bam = ch_cgpVAF_normal_bam
 }
 
 workflow hairpin {
@@ -457,24 +477,18 @@ workflow post_filtering_and_pileup {
   ch_input
 
   main:
-  // get list of chromosomes
-  def chromosomes = (1..22).collect { "chr$it" } + ['chrX', 'chrY']
-
   // run post-filtering
   ch_input
   | post_filtering
-  // group vcfs by donor and pileup
-  | map { meta, vcf_type, vcf, vcf_pass_flags ->
-          [meta.subMap('donor_id', 'project_id'), vcf_type, vcf, meta.sample_id, vcf_pass_flags] }
+  // group vcfs by donor, pileup
+  | map { meta, vcf_type, vcf, bam, bai, vcf_pass_flags ->
+          [meta.subMap('donor_id', 'project_id'), 
+           vcf_type, vcf, bam, bai, meta.sample_id, vcf_pass_flags] }
   | groupTuple(by: [0,1])
   | pileup
-  // split by chr
-  | combine(chromosomes)
-  | view
-  | set { ch_pileup_by_chr }
 
   emit:
-  ch_pileup_by_chr
+  pileup.out
 }
 
 workflow cgpVAF {
@@ -482,15 +496,27 @@ workflow cgpVAF {
   ch_input
   ch_fasta
   ch_high_depth_bed
+  ch_cgpVAF_normal_bam
 
   main:
-  // run cgpVAF, split by chromosome
-  run_cgpVAF (
-    ch_input,
+  // get list of chromosomes
+  def chromosomes = (1..22).collect { 'chr' + it } + ['chrX', 'chrY']
+  ch_input
+  | combine(chromosomes)
+  | combine(ch_fasta)
+  | combine(ch_high_depth_bed)
+  | combine(ch_cgpVAF_normal_bam)
+  | set {ch_chromosomes}
+
+  // run cpgVAF
+  run_cgpVAF(
+    ch_chromosomes,
     ch_fasta,
-    ch_high_depth_bed)
-  
-  //| concat_cgpVAF
+    ch_high_depth_bed,
+    ch_cgpVAF_normal_bam)
+
+  // concatenate the results
+
 }
 
 // Main workflow
@@ -520,7 +546,8 @@ workflow {
     // run cgpVAF
     cgpVAF(post_filtering_and_pileup.out, 
            preprocess.out.ch_fasta, 
-           preprocess.out.ch_high_depth_bed)
+           preprocess.out.ch_high_depth_bed,
+           preprocess.out.ch_cgpVAF_normal_bam)
 
 }
 
