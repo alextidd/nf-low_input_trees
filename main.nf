@@ -186,15 +186,15 @@ process post_filtering {
   script:
   if (vcf_type == "caveman") {
     """
-    # apply filters as seen in /lustre/scratch126/casm/team154pc/ms56/my_programs/filter_pass_subs_new.pl
+    # apply filters as described in https://confluence.sanger.ac.uk/display/CAS/hairpin
     # FILTER = PASS
-    # INFO =~ CLPM=0.00 (A soft flag median number of soft clipped bases in variant supporting reads)
-    # INFO =~ (ASMD=14|ASMD=15) (A soft flag median alignment score of reads showing the variant allele)
+    # INFO/CLPM=0.00 (A soft flag median number of soft clipped bases in variant supporting reads)
+    # INFO/ASRD>=0.87 (A soft flag median (read length adjusted) alignment score of reads showing the variant allele)
 
     module load bcftools-1.9/python-3.11.6
     bcftools filter \
       -o ${passed_vcf}.tmp \
-      -i 'FILTER="PASS" && INFO/CLPM="0.00" && INFO/ASMD>=140 && INFO/ASMD < 160' \
+      -i 'FILTER="PASS" && INFO/CLPM="0.00" && INFO/ASRD>=0.87' \
       ${passed_vcf}
 
     # remove the header, get pass flags only
