@@ -261,14 +261,16 @@ process cgpVAFcommand {
   output:
   tuple val(meta),
         val(vcf_type),
-        val(sample_ids),
-        path(bed),
         path("${meta.donor_id}_merged_${vcf_type}.tsv")
 
   script:
   """
   # module
+  module purge
   module load cgpVAFcommand/2.5.0
+
+  # dummy alias to suppress unalias error
+  alias vafcorrect-shell=''
 
   # get input code for vcf type
   [[ "$vcf_type" == "pindel" ]] && in="1"
@@ -285,8 +287,10 @@ process cgpVAFcommand {
     --bedIntervals ${bed} \
     --sample_names ${sample_ids.join(' ')}
 
-  # run cgpVAF, concat chromosomal results
+  # run cgpVAF
   bash cgpVafChr.cmd 
+
+  # concat chromosomal results
   bash cgpVafConcat.cmd 
 
   # create full matrix, concat donor results
@@ -304,8 +308,38 @@ process cgpVAFcommand {
     cut -f 39,41,54,56,69,71,84,86,99,101,114,116,129,131,144,146,159,161,174,176 \
     > \${file}.tmp
   done
+
+  # paste together
   paste ${meta.donor_id}_merged_${vcf_type}.tsv.tmp output/*/*/*_vaf.tsv.tmp \
   > ${meta.donor_id}_merged_${vcf_type}.tsv
+  """
+}
+
+process get_mutation_filtering_parameters {
+  tag "${meta.donor_id}:${vcf_type}"
+  label "normal"
+  publishDir "${params.outdir}/${meta.donor_id}/${run}", 
+    mode: "copy"
+
+  input:
+  tuple val(meta),
+        val(sample_ids),
+        path(merged_caveman),
+        path(merged_pindel)
+        tuple val(run), val(extra_arguments)
+
+  output:
+  tuple val(meta),
+        val(vcf_type),
+        val(sample_ids)
+  
+  script:
+  """
+  get_mutation_filtering_parameters.R \
+    --runid ${meta.experiment_id} \
+    --snvfile ${merged_caveman} \
+    --indelfile ${merged_pindel} \
+    --output ./ ${extra_arguments}
   """
 }
 
@@ -326,7 +360,8 @@ workflow preprocess {
   Channel.fromPath(params.sample_sheet, checkIfExists: true)
   | splitCsv(header: true)
   | map { row ->
-      meta = [sample_id: row.sample_id, donor_id: row.donor_id, project_id: row.project_id]
+      meta = [sample_id: row.sample_id, donor_id: row.donor_id, 
+              project_id: row.project_id, experiment_id: row.experiment_id]
       [meta, 
       file(row.caveman_vcf, checkIfExists: true),
       file(row.pindel_vcf, checkIfExists: true),
@@ -393,7 +428,7 @@ workflow post_filtering_and_pileup {
   | post_filtering
   // group vcfs by donor, pileup
   | map { meta, vcf_type, vcf_pass_flags ->
-          [meta.subMap('donor_id', 'project_id'), 
+          [meta.subMap('donor_id', 'project_id', 'experiment_id'), 
            vcf_type, meta.sample_id, vcf_pass_flags] }
   | groupTuple(by: [0,1])
   | pileup
@@ -415,8 +450,8 @@ workflow cgpVAF {
     ch_fasta,
     ch_high_depth_bed)
 
-  // concatenate the results
-
+  emit:
+  cgpVAFcommand.out
 }
 
 // Main workflow
@@ -448,5 +483,23 @@ workflow {
            preprocess.out.ch_fasta, 
            preprocess.out.ch_high_depth_bed)
 
+    // get mutation filtering parameters
+    cgpVAF.out 
+    | branch { meta, vcf_type, merged_muts ->
+                caveman: vcf_type == "caveman"
+                  return tuple(meta, merged_muts)
+                pindel: vcf_type == "pindel"
+                  return tuple(meta, merged_muts) }
+    | set { ch_merged_muts }
+
+    // run twice:
+    // 1. not excluding any samples
+    // 2. excluding samples with peak VAF < 0.4
+    runs = [["include_all", ""],
+            ["remove_below_0.4", "--mixed_remove --vaf_cutoff 0.4"]]
+    ch_merged_muts.caveman
+    | join(ch_merged_muts.pindel)
+    | combine(runs)
+    | view
 }
 
