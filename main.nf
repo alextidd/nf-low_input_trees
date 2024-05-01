@@ -26,7 +26,7 @@ process hairpin_preselect {
 
     output:
     tuple val(meta), 
-          val(vcf_type), 
+          val(vcf_type), path(vcf), 
           path(bam), path(bai), path(bas), path(met),
           path("${meta.sample_id}.pre.vcf")
 
@@ -47,7 +47,7 @@ process hairpin_imitateANNOVAR {
 
     input:
     tuple val(meta), 
-          val(vcf_type), 
+          val(vcf_type), path(vcf),
           path(bam), path(bai), path(bas), path(met),
           path(pre_vcf)
 
@@ -55,7 +55,7 @@ process hairpin_imitateANNOVAR {
     tuple val(meta), 
           val(vcf_type), 
           path(bam), path(bai), path(bas), path(met),
-          path(pre_vcf), 
+          path(pre_vcf), path(vcf), 
           path("${meta.sample_id}.pre.annovar.txt")
 
     script:
@@ -75,7 +75,7 @@ process hairpin_annotateBAMStatistics {
 
   input:
   tuple val(meta), 
-        val(vcf_type), 
+        val(vcf_type), path(vcf), 
         path(bam), path(bai), path(bas), path(met),
         path(pre_vcf), 
         path(pre_annovar)
@@ -84,7 +84,7 @@ process hairpin_annotateBAMStatistics {
   tuple val(meta), 
         val(vcf_type), 
         path(bam), path(bai), path(bas), path(met),
-        path(pre_vcf), 
+        path(pre_vcf), path(vcf), 
         path(pre_annovar), 
         path("${meta.sample_id}.pre.annovar.annot.txt")
 
@@ -107,7 +107,7 @@ process hairpin_additionalBAMStatistics {
   
   input:
   tuple val(meta), 
-        val(vcf_type),
+        val(vcf_type), path(vcf), 
         path(bam), path(bai), path(bas), path(met),
         path(pre_vcf), 
         path(pre_annovar), 
@@ -117,7 +117,8 @@ process hairpin_additionalBAMStatistics {
 
   output:
   tuple val(meta), 
-        val(vcf_type), 
+        val(vcf_type), path(vcf), 
+        path(bam), path(bai), path(bas), path(met),
         path(pre_vcf), 
         path(pre_annovar), 
         path(pre_annovar_annot), 
@@ -144,7 +145,8 @@ process hairpin_filtering {
 
   input:
   tuple val(meta), 
-        val(vcf_type), 
+        val(vcf_type), path(vcf), 
+        path(bam), path(bai), path(bas), path(met),
         path(pre_vcf), 
         path(pre_annovar), 
         path(pre_annovar_annot), 
@@ -152,7 +154,8 @@ process hairpin_filtering {
 
   output:
   tuple val(meta), 
-        val(vcf_type), 
+        val(vcf_type), path(vcf), 
+        path(bam), path(bai), path(bas), path(met),
         path("${meta.sample_id}_passed.vcf"),
         path("${meta.sample_id}_filtered.vcf")
 
@@ -174,14 +177,16 @@ process post_filtering {
 
   input:
   tuple val(meta),
-        val(vcf_type), 
+        val(vcf_type), path(vcf), 
+        path(bam), path(bai), path(bas), path(met),
         path(passed_vcf),
         path(filtered_vcf)
 
   output:
   tuple val(meta),
-        val(vcf_type), 
-        path("${passed_vcf}.pass_flags")
+        val(vcf_type), path(vcf), 
+        path(bam), path(bai), path(bas), path(met),
+        path("${meta.sample_id}_postfiltered.bed")
 
   script:
   if (vcf_type == "caveman") {
@@ -193,28 +198,21 @@ process post_filtering {
 
     module load bcftools-1.9/python-3.11.6
     bcftools filter \
-      -o ${passed_vcf}.tmp \
       -i 'FILTER="PASS" && INFO/CLPM="0.00" && INFO/ASRD>=0.87' \
-      ${passed_vcf}
-
-    # remove the header, get pass flags only
-    grep -v '^#' ${passed_vcf}.tmp \
-    > ${passed_vcf}.pass_flags
+      ${passed_vcf} |
+    grep -v '^#' \
+    > ${meta.sample_id}_postfiltered.vcf
     """
   } else if (vcf_type == "pindel") {
     """
-    # apply filters as seen in /lustre/scratch126/casm/team154pc/ms56/my_programs/filter_indels_new.pl
-    # FILTER = PASS
+    # apply pass filter (FILTER = PASS)
 
     module load bcftools-1.9/python-3.11.6
     bcftools filter \
-      -o ${passed_vcf}.tmp \
       -i 'FILTER="PASS"' \
-      ${passed_vcf} 
-
-    # remove the header, get pass flags only
-    grep -v '^#' ${passed_vcf}.tmp \
-    > ${passed_vcf}.pass_flags
+      ${passed_vcf} |
+    grep -v '^#' \
+    > ${meta.sample_id}_postfiltered.vcf
     """
   }
 }
@@ -227,20 +225,64 @@ process pileup {
   
   input:
   tuple val(meta),
-        val(vcf_type), 
         val(sample_ids),
-        path(vcf_pass_flags)
+        val(vcf_type), path(vcfs), 
+        path(bams), path(bais), path(bass), path(mets),
+        path(vcf_postfiltered)
 
   output:
   tuple val(meta),
-        val(vcf_type), 
         val(sample_ids),
-        path("${meta.donor_id}.bed")
+        val(vcf_type), path(vcfs), 
+        path(bams), path(bais), path(bass), path(mets),
+        path("${meta.donor_id}_intervals.bed")
 
   script:
   """
-  cut -f 1,2,4,5 *.pass_flags | sort | uniq \
-  > ${meta.donor_id}.bed
+  cut -f 1,2,4,5 *_postfiltered.vcf | sort | uniq \
+  > ${meta.donor_id}_intervals.bed
+  """
+}
+
+process cgpVAF_run {
+  tag "${meta.donor_id}:${vcf_type}"
+  label "normal"
+  publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/", 
+    mode: "copy"
+  
+  input: 
+  tuple val(meta),
+        val(sample_ids),
+        val(vcf_type), path(vcfs), 
+        path(bams), path(bais), path(bass), path(mets),
+        path(bed_intervals)
+  tuple path(fasta), path(fai)
+  tuple path(high_depth_bed), path(high_depth_tbi)
+  tuple val(cgpVAF_normal_name), path(cgpVAF_normal_bam), path(cgpVAF_normal_bai)
+
+  script:
+  """
+  module load cgpVAFcommand/2.5.0
+
+  # get variant type
+  [[ "$vcf_type" == "caveman" ]] && variant_type="snp"
+  [[ "$vcf_type" == "pindel" ]] && variant_type="indel"
+
+  cgpVaf.pl \
+    --inputDir ./ \
+    --outDir ./ \
+    --variant_type \$variant_type \
+    --genome ${fasta} \
+    --high_depth_bed ${params.high_depth_bed} \
+    --bed_only 1 \
+    --bedIntervals ${bed_intervals} \
+    --base_quality 25 \
+    --map_quality 30 \
+    --tumour_name ${sample_ids.join(' ')} \
+    --tumour_bam ${bams.join(' ')} \
+    --normal_name ${cgpVAF_normal_name} \
+    --normal_bam ${cgpVAF_normal_bam} \
+    --vcf ${vcfs.join(' ')}
   """
 }
 
@@ -252,7 +294,7 @@ process cgpVAFcommand {
 
   input:
   tuple val(meta),
-        val(vcf_type), 
+        val(vcf_type), path(vcfs), 
         val(sample_ids),
         path(bed)
   tuple path(fasta), path(fai)
@@ -269,9 +311,6 @@ process cgpVAFcommand {
   module purge
   module load cgpVAFcommand/2.5.0
 
-  # dummy alias to suppress unalias error
-  alias vafcorrect-shell=''
-
   # get input code for vcf type
   [[ "$vcf_type" == "pindel" ]] && in="1"
   [[ "$vcf_type" == "caveman" ]] && in="3"
@@ -283,7 +322,7 @@ process cgpVAFcommand {
     --outdir ./ \
     --genome ${fasta} \
     --high_depth_bed ${high_depth_bed} \
-    --mq 30 -bo 1 \
+    -bq 25 -mq 30 -bo 1 \
     --bedIntervals ${bed} \
     --sample_names ${sample_ids.join(' ')}
 
@@ -427,9 +466,9 @@ workflow post_filtering_and_pileup {
   ch_input
   | post_filtering
   // group vcfs by donor, pileup
-  | map { meta, vcf_type, vcf_pass_flags ->
+  | map { meta, vcf_type, vcf, vcf_postfiltered ->
           [meta.subMap('donor_id', 'project_id', 'experiment_id'), 
-           vcf_type, meta.sample_id, vcf_pass_flags] }
+           meta.sample_id, vcf_type, vcfs, vcf_postfiltered] }
   | groupTuple(by: [0,1])
   | pileup
 
