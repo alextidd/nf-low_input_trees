@@ -154,7 +154,7 @@ process hairpin_filtering {
 
   output:
   tuple val(meta), 
-        val(vcf_type), 
+        val(vcf_type), path(vcf),
         path("${meta.sample_id}_passed.vcf"),
         path("${meta.sample_id}_filtered.vcf")
 
@@ -176,13 +176,13 @@ process post_filtering {
 
   input:
   tuple val(meta),
-        val(vcf_type),
+        val(vcf_type), path(vcf),
         path(passed_vcf),
         path(filtered_vcf)
 
   output:
   tuple val(meta),
-        val(vcf_type),
+        val(vcf_type), path(vcf), 
         path("${passed_vcf}.pass_flags")
 
   script:
@@ -229,13 +229,13 @@ process pileup {
   
   input:
   tuple val(meta),
-        val(vcf_type),
+        val(vcf_type), path(vcf),
         val(sample_ids),
         path(vcf_pass_flags)
 
   output:
   tuple val(meta),
-        val(vcf_type),
+        val(vcf_type), path(vcf),
         val(sample_ids),
         path("${meta.donor_id}.bed")
 
@@ -254,7 +254,7 @@ process cgpVAFcommand {
 
   input:
   tuple val(meta),
-        val(vcf_type),
+        val(vcf_type), path(vcf),
         val(sample_ids),
         path(bed)
   tuple path(fasta), path(fai)
@@ -296,16 +296,16 @@ process run_cgpVAF {
 
   input:
   tuple val(meta),
-        val(vcf_type),
+        val(vcf_type), path(vcf),
         val(sample_ids),
-        path(bed)
+        path(bed),
+        val(chr)
   tuple path(fasta), path(fai)
   tuple path(high_depth_bed), path(high_depth_tbi)
-  val chr
-
+  
   output:
   tuple val(meta),
-        val(vcf_type),
+        val(vcf_type), path(vcf),
         path("*_vaf.tsv")
 
   script:
@@ -441,7 +441,7 @@ workflow hairpin {
   | hairpin_imitateANNOVAR
   | hairpin_annotateBAMStatistics
   
-  // stage fasta and snp database
+  // add fasta and snp database to input
   hairpin_additionalBAMStatistics (
     hairpin_annotateBAMStatistics.out,
     params.fasta,
@@ -452,6 +452,31 @@ workflow hairpin {
   hairpin_filtering.out
 }
 
+workflow post_filtering_and_pileup {
+  take:
+  ch_input
+
+  main:
+  // get list of chromosomes
+  def chromosomes = (1..22).collect { "chr$it" } + ['chrX', 'chrY']
+
+  // run post-filtering
+  ch_input
+  | post_filtering
+  // group vcfs by donor and pileup
+  | map { meta, vcf_type, vcf, vcf_pass_flags ->
+          [meta.subMap('donor_id', 'project_id'), vcf_type, vcf, meta.sample_id, vcf_pass_flags] }
+  | groupTuple(by: [0,1])
+  | pileup
+  // split by chr
+  | combine(chromosomes)
+  | view
+  | set { ch_pileup_by_chr }
+
+  emit:
+  ch_pileup_by_chr
+}
+
 workflow cgpVAF {
   take:
   ch_input
@@ -459,20 +484,13 @@ workflow cgpVAF {
   ch_high_depth_bed
 
   main:
-
-  // group vcfs by donor
-  ch_input
-  | map { meta, vcf_type, vcf_pass_flags ->
-          [meta.subMap('donor_id', 'project_id'), vcf_type, meta.sample_id, vcf_pass_flags] }
-  | groupTuple(by: [0,1])
-  | view
-  | pileup
-
-  // generate cgpVAF command
-  cgpVAFcommand (
-    pileup.out,
+  // run cgpVAF, split by chromosome
+  run_cgpVAF (
+    ch_input,
     ch_fasta,
     ch_high_depth_bed)
+  
+  //| concat_cgpVAF
 }
 
 // Main workflow
@@ -496,11 +514,11 @@ workflow {
     // run hairpin
     hairpin(preprocess.out.ch_input)
 
-    // run post-filtering
-    post_filtering(hairpin.out)
+    // run post_filtering_and_pileup
+    post_filtering_and_pileup(hairpin.out)
 
     // run cgpVAF
-    cgpVAF(post_filtering.out, 
+    cgpVAF(post_filtering_and_pileup.out, 
            preprocess.out.ch_fasta, 
            preprocess.out.ch_high_depth_bed)
 
