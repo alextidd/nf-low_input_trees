@@ -290,19 +290,19 @@ process cgpVAFcommand {
   bash cgpVafConcat.cmd 
 
   # create full matrix, concat donor results
-  vaf_files=$(ls output/*/*/*_vaf.tsv)
+  vaf_files=\$(ls output/*/*/*_vaf.tsv)
 
   # get positional columns
-  cat ${vaf_files[0]} | grep -v '^##' | 
+  cat \${vaf_files[0]} | grep -v '^##' | 
   cut -f3,4,5,6,24,26 \
   > ${meta.donor_id}_merged_${vcf_type}.tsv.tmp
 
   # get variant columns
-  for file in ${vaf_files[@]} ; do
-    cat $file | 
+  for file in \${vaf_files[@]} ; do
+    cat \$file | 
     grep -v '^##' |
     cut -f 39,41,54,56,69,71,84,86,99,101,114,116,129,131,144,146,159,161,174,176 \
-    > ${file}.tmp
+    > \${file}.tmp
   done
   paste ${meta.donor_id}_merged_${vcf_type}.tsv.tmp output/*/*/*_vaf.tsv.tmp \
   > ${meta.donor_id}_merged_${vcf_type}.tsv
