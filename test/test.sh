@@ -12,3 +12,10 @@ nextflow run ../main.nf \
     -w work/ \
     -c /lustre/scratch125/casm/team268im/at31/RA_som_mut/scomatic/config/LSF.config \
     -resume
+
+nextflow run ../main.nf \
+    --sample_sheet data/GRCh38/chr10/sample_sheet.csv \
+    --outdir out/GRCh38/chr10/ \
+    -w work/ \
+    -c /lustre/scratch125/casm/team268im/at31/RA_som_mut/scomatic/config/LSF.config \
+    -resume
