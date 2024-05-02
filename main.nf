@@ -53,9 +53,9 @@ process hairpin_imitateANNOVAR {
 
     output:
     tuple val(meta), 
-          val(vcf_type), 
+          val(vcf_type), path(vcf),
           path(bam), path(bai), path(bas), path(met),
-          path(pre_vcf), path(vcf), 
+          path(pre_vcf), 
           path("${meta.sample_id}.pre.annovar.txt")
 
     script:
@@ -82,9 +82,9 @@ process hairpin_annotateBAMStatistics {
 
   output:
   tuple val(meta), 
-        val(vcf_type), 
+        val(vcf_type), path(vcf), 
         path(bam), path(bai), path(bas), path(met),
-        path(pre_vcf), path(vcf), 
+        path(pre_vcf), 
         path(pre_annovar), 
         path("${meta.sample_id}.pre.annovar.annot.txt")
 
@@ -256,9 +256,18 @@ process cgpVAF_run {
         val(vcf_type), path(vcfs), 
         path(bams), path(bais), path(bass), path(mets),
         path(bed_intervals)
-  tuple path(fasta), path(fai)
-  tuple path(high_depth_bed), path(high_depth_tbi)
-  tuple val(cgpVAF_normal_name), path(cgpVAF_normal_bam), path(cgpVAF_normal_bai)
+  tuple path(fasta), 
+        path(fai)
+  tuple path(high_depth_bed), 
+        path(high_depth_tbi)
+  tuple path(cgpVAF_normal_bam), 
+        path(cgpVAF_normal_bas), 
+        path(cgpVAF_normal_bai),
+        path(cgpVAF_normal_met)
+
+  output:
+  tuple val(meta),
+        val(sample_ids)
 
   script:
   """
@@ -280,13 +289,13 @@ process cgpVAF_run {
     --map_quality 30 \
     --tumour_name ${sample_ids.join(' ')} \
     --tumour_bam ${bams.join(' ')} \
-    --normal_name ${cgpVAF_normal_name} \
+    --normal_name "normal" \
     --normal_bam ${cgpVAF_normal_bam} \
     --vcf ${vcfs.join(' ')}
   """
 }
 
-process cgpVAFcommand {
+process cgpVAF_command {
   tag "${meta.donor_id}:${vcf_type}"
   label "normal"
   publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/", 
@@ -395,6 +404,15 @@ workflow preprocess {
   | map { bed -> [bed, file(bed + ".tbi", checkIfExists: true)] }
   | set { ch_high_depth_bed }
 
+  // get cgpVAF normal bam + bai
+  Channel.fromPath(
+    [params.cgpVAF_normal_bam, 
+     params.cgpVAF_normal_bas,
+     params.cgpVAF_normal_bai,
+     params.cgpVAF_normal_met],
+    checkIfExists: true)
+  | set { ch_cgpVAF_normal_bam }
+
   // get metadata + bam paths
   Channel.fromPath(params.sample_sheet, checkIfExists: true)
   | splitCsv(header: true)
@@ -433,6 +451,7 @@ workflow preprocess {
   ch_input = ch_input
   ch_fasta = ch_fasta
   ch_high_depth_bed = ch_high_depth_bed
+  ch_cgpVAF_normal_bam = ch_cgpVAF_normal_bam
 }
 
 workflow hairpin {
@@ -481,16 +500,24 @@ workflow cgpVAF {
   ch_input
   ch_fasta
   ch_high_depth_bed
+  ch_cgpVAF_normal_bam
 
   main:
   // run cpgVAF
-  cgpVAFcommand(
+  //cgpVAF_command(
+  //  ch_input,
+  //  ch_fasta,
+  //  ch_high_depth_bed)
+
+  cgpVAF_run(
     ch_input,
     ch_fasta,
-    ch_high_depth_bed)
+    ch_high_depth_bed,
+    ch_cgpVAF_normal_bam
+  )
 
   emit:
-  cgpVAFcommand.out
+  cgpVAF_run.out
 }
 
 // Main workflow
@@ -520,7 +547,8 @@ workflow {
     // run cgpVAF
     cgpVAF(post_filtering_and_pileup.out, 
            preprocess.out.ch_fasta, 
-           preprocess.out.ch_high_depth_bed)
+           preprocess.out.ch_high_depth_bed,
+           preprocess.out.ch_cgpVAF_normal_bam)
 
     // get mutation filtering parameters
     cgpVAF.out 
