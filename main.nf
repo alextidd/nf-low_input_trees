@@ -32,7 +32,8 @@ workflow {
     preprocess()
 
     // run hairpin
-    hairpin(preprocess.out.ch_input)
+    hairpin(preprocess.out.ch_input,
+            preprocess.out.genome_names)
 
     // run post-filtering and pileup
     post_filtering_and_pileup(hairpin.out)

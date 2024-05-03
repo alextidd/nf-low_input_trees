@@ -21,8 +21,9 @@ process sequoia_run {
 workflow sequoia {
   take:
   ch_input
+  ch_fasta
 
   main:
-  sequoia_run(
-    ch_input)
+  sequoia_run(ch_input,
+              ch_fasta)
 }

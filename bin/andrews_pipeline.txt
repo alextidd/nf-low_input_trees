@@ -1,0 +1,153 @@
+Pancreas LCM exome analysis
+11/03/2024 deleted and excluded donors PD55083 and PD55087 (donor sex mismatch with metadata)
+The move to farm22 has deleted some software, these have been changed and the originals kept in folder called Farm5
+Find the NST folder relevant CanApps study. This will contain the Caveman output.
+cd /nfs/cancer_ref01/nst_links/live/3076
+cd /nfs/cancer_ref01/nst_links/live/3121
+cd /nfs/cancer_ref01/nst_links/live/3276
+Copying Caveman output from /nfs to /lustre
+Check for annot.vcf.gz files
+for i in *; do cp $i/$i.caveman_c.annot.vcf.gz /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Data/Caveman; done
+Copying Pindel output from /nfs to /lustre
+Check for pindel.annot.vcf.gz files
+for i in *; do cp $i/$i.pindel.annot.vcf.gz /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Data/Pindel; done
+Go to LCM exome directory with newly-copied Caveman or Pindel output
+cd /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Data/Caveman/cd /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Data/Pindel/
+Quick and dirrrrty way of finding KRAS mutations in your Caveman or Pindel output
+for i in *.vcf.gz; do echo $i; zcat $i | grep "PASS" | grep "KRAS"; done
+for i in *.vcf.gz; do echo $i; zcat $i | grep "PASS" | grep "APC"; done
+To find mutations in a donor
+for i in PD42134c*; do echo $i; zcat $i | grep "PASS" | grep "non_synonymous_codon"; done
+for i in PD55102*; do echo $i; zcat $i | grep "PASS" | grep "APC"; done
+for i in PD48395*; do echo $i; zcat $i | grep "PASS" | grep "KRAS"; done
+for i in PD61871*; do echo $i; zcat $i | grep "PASS" | grep "KRAS"; done
+for i in PD61872*; do echo $i; zcat $i | grep "PASS" | grep "KRAS"; done
+Once files are marked as sequencing complete, calculate Picard library complexity and on-target coverage estimation for samples (for LCM WES pancreas there are multiple studies)
+Scripts are from lustre/scratch125/casm/team268im/al28/pancreas_exome/al28_code/Picard,
+To calculate coverage within entire studies, use: 
+cd /lustre/scratch125/casm/team268im/pn8/pancreas_exome/al28_code/Picard
+bash wrapper_picard_hs_metrics.sh 3076
+bash wrapper_picard_hs_metrics.sh 3121
+bash wrapper_picard_hs_metrics.sh 3276
+To calculate coverage within a list of samples, use:
+bash wrapper_picard_hs_metrics_custom_list.sh <studyID> <donor PD>
+bash wrapper_picard_hs_metrics_custom_list.sh 3121 PD55102
+bash wrapper_picard_hs_metrics_custom_list.sh 3276 PD61871
+To calculate coverage for individual samples, use:
+cd /lustre/scratch125/casm/team268im/pn8/pancreas_exome/al28_code/Picard
+bash single_sample_picard_hs_metrics.sh <BAM_name> <directory>
+Once jobs are submitting
+bjobs to monitor the jobs running under me
+watch bjobs (refreshes jobs every 2 seconds, can add the job ID)
+bjobs -a for all jobs (for completed ones as well as running ones)
+bqueues -l normal (for run times and memory limits in normal queue)
+bjobs -w to see the wide view of bjobs, showing whole ID
+Merge Picard output (Andrew’s method)
+cd /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Picard/Collect_Hs_Metrics/
+Make header (pick first sample)
+head -7 PD30394c_lo0017.500bp.hs_metrics | tail -1 | awk '{print "SAMPLE_ID\011"$0}' > combined_LCM_pancreas_hs_metrics.tsv
+Append the metrics from study 3076 (>> means append rather than assign)
+for sample_dir in /nfs/cancer_ref01/nst_links/live/3076/*; do sample=${sample_dir##*/}; sample_hs="${sample}.500bp.hs_metrics"; head -8 $sample_hs | tail -1 | awk -v var="$sample" -F $'\t' '{print var"\011"$0}' >> combined_LCM_pancreas_hs_metrics.tsv; done
+Append the metrics from study 3121 (>> means append rather than assign)
+for sample_dir in /nfs/cancer_ref01/nst_links/live/3121/*; do sample=${sample_dir##*/}; sample_hs="${sample}.500bp.hs_metrics"; head -8 $sample_hs | tail -1 | awk -v var="$sample" -F $'\t' '{print var"\011"$0}' >> combined_LCM_pancreas_hs_metrics.tsv; done
+Append the metrics from study 3276 (>> means append rather than assign)
+for sample_dir in /nfs/cancer_ref01/nst_links/live/3276/*; do sample=${sample_dir##*/}; sample_hs="${sample}.500bp.hs_metrics"; head -8 $sample_hs | tail -1 | awk -v var="$sample" -F $'\t' '{print var"\011"$0}' >> combined_LCM_pancreas_hs_metrics.tsv; done
+Running Mathij’s filters (slack from Andrew 26/02/2023)
+#Old farm5 version
+module load singularity 
+module load /software/CASM/modules/modulefiles/singularity/3.5.3
+#New farm22 version
+module load singularity 
+Make sure you are in the relevant nfs directory when launching for each study and run each step separately for each study
+cd /nfs/cancer_ref01/nst_links/live/3076
+cd /nfs/cancer_ref01/nst_links/live/3121
+cd /nfs/cancer_ref01/nst_links/live/3276
+Run the following 5 commands for each study (checking that they've finished successfully each time before launching the next one):
+(When running for subset of samples such as new additions, use 
+for i in PDID*;
+to stop repeat on other samples
+Preselect
+for i in *; do bsub -q normal -e /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/logs/$i.preselect.err -o /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/logs/$i.preselect.out "singularity run --bind /nfs,/lustre --app preselect /lustre/scratch125/casm/team268im/pn8/pancreas_exome/al28_code/Other/SangerLCMFilteringSingularity_latest.sif -v $i/$i.caveman_c.annot.vcf.gz -a 140 > /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/$i.filtered.vcf"; done
+ASMD filter (-a argument)
+Typically 120-140
+Check successful jobs in logs file
+cd /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/logs
+grep "Successfully completed" *.preselect* | wc -l
+grep “Exit” *.preselect.* | wc -l
+imitateANNOVAR
+for i in *; do bsub -q normal -e /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/logs/$i.imitate.err -o /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/logs/$i.imitate.out "singularity run --bind /nfs,/lustre --app imitateANNOVAR /lustre/scratch125/casm/team268im/pn8/pancreas_exome/al28_code/Other/SangerLCMFilteringSingularity_latest.sif -v /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/$i.filtered.vcf > /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/$i.annovar"; done
+Check successful jobs in logs file
+cd /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/logs 
+grep "Successfully completed" *.imitate.* | wc -l
+grep “Exit” *.imitate.* | wc -l
+annotateBAMStatistics 
+for i in *; do bsub -q normal -e /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/logs/$i.annotate.err -o /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/logs/$i.annotate.out "singularity run --bind /nfs,/lustre --app annotateBAMStatistics /lustre/scratch125/casm/team268im/pn8/pancreas_exome/al28_code/Other/SangerLCMFilteringSingularity_latest.sif -a /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/$i.annovar -b $i/$i.sample.dupmarked.bam > /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/$i.annovar_annotated"; done
+Check successful jobs in logs file
+cd /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/logs
+grep "Successfully completed" *.annotate.out* | wc -l
+Check failed jobs in logs file (due to temporary issue with NSF storage)
+grep “Exit” *.annotate.* | wc -l
+additionalBAMStatistics (longest step )
+for i in *; do bsub -q normal -R "select[mem>=10000 && hname!='node-13-13'] rusage[mem=10000]" -M10000 -e /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/logs/$i.additional.err -o /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/logs/$i.additional.out "singularity run --bind /nfs,/lustre --app additionalBAMStatistics /lustre/scratch125/casm/team268im/pn8/pancreas_exome/al28_code/Other/SangerLCMFilteringSingularity_latest.sif -a /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/$i.annovar_annotated -b $i/$i.sample.dupmarked.bam -r /lustre/scratch125/casm/team268im/al28/bed_ref/hs37d5.fa -s /lustre/scratch125/casm/team268im/al28/synovium_manuscript/al28_code/ms44_filter_requirements/common_all_20170710.vcf.gz > /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/$i.annovar_annotated_full"; done
+Check successful jobs in logs file
+cd /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/logs
+grep "Successfully completed" *.additional.out | wc -l
+Check failed jobs in logs file
+grep "Exit" *.additional.out* | wc -l
+Count number of files
+grep -l "Successfully completed" *.additional.out | wc
+Count number of files that do not contain text (due to appending of error files, this can be more accurate than other commands)
+grep -L "Successfully completed" *.additional.out | wc
+filtering (quick)
+for i in *; do bsub -q normal -R "select[mem >= 2000 && hname!='node-13-13'] rusage[mem=2000]" -M2000 -e /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/logs/$i.filter.err -o /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/logs/$i.filter.out "singularity run --bind /nfs,/lustre --app filtering /lustre/scratch125/casm/team268im/pn8/pancreas_exome/al28_code/Other/SangerLCMFilteringSingularity_latest.sif -a /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/$i.annovar_annotated_full -v $i/$i.caveman_c.annot.vcf.gz -o /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/ -p $i"; done
+cd /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/ms44_filtered_asmd140_f3/logs
+grep "Successfully completed" *.filter.out | wc -l
+Check failed jobs in logs file
+grep "Exit" *.filter.out* | wc -l
+Count number of files
+grep -l "Successfully completed" *.filter.out | wc
+Count number of files that do not contain text (due to appending of error files, this can be more accurate than other commands)
+grep -L "Successfully completed" *.filter.out | wc
+Caveman VCF parsing scripts
+Step 1
+bsub -o /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman -e /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman -q normal -M1000 -R'select[mem>1000] rusage[mem=1000] span[hosts=1]' Rscript /lustre/scratch125/casm/team268im/pn8/pancreas_exome/al28_code/SNVs/1.caveman_pancreas_exome_VCF_analysis_farm.R
+need to optimise memory requirements
+Step 2
+bsub -o /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman -e /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman -q normal -M1000 -R'select[mem>1000] rusage[mem=1000] span[hosts=1]' Rscript /lustre/scratch125/casm/team268im/pn8/pancreas_exome/al28_code/SNVs/2.caveman_pancreas_exome_VCF_analysis_post_ms44_filters_farm.R
+Step 2 will fail and have no output if exome_sample_list does not match the input (in the case of working with incomplete dataset, adjust exome_sample_list to match this.
+BAM2R pileups (run on farm)
+Pileups using R package deepSNV 
+https://bioconductor.org/packages/devel/bioc/manuals/deepSNV/man/deepSNV.pdf 
+Perform pileups in R at a single site. This rescues rare mutations which missed Caveman threshold to be called but we have reason to believe are genuine (like cgpVAF). 
+(Check that 76 matches the number of donors)
+for i in {1..76}; do bsub -q normal -M2000 -R'select[mem>2000] rusage[mem=2000] span[hosts=1]' -n1 -e /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/bam2R_pileups/logs/$i.err -o /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman/bam2R_pileups/logs/$i.out Rscript /lustre/scratch125/casm/team268im/pn8/pancreas_exome/al28_code/SNVs/3.bam2r_caveman_calls_per_donor_exome_farm.R $i; done
+BED filter (run on the farm, to keep consistent with indels, need to modify this and run it before bam2r)
+bsub -o /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman -e /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman -q normal -M1000 -R'select[mem>1000] rusage[mem=1000] span[hosts=1]' Rscript /lustre/scratch125/casm/team268im/pn8/pancreas_exome/al28_code/SNVs/4.caveman_pancreas_exome_in_bed_filter_farm.R
+Beta binomial and heatmap generation
+Can use an interactive job or bsub
+Modifications were needed to file to change sample_id to sampleID for example. Also edited to include different rho
+bsub -o /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman -e /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman -q normal -M500 -R'select[mem>500] rusage[mem=500] span[hosts=1]' Rscript /lustre/scratch125/casm/team268im/pn8/pancreas_exome/al28_code/SNVs/5.heatmap_generation_caveman_beta_binom_annotation_exome_farm_rho0.05.R
+Creating Caveman VAFs
+bsub -o /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman -e /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman -q normal -M500 -R'select[mem>500] rusage[mem=500] span[hosts=1]' Rscript /lustre/scratch125/casm/team268im/pn8/pancreas_exome/al28_code/SNVs/6.creating_caveman_VAFs_farm.R
+Annotate extended context (can play around with length of context)
+bsub -o /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman -e /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Caveman -q normal -M1000 -R'select[mem>1000] rusage[mem=1000] span[hosts=1]' Rscript /lustre/scratch125/casm/team268im/pn8/pancreas_exome/al28_code/SNVs/7.extended_contexts_farm.R
+Optional
+Pileups of key driver hotspots and/or TERT promoter hotpsots (TERT promoter calls are thrown out by Caveman)
+bsub -n 4  -R "span[ptile=4] select[mem>=30000] rusage[mem=30000]" -M30000 -W 6:00 -Is bash
+module load R/4.1.0
+Rscript /lustre/scratch125/casm/team268im/pn8/pancreas_exome/al28_code/SNVs/TERT_promoter_pileup.R
+Rscript /lustre/scratch125/casm/team268im/pn8/pancreas_exome/al28_code/SNVs/Driver_pileup.R
+Indels
+The first step is most intense 
+Parse indels into R (takes 8 hours, memory optimised based on prior runs)
+cd /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Data/Pindel
+bsub -o /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Pindel -e /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Pindel -q normal -M2000 -R'select[mem>2000] rusage[mem=2000] span[hosts=1]' Rscript /lustre/scratch125/casm/team268im/pn8/pancreas_exome/al28_code/Indels/1.pindel_pancreas_exome_VCF_analysis_farm.R
+Exome bed filter step (takes < 1 minute)
+bsub -o /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Pindel -e /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Pindel -q normal -M1000 -R'select[mem>1000] rusage[mem=1000] span[hosts=1]' Rscript /lustre/scratch125/casm/team268im/pn8/pancreas_exome/al28_code/Indels/2.pindel_pancreas_exome_in_bed_filter_farm.R
+Pileup stage to rescue indels - 2 methods (BAM2R alternatively can use CGPVAF)
+Run bam2R to generate variant counts (bam2r_pindel_calls_per_donor_exome.R) (the number in the loop is the number of donors, takes ~2 hours)
+for i in {1..76}; do bsub -q normal -M2000 -R'select[mem>2000] rusage[mem=2000] span[hosts=1]' -n1 -e /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Pindel/bam2R_pileups/logs/$i.err -o /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/exome/Pindel/bam2R_pileups/logs/$i.out Rscript /lustre/scratch125/casm/team268im/pn8/pancreas_exome/al28_code/Indels/3.bam2r_pindel_calls_per_donor_exome_farm.R $i; done
+Beta binomial filter and heatmap generation for Pindel
+bsub -o /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Pindel -e /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Pindel -q normal -M1000 -R'select[mem>1000] rusage[mem=1000] span[hosts=1]' Rscript /lustre/scratch125/casm/team268im/pn8/pancreas_exome/al28_code/Indels/4.heatmap_generation_pindel_beta_binom_annotation_exome_farm.R
+Creating Pindel VAFs
+bsub -o /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Pindel -e /lustre/scratch125/casm/team268im/pn8/pancreas_exome/Analysis/Pindel -q normal -M100 -R'select[mem>100] rusage[mem=100] span[hosts=1]' Rscript /lustre/scratch125/casm/team268im/pn8/pancreas_exome/al28_code/Indels/5.creating_pindel_VAFs_farm.R
