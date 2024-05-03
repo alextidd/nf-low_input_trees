@@ -1,4 +1,3 @@
-
 #!/usr/bin/env Rscript
 if(!require("optparse", character.only=T,quietly = T, warn.conflicts = F)){
   install.packages("optparse",repos = "http://cran.us.r-project.org")
@@ -532,7 +531,10 @@ xy_depth=mean(rowMeans(NR[XY_chromosomal,]))
 autosomal_depth=mean(rowMeans(NR[autosomal,]))
 
 gender='male'
-if(xy_depth>0.8*autosomal_depth) gender='female'
+
+print(paste("xy_depth:", xy_depth))
+print(paste("autosomal_depth:", autosomal_depth))
+if (xy_depth > (0.8*autosomal_depth)) {gender='female'}
 
 noCNVs=!samples%in%samples_with_CNVs
 

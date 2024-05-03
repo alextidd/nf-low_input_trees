@@ -1,81 +1,120 @@
+// filter VCF on FILTER=PASS and CLPM=0
 process hairpin_preselect {
-    tag "${meta.sample_id}:${vcf_type}"
-    label "normal"
-    publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
-      mode: "copy",
-      pattern: "*.pre.vcf"
-    publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
-      mode: "symlink",
-      pattern: "*.{annot.vcf.gz,sample.dupmarked.bam}"
+  tag "${meta.sample_id}:${vcf_type}"
+  label "normal"
+  publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
+    mode: "symlink",
+    pattern: "*.{annot.vcf.gz,sample.dupmarked.bam}"
 
-    input:
-    tuple val(meta), 
-          val(vcf_type), path(vcf), 
-          path(bam), path(bai), path(bas), path(met)
+  input:
+  tuple val(meta), 
+        val(vcf_type), path(vcf), 
+        path(bam), path(bai), path(bas), path(met)
 
-    output:
-    tuple val(meta), 
-          val(vcf_type), path(vcf), 
-          path(bam), path(bai), path(bas), path(met),
-          path("${meta.sample_id}.pre.vcf")
+  output:
+  tuple val(meta), 
+        val(vcf_type), path(vcf), 
+        path(bam), path(bai), path(bas), path(met),
+        path("${meta.sample_id}.pre_wo_ASRD.vcf")
 
-    script:
-    """
-    /bin/bash /code/runScriptPreselect.sh \
-      --vcf-file ${vcf} \
-      > ${meta.sample_id}.pre.vcf
-    """
+  script:
+  """
+  # disable ASMD filter (will filter on ASRD in the next step)
+  /bin/bash /code/runScriptPreselect.sh \
+    --vcf-file ${vcf} \
+    --asmd 0 \
+    > ${meta.sample_id}.preselected_wo_ASRD.vcf
+  """
 }
 
+// replace hairpin's ASMD filter with ASRD filter
+process filter_ASRD {
+  tag "${meta.sample_id}:${vcf_type}"
+  label "normal"
+  publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
+    mode: "copy",
+    pattern: "*.preselected.vcf"
+  
+  input:
+  tuple val(meta),
+        val(vcf_type), path(vcf), 
+        path(bam), path(bai), path(bas), path(met),
+        path(preselected_wo_ASRD_vcf)
+  
+  output:
+  tuple val(meta),
+        val(vcf_type), path(vcf), 
+        path(bam), path(bai), path(bas), path(met),
+        path("${meta.sample_id}.preselected.vcf")
+  
+  script:
+  if (vcf_type == "caveman") {
+    """
+    # apply ASRD filter, in case of non-standard read lengths
+    # INFO/ASRD>=0.87 (A soft flag median (read length adjusted) alignment score of reads showing the variant allele)
+    module load bcftools-1.9/python-3.11.6
+    bcftools filter -i 'INFO/ASRD>=0.87' ${preselected_wo_ASRD_vcf} \
+    > ${meta.sample_id}.preselected.vcf
+    """
+  } else if (vcf_type == "pindel") {
+    """
+    # ASRD filter does not apply to indels
+    cp ${preselected_wo_ASRD_vcf} ${meta.sample_id}.preselected.vcf
+    """
+  }
+}
+
+// convert the VCF file to ANNOVAR format (Chr,Start,End,Ref,Alt)
 process hairpin_imitateANNOVAR {
     tag "${meta.sample_id}:${vcf_type}"
     label "normal"
     publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
       mode: "copy",
-      pattern: "*.pre.annovar.txt"
+      pattern: "*.preselected.annovar.txt"
 
     input:
     tuple val(meta), 
           val(vcf_type), path(vcf),
           path(bam), path(bai), path(bas), path(met),
-          path(pre_vcf)
+          path(preselected_vcf)
 
     output:
     tuple val(meta), 
           val(vcf_type), path(vcf),
           path(bam), path(bai), path(bas), path(met),
-          path(pre_vcf), 
-          path("${meta.sample_id}.pre.annovar.txt")
+          path(preselected_vcf), 
+          path("${meta.sample_id}.preselected.annovar.txt")
 
     script:
     """
     /bin/bash /code/runScriptImitateANNOVAR.sh \
-      --vcf-file ${pre_vcf} \
-      > ${meta.sample_id}.pre.annovar.txt
+      --vcf-file ${preselected_vcf} \
+      > ${meta.sample_id}.preselected.annovar.txt
     """
 }
 
+// 
 process hairpin_annotateBAMStatistics {
   tag "${meta.sample_id}:${vcf_type}"
   label "normal"
   publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
     mode: "copy",
-    pattern: "*.pre.annovar.annot.txt"
+    pattern: "*.preselected.annovar.annot.txt"
 
   input:
   tuple val(meta), 
         val(vcf_type), path(vcf), 
         path(bam), path(bai), path(bas), path(met),
-        path(pre_vcf), 
+        path(preselected_vcf), 
         path(pre_annovar)
 
   output:
   tuple val(meta), 
         val(vcf_type), path(vcf), 
         path(bam), path(bai), path(bas), path(met),
-        path(pre_vcf), 
+        path(preselected_vcf), 
         path(pre_annovar), 
-        path("${meta.sample_id}.pre.annovar.annot.txt")
+        path("${meta.sample_id}.preselected.annovar.annot.txt")
 
   script:
   """
@@ -83,7 +122,7 @@ process hairpin_annotateBAMStatistics {
     --annovarfile ${pre_annovar} \
     --bamfiles ${bam} \
     --threads ${task.cpus} \
-    > ${meta.sample_id}.pre.annovar.annot.txt
+    > ${meta.sample_id}.preselected.annovar.annot.txt
   """
 }
 
@@ -92,13 +131,13 @@ process hairpin_additionalBAMStatistics {
   label "normal10gb"
   publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
     mode: "copy",
-    pattern: "*.pre.annovar.annot.full.txt"
+    pattern: "*.preselected.annovar.annot.full.txt"
   
   input:
   tuple val(meta), 
         val(vcf_type), path(vcf), 
         path(bam), path(bai), path(bas), path(met),
-        path(pre_vcf), 
+        path(preselected_vcf), 
         path(pre_annovar), 
         path(pre_annovar_annot)
   path fasta
@@ -108,10 +147,10 @@ process hairpin_additionalBAMStatistics {
   tuple val(meta), 
         val(vcf_type), path(vcf), 
         path(bam), path(bai), path(bas), path(met),
-        path(pre_vcf), 
+        path(preselected_vcf), 
         path(pre_annovar), 
         path(pre_annovar_annot), 
-        path("${meta.sample_id}.pre.annovar.annot.full.txt")
+        path("${meta.sample_id}.preselected.annovar.annot.full.txt")
 
   script:
   """
@@ -121,7 +160,7 @@ process hairpin_additionalBAMStatistics {
     --threads $task.cpus \
     --reference ${fasta} \
     --snp-database ${snp_database} \
-    > ${meta.sample_id}.pre.annovar.annot.full.txt
+    > ${meta.sample_id}.preselected.annovar.annot.full.txt
   """
 }
 
@@ -136,7 +175,7 @@ process hairpin_filtering {
   tuple val(meta), 
         val(vcf_type), path(vcf), 
         path(bam), path(bai), path(bas), path(met),
-        path(pre_vcf), 
+        path(preselected_vcf), 
         path(pre_annovar), 
         path(pre_annovar_annot), 
         path(pre_annovar_annot_full)
@@ -152,7 +191,7 @@ process hairpin_filtering {
   """
   /bin/bash /code/runScriptFiltering.sh \
     --annotated-file ${pre_annovar_annot_full} \
-    --vcf-file ${pre_vcf} \
+    --vcf-file ${preselected_vcf} \
     --output-directory ./ \
     --prefix ${meta.sample_id} \
     --fragment-threshold ${params.fragment_threshold}
@@ -167,6 +206,7 @@ workflow hairpin {
   // run
   ch_input 
   | hairpin_preselect
+  | filter_ASRD
   | hairpin_imitateANNOVAR
   | hairpin_annotateBAMStatistics
   

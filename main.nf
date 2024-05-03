@@ -11,24 +11,7 @@ include { preprocess } from './modules/preprocess.nf'
 include { hairpin } from './modules/hairpin.nf'
 include { post_filtering_and_pileup } from './modules/post_filtering_and_pileup.nf'
 include { cgpVAF } from './modules/cgpVAF.nf'
-
-process sequoia {
-  tag "${meta.donor_id}"
-  publishDir "${params.outdir}/phylogeny", mode: 'copy'
-  conda '/nfs/users/nfs_a/at31/miniforge3/envs/sequoia'
-
-  input:
-  tuple val(meta),
-        path(cgpVAF_file)
-
-  script:
-  """
-  Rscript build_phylogeny.R \
-    -c ${cgpVAF_file}
-  """
-  
-
-}
+include { sequoia } from './modules/sequoia.nf'
 
 // Main workflow
 workflow {
@@ -51,7 +34,7 @@ workflow {
     // run hairpin
     hairpin(preprocess.out.ch_input)
 
-    // run post_filtering_and_pileup
+    // run post-filtering and pileup
     post_filtering_and_pileup(hairpin.out)
 
     // run cgpVAF
@@ -61,7 +44,8 @@ workflow {
            preprocess.out.ch_cgpVAF_normal_bam)
 
     // run sequoia
-    sequoia(cgpVAF.out)
+    sequoia(cgpVAF.out,
+            preprocess.out.ch_fasta)
     
 }
 

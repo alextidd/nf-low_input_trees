@@ -6,7 +6,7 @@ cd $wd
 module load samtools-1.19.2/python-3.11.6
 
 # generate GRCh38 test datasets (chr22 is small, chr10 is medium)
-for chr in chr10 chr22 ; do
+for chr in chr22 ; do
     echo $chr
     outdir=$wd/data/GRCh38/$chr/
     mkdir -p $outdir
@@ -41,4 +41,8 @@ for chr in chr10 chr22 ; do
     done < <(cat ../../data/sample_sheet.csv | sed 1d | head -2)
 done
 
-# generate GRCh37 test dataset
+# test dataset for two full samples
+mkdir data/GRCh38/full/
+cat ../../data/sample_sheet.csv |
+head -3 \
+> data/GRCh38/full/sample_sheet.csv 
