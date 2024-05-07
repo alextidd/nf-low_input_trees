@@ -1,4 +1,4 @@
-// filter VCF on FILTER=PASS and CLPM=0
+// filter VCF on FILTER=PASS and CLPM=0 and ASMD > 140
 process hairpin_preselect {
   tag "${meta.sample_id}:${vcf_type}"
   label "normal"
@@ -25,7 +25,6 @@ process hairpin_preselect {
   # disable ASMD filter (will filter on ASRD in the next step)
   /bin/bash /code/runScriptPreselect.sh \
     --vcf-file ${vcf} \
-    --asmd 0 \
     > ${meta.sample_id}.preselected.vcf
   """
 }
