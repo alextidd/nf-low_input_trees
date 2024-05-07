@@ -5,6 +5,9 @@ process hairpin_preselect {
   publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
     mode: "symlink",
     pattern: "*.{annot.vcf.gz,sample.dupmarked.bam}"
+  publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
+    mode: "copy",
+    pattern: "*.preselected.vcf"
 
   input:
   tuple val(meta), 
@@ -15,7 +18,7 @@ process hairpin_preselect {
   tuple val(meta), 
         val(vcf_type), path(vcf), 
         path(bam), path(bai), path(bas), path(met),
-        path("${meta.sample_id}.preselected_wo_ASRD.vcf")
+        path("${meta.sample_id}.preselected.vcf")
 
   script:
   """
@@ -23,45 +26,8 @@ process hairpin_preselect {
   /bin/bash /code/runScriptPreselect.sh \
     --vcf-file ${vcf} \
     --asmd 0 \
-    > ${meta.sample_id}.preselected_wo_ASRD.vcf
-  """
-}
-
-// replace hairpin's ASMD filter with ASRD filter
-process filter_ASRD {
-  tag "${meta.sample_id}:${vcf_type}"
-  label "normal"
-  publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
-    mode: "copy",
-    pattern: "*.preselected.vcf"
-  
-  input:
-  tuple val(meta),
-        val(vcf_type), path(vcf), 
-        path(bam), path(bai), path(bas), path(met),
-        path(preselected_wo_ASRD_vcf)
-  
-  output:
-  tuple val(meta),
-        val(vcf_type), path(vcf), 
-        path(bam), path(bai), path(bas), path(met),
-        path("${meta.sample_id}.preselected.vcf")
-  
-  script:
-  if (vcf_type == "caveman") {
-    """
-    # apply ASRD filter, in case of non-standard read lengths
-    # INFO/ASRD>=0.87 (A soft flag median (read length adjusted) alignment score of reads showing the variant allele)
-    module load bcftools-1.9/python-3.11.6
-    bcftools filter -i 'INFO/ASRD>=0.87' ${preselected_wo_ASRD_vcf} \
     > ${meta.sample_id}.preselected.vcf
-    """
-  } else if (vcf_type == "pindel") {
-    """
-    # ASRD filter does not apply to indels
-    cp ${preselected_wo_ASRD_vcf} ${meta.sample_id}.preselected.vcf
-    """
-  }
+  """
 }
 
 // convert the VCF file to ANNOVAR format (Chr,Start,End,Ref,Alt)
@@ -206,7 +172,6 @@ workflow hairpin {
   // run
   ch_input 
   | hairpin_preselect
-  | filter_ASRD
   | hairpin_imitateANNOVAR
   | hairpin_annotateBAMStatistics
 
@@ -220,3 +185,5 @@ workflow hairpin {
   emit:
   hairpin_filtering.out
 }
+
+

@@ -3,6 +3,9 @@ process post_filtering {
   tag "${meta.sample_id}:${vcf_type}"
   label "normal"
   errorStrategy 'ignore'
+  publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
+    mode: "copy",
+    pattern: "*_postfiltered.vcf"
 
   input:
   tuple val(meta),
