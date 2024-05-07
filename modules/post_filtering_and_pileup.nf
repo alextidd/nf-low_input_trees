@@ -1,8 +1,6 @@
-
 process post_filtering {
   tag "${meta.sample_id}:${vcf_type}"
   label "normal"
-  errorStrategy 'ignore'
   publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
     mode: "copy",
     pattern: "*_postfiltered.vcf"
@@ -31,8 +29,7 @@ process post_filtering {
     module load bcftools-1.9/python-3.11.6
     bcftools filter \
       -i 'FILTER="PASS" && INFO/CLPM="0.00" && INFO/ASRD>=0.87' \
-      ${passed_vcf} |
-    grep -v '^#' \
+      ${passed_vcf} \
     > ${meta.sample_id}_postfiltered.vcf
     """
   } else if (vcf_type == "pindel") {
@@ -42,8 +39,7 @@ process post_filtering {
     module load bcftools-1.9/python-3.11.6
     bcftools filter \
       -i 'FILTER="PASS"' \
-      ${passed_vcf} |
-    grep -v '^#' \
+      ${passed_vcf} \
     > ${meta.sample_id}_postfiltered.vcf
     """
   }
@@ -53,7 +49,8 @@ process pileup {
   tag "${meta.donor_id}:${vcf_type}"
   label "normal"
   publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/", 
-    mode: "copy"
+    mode: "copy",
+    pattern: "*_intervals.bed"
   
   input:
   tuple val(meta),
@@ -61,7 +58,7 @@ process pileup {
         val(sample_ids),
         path(vcfs), 
         path(bams), path(bais), path(bass), path(mets),
-        path(vcf_postfiltered)
+        path(vcfs_postfiltered)
 
   output:
   tuple val(meta),
@@ -73,7 +70,9 @@ process pileup {
 
   script:
   """
-  cut -f 1,2,4,5 *_postfiltered.vcf | sort | uniq \
+  (for file in *_postfiltered.vcf ; do
+    grep -v '^#' \$file | cut -f 1,2,4,5 ;
+  done) | cat | sort | uniq \
   > ${meta.donor_id}_intervals.bed
   """
 }
