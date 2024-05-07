@@ -1,32 +1,3 @@
-process hp_run {
-  tag "${meta.sample_id}:${vcf_type}"
-  label "normal"
-  publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
-    mode: "symlink",
-    pattern: "*.{annot.vcf.gz,sample.dupmarked.bam}"
-
-  input:
-  tuple val(meta), 
-        val(vcf_type), path(vcf), 
-        path(bam), path(bai), path(bas), path(met)
-  val(genome_names)
-
-  output:
-  tuple val(meta), 
-        val(vcf_type), path(vcf), 
-        path(bam), path(bai), path(bas), path(met)
-
-  script:
-  """
-  module load hairpin
-  hairpin \
-    -v ${vcf} \
-    -b ${bam} \
-    -g ${genome_names.hg} \
-    -m ${task.memory}
-  """
-}
-
 // filter VCF on FILTER=PASS and CLPM=0
 process hairpin_preselect {
   tag "${meta.sample_id}:${vcf_type}"
@@ -44,7 +15,7 @@ process hairpin_preselect {
   tuple val(meta), 
         val(vcf_type), path(vcf), 
         path(bam), path(bai), path(bas), path(met),
-        path("${meta.sample_id}.pre_wo_ASRD.vcf")
+        path("${meta.sample_id}.preselected_wo_ASRD.vcf")
 
   script:
   """
@@ -230,24 +201,22 @@ process hairpin_filtering {
 workflow hairpin {
   take: 
   ch_input
-  genome_names
 
   main:
-  //// run
-  //ch_input 
-  //| hairpin_preselect
-  //| filter_ASRD
-  //| hairpin_imitateANNOVAR
-  //| hairpin_annotateBAMStatistics
-  //// add fasta and snp database to input
-  //hairpin_additionalBAMStatistics (
-  //  hairpin_annotateBAMStatistics.out,
-  //  params.fasta,
-  //  params.snp_database)
-  //| hairpin_filtering
+  // run
+  ch_input 
+  | hairpin_preselect
+  | filter_ASRD
+  | hairpin_imitateANNOVAR
+  | hairpin_annotateBAMStatistics
 
-  hp_run(ch_input, genome_names)
+  // add fasta and snp database to input
+  hairpin_additionalBAMStatistics (
+    hairpin_annotateBAMStatistics.out,
+    params.fasta,
+    params.snp_database)
+  | hairpin_filtering
 
   emit:
-  hp_run.out
+  hairpin_filtering.out
 }
