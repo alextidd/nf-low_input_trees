@@ -1,3 +1,45 @@
+process hp_run {
+  tag "${meta.sample_id}:${vcf_type}"
+  label "normal100gb"
+  publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
+    mode: "symlink",
+    pattern: "*.{annot.vcf.gz,sample.dupmarked.bam}"
+  publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
+    mode: "copy",
+    pattern: "*.hairpin.vcf"
+
+  input:
+  tuple val(meta), 
+        val(vcf_type), path(vcf), 
+        path(bam), path(bai), path(bas), path(met)
+
+  output:
+  tuple val(meta), 
+        val(vcf_type), path(vcf), 
+        path(bam), path(bai), path(bas), path(met),
+        path("*.hairpin.vcf")
+
+  script:
+  """
+  # load module
+  module load hairpin
+
+  # get appropriate genome name
+  if [[ "$params.genome_build" == "GRCh38" ]] || [[ "$params.genome_build" == "hg38" ]]; then
+    genome_name="hg38"
+  elif [[ "$params.genome_build" == "GRCh37" ]] || [[ "$params.genome_build" == "hg19" ]]; then
+    genome_name="hg37"
+  fi
+
+  # run the module
+  hairpin \
+    -v ${vcf} \
+    -b ${bam} \
+    -g \$genome_name \
+    -m 100
+  """
+}
+
 // filter VCF on FILTER=PASS and CLPM=0 and ASMD > 140
 process hairpin_preselect {
   tag "${meta.sample_id}:${vcf_type}"
@@ -169,20 +211,11 @@ workflow hairpin {
 
   main:
   // run
-  ch_input 
-  | hairpin_preselect
-  | hairpin_imitateANNOVAR
-  | hairpin_annotateBAMStatistics
-
-  // add fasta and snp database to input
-  hairpin_additionalBAMStatistics (
-    hairpin_annotateBAMStatistics.out,
-    params.fasta,
-    params.snp_database)
-  | hairpin_filtering
+  ch_input
+  | hp_run
 
   emit:
-  hairpin_filtering.out
+  hp_run.out
 }
 
 

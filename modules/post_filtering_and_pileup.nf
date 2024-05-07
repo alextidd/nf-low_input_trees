@@ -9,8 +9,7 @@ process post_filtering {
   tuple val(meta),
         val(vcf_type), path(vcf), 
         path(bam), path(bai), path(bas), path(met),
-        path(passed_vcf),
-        path(filtered_vcf)
+        path(hairpin_vcf)
 
   output:
   tuple val(meta),
@@ -29,7 +28,7 @@ process post_filtering {
     module load bcftools-1.9/python-3.11.6
     bcftools filter \
       -i 'FILTER="PASS" && INFO/CLPM="0.00" && INFO/ASRD>=0.87' \
-      ${passed_vcf} \
+      ${hairpin_vcf} \
     > ${meta.sample_id}_postfiltered.vcf
     """
   } else if (vcf_type == "pindel") {
@@ -39,7 +38,7 @@ process post_filtering {
     module load bcftools-1.9/python-3.11.6
     bcftools filter \
       -i 'FILTER="PASS"' \
-      ${passed_vcf} \
+      ${hairpin_vcf} \
     > ${meta.sample_id}_postfiltered.vcf
     """
   }

@@ -1,14 +1,5 @@
 workflow preprocess {
   main:
-  // get genome build names
-  if (params.genome_build == 'hg38' || params.genome_build == 'GRCh38') {
-    genome_names = ['hg': 'hg38', 'GRCh': 'GRCh38']
-  } else if (params.genome_build == 'hg19' || params.genome_build == 'GRCh37') {
-    genome_names = ['hg': 'hg19', 'GRCh': 'GRCh37']
-  } else {
-    println "Invalid genome build. Please provide hg38, GRCh38, hg19 or GRCh37"
-    exit 0
-  }
 
   // get fasta + fai
   Channel.fromPath(params.fasta, checkIfExists: true)
@@ -63,7 +54,6 @@ workflow preprocess {
   | set { ch_input } 
 
   emit:
-  genome_names = genome_names
   ch_input = ch_input
   ch_fasta = ch_fasta
   ch_high_depth_bed = ch_high_depth_bed
