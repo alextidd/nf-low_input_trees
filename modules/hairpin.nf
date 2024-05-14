@@ -12,6 +12,7 @@ process hp_run {
   tuple val(meta), 
         val(vcf_type), path(vcf), 
         path(bam), path(bai), path(bas), path(met)
+  each chr
 
   output:
   tuple val(meta), 
@@ -24,18 +25,14 @@ process hp_run {
   # load module
   module load hairpin
 
-  # get appropriate genome name
-  if [[ "$params.genome_build" == "GRCh38" ]] || [[ "$params.genome_build" == "hg38" ]]; then
-    genome_name="hg38"
-  elif [[ "$params.genome_build" == "GRCh37" ]] || [[ "$params.genome_build" == "hg19" ]]; then
-    genome_name="hg37"
-  fi
+  # subset to chr
+  
 
   # run the module
   hairpin \
     -v ${vcf} \
     -b ${bam} \
-    -g \$genome_name \
+    -g /lustre/scratch124/casm/team78pipelines/reference/Homo_sapiens/GRCh38_full_analysis_set_plus_decoy_hla/genome.fa \
     -m 100
   """
 }
@@ -100,7 +97,6 @@ process hairpin_imitateANNOVAR {
     """
 }
 
-// 
 process hairpin_annotateBAMStatistics {
   tag "${meta.sample_id}:${vcf_type}"
   label "normal"

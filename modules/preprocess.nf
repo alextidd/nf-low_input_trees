@@ -14,9 +14,9 @@ workflow preprocess {
   // get cgpVAF normal bam + bai
   Channel.of(
     [file(params.cgpVAF_normal_bam, checkIfExists: true), 
-    file(params.cgpVAF_normal_bas, checkIfExists: true),
-    file(params.cgpVAF_normal_bai, checkIfExists: true),
-    file(params.cgpVAF_normal_met, checkIfExists: true)])
+    file(params.cgpVAF_normal_bam + ".bas", checkIfExists: true),
+    file(params.cgpVAF_normal_bam + ".bai", checkIfExists: true),
+    file(params.cgpVAF_normal_bam + ".met.gz", checkIfExists: true)])
   | set { ch_cgpVAF_normal_bam }
 
   // get metadata + bam paths

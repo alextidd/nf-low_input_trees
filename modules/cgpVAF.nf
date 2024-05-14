@@ -49,14 +49,15 @@ process cgpVAF_run {
     --normal_bam ${cgpVAF_normal_bam} \
     --vcf ${vcfs.join(' ')}
   
-  # rename output
+  # rename output and remove vcf header
   cgpVAF_out=(`ls *_vaf.tsv`)
   n_files=\${#cgpVAF_out[@]}
   if (( n_files > 1 )) ; then
     echo "Error: More than one file matches pattern *_vaf.tsv"
     exit 1
   elif (( n_files == 1 )) ; then
-    cp \${cgpVAF_out[0]} ${meta.donor_id}_${vcf_type}_vaf.tsv
+    grep -v '^##' \${cgpVAF_out[0]} \
+    > ${meta.donor_id}_${vcf_type}_vaf.tsv
   else
     echo "Error: No files match the pattern *_vaf.tsv"
     exit 1

@@ -6,7 +6,7 @@ cd $wd
 module load samtools-1.19.2/python-3.11.6
 
 # generate GRCh38 test datasets (chr22 is small, chr10 is medium)
-for chr in chr22 ; do
+for chr in chr22 chrX ; do
     echo $chr
     outdir=$wd/data/GRCh38/$chr/
     mkdir -p $outdir
@@ -19,7 +19,7 @@ for chr in chr22 ; do
         for vcf in $pindel_vcf $caveman_vcf; do
             base_vcf=$(basename $vcf)
             new_vcf="$outdir/${base_vcf}"
-            zcat $vcf | grep "#\|^$chr" | gzip \
+            zcat $vcf | grep "^#\|^$chr" | gzip \
             > $new_vcf
             new_vcfs+=($new_vcf)
         done
@@ -42,7 +42,7 @@ for chr in chr22 ; do
 done
 
 # test dataset for two full samples
-mkdir data/GRCh38/full/
+mkdir -p data/GRCh38/full/
 cat ../../data/sample_sheet.csv |
-head -3 \
+head -5 \
 > data/GRCh38/full/sample_sheet.csv 
