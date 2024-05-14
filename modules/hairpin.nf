@@ -12,7 +12,6 @@ process hp_run {
   tuple val(meta), 
         val(vcf_type), path(vcf), 
         path(bam), path(bai), path(bas), path(met)
-  each chr
 
   output:
   tuple val(meta), 
@@ -25,14 +24,11 @@ process hp_run {
   # load module
   module load hairpin
 
-  # subset to chr
-  
-
   # run the module
   hairpin \
     -v ${vcf} \
     -b ${bam} \
-    -g /lustre/scratch124/casm/team78pipelines/reference/Homo_sapiens/GRCh38_full_analysis_set_plus_decoy_hla/genome.fa \
+    -g ${params.genome_build} \
     -m 100
   """
 }
@@ -207,11 +203,23 @@ workflow hairpin {
 
   main:
   // run
-  ch_input
-  | hp_run
+  //hp_run(ch_input)
+
+  // run
+  ch_input 
+  | hairpin_preselect
+  | hairpin_imitateANNOVAR
+  | hairpin_annotateBAMStatistics
+
+  // add fasta and snp database to input
+  hairpin_additionalBAMStatistics (
+    hairpin_annotateBAMStatistics.out,
+    params.fasta,
+    params.snp_database)
+  | hairpin_filtering
 
   emit:
-  hp_run.out
+  hairpin_filtering.out
 }
 
 

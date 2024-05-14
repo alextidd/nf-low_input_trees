@@ -9,7 +9,8 @@ process post_filtering {
   tuple val(meta),
         val(vcf_type), path(vcf), 
         path(bam), path(bai), path(bas), path(met),
-        path(hairpin_vcf)
+        path(passed_vcf),
+        path(filtered_vcf)
 
   output:
   tuple val(meta),
@@ -28,7 +29,7 @@ process post_filtering {
     module load bcftools-1.9/python-3.11.6
     bcftools filter \
       -i 'FILTER="PASS" && INFO/CLPM="0.00" && INFO/ASRD>=0.87' \
-      ${hairpin_vcf} \
+      ${passed_vcf} \
     > ${meta.sample_id}_postfiltered.vcf
     """
   } else if (vcf_type == "pindel") {
@@ -38,7 +39,7 @@ process post_filtering {
     module load bcftools-1.9/python-3.11.6
     bcftools filter \
       -i 'FILTER="PASS"' \
-      ${hairpin_vcf} \
+      ${passed_vcf} \
     > ${meta.sample_id}_postfiltered.vcf
     """
   }
@@ -91,6 +92,16 @@ workflow post_filtering_and_pileup {
   | groupTuple(by: [0,1])
   | pileup
 
+  // get pileups where the intervals BED file is not empty 
+  pileup.out | 
+  map { meta, vcf_type, sample_ids, vcfs, bams, bais, bass, mets, bed_intervals ->
+        tuple(meta, vcf_type, sample_ids, vcfs, bams, bais, bass, mets, bed_intervals, 
+              bed_intervals.size())}
+  | branch { meta, vcf_type, sample_ids, vcfs, bams, bais, bass, mets, bed_intervals, bed_intervals_size -> 
+      not_empty: bed_intervals_size > 0
+        return tuple(meta, vcf_type, sample_ids, vcfs, bams, bais, bass, mets, bed_intervals) }
+  | set { ch_pileup_not_empty }
+
   emit:
-  pileup.out
+  ch_pileup_not_empty
 }

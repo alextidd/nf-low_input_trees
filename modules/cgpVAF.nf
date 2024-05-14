@@ -3,7 +3,7 @@ process cgpVAF_run {
   label "normal"
   publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/", 
     mode: "copy"
-  
+
   input: 
   tuple val(meta),
         val(vcf_type), 
@@ -25,18 +25,15 @@ process cgpVAF_run {
         path("${meta.donor_id}_${vcf_type}_vaf.tsv")
 
   script:
+  def variant_type = (vcf_type == "caveman") ? "snp" : (vcf_type == "pindel") ? "indel" : ""
   """
   module load cgpVAFcommand/2.5.0
-
-  # get variant type
-  [[ "$vcf_type" == "caveman" ]] && variant_type="snp"
-  [[ "$vcf_type" == "pindel" ]] && variant_type="indel"
 
   # run cgpVAF
   cgpVaf.pl \
     --inputDir ./ \
     --outDir ./ \
-    --variant_type \$variant_type \
+    --variant_type ${variant_type} \
     --genome ${fasta} \
     --high_depth_bed ${params.high_depth_bed} \
     --bed_only 1 \
@@ -78,7 +75,7 @@ workflow cgpVAF {
     ch_fasta,
     ch_high_depth_bed,
     ch_cgpVAF_normal_bam)
-  | groupTuple
+  //| groupTuple
   | set { cgpVAF_out }
 
   emit:
