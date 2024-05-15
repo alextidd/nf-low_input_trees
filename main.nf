@@ -36,10 +36,10 @@ workflow {
 
     // concatenate channels together
     preprocess.out.ch_pindel.concat(hairpin.out) 
-    | set { ch_hairpin_filtered } 
+    | set { ch_hairpin_pass } 
 
     // run post-filtering and pileup
-    post_filtering_and_pileup(ch_hairpin_filtered)
+    post_filtering_and_pileup(ch_hairpin_pass)
 
     // run cgpVAF
     cgpVAF(post_filtering_and_pileup.out, 
