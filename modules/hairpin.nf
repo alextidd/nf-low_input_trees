@@ -199,27 +199,27 @@ process hairpin_filtering {
 
 workflow hairpin {
   take: 
-  ch_input
+  ch_caveman
 
   main:
   // run
-  //hp_run(ch_input)
-
-  // run
-  ch_input 
+  ch_caveman 
   | hairpin_preselect
   | hairpin_imitateANNOVAR
   | hairpin_annotateBAMStatistics
 
   // add fasta and snp database to input
-  hairpin_additionalBAMStatistics (
+  hairpin_additionalBAMStatistics(
     hairpin_annotateBAMStatistics.out,
     params.fasta,
     params.snp_database)
   | hairpin_filtering
+  | map { meta, vcf_type, vcf, bam, bai, bas, met, vcf_passed, vcf_filtered ->
+          tuple(meta, vcf_type, vcf_filtered, bam, bai, bas, met) }
+  | set { ch_hairpin_filtered }
 
   emit:
-  hairpin_filtering.out
+  ch_hairpin_filtered
 }
 
 

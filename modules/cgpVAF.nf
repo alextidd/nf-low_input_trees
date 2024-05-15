@@ -70,12 +70,20 @@ workflow cgpVAF {
   ch_cgpVAF_normal_bam
 
   main:
+  // create value channel of the chromosomes
+  // TODO: split cgpVAF by choromosme
+  // Channel.of(1..22, 'X', 'Y') | view
+  // if (params.genome_build == 'hg38') {
+  //  chromosomes = chromosomes.collect { 'chr' + it }
+  // }
+
+  //run
   cgpVAF_run(
     ch_input,
     ch_fasta,
     ch_high_depth_bed,
     ch_cgpVAF_normal_bam)
-  //| groupTuple
+  | groupTuple
   | set { cgpVAF_out }
 
   emit:

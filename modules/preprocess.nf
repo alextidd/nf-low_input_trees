@@ -1,6 +1,11 @@
 workflow preprocess {
   main:
 
+  // check genome build is among possibilities
+  assert params.genome_build in ['hg19', 'hg38'] : 
+    "Invalid genome build: ${params.genome_build}. " +
+    "Only 'hg19' or 'hg38' are allowed."
+
   // get fasta + fai
   Channel.fromPath(params.fasta, checkIfExists: true)
   | map { fasta -> [fasta, file(fasta + ".fai", checkIfExists: true)] } 
@@ -49,12 +54,10 @@ workflow preprocess {
   }
   | set { ch_pindel }
 
-  // concatenate channels together
-  ch_caveman.concat(ch_pindel) 
-  | set { ch_input } 
 
   emit:
-  ch_input = ch_input
+  ch_caveman = ch_caveman
+  ch_pindel = ch_pindel
   ch_fasta = ch_fasta
   ch_high_depth_bed = ch_high_depth_bed
   ch_cgpVAF_normal_bam = ch_cgpVAF_normal_bam

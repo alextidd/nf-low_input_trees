@@ -32,10 +32,14 @@ workflow {
     preprocess()
 
     // run hairpin
-    hairpin(preprocess.out.ch_input)
+    hairpin(preprocess.out.ch_caveman)
+
+    // concatenate channels together
+    preprocess.out.ch_pindel.concat(hairpin.out) 
+    | set { ch_hairpin_filtered } 
 
     // run post-filtering and pileup
-    post_filtering_and_pileup(hairpin.out)
+    post_filtering_and_pileup(ch_hairpin_filtered)
 
     // run cgpVAF
     cgpVAF(post_filtering_and_pileup.out, 
