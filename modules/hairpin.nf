@@ -1,38 +1,3 @@
-process hp_run {
-  tag "${meta.sample_id}:${vcf_type}"
-  label "normal100gb"
-  publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
-    mode: "symlink",
-    pattern: "*.{annot.vcf.gz,sample.dupmarked.bam}"
-  publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
-    mode: "copy",
-    pattern: "*.hairpin.vcf"
-
-  input:
-  tuple val(meta), 
-        val(vcf_type), path(vcf), 
-        path(bam), path(bai), path(bas), path(met)
-
-  output:
-  tuple val(meta), 
-        val(vcf_type), path(vcf), 
-        path(bam), path(bai), path(bas), path(met),
-        path("*.hairpin.vcf")
-
-  script:
-  """
-  # load module
-  module load hairpin
-
-  # run the module
-  hairpin \
-    -v ${vcf} \
-    -b ${bam} \
-    -g ${params.genome_build} \
-    -m 100
-  """
-}
-
 // filter VCF on FILTER=PASS and CLPM=0 and ASMD > 140
 process hairpin_preselect {
   tag "${meta.sample_id}:${vcf_type}"
@@ -57,7 +22,6 @@ process hairpin_preselect {
 
   script:
   """
-  # disable ASMD filter (will filter on ASRD in the next step)
   /bin/bash /code/runScriptPreselect.sh \
     --vcf-file ${vcf} \
     > ${meta.sample_id}.preselected.vcf
@@ -156,7 +120,7 @@ process hairpin_additionalBAMStatistics {
   /bin/bash /code/runScriptAdditional.sh \
     --annovarfile ${pre_annovar_annot} \
     --bamfile ${bam} \
-    --threads $task.cpus \
+    --threads ${task.cpus} \
     --reference ${fasta} \
     --snp-database ${snp_database} \
     > ${meta.sample_id}.preselected.annovar.annot.full.txt
@@ -168,7 +132,7 @@ process hairpin_filtering {
   label "normal"
   publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
     mode: "copy",
-    pattern: "*{passed,filtered}.vcf"
+    pattern: "*_passed.vcf"
 
   input:
   tuple val(meta), 
@@ -183,8 +147,7 @@ process hairpin_filtering {
   tuple val(meta), 
         val(vcf_type), path(vcf), 
         path(bam), path(bai), path(bas), path(met),
-        path("${meta.sample_id}_passed.vcf"),
-        path("${meta.sample_id}_filtered.vcf")
+        path("${meta.sample_id}_passed.vcf")
 
   script:
   """
@@ -197,12 +160,34 @@ process hairpin_filtering {
   """
 }
 
+process sync_pindels {
+  tag "${meta.sample_id}:${vcf_type}"
+  label "normal"
+
+  input:
+  tuple val(meta), 
+        val(vcf_type), path(vcf), 
+        path(bam), path(bai), path(bas), path(met)
+
+  output:
+  tuple val(meta), 
+        val(vcf_type), path(vcf), 
+        path(bam), path(bai), path(bas), path(met),
+        path("${meta.sample_id}_passed.vcf")
+
+  script:
+  """
+  zcat $vcf > ${meta.sample_id}_passed.vcf
+  """
+}
+
 workflow hairpin {
   take: 
   ch_caveman
+  ch_pindel
 
   main:
-  // run
+  // run hairpin on caveman
   ch_caveman 
   | hairpin_preselect
   | hairpin_imitateANNOVAR
@@ -214,9 +199,15 @@ workflow hairpin {
     params.fasta,
     params.snp_database)
   | hairpin_filtering
-  | map { meta, vcf_type, vcf, bam, bai, bas, met, vcf_passed, vcf_filtered ->
-          tuple(meta, vcf_type, vcf_passed, bam, bai, bas, met) }
-  | set { ch_hairpin_pass }
+
+  // get pindel channel into same formal as hairpin output
+  // (meta, vcf_type, vcf, bam, bai, bas, met, vcf_passed)
+  // (vcf_passed is the same file as vcf, but unzipped and renamed)
+  ch_pindel
+  | sync_pindels
+
+  sync_pindels.out.concat(hairpin_filtering.out) 
+  | set { ch_hairpin_pass } 
 
   emit:
   ch_hairpin_pass

@@ -8,7 +8,8 @@ process post_filtering {
   input:
   tuple val(meta),
         val(vcf_type), path(vcf), 
-        path(bam), path(bai), path(bas), path(met)
+        path(bam), path(bai), path(bas), path(met),
+        path(vcf_passed, stageAs: "passed.vcf")
 
   output:
   tuple val(meta),
@@ -27,7 +28,7 @@ process post_filtering {
     module load bcftools-1.9/python-3.11.6
     bcftools filter \
       -i 'FILTER="PASS" && INFO/CLPM="0.00" && INFO/ASRD>=0.87' \
-      ${vcf} \
+      ${vcf_passed} \
     > ${meta.sample_id}_postfiltered.vcf
     """
   } else if (vcf_type == "pindel") {
@@ -37,7 +38,7 @@ process post_filtering {
     module load bcftools-1.9/python-3.11.6
     bcftools filter \
       -i 'FILTER="PASS"' \
-      ${vcf} \
+      ${vcf_passed} \
     > ${meta.sample_id}_postfiltered.vcf
     """
   }
@@ -83,7 +84,6 @@ workflow post_filtering_and_pileup {
   // run post-filtering
   ch_input
   | post_filtering
-
   // group vcfs by donor, pileup
   | map { meta, vcf_type, vcf, bam, bai, bas, met, vcf_postfiltered ->
           [meta.subMap('donor_id', 'project_id', 'experiment_id'), 
