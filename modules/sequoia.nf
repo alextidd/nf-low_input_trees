@@ -6,9 +6,8 @@ process sequoia_run {
 
   input:
   tuple val(meta),
-        path(cgpVAF_out)
-  tuple path(fasta), 
-        path(fai)
+        path(cgpVAF_out),
+        path(fasta), path(fai)
   
   output:
     path("sequoia/*")
@@ -25,9 +24,7 @@ process sequoia_run {
 workflow sequoia {
   take:
   ch_input
-  ch_fasta
 
   main:
-  sequoia_run(ch_input,
-              ch_fasta)
+  sequoia_run(ch_input)
 }

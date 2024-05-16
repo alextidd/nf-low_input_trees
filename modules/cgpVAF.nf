@@ -1,6 +1,7 @@
 process cgpVAF_run {
-  tag "${meta.donor_id}:${vcf_type}"
-  label "normal4core20gb"
+  tag "${meta.donor_id}:${vcf_type}:${chr}"
+  label "normal4core"
+  errorStrategy = 'retry'
   publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/", 
     mode: "copy"
 
@@ -10,19 +11,19 @@ process cgpVAF_run {
         val(sample_ids),
         path(vcfs), 
         path(bams), path(bais), path(bass), path(mets),
-        path(bed_intervals)
-  tuple path(fasta), 
-        path(fai)
-  tuple path(high_depth_bed), 
-        path(high_depth_tbi)
-  tuple path(cgpVAF_normal_bam), 
+        path(bed_intervals),
+        path(fasta), path(fai),
+        path(high_depth_bed), path(high_depth_tbi),
+        path(cgpVAF_normal_bam), 
         path(cgpVAF_normal_bas), 
         path(cgpVAF_normal_bai),
-        path(cgpVAF_normal_met)
+        path(cgpVAF_normal_met),
+        val(chr)
 
   output:
   tuple val(meta),
-        path("${meta.donor_id}_${vcf_type}_vaf.tsv")
+        val(vcf_type),
+        path("tmpvaf_*/*")
 
   script:
   def variant_type = (vcf_type == "caveman") ? "snp" : (vcf_type == "pindel") ? "indel" : ""
@@ -35,7 +36,7 @@ process cgpVAF_run {
     --outDir ./ \
     --variant_type ${variant_type} \
     --genome ${fasta} \
-    --high_depth_bed ${params.high_depth_bed} \
+    --high_depth_bed ${high_depth_bed} \
     --bed_only 1 \
     --bedIntervals ${bed_intervals} \
     --base_quality 25 \
@@ -44,21 +45,8 @@ process cgpVAF_run {
     --tumour_bam ${bams.join(' ')} \
     --normal_name "normal" \
     --normal_bam ${cgpVAF_normal_bam} \
-    --vcf ${vcfs.join(' ')}
-  
-  # rename output and remove vcf header
-  cgpVAF_out=(`ls *_vaf.tsv`)
-  n_files=\${#cgpVAF_out[@]}
-  if (( n_files > 1 )) ; then
-    echo "Error: More than one file matches pattern *_vaf.tsv"
-    exit 1
-  elif (( n_files == 1 )) ; then
-    grep -v '^##' \${cgpVAF_out[0]} \
-    > ${meta.donor_id}_${vcf_type}_vaf.tsv
-  else
-    echo "Error: No files match the pattern *_vaf.tsv"
-    exit 1
-  fi 
+    --vcf ${vcfs.join(' ')} \
+    -chr ${chr}
   """
 }
 
@@ -74,16 +62,19 @@ process cgpVAF_concat {
         val(sample_ids),
         path(vcfs), 
         path(bams), path(bais), path(bass), path(mets),
-        path(bed_intervals)
-  tuple path(fasta), 
-        path(fai)
-  tuple path(high_depth_bed), 
-        path(high_depth_tbi)
-  tuple path(cgpVAF_normal_bam), 
+        path(bed_intervals),
+        path(tmpvaf),
+        path(fasta), path(fai),
+        path(high_depth_bed), path(high_depth_tbi),
+        path(cgpVAF_normal_bam), 
         path(cgpVAF_normal_bas), 
         path(cgpVAF_normal_bai),
         path(cgpVAF_normal_met)
-  path cgpVAf_chrs
+
+  output:
+  tuple val(meta),     
+        path("${meta.donor_id}_${vcf_type}_vaf.tsv"),
+        path(fasta), path(fai)
 
   script:
   def variant_type = (vcf_type == "caveman") ? "snp" : (vcf_type == "pindel") ? "indel" : ""
@@ -96,7 +87,7 @@ process cgpVAF_concat {
     --outDir ./ \
     --variant_type ${variant_type} \
     --genome ${fasta} \
-    --high_depth_bed ${params.high_depth_bed} \
+    --high_depth_bed ${high_depth_bed} \
     --bed_only 1 \
     --bedIntervals ${bed_intervals} \
     --base_quality 25 \
@@ -105,7 +96,7 @@ process cgpVAF_concat {
     --tumour_bam ${bams.join(' ')} \
     --normal_name "normal" \
     --normal_bam ${cgpVAF_normal_bam} \
-    --vcf ${vcfs.join(' ')}
+    --vcf ${vcfs.join(' ')} \
     -ct 1
   
   # rename output and remove vcf header
@@ -132,21 +123,33 @@ workflow cgpVAF {
   ch_cgpVAF_normal_bam
 
   main:
-  // // create value channel of the chromosomes
-  // Channel.of(1..22).concat(Channel.of('X', 'Y')) | view | set { chromosomes }
-  // if (params.genome_build == 'hg38') {
-  //  chromosomes = chromosomes | map { 'chr' + it }
-  // }
+  // create value channel of the chromosomes
+  Channel.of(1..22).concat(Channel.of('X', 'Y')) | set { chromosomes }
+  if (params.genome_build == 'hg38') {
+   chromosomes = chromosomes | map { 'chr' + it }
+  }
 
-  // run
-  cgpVAF_run(
-    ch_input,
-    ch_fasta,
-    ch_high_depth_bed,
-    ch_cgpVAF_normal_bam)
-  | groupTuple
-  | set { cgpVAF_out }
+  // run cgpVAF by chromosome
+  ch_input 
+  | combine(ch_fasta)
+  | combine(ch_high_depth_bed)
+  | combine(ch_cgpVAF_normal_bam)
+  | combine(chromosomes) 
+  | cgpVAF_run
+
+  // combine chromosomal channels
+  cgpVAF_run.out
+  | groupTuple(by: [0,1])
+  | set { ch_cgpVAF_chrs }
+
+  // concat cgpVAF outputs
+  ch_input
+  | combine(ch_cgpVAF_chrs, by: [0,1])
+  | combine(ch_fasta)
+  | combine(ch_high_depth_bed)
+  | combine(ch_cgpVAF_normal_bam)
+  | cgpVAF_concat
 
   emit:
-  cgpVAF_out
+  cgpVAF_concat.out
 }
