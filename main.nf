@@ -45,7 +45,8 @@ workflow {
            preprocess.out.ch_cgpVAF_normal_bam)
 
     // run sequoia
-    sequoia(cgpVAF.out)
+    sequoia(cgpVAF.out,
+            preprocess.out.ch_fasta)
     
 }
 

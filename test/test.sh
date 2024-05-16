@@ -1,4 +1,4 @@
-#!/bi`n`/bash
+#!/bin/bash
 # cd /lustre/scratch126/casm/team154pc/at31/chemo_trees/nf-chemo-trees/test/; bsub -q week -M 2000 -R 'select[mem>=2000] span[hosts=1] rusage[mem=2000]' -J test_chemo_trees -o log "bash test.sh"
 
 # modules

@@ -1,6 +1,6 @@
 process cgpVAF_run {
   tag "${meta.donor_id}:${vcf_type}:${chr}"
-  label "normal4core"
+  label "normal4core20gb"
   errorStrategy = 'retry'
   publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/", 
     mode: "copy"
@@ -23,7 +23,9 @@ process cgpVAF_run {
   output:
   tuple val(meta),
         val(vcf_type),
-        path("tmpvaf_*/*")
+        path("tmpvaf_*/${chr}_progress.out"),
+        path("tmpvaf_*/tmp_${chr}.tsv"),
+        path("tmpvaf_*/tmp_${chr}.vcf")
 
   script:
   def variant_type = (vcf_type == "caveman") ? "snp" : (vcf_type == "pindel") ? "indel" : ""
@@ -63,7 +65,9 @@ process cgpVAF_concat {
         path(vcfs), 
         path(bams), path(bais), path(bass), path(mets),
         path(bed_intervals),
-        path(tmpvaf),
+        path(tmpvaf_progress),
+        path(tmpvaf_tsv),
+        path(tmpvaf_vcf),
         path(fasta), path(fai),
         path(high_depth_bed), path(high_depth_tbi),
         path(cgpVAF_normal_bam), 
@@ -72,14 +76,18 @@ process cgpVAF_concat {
         path(cgpVAF_normal_met)
 
   output:
-  tuple val(meta),     
-        path("${meta.donor_id}_${vcf_type}_vaf.tsv"),
-        path(fasta), path(fai)
+  tuple val(meta),   
+        path("${meta.donor_id}_${vcf_type}_vaf.tsv")
 
   script:
   def variant_type = (vcf_type == "caveman") ? "snp" : (vcf_type == "pindel") ? "indel" : ""
   """
   module load cgpVAFcommand/2.5.0
+  
+  # stage in tmpvaf dir 
+  # (cgpVAF uses the first sample id as the output directory suffix)
+  mkdir -p tmpvaf_${sample_ids[0]}
+  mv tmp*{.vcf,tsv} *_progress.out tmpvaf_${sample_ids[0]}
 
   # run cgpVAF concat
   cgpVaf.pl \
@@ -149,7 +157,9 @@ workflow cgpVAF {
   | combine(ch_high_depth_bed)
   | combine(ch_cgpVAF_normal_bam)
   | cgpVAF_concat
+  | groupTuple
+  | set { ch_cgpVAF_out }
 
   emit:
-  cgpVAF_concat.out
+  ch_cgpVAF_out
 }
