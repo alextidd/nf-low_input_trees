@@ -8,9 +8,11 @@ and `Pindel` (indel) VCF files generated from the alignment files from
 sequencing. The steps are as follows.
 
 1. Filter the `CaVEMAN` SNV output.
+    
     a. Run Mathis Sanders' [SangerLCMFiltering](https://github.com/MathijsSanders/SangerLCMFiltering). 
     b. Post-filter the VCF (FILTER = PASS & CLPM=0.00 ASRD>=0.87).
 2. Filter the `Pindel` indel output.
+    
     a. Filter the VCF (FILTER = PASS).
 3. Run `cgpVAF` ((Sanger's internal module)[https://confluence.sanger.ac.uk/pages/viewpage.action?pageId=22710418])
     a.k.a. [vafCorrect](https://github.com/cancerit/vafCorrect). This re-checks
