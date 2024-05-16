@@ -2,12 +2,6 @@
 process hairpin_preselect {
   tag "${meta.sample_id}:${vcf_type}"
   label "normal"
-  publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
-    mode: "symlink",
-    pattern: "*.{annot.vcf.gz,sample.dupmarked.bam}"
-  publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
-    mode: "copy",
-    pattern: "*.preselected.vcf"
 
   input:
   tuple val(meta), 
@@ -32,9 +26,6 @@ process hairpin_preselect {
 process hairpin_imitateANNOVAR {
     tag "${meta.sample_id}:${vcf_type}"
     label "normal"
-    publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
-      mode: "copy",
-      pattern: "*.preselected.annovar.txt"
 
     input:
     tuple val(meta), 
@@ -60,9 +51,6 @@ process hairpin_imitateANNOVAR {
 process hairpin_annotateBAMStatistics {
   tag "${meta.sample_id}:${vcf_type}"
   label "normal"
-  publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
-    mode: "copy",
-    pattern: "*.preselected.annovar.annot.txt"
 
   input:
   tuple val(meta), 
@@ -92,9 +80,6 @@ process hairpin_annotateBAMStatistics {
 process hairpin_additionalBAMStatistics {
   tag "${meta.sample_id}:${vcf_type}"
   label "normal10gb"
-  publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
-    mode: "copy",
-    pattern: "*.preselected.annovar.annot.full.txt"
   
   input:
   tuple val(meta), 
@@ -163,7 +148,7 @@ process hairpin_filtering {
 process sync_pindels {
   tag "${meta.sample_id}:${vcf_type}"
   label "normal"
-
+  
   input:
   tuple val(meta), 
         val(vcf_type), path(vcf), 

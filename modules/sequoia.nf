@@ -28,6 +28,7 @@ process sequoia_run {
     --output_dir sequoia/ \
     --split_trees F \
     --ncores $task.cpus
+  # --plot_spectra T \
   """
 }
 

@@ -16,6 +16,7 @@ module load singularity
 nextflow run ../main.nf \
     --sample_sheet data/GRCh38/full/sample_sheet.csv \
     --outdir out/GRCh38/full/ \
-    -w ./work2/ \
+    -w ./work/ \
     -c /lustre/scratch125/casm/team268im/at31/RA_som_mut/scomatic/config/LSF.config \
-    -resume
+    -resume \
+    -N at31@sanger.ac.uk
