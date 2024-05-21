@@ -11,7 +11,7 @@ sequencing. The steps are as follows.
     
     a. Run Mathis Sanders' [SangerLCMFiltering](https://github.com/MathijsSanders/SangerLCMFiltering). 
     
-    b. Post-filter the VCF (FILTER = PASS & CLPM=0.00 ASRD>=0.87).
+    b. Post-filter the VCF (FILTER = PASS & CLPM=0.00 & ASRD>=0.87).
 
 2. Filter the `Pindel` indel output.
     
@@ -24,7 +24,7 @@ sequencing. The steps are as follows.
     facilitates unbiased `pileup` (SNVs) and `exonerate` (indels)-based VAF
     calculation for the union of variant sites in the set of related samples
     from each donor. 
-    
+
 4. Run [Sequoia](https://github.com/TimCoorens/Sequoia).
     
 

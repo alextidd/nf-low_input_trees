@@ -1,9 +1,7 @@
 process cgpVAF_run {
   tag "${meta.donor_id}:${vcf_type}:${chr}"
-  label "normal4core20gb"
+  label "normal100gb"
   errorStrategy = 'retry'
-  publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/", 
-    mode: "copy"
 
   input: 
   tuple val(meta),
