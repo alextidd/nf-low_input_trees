@@ -54,7 +54,6 @@ workflow preprocess {
   }
   | set { ch_pindel }
 
-
   emit:
   ch_caveman = ch_caveman
   ch_pindel = ch_pindel

@@ -7,11 +7,12 @@ nextflow.enable.dsl=2
 
 // import functions / modules / subworkflows / workflows
 include { validateParameters; paramsHelp; paramsSummaryLog; fromSamplesheet } from 'plugin/nf-validation'
-include { preprocess } from './modules/preprocess.nf'
-include { hairpin } from './modules/hairpin.nf'
+include { preprocess                } from './modules/preprocess.nf'
+include { reflag                    } from './modules/reflag.nf'
+include { hairpin                   } from './modules/hairpin.nf'
 include { post_filtering_and_pileup } from './modules/post_filtering_and_pileup.nf'
-include { cgpVAF } from './modules/cgpVAF.nf'
-include { sequoia } from './modules/sequoia.nf'
+include { cgpVAF                    } from './modules/cgpVAF.nf'
+include { sequoia                   } from './modules/sequoia.nf'
 
 // Main workflow
 workflow {
@@ -31,9 +32,13 @@ workflow {
     // preprocess
     preprocess()
 
+    // reflag
+    reflag(preprocess.out.ch_caveman,
+           preprocess.out.ch_pindel)
+
     // run hairpin
-    hairpin(preprocess.out.ch_caveman,
-            preprocess.out.ch_pindel)
+    hairpin(reflag.out.ch_caveman_reflagged,
+            reflag.out.ch_pindel_reflagged)
 
     // run post-filtering and pileup
     post_filtering_and_pileup(hairpin.out)

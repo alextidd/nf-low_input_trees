@@ -15,8 +15,9 @@ module load singularity
 # run the workflow on the hg38 test data, two full samples
 nextflow run ../main.nf \
     --sample_sheet data/GRCh38/full/sample_sheet.csv \
+    --project_type WES \
     --outdir out/GRCh38/full/ \
     -w ./work/ \
     -c /lustre/scratch125/casm/team268im/at31/RA_som_mut/scomatic/config/LSF.config \
-    -resume \
-    -N at31@sanger.ac.uk
+    -resume #\
+    #-N at31@sanger.ac.uk

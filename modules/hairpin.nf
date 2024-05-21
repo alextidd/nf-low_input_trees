@@ -185,9 +185,9 @@ workflow hairpin {
     params.snp_database)
   | hairpin_filtering
 
-  // get pindel channel into same formal as hairpin output
+  // get pindel channel into same format as hairpin output
   // (meta, vcf_type, vcf, bam, bai, bas, met, vcf_passed)
-  // (vcf_passed is the same file as vcf, but unzipped and renamed)
+  // (vcf_passed here is the same file as vcf, but unzipped and renamed)
   ch_pindel
   | sync_pindels
 
