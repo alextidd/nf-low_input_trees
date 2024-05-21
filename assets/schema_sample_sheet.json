@@ -7,25 +7,34 @@
   "items": {
     "type": "object",
     "properties": {
-      "donor_id": {
-        "type": "string",
-        "default": "value"
-      },
       "sample_id": {
         "type": "string",
-        "unique": true
+        "unique": true,
+        "pattern": "^\\S+$",
+        "errorMessage": "Sample ID must be provided and cannot contain spaces",
+        "meta": ["sample_id"]
       },
-      "project_number": {
-        "type": "number"
+      "donor_id": {
+        "type": "string",
+        "default": "value",
+        "pattern": "^\\S+$",
+        "errorMessage": "Donor ID must be provided and cannot contain spaces",
+        "meta": ["donor_id"]
       },
       "bam": {
-        "type": "string"
+        "type": "string",
+        "format": "file-path",
+        "exists": true
       },
-      "pindel": {
-        "type": "string"
+      "caveman_vcf": {
+        "type": "string",
+        "format": "file-path",
+        "exists": true
       },
-      "caveman_c": {
-        "type": "string"
+      "pindel_vcf": {
+        "type": "string",
+        "format": "file-path",
+        "exists": true
       }
     },
     "required": ["donor_id", "sample_id", "bam"]

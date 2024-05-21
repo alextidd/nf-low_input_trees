@@ -86,7 +86,7 @@ workflow post_filtering_and_pileup {
   | post_filtering
   // group vcfs by donor, pileup
   | map { meta, vcf_type, vcf, bam, bai, bas, met, vcf_postfiltered ->
-          [meta.subMap('donor_id', 'project_id', 'experiment_id'), 
+          [meta.subMap('donor_id'), 
            vcf_type, meta.sample_id, vcf, bam, bai, bas, met, vcf_postfiltered] }
   | groupTuple(by: [0,1])
   | pileup

@@ -168,12 +168,21 @@ process sync_pindels {
 
 workflow hairpin {
   take: 
-  ch_caveman
-  ch_pindel
+  ch_input
 
   main:
+  // branch caveman and pindel outputs
+  ch_input
+  | branch {
+      meta, vcf_type, vcf, bam, bai, bas, met ->
+      caveman: vcf_type == "caveman"
+        return tuple(meta, vcf_type, vcf, bam, bai, bas, met)
+      pindel: vcf_type == "pindel"
+        return tuple(meta, vcf_type, vcf, bam, bai, bas, met)
+  } | set { ch_branched }
+
   // run hairpin on caveman
-  ch_caveman 
+  ch_branched.caveman 
   | hairpin_preselect
   | hairpin_imitateANNOVAR
   | hairpin_annotateBAMStatistics
@@ -188,7 +197,7 @@ workflow hairpin {
   // get pindel channel into same format as hairpin output
   // (meta, vcf_type, vcf, bam, bai, bas, met, vcf_passed)
   // (vcf_passed here is the same file as vcf, but unzipped and renamed)
-  ch_pindel
+  ch_branched.pindel
   | sync_pindels
 
   sync_pindels.out.concat(hairpin_filtering.out) 

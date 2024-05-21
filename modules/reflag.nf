@@ -35,9 +35,9 @@ process reflag_run {
   present_flags=()
   for flag in "\${array[@]}" ; do
     if grep -q "\$flag" <(zcat ${vcf}) ; then
-      echo "Flag \${flag} not found in ${vcf}. Ignoring!"
-    else 
       present_flags+=("--flagremove \${flag}")
+    else 
+      echo "Flag \${flag} not found in ${vcf}. Ignoring!"
     fi
   done
 
@@ -55,24 +55,15 @@ process reflag_run {
 
 workflow reflag {
   take: 
-  ch_caveman
-  ch_pindel
+  ch_input
 
   main:
   // reflag and split channels
-  ch_caveman.concat(ch_pindel)
+  ch_input
   | reflag_run
-  | branch {
-      meta, vcf_type, vcf, bam, bai, bas, met ->
-      caveman: vcf_type == "caveman"
-        return tuple(meta, vcf_type, vcf, bam, bai, bas, met)
-      pindel: vcf_type == "pindel"
-        return tuple(meta, vcf_type, vcf, bam, bai, bas, met)
-  } | set { ch_reflagged }
 
   emit:
-  ch_caveman_reflagged = ch_reflagged.caveman
-  ch_pindel_reflagged = ch_reflagged.pindel
+  reflag_run.out
 }
 
 

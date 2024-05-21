@@ -6,7 +6,7 @@ nextflow.enable.dsl=2
 // all of the default parameters are being set in `nextflow.config`
 
 // import functions / modules / subworkflows / workflows
-include { validateParameters; paramsHelp; paramsSummaryLog; fromSamplesheet } from 'plugin/nf-validation'
+include { validateParameters; paramsHelp; paramsSummaryLog; samplesheetToList } from 'plugin/nf-schema'
 include { preprocess                } from './modules/preprocess.nf'
 include { reflag                    } from './modules/reflag.nf'
 include { hairpin                   } from './modules/hairpin.nf'
@@ -24,7 +24,7 @@ workflow {
     }
 
     // validate the input parameters
-    // validateParameters()
+    validateParameters()
 
     // print summary of supplied parameters
     log.info paramsSummaryLog(workflow)
@@ -33,12 +33,10 @@ workflow {
     preprocess()
 
     // reflag
-    reflag(preprocess.out.ch_caveman,
-           preprocess.out.ch_pindel)
+    reflag(preprocess.out.ch_input)
 
     // run hairpin
-    hairpin(reflag.out.ch_caveman_reflagged,
-            reflag.out.ch_pindel_reflagged)
+    hairpin(reflag.out)
 
     // run post-filtering and pileup
     post_filtering_and_pileup(hairpin.out)
