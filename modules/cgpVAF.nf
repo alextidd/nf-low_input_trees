@@ -1,6 +1,6 @@
 process cgpVAF_run {
   tag "${meta.donor_id}:${vcf_type}:${chr}"
-  label "normal100gb"
+  label "week100gb"
   errorStrategy = 'retry'
 
   input: 

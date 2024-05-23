@@ -19,7 +19,7 @@ workflow {
 
     // print help message, supply typical command line usage for the pipeline
     if (params.help) {
-      log.info paramsHelp("nextflow run nf-chemo-trees --sample_sheet sample_sheet.csv")
+      log.info paramsHelp("nextflow run nf-chemo-trees --sample_sheet sample_sheet.csv --project_type WGS --outdir out/")
       exit 0
     }
 

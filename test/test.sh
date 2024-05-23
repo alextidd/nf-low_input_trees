@@ -19,5 +19,5 @@ nextflow run ../main.nf \
     --outdir out/GRCh38/full/ \
     -w ./work/ \
     -c /lustre/scratch125/casm/team268im/at31/RA_som_mut/scomatic/config/LSF.config \
-    -resume #\
-    #-N at31@sanger.ac.uk
+    -resume \
+    -N at31@sanger.ac.uk

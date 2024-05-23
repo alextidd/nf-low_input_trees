@@ -16,9 +16,11 @@ process sequoia_run {
   """
   # plot trees of SNVs and indels separately
   build_phylogeny.R \
+    --donor_id ${meta.donor_id} \
     --cgpvaf_output ${cgpVAF_out.join(',')} \
     --genomeFile ${fasta} \
-    --output_dir sequoia/
+    --output_dir sequoia/ \
+    --ncores $task.cpus
   
   # plot tree integrating SNVs and indels
   build_phylogeny.R \
