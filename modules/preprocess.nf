@@ -2,12 +2,7 @@ include { samplesheetToList } from 'plugin/nf-schema'
 
 workflow preprocess {
   main:
-
-  // check genome build is among possibilities
-  assert params.genome_build in ['hg19', 'hg38'] : 
-    "Invalid genome build: ${params.genome_build}. " +
-    "Only 'hg19' or 'hg38' are allowed."
-
+  
   // get fasta + fai
   Channel.fromPath(params.fasta, checkIfExists: true)
   | map { fasta -> [fasta, file(fasta + ".fai", checkIfExists: true)] } 

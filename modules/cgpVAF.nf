@@ -85,7 +85,7 @@ process cgpVAF_concat {
   # stage in tmpvaf dir 
   # (cgpVAF uses the first sample id as the output directory suffix)
   mkdir -p tmpvaf_${sample_ids[0]}
-  mv tmp*{.vcf,tsv} *_progress.out tmpvaf_${sample_ids[0]}
+  mv tmp*{.vcf,.tsv} *_progress.out tmpvaf_${sample_ids[0]}
 
   # run cgpVAF concat
   cgpVaf.pl \

@@ -4,7 +4,7 @@
   "title": "nf-core/chemotrees pipeline parameters",
   "description": "Use Sequoia to construct phylogenetic trees for blood-derived single cell colonies pre- and post-chemo",
   "type": "object",
-  "defs": {
+  "definitions": {
     "input_output_options": {
       "title": "Input/output options",
       "type": "object",
@@ -65,20 +65,6 @@
           "help_text": "This parameter is *mandatory* if `--genome` is not specified. If you don't have a BWA index available this will be generated for you automatically. Combine with `--save_reference` to save BWA index for future runs.",
           "fa_icon": "far fa-file-code",
           "default": "/lustre/scratch126/casm/team273jn/share/pileups/reference_data/hg38/genome.fa"
-        },
-        "genome": {
-          "type": "string",
-          "description": "Name of iGenomes reference.",
-          "fa_icon": "fas fa-book",
-          "help_text": "If using a reference genome configured in the pipeline using iGenomes, use this parameter to give the ID for the reference. This is then used to build the full paths for all required reference genome files e.g. `--genome GRCh38`. \n\nSee the [nf-core website docs](https://nf-co.re/usage/reference_genomes) for more details.",
-          "hidden": true
-        },
-        "igenomes_ignore": {
-          "type": "boolean",
-          "description": "Do not load the iGenomes reference config.",
-          "fa_icon": "fas fa-ban",
-          "hidden": true,
-          "help_text": "Do not load `igenomes.config` when running the pipeline. You may choose this option if you observe clashes between custom parameters and those supplied in `igenomes.config`."
         }
       },
       "required": ["genome_build", "fasta"]
@@ -396,7 +382,7 @@
           "fa_icon": "far fa-check-circle",
           "description": "Validation of parameters fails when an unrecognised parameter is found.",
           "hidden": true,
-          "help_text": "By default, when an unrecognised parameter is found, it returns a warinig."
+          "help_text": "By default, when an unrecognised parameter is found, it returns a warning."
         },
         "validationLenientMode": {
           "type": "boolean",
@@ -419,28 +405,28 @@
   },
   "allOf": [
     {
-      "$ref": "#/defs/input_output_options"
+      "$ref": "#/definitions/input_output_options"
     },
     {
-      "$ref": "#/defs/reference_genome_options"
+      "$ref": "#/definitions/reference_genome_options"
     },
     {
-      "$ref": "#/defs/hairpin_options"
+      "$ref": "#/definitions/hairpin_options"
     },
     {
-      "$ref": "#/defs/cgpvaf_options"
+      "$ref": "#/definitions/cgpvaf_options"
     },
     {
-      "$ref": "#/defs/sequoia_options"
+      "$ref": "#/definitions/sequoia_options"
     },
     {
-      "$ref": "#/defs/institutional_config_options"
+      "$ref": "#/definitions/institutional_config_options"
     },
     {
-      "$ref": "#/defs/max_job_request_options"
+      "$ref": "#/definitions/max_job_request_options"
     },
     {
-      "$ref": "#/defs/generic_options"
+      "$ref": "#/definitions/generic_options"
     }
   ]
 }
