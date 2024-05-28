@@ -49,7 +49,6 @@ workflow {
 
     // run sequoia
     sequoia(cgpVAF.out,
-            preprocess.out.ch_fasta)
-    
+            preprocess.out.ch_fasta) | view
 }
 
