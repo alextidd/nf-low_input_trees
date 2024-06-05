@@ -1,8 +1,9 @@
 process sequoia_run {
   tag "${meta.donor_id}"
-  label "normal4core"
+  label "week100gb"
   publishDir "${params.outdir}/${meta.donor_id}/", mode: 'copy'
   conda '/nfs/users/nfs_a/at31/miniforge3/envs/sequoia'
+  errorStrategy = 'retry'
 
   input:
   tuple val(meta),

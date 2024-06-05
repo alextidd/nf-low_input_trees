@@ -84,20 +84,29 @@ workflow post_filtering_and_pileup {
   // run post-filtering
   ch_input
   | post_filtering
+  // group vcfs by donor, pileup
   | map { meta, vcf_type, vcf, bam, bai, bas, met, vcf_postfiltered ->
           [meta.subMap('donor_id'), 
            vcf_type, meta.sample_id, vcf, bam, bai, bas, met, vcf_postfiltered] }
-  | set { ch_to_batch }
-
-  // group vcfs by donor, pileup intervals
-  ch_to_batch
   | groupTuple(by: [0,1])
   | pileup
 
-  // batch vcfs / bams by 10 within donors, combine with bed intervals
-  ch_to_batch
-  | flatMap { meta, vcf_type, vcf, bam, bai, bas, met, vcf_postfiltered -> 
-              vcf.collate(50).collect { chunk -> [id, chunk] } }
+  // ch_input
+  // | post_filtering
+  // | map { meta, vcf_type, vcf, bam, bai, bas, met, vcf_postfiltered ->
+  //         [meta.subMap('donor_id'), 
+  //          vcf_type, meta.sample_id, vcf, bam, bai, bas, met, vcf_postfiltered] }
+  // | set { ch_to_batch }
+
+  // // group vcfs by donor, pileup intervals
+  // ch_to_batch
+  // | groupTuple(by: [0,1])
+  // | pileup
+
+  // // batch vcfs / bams by 10 within donors, combine with bed intervals
+  // ch_to_batch
+  // | flatMap { meta, vcf_type, vcf, bam, bai, bas, met, vcf_postfiltered -> 
+  //             vcf.collate(50).collect { chunk -> [id, chunk] } }
 
   emit:
   pileup.out

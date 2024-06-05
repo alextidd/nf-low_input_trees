@@ -52,7 +52,8 @@ process cgpVAF_run {
 
 process cgpVAF_concat {
   tag "${meta.donor_id}:${vcf_type}"
-  label "normal"
+  label "week100gb"
+  errorStrategy = "retry"
   publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/", 
     mode: "copy"
 
@@ -76,7 +77,7 @@ process cgpVAF_concat {
   output:
   tuple val(meta),   
         path("${meta.donor_id}_${vcf_type}_vaf.tsv")
-
+  
   script:
   def variant_type = (vcf_type == "caveman") ? "snp" : (vcf_type == "pindel") ? "indel" : ""
   """
