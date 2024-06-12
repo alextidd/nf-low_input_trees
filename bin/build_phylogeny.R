@@ -103,17 +103,16 @@ options(stringsAsFactors = F)
 #     library(package, character.only=T,quietly = T, warn.conflicts = F)
 #   }
 # }
-if (!require("treemut", character.only=T,quietly = T, warn.conflicts = F)){
-  install_git("https://github.com/NickWilliamsSanger/treemut")
-  library("treemut",character.only=T,quietly = T, warn.conflicts = F)
-}
 cran_packages <- c("ggplot2","ape","seqinr","stringr","data.table","tidyr","dplyr","VGAM","MASS","devtools")
 bioconductor_packages <- c("Rsamtools","GenomicRanges")
 github_packages <- c("treemut")
-for (package in c(cran_packages, bioconductor_packages, github_packages)) {
+for (package in c(cran_packages, bioconductor_packages)) {
   library(package, character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)
 }
-
+if (!require("treemut", character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)){
+  install_git("https://github.com/NickWilliamsSanger/treemut")
+}
+library("treemut", character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)
 
 #----------------------------------
 # Functions
