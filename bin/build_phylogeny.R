@@ -88,27 +88,32 @@ min_clonal_mut=opt$min_clonal_mut
 # Load packages (install if they are not installed yet)
 #----------------------------------
 options(stringsAsFactors = F)
-cran_packages=c("ggplot2","ape","seqinr","stringr","data.table","tidyr","dplyr","VGAM","MASS","devtools")
-bioconductor_packages=c("Rsamtools","GenomicRanges")
 
-for(package in cran_packages){
-  if(!require(package, character.only=T,quietly = T, warn.conflicts = F)){
-    install.packages(as.character(package),repos = "http://cran.us.r-project.org")
-    library(package, character.only=T,quietly = T, warn.conflicts = F)
-  }
-}
-if (!require("BiocManager", quietly = T, warn.conflicts = F))
-  install.packages("BiocManager")
-for(package in bioconductor_packages){
-  if(!require(package, character.only=T,quietly = T, warn.conflicts = F)){
-    BiocManager::install(as.character(package))
-    library(package, character.only=T,quietly = T, warn.conflicts = F)
-  }
-}
-if(!require("treemut", character.only=T,quietly = T, warn.conflicts = F)){
+# for(package in cran_packages){
+#   if(!require(package, character.only=T,quietly = T, warn.conflicts = F)){
+#     install.packages(as.character(package),repos = "http://cran.us.r-project.org")
+#     library(package, character.only=T,quietly = T, warn.conflicts = F)
+#   }
+# }
+# if (!require("BiocManager", quietly = T, warn.conflicts = F))
+#   install.packages("BiocManager")
+# for(package in bioconductor_packages){
+#   if(!require(package, character.only=T,quietly = T, warn.conflicts = F)){
+#     BiocManager::install(as.character(package))
+#     library(package, character.only=T,quietly = T, warn.conflicts = F)
+#   }
+# }
+if (!require("treemut", character.only=T,quietly = T, warn.conflicts = F)){
   install_git("https://github.com/NickWilliamsSanger/treemut")
   library("treemut",character.only=T,quietly = T, warn.conflicts = F)
 }
+cran_packages <- c("ggplot2","ape","seqinr","stringr","data.table","tidyr","dplyr","VGAM","MASS","devtools")
+bioconductor_packages <- c("Rsamtools","GenomicRanges")
+github_packages <- c("treemut")
+for (package in c(cran_packages, bioconductor_packages, github_packages)) {
+  library(package, character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)
+}
+
 
 #----------------------------------
 # Functions
