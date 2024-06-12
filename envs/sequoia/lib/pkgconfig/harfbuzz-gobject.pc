@@ -1,0 +1,12 @@
+prefix=/nfs/users/nfs_a/at31/miniforge3/envs/sequoia
+exec_prefix=/nfs/users/nfs_a/at31/miniforge3/envs/sequoia
+libdir=/nfs/users/nfs_a/at31/miniforge3/envs/sequoia/lib
+includedir=/nfs/users/nfs_a/at31/miniforge3/envs/sequoia/include
+
+Name: harfbuzz
+Description: HarfBuzz text shaping library GObject integration
+Version: 2.4.0
+
+Requires: harfbuzz gobject-2.0 glib-2.0
+Libs: -L${libdir} -lharfbuzz-gobject
+Cflags: -I${includedir}/harfbuzz

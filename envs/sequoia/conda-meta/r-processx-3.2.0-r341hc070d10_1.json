@@ -1,0 +1,248 @@
+{
+  "build": "r341hc070d10_1",
+  "build_number": 1,
+  "channel": "https://conda.anaconda.org/conda-forge/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=4.9",
+    "r-assertthat",
+    "r-base >=3.4.1,<3.4.2.0a0",
+    "r-crayon",
+    "r-ps",
+    "r-r6"
+  ],
+  "extracted_package_dir": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-processx-3.2.0-r341hc070d10_1",
+  "features": "",
+  "files": [
+    "lib/R/library/processx/CODE_OF_CONDUCT.md",
+    "lib/R/library/processx/DESCRIPTION",
+    "lib/R/library/processx/INDEX",
+    "lib/R/library/processx/LICENSE",
+    "lib/R/library/processx/Meta/Rd.rds",
+    "lib/R/library/processx/Meta/features.rds",
+    "lib/R/library/processx/Meta/hsearch.rds",
+    "lib/R/library/processx/Meta/links.rds",
+    "lib/R/library/processx/Meta/nsInfo.rds",
+    "lib/R/library/processx/Meta/package.rds",
+    "lib/R/library/processx/NAMESPACE",
+    "lib/R/library/processx/NEWS.md",
+    "lib/R/library/processx/R/processx",
+    "lib/R/library/processx/R/processx.rdb",
+    "lib/R/library/processx/R/processx.rdx",
+    "lib/R/library/processx/README.markdown",
+    "lib/R/library/processx/bin/px",
+    "lib/R/library/processx/bin/supervisor",
+    "lib/R/library/processx/help/AnIndex",
+    "lib/R/library/processx/help/aliases.rds",
+    "lib/R/library/processx/help/paths.rds",
+    "lib/R/library/processx/help/processx.rdb",
+    "lib/R/library/processx/help/processx.rdx",
+    "lib/R/library/processx/html/00Index.html",
+    "lib/R/library/processx/html/R.css",
+    "lib/R/library/processx/libs/processx.so"
+  ],
+  "fn": "r-processx-3.2.0-r341hc070d10_1.tar.bz2",
+  "license": "MIT",
+  "link": {
+    "source": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-processx-3.2.0-r341hc070d10_1",
+    "type": 1
+  },
+  "md5": "5d5d51fb15227a775a273b3a2a72a916",
+  "name": "r-processx",
+  "package_tarball_full_path": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-processx-3.2.0-r341hc070d10_1.tar.bz2",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "lib/R/library/processx/CODE_OF_CONDUCT.md",
+        "path_type": "hardlink",
+        "sha256": "a7d99d5947b135dcad74a1957f14d4a627b17ae9ad30d2a4de40c75713a749e3",
+        "sha256_in_prefix": "a7d99d5947b135dcad74a1957f14d4a627b17ae9ad30d2a4de40c75713a749e3",
+        "size_in_bytes": 1389
+      },
+      {
+        "_path": "lib/R/library/processx/DESCRIPTION",
+        "path_type": "hardlink",
+        "sha256": "94c6293429181863ddcb273b0e52b472ba5651657352339ccf936d4822e78853",
+        "sha256_in_prefix": "94c6293429181863ddcb273b0e52b472ba5651657352339ccf936d4822e78853",
+        "size_in_bytes": 1540
+      },
+      {
+        "_path": "lib/R/library/processx/INDEX",
+        "path_type": "hardlink",
+        "sha256": "6d20f666a3500e85327e1a0e54f9040af16cdb9c865292a349ab6afd32f55d6b",
+        "sha256_in_prefix": "6d20f666a3500e85327e1a0e54f9040af16cdb9c865292a349ab6afd32f55d6b",
+        "size_in_bytes": 216
+      },
+      {
+        "_path": "lib/R/library/processx/LICENSE",
+        "path_type": "hardlink",
+        "sha256": "2767fa7b0af5d1931d33ff402528150e1ce621f8a42f11a15469e997a947bfe7",
+        "sha256_in_prefix": "2767fa7b0af5d1931d33ff402528150e1ce621f8a42f11a15469e997a947bfe7",
+        "size_in_bytes": 75
+      },
+      {
+        "_path": "lib/R/library/processx/Meta/Rd.rds",
+        "path_type": "hardlink",
+        "sha256": "16b03049269a8bf255a728d28af24467f4251d58013adc05de980767416ae60f",
+        "sha256_in_prefix": "16b03049269a8bf255a728d28af24467f4251d58013adc05de980767416ae60f",
+        "size_in_bytes": 493
+      },
+      {
+        "_path": "lib/R/library/processx/Meta/features.rds",
+        "path_type": "hardlink",
+        "sha256": "79a0197390e6502dd95396d9acb73882afc9688bcdbf20fbecafd39f92cc9bc3",
+        "sha256_in_prefix": "79a0197390e6502dd95396d9acb73882afc9688bcdbf20fbecafd39f92cc9bc3",
+        "size_in_bytes": 112
+      },
+      {
+        "_path": "lib/R/library/processx/Meta/hsearch.rds",
+        "path_type": "hardlink",
+        "sha256": "83313d695891396cc71629dafdbe6df6e70603449c8f4c809316698372059716",
+        "sha256_in_prefix": "83313d695891396cc71629dafdbe6df6e70603449c8f4c809316698372059716",
+        "size_in_bytes": 529
+      },
+      {
+        "_path": "lib/R/library/processx/Meta/links.rds",
+        "path_type": "hardlink",
+        "sha256": "a668cce120b4d73a96070ee337d957781e03d7a79047e7c261d1b91060d86e68",
+        "sha256_in_prefix": "a668cce120b4d73a96070ee337d957781e03d7a79047e7c261d1b91060d86e68",
+        "size_in_bytes": 296
+      },
+      {
+        "_path": "lib/R/library/processx/Meta/nsInfo.rds",
+        "path_type": "hardlink",
+        "sha256": "97475e3d5b759512c8a4550cfe8fd719e2ec7c9e968a316194d3d44686cf1710",
+        "sha256_in_prefix": "97475e3d5b759512c8a4550cfe8fd719e2ec7c9e968a316194d3d44686cf1710",
+        "size_in_bytes": 554
+      },
+      {
+        "_path": "lib/R/library/processx/Meta/package.rds",
+        "path_type": "hardlink",
+        "sha256": "dc209821a4a4cb9e082c733f6e09ef49062dda11125b17db094a8fc26a133413",
+        "sha256_in_prefix": "dc209821a4a4cb9e082c733f6e09ef49062dda11125b17db094a8fc26a133413",
+        "size_in_bytes": 1261
+      },
+      {
+        "_path": "lib/R/library/processx/NAMESPACE",
+        "path_type": "hardlink",
+        "sha256": "217deb90c115bcf1b9ef2c1554946f79f54c6fd8b7aa959593bb1a6de04ec7fd",
+        "sha256_in_prefix": "217deb90c115bcf1b9ef2c1554946f79f54c6fd8b7aa959593bb1a6de04ec7fd",
+        "size_in_bytes": 1074
+      },
+      {
+        "_path": "lib/R/library/processx/NEWS.md",
+        "path_type": "hardlink",
+        "sha256": "cb377489c5bbfc06c0bfd348713399b60909cc6db781c87c4a75ffa011bb9368",
+        "sha256_in_prefix": "cb377489c5bbfc06c0bfd348713399b60909cc6db781c87c4a75ffa011bb9368",
+        "size_in_bytes": 4243
+      },
+      {
+        "_path": "lib/R/library/processx/R/processx",
+        "path_type": "hardlink",
+        "sha256": "2fb8b16be23c820daf2e51b7ddfef61ca4978e561b1d228d546d1b356041f79e",
+        "sha256_in_prefix": "2fb8b16be23c820daf2e51b7ddfef61ca4978e561b1d228d546d1b356041f79e",
+        "size_in_bytes": 1056
+      },
+      {
+        "_path": "lib/R/library/processx/R/processx.rdb",
+        "path_type": "hardlink",
+        "sha256": "5b6e553bd21cbd63f3753f6602fb1a366fccb932160b3ff413ec26294836fbd5",
+        "sha256_in_prefix": "5b6e553bd21cbd63f3753f6602fb1a366fccb932160b3ff413ec26294836fbd5",
+        "size_in_bytes": 34200
+      },
+      {
+        "_path": "lib/R/library/processx/R/processx.rdx",
+        "path_type": "hardlink",
+        "sha256": "c520ff1cb9d4e2809964ac895382862804a86d8152af1ce6602e9215f56a25bd",
+        "sha256_in_prefix": "c520ff1cb9d4e2809964ac895382862804a86d8152af1ce6602e9215f56a25bd",
+        "size_in_bytes": 1856
+      },
+      {
+        "_path": "lib/R/library/processx/README.markdown",
+        "path_type": "hardlink",
+        "sha256": "e95b5b7026935e4aa3956c87d01d94d2e9f91c126a584362e048afc126e886c8",
+        "sha256_in_prefix": "e95b5b7026935e4aa3956c87d01d94d2e9f91c126a584362e048afc126e886c8",
+        "size_in_bytes": 16519
+      },
+      {
+        "_path": "lib/R/library/processx/bin/px",
+        "path_type": "hardlink",
+        "sha256": "ab229768ebe85326b813bd19b4f20a49905569ed2c2c9fadbb692130ea90e973",
+        "sha256_in_prefix": "ab229768ebe85326b813bd19b4f20a49905569ed2c2c9fadbb692130ea90e973",
+        "size_in_bytes": 14431
+      },
+      {
+        "_path": "lib/R/library/processx/bin/supervisor",
+        "path_type": "hardlink",
+        "sha256": "b2c3f883d862044c6772fd013c34ea7b27c8ed6e9df34d6693f66a1dac3f8841",
+        "sha256_in_prefix": "b2c3f883d862044c6772fd013c34ea7b27c8ed6e9df34d6693f66a1dac3f8841",
+        "size_in_bytes": 14904
+      },
+      {
+        "_path": "lib/R/library/processx/help/AnIndex",
+        "path_type": "hardlink",
+        "sha256": "b7781261093ce6fb3d613bb862a1e511d9971f643f53df2711fb701448356e24",
+        "sha256_in_prefix": "b7781261093ce6fb3d613bb862a1e511d9971f643f53df2711fb701448356e24",
+        "size_in_bytes": 717
+      },
+      {
+        "_path": "lib/R/library/processx/help/aliases.rds",
+        "path_type": "hardlink",
+        "sha256": "cc9065571df5bb4f933f8659323837593b618ea4a7e160152a2ddd5101619ef6",
+        "sha256_in_prefix": "cc9065571df5bb4f933f8659323837593b618ea4a7e160152a2ddd5101619ef6",
+        "size_in_bytes": 256
+      },
+      {
+        "_path": "lib/R/library/processx/help/paths.rds",
+        "path_type": "hardlink",
+        "sha256": "a2d6952569016078931071514a0268b3409c94e02ab822a15e315f7ccd2e819f",
+        "sha256_in_prefix": "a2d6952569016078931071514a0268b3409c94e02ab822a15e315f7ccd2e819f",
+        "size_in_bytes": 197
+      },
+      {
+        "_path": "lib/R/library/processx/help/processx.rdb",
+        "path_type": "hardlink",
+        "sha256": "385fa8d7ecc73078bf1be95c3cfcaa8bf7134b4c96d6e2605832e24c19d891d0",
+        "sha256_in_prefix": "385fa8d7ecc73078bf1be95c3cfcaa8bf7134b4c96d6e2605832e24c19d891d0",
+        "size_in_bytes": 32967
+      },
+      {
+        "_path": "lib/R/library/processx/help/processx.rdx",
+        "path_type": "hardlink",
+        "sha256": "2eb0abd1a47f05edfd91726f5b953f0325e424ea26978bfe11f10a9f051e9cc9",
+        "sha256_in_prefix": "2eb0abd1a47f05edfd91726f5b953f0325e424ea26978bfe11f10a9f051e9cc9",
+        "size_in_bytes": 265
+      },
+      {
+        "_path": "lib/R/library/processx/html/00Index.html",
+        "path_type": "hardlink",
+        "sha256": "9e8a64f4af64727e36e84667911eb6d5b0be628036cbfb17822006ee3df08ab6",
+        "sha256_in_prefix": "9e8a64f4af64727e36e84667911eb6d5b0be628036cbfb17822006ee3df08ab6",
+        "size_in_bytes": 3229
+      },
+      {
+        "_path": "lib/R/library/processx/html/R.css",
+        "path_type": "hardlink",
+        "sha256": "0f4849ab1757247808d54da2c371e992364371c942ad7d629dae8d62327ed068",
+        "sha256_in_prefix": "0f4849ab1757247808d54da2c371e992364371c942ad7d629dae8d62327ed068",
+        "size_in_bytes": 1335
+      },
+      {
+        "_path": "lib/R/library/processx/libs/processx.so",
+        "path_type": "hardlink",
+        "sha256": "de71a1ddcbe98a1aa03317ecab0ecc4e9628f1c031d083071151b768ad377c40",
+        "sha256_in_prefix": "de71a1ddcbe98a1aa03317ecab0ecc4e9628f1c031d083071151b768ad377c40",
+        "size_in_bytes": 61408
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "1ee0941cc0c3530c67cab95458e13a26c19ace7ee5954746be94f2f508ee08d0",
+  "size": 119386,
+  "subdir": "linux-64",
+  "timestamp": 1536470538000,
+  "track_features": "",
+  "url": "https://conda.anaconda.org/conda-forge/linux-64/r-processx-3.2.0-r341hc070d10_1.tar.bz2",
+  "version": "3.2.0"
+}

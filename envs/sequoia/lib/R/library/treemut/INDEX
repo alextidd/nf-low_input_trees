@@ -1,0 +1,11 @@
+assign_to_tree          Assigns mutations to a tree topology and sets
+                        the branch lengths based on the hard assignment
+                        of mutations to branches.
+generate_random_tree    generate random tree
+get_simulated_reads     get simulated reads
+plot_sim_result         plot sim result
+reconstruct_genotype_summary
+                        reconstruct genotype summary
+run_sim                 run sim
+simulate_reads_from_tree
+                        simulate reads from tree

@@ -1,0 +1,10 @@
+prefix=/nfs/users/nfs_a/at31/miniforge3/envs/sequoia
+exec_prefix=${prefix}
+includedir=/nfs/users/nfs_a/at31/miniforge3/envs/sequoia/include
+libdir=/nfs/users/nfs_a/at31/miniforge3/envs/sequoia/lib
+
+Name: libdeflate
+Description: Fast implementation of DEFLATE, zlib, and gzip
+Version: 1.14
+Libs: -L${libdir} -ldeflate
+Cflags: -I${includedir}

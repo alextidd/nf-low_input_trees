@@ -1,0 +1,911 @@
+{
+  "build": "r3.4.1_0",
+  "build_number": 0,
+  "channel": "https://conda.anaconda.org/bioconda/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc",
+    "r-ade4",
+    "r-base 3.4.1*",
+    "r-segmented"
+  ],
+  "extracted_package_dir": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-seqinr-3.4_5-r3.4.1_0",
+  "features": "",
+  "files": [
+    "lib/R/library/seqinr/CITATION",
+    "lib/R/library/seqinr/DESCRIPTION",
+    "lib/R/library/seqinr/INDEX",
+    "lib/R/library/seqinr/Meta/Rd.rds",
+    "lib/R/library/seqinr/Meta/data.rds",
+    "lib/R/library/seqinr/Meta/features.rds",
+    "lib/R/library/seqinr/Meta/hsearch.rds",
+    "lib/R/library/seqinr/Meta/links.rds",
+    "lib/R/library/seqinr/Meta/nsInfo.rds",
+    "lib/R/library/seqinr/Meta/package.rds",
+    "lib/R/library/seqinr/NAMESPACE",
+    "lib/R/library/seqinr/NEWS",
+    "lib/R/library/seqinr/R/seqinr",
+    "lib/R/library/seqinr/R/seqinr.rdb",
+    "lib/R/library/seqinr/R/seqinr.rdx",
+    "lib/R/library/seqinr/abif/1_0000206138_C01_005.fsa",
+    "lib/R/library/seqinr/abif/1_FAC321_0000205983_B02_004.fsa",
+    "lib/R/library/seqinr/abif/2_0000206138_C01_005.fsa",
+    "lib/R/library/seqinr/abif/2_FAC321_0000205983_B02_004.fsa",
+    "lib/R/library/seqinr/abif/AmpFLSTR_Bins_v1.txt",
+    "lib/R/library/seqinr/abif/AmpFLSTR_Panels_v1.txt",
+    "lib/R/library/seqinr/abif/NGM_Bins.txt",
+    "lib/R/library/seqinr/abif/NGM_Pa.txt",
+    "lib/R/library/seqinr/abif/Promega_Bins_v1.txt",
+    "lib/R/library/seqinr/abif/Promega_Panels_v1.txt",
+    "lib/R/library/seqinr/abif/Prototype_PowerPlex_EP01_Bins.txt",
+    "lib/R/library/seqinr/abif/Prototype_PowerPlex_EP01_Pa.txt",
+    "lib/R/library/seqinr/abif/samplefsa2ps.fsa",
+    "lib/R/library/seqinr/data/AnoukResult.RData",
+    "lib/R/library/seqinr/data/ECH.RData",
+    "lib/R/library/seqinr/data/EXP.RData",
+    "lib/R/library/seqinr/data/JLO.RData",
+    "lib/R/library/seqinr/data/SEQINR.UTIL.RData",
+    "lib/R/library/seqinr/data/aacost.RData",
+    "lib/R/library/seqinr/data/aaindex.RData",
+    "lib/R/library/seqinr/data/caitab.RData",
+    "lib/R/library/seqinr/data/chargaff.RData",
+    "lib/R/library/seqinr/data/clustal.RData",
+    "lib/R/library/seqinr/data/datalist",
+    "lib/R/library/seqinr/data/dinucl.RData",
+    "lib/R/library/seqinr/data/ec999.RData",
+    "lib/R/library/seqinr/data/fasta.RData",
+    "lib/R/library/seqinr/data/gcO2.rda",
+    "lib/R/library/seqinr/data/gcT.rda",
+    "lib/R/library/seqinr/data/gs500liz.RData",
+    "lib/R/library/seqinr/data/identifiler.RData",
+    "lib/R/library/seqinr/data/kaksTorture.RData",
+    "lib/R/library/seqinr/data/m16j.RData",
+    "lib/R/library/seqinr/data/mase.RData",
+    "lib/R/library/seqinr/data/msf.RData",
+    "lib/R/library/seqinr/data/pK.RData",
+    "lib/R/library/seqinr/data/phylip.RData",
+    "lib/R/library/seqinr/data/prochlo.RData",
+    "lib/R/library/seqinr/data/revaligntest.RData",
+    "lib/R/library/seqinr/data/sysdata.rda",
+    "lib/R/library/seqinr/data/toyaa.RData",
+    "lib/R/library/seqinr/data/toycodon.RData",
+    "lib/R/library/seqinr/data/waterabs.RData",
+    "lib/R/library/seqinr/help/AnIndex",
+    "lib/R/library/seqinr/help/aliases.rds",
+    "lib/R/library/seqinr/help/figures/aka.pdf",
+    "lib/R/library/seqinr/help/figures/chargaff.png",
+    "lib/R/library/seqinr/help/figures/gcskewmbe96.pdf",
+    "lib/R/library/seqinr/help/figures/introduction-dbg.pdf",
+    "lib/R/library/seqinr/help/figures/lncs2004.pdf",
+    "lib/R/library/seqinr/help/figures/waterabs.jpg",
+    "lib/R/library/seqinr/help/paths.rds",
+    "lib/R/library/seqinr/help/seqinr.rdb",
+    "lib/R/library/seqinr/help/seqinr.rdx",
+    "lib/R/library/seqinr/html/00Index.html",
+    "lib/R/library/seqinr/html/R.css",
+    "lib/R/library/seqinr/libs/seqinr.so",
+    "lib/R/library/seqinr/sequences/Anouk.fasta",
+    "lib/R/library/seqinr/sequences/DarrenObbard.fasta",
+    "lib/R/library/seqinr/sequences/ECOUNC.fsa",
+    "lib/R/library/seqinr/sequences/UBIQUITIN.mase",
+    "lib/R/library/seqinr/sequences/ame1.gbk",
+    "lib/R/library/seqinr/sequences/bb.acc",
+    "lib/R/library/seqinr/sequences/bb.kwd",
+    "lib/R/library/seqinr/sequences/bb.mne",
+    "lib/R/library/seqinr/sequences/bb.sp",
+    "lib/R/library/seqinr/sequences/bordetella.fasta",
+    "lib/R/library/seqinr/sequences/bordetella.pep.aln",
+    "lib/R/library/seqinr/sequences/ct.bfa",
+    "lib/R/library/seqinr/sequences/ct.fasta.gz",
+    "lib/R/library/seqinr/sequences/ct.gbk.gz",
+    "lib/R/library/seqinr/sequences/ct.predict",
+    "lib/R/library/seqinr/sequences/ecolicgpe5.fasta",
+    "lib/R/library/seqinr/sequences/gopher.fasta",
+    "lib/R/library/seqinr/sequences/gopher.names",
+    "lib/R/library/seqinr/sequences/hannah.txt",
+    "lib/R/library/seqinr/sequences/humanMito.fasta",
+    "lib/R/library/seqinr/sequences/input.dat",
+    "lib/R/library/seqinr/sequences/input.out",
+    "lib/R/library/seqinr/sequences/kaks-torture.fasta",
+    "lib/R/library/seqinr/sequences/legacy.fasta",
+    "lib/R/library/seqinr/sequences/louse.fasta",
+    "lib/R/library/seqinr/sequences/louse.names",
+    "lib/R/library/seqinr/sequences/malM.fasta",
+    "lib/R/library/seqinr/sequences/ortho.fasta",
+    "lib/R/library/seqinr/sequences/scuco.txt",
+    "lib/R/library/seqinr/sequences/seqAA.fasta",
+    "lib/R/library/seqinr/sequences/smallAA.fasta",
+    "lib/R/library/seqinr/sequences/smallAA.fasta.gz",
+    "lib/R/library/seqinr/sequences/someORF.fsa",
+    "lib/R/library/seqinr/sequences/test.aln",
+    "lib/R/library/seqinr/sequences/test.mase",
+    "lib/R/library/seqinr/sequences/test.msf",
+    "lib/R/library/seqinr/sequences/test.phylip"
+  ],
+  "fn": "r-seqinr-3.4_5-r3.4.1_0.tar.bz2",
+  "license": "GPL (>= 2)",
+  "link": {
+    "source": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-seqinr-3.4_5-r3.4.1_0",
+    "type": 1
+  },
+  "md5": "aa14505b11908eea1b8025737e9aa03b",
+  "name": "r-seqinr",
+  "package_tarball_full_path": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-seqinr-3.4_5-r3.4.1_0.tar.bz2",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "lib/R/library/seqinr/CITATION",
+        "path_type": "hardlink",
+        "sha256": "28c696ae210941a81618cd23cca2419e3aa3da78219b89691957f324c588284d",
+        "sha256_in_prefix": "28c696ae210941a81618cd23cca2419e3aa3da78219b89691957f324c588284d",
+        "size_in_bytes": 778
+      },
+      {
+        "_path": "lib/R/library/seqinr/DESCRIPTION",
+        "path_type": "hardlink",
+        "sha256": "47e80d1c19991f7eefe24f6e0c56a5ccf9f01d1a48c755b56e1636fb837f3335",
+        "sha256_in_prefix": "47e80d1c19991f7eefe24f6e0c56a5ccf9f01d1a48c755b56e1636fb837f3335",
+        "size_in_bytes": 1702
+      },
+      {
+        "_path": "lib/R/library/seqinr/INDEX",
+        "path_type": "hardlink",
+        "sha256": "f7096560312f3e47e16582f2d05fc6b75a7370ae26ffa5f9830847d0a8096b1d",
+        "sha256_in_prefix": "f7096560312f3e47e16582f2d05fc6b75a7370ae26ffa5f9830847d0a8096b1d",
+        "size_in_bytes": 11999
+      },
+      {
+        "_path": "lib/R/library/seqinr/Meta/Rd.rds",
+        "path_type": "hardlink",
+        "sha256": "1afde7c188b4920b81bc4ba01eb741203d8e66e9de6efc47d00660436bd38f45",
+        "sha256_in_prefix": "1afde7c188b4920b81bc4ba01eb741203d8e66e9de6efc47d00660436bd38f45",
+        "size_in_bytes": 6045
+      },
+      {
+        "_path": "lib/R/library/seqinr/Meta/data.rds",
+        "path_type": "hardlink",
+        "sha256": "d41c76abb3ddc0b2ddfa45ce817e7e94386b48bd44f448a72adef7b03b0f238d",
+        "sha256_in_prefix": "d41c76abb3ddc0b2ddfa45ce817e7e94386b48bd44f448a72adef7b03b0f238d",
+        "size_in_bytes": 855
+      },
+      {
+        "_path": "lib/R/library/seqinr/Meta/features.rds",
+        "path_type": "hardlink",
+        "sha256": "79a0197390e6502dd95396d9acb73882afc9688bcdbf20fbecafd39f92cc9bc3",
+        "sha256_in_prefix": "79a0197390e6502dd95396d9acb73882afc9688bcdbf20fbecafd39f92cc9bc3",
+        "size_in_bytes": 112
+      },
+      {
+        "_path": "lib/R/library/seqinr/Meta/hsearch.rds",
+        "path_type": "hardlink",
+        "sha256": "c3e4712b7d0c58f98824dbc37510506939ace3d491723480eb8a9fc5c7670b12",
+        "sha256_in_prefix": "c3e4712b7d0c58f98824dbc37510506939ace3d491723480eb8a9fc5c7670b12",
+        "size_in_bytes": 5506
+      },
+      {
+        "_path": "lib/R/library/seqinr/Meta/links.rds",
+        "path_type": "hardlink",
+        "sha256": "cebd17878df7600ad24ff88da20fc60ea3b11cacdca04b3125752a971122dafc",
+        "sha256_in_prefix": "cebd17878df7600ad24ff88da20fc60ea3b11cacdca04b3125752a971122dafc",
+        "size_in_bytes": 2419
+      },
+      {
+        "_path": "lib/R/library/seqinr/Meta/nsInfo.rds",
+        "path_type": "hardlink",
+        "sha256": "0c4adcc5478e7f4e874d5ae0720fb0c1f59c75761b1919e3491627008fdf8d90",
+        "sha256_in_prefix": "0c4adcc5478e7f4e874d5ae0720fb0c1f59c75761b1919e3491627008fdf8d90",
+        "size_in_bytes": 809
+      },
+      {
+        "_path": "lib/R/library/seqinr/Meta/package.rds",
+        "path_type": "hardlink",
+        "sha256": "67075419d3625d0dc9b246704cbf3254d61d6b580c46295f1c851dd902490b55",
+        "sha256_in_prefix": "67075419d3625d0dc9b246704cbf3254d61d6b580c46295f1c851dd902490b55",
+        "size_in_bytes": 1289
+      },
+      {
+        "_path": "lib/R/library/seqinr/NAMESPACE",
+        "path_type": "hardlink",
+        "sha256": "08a8e531411397fbe9f97c0dbe3632a4e6af41b4bc0d0dc283e6e8fed5e8a974",
+        "sha256_in_prefix": "08a8e531411397fbe9f97c0dbe3632a4e6af41b4bc0d0dc283e6e8fed5e8a974",
+        "size_in_bytes": 2647
+      },
+      {
+        "_path": "lib/R/library/seqinr/NEWS",
+        "path_type": "hardlink",
+        "sha256": "598af401a1e8eb4bdff0e3be1888e52a05f4fc5b3be24d4df36ca15993393081",
+        "sha256_in_prefix": "598af401a1e8eb4bdff0e3be1888e52a05f4fc5b3be24d4df36ca15993393081",
+        "size_in_bytes": 97
+      },
+      {
+        "_path": "lib/R/library/seqinr/R/seqinr",
+        "path_type": "hardlink",
+        "sha256": "2fb8b16be23c820daf2e51b7ddfef61ca4978e561b1d228d546d1b356041f79e",
+        "sha256_in_prefix": "2fb8b16be23c820daf2e51b7ddfef61ca4978e561b1d228d546d1b356041f79e",
+        "size_in_bytes": 1056
+      },
+      {
+        "_path": "lib/R/library/seqinr/R/seqinr.rdb",
+        "path_type": "hardlink",
+        "sha256": "054f9b92b4cc71f45b152273e134dc45cf8bb8463ce77a481a2e4848c7cf0cde",
+        "sha256_in_prefix": "054f9b92b4cc71f45b152273e134dc45cf8bb8463ce77a481a2e4848c7cf0cde",
+        "size_in_bytes": 107887
+      },
+      {
+        "_path": "lib/R/library/seqinr/R/seqinr.rdx",
+        "path_type": "hardlink",
+        "sha256": "7a5fff996e95f45fe54dc802b50a902fc29d10a2ef26033c34fbf09e1db1fbb0",
+        "sha256_in_prefix": "7a5fff996e95f45fe54dc802b50a902fc29d10a2ef26033c34fbf09e1db1fbb0",
+        "size_in_bytes": 2730
+      },
+      {
+        "_path": "lib/R/library/seqinr/abif/1_0000206138_C01_005.fsa",
+        "path_type": "hardlink",
+        "sha256": "960919c9042eb2d6c3d1b6a57351452797e58626c99cf2803a57129f6b8ae66a",
+        "sha256_in_prefix": "960919c9042eb2d6c3d1b6a57351452797e58626c99cf2803a57129f6b8ae66a",
+        "size_in_bytes": 109299
+      },
+      {
+        "_path": "lib/R/library/seqinr/abif/1_FAC321_0000205983_B02_004.fsa",
+        "path_type": "hardlink",
+        "sha256": "f60ca583866cff395cb238dd8335b34bb18d64682fb625bf10295bd01e6f1f5b",
+        "sha256_in_prefix": "f60ca583866cff395cb238dd8335b34bb18d64682fb625bf10295bd01e6f1f5b",
+        "size_in_bytes": 111777
+      },
+      {
+        "_path": "lib/R/library/seqinr/abif/2_0000206138_C01_005.fsa",
+        "path_type": "hardlink",
+        "sha256": "1dee5a6d0e04635e2e0ea6912ea9780d0d6bd2423f34ff5e53b057ea387efcf6",
+        "sha256_in_prefix": "1dee5a6d0e04635e2e0ea6912ea9780d0d6bd2423f34ff5e53b057ea387efcf6",
+        "size_in_bytes": 109387
+      },
+      {
+        "_path": "lib/R/library/seqinr/abif/2_FAC321_0000205983_B02_004.fsa",
+        "path_type": "hardlink",
+        "sha256": "783b3b53d59197cb027a286ba8005fff1b310188ef2d999826cd1a319e2ef6c1",
+        "sha256_in_prefix": "783b3b53d59197cb027a286ba8005fff1b310188ef2d999826cd1a319e2ef6c1",
+        "size_in_bytes": 114833
+      },
+      {
+        "_path": "lib/R/library/seqinr/abif/AmpFLSTR_Bins_v1.txt",
+        "path_type": "hardlink",
+        "sha256": "481664bb3545d0c887de1f34fe0c72ac5b3345816be007b682d8fa6cd579889d",
+        "sha256_in_prefix": "481664bb3545d0c887de1f34fe0c72ac5b3345816be007b682d8fa6cd579889d",
+        "size_in_bytes": 39662
+      },
+      {
+        "_path": "lib/R/library/seqinr/abif/AmpFLSTR_Panels_v1.txt",
+        "path_type": "hardlink",
+        "sha256": "08b668e17e29f34d4e13ca4d4009d667a2954baa39b0044e9043058bd5daf0ce",
+        "sha256_in_prefix": "08b668e17e29f34d4e13ca4d4009d667a2954baa39b0044e9043058bd5daf0ce",
+        "size_in_bytes": 10428
+      },
+      {
+        "_path": "lib/R/library/seqinr/abif/NGM_Bins.txt",
+        "path_type": "hardlink",
+        "sha256": "aeca3ea77ad782292c01b8987d8a40ebe65149ed749a54192af87dfe220f8129",
+        "sha256_in_prefix": "aeca3ea77ad782292c01b8987d8a40ebe65149ed749a54192af87dfe220f8129",
+        "size_in_bytes": 65553
+      },
+      {
+        "_path": "lib/R/library/seqinr/abif/NGM_Pa.txt",
+        "path_type": "hardlink",
+        "sha256": "e0489585b1dcaa781b610b3204323b18fc05e3b9998082d7dfcc0dae775d2e93",
+        "sha256_in_prefix": "e0489585b1dcaa781b610b3204323b18fc05e3b9998082d7dfcc0dae775d2e93",
+        "size_in_bytes": 18754
+      },
+      {
+        "_path": "lib/R/library/seqinr/abif/Promega_Bins_v1.txt",
+        "path_type": "hardlink",
+        "sha256": "c8b58558145e448c4a4337d799c23edbd1a7173e06765a9423addc4b7b51f1a1",
+        "sha256_in_prefix": "c8b58558145e448c4a4337d799c23edbd1a7173e06765a9423addc4b7b51f1a1",
+        "size_in_bytes": 9332
+      },
+      {
+        "_path": "lib/R/library/seqinr/abif/Promega_Panels_v1.txt",
+        "path_type": "hardlink",
+        "sha256": "0e5db591de3e775ce7c5e4190f2c8f97767d02cee3ea757c2a62a9bf48ca1d75",
+        "sha256_in_prefix": "0e5db591de3e775ce7c5e4190f2c8f97767d02cee3ea757c2a62a9bf48ca1d75",
+        "size_in_bytes": 3415
+      },
+      {
+        "_path": "lib/R/library/seqinr/abif/Prototype_PowerPlex_EP01_Bins.txt",
+        "path_type": "hardlink",
+        "sha256": "426005c513f656b074bc1cfe07aefc0367c9369213d6230040f889494231c295",
+        "sha256_in_prefix": "426005c513f656b074bc1cfe07aefc0367c9369213d6230040f889494231c295",
+        "size_in_bytes": 5833
+      },
+      {
+        "_path": "lib/R/library/seqinr/abif/Prototype_PowerPlex_EP01_Pa.txt",
+        "path_type": "hardlink",
+        "sha256": "c0cc0c3977a54780ec6c897667bf61a51f3bcf85c1d6106e793a6c18905aa6b5",
+        "sha256_in_prefix": "c0cc0c3977a54780ec6c897667bf61a51f3bcf85c1d6106e793a6c18905aa6b5",
+        "size_in_bytes": 1879
+      },
+      {
+        "_path": "lib/R/library/seqinr/abif/samplefsa2ps.fsa",
+        "path_type": "hardlink",
+        "sha256": "7dfd6c7a388474b21ee54d5a48a989734760d81874174bc38d3df5fc690e59eb",
+        "sha256_in_prefix": "7dfd6c7a388474b21ee54d5a48a989734760d81874174bc38d3df5fc690e59eb",
+        "size_in_bytes": 218313
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/AnoukResult.RData",
+        "path_type": "hardlink",
+        "sha256": "0c0af6386a65f3d1c34707a4208517465b0b029c9dcdc66303c78900563a3361",
+        "sha256_in_prefix": "0c0af6386a65f3d1c34707a4208517465b0b029c9dcdc66303c78900563a3361",
+        "size_in_bytes": 319
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/ECH.RData",
+        "path_type": "hardlink",
+        "sha256": "0b13d56b3a55358396ec237a083473d67e0165fffea29467ccbee1205955008e",
+        "sha256_in_prefix": "0b13d56b3a55358396ec237a083473d67e0165fffea29467ccbee1205955008e",
+        "size_in_bytes": 38432
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/EXP.RData",
+        "path_type": "hardlink",
+        "sha256": "d27a85ebe0ceb815b4cfc9fe7618bc754b9a06f8d7917cc1f5c2fa21397ff036",
+        "sha256_in_prefix": "d27a85ebe0ceb815b4cfc9fe7618bc754b9a06f8d7917cc1f5c2fa21397ff036",
+        "size_in_bytes": 1066
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/JLO.RData",
+        "path_type": "hardlink",
+        "sha256": "5faf0e821375b791a394be7f00d6c247278493f1111af772e2f0164111e6175a",
+        "sha256_in_prefix": "5faf0e821375b791a394be7f00d6c247278493f1111af772e2f0164111e6175a",
+        "size_in_bytes": 39576
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/SEQINR.UTIL.RData",
+        "path_type": "hardlink",
+        "sha256": "857f08c191d2557a8d1039a7586b1a13ac86434ad19044e5b32388e2700a10a5",
+        "sha256_in_prefix": "857f08c191d2557a8d1039a7586b1a13ac86434ad19044e5b32388e2700a10a5",
+        "size_in_bytes": 1775
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/aacost.RData",
+        "path_type": "hardlink",
+        "sha256": "704554cba379607f7b0fc1a7ccc1b53a2ab0e6f6199e03713be8410234ede894",
+        "sha256_in_prefix": "704554cba379607f7b0fc1a7ccc1b53a2ab0e6f6199e03713be8410234ede894",
+        "size_in_bytes": 638
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/aaindex.RData",
+        "path_type": "hardlink",
+        "sha256": "dd96758720b796281b0fd3ba1ad08d01e9d5447490a25d0a786879365baeed4a",
+        "sha256_in_prefix": "dd96758720b796281b0fd3ba1ad08d01e9d5447490a25d0a786879365baeed4a",
+        "size_in_bytes": 81830
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/caitab.RData",
+        "path_type": "hardlink",
+        "sha256": "f5048310952f51685cf4b02e5f68beb8ec568cc991fc1d4349a445b869fa632f",
+        "sha256_in_prefix": "f5048310952f51685cf4b02e5f68beb8ec568cc991fc1d4349a445b869fa632f",
+        "size_in_bytes": 941
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/chargaff.RData",
+        "path_type": "hardlink",
+        "sha256": "c6d01fe58ea1a5bbaef7be060443a97df14d189db703733fd6b2193cc86643fa",
+        "sha256_in_prefix": "c6d01fe58ea1a5bbaef7be060443a97df14d189db703733fd6b2193cc86643fa",
+        "size_in_bytes": 351
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/clustal.RData",
+        "path_type": "hardlink",
+        "sha256": "54b9c714d4e9674ad223a1c97ee371a288f2bb02a4c37620509c17f12502cece",
+        "sha256_in_prefix": "54b9c714d4e9674ad223a1c97ee371a288f2bb02a4c37620509c17f12502cece",
+        "size_in_bytes": 422
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/datalist",
+        "path_type": "hardlink",
+        "sha256": "aaf165cd9208a0d57e01a1ad80e05cf3d94823c8921bfb7270081e4a4ccae826",
+        "sha256_in_prefix": "aaf165cd9208a0d57e01a1ad80e05cf3d94823c8921bfb7270081e4a4ccae826",
+        "size_in_bytes": 217
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/dinucl.RData",
+        "path_type": "hardlink",
+        "sha256": "a606d450ff7dbe4b8ae6a8caa7b33bbb4852db1b4ba520592ce779cb397c6f46",
+        "sha256_in_prefix": "a606d450ff7dbe4b8ae6a8caa7b33bbb4852db1b4ba520592ce779cb397c6f46",
+        "size_in_bytes": 65740
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/ec999.RData",
+        "path_type": "hardlink",
+        "sha256": "7b53035a1be7f7c92109dce3357932c442e3fc745b808eb9bd84810e33ca1ae9",
+        "sha256_in_prefix": "7b53035a1be7f7c92109dce3357932c442e3fc745b808eb9bd84810e33ca1ae9",
+        "size_in_bytes": 317766
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/fasta.RData",
+        "path_type": "hardlink",
+        "sha256": "3fc4598c94986657788a8a5e036bcf05b4dbb04ed9779f7ba7be15e287d979d3",
+        "sha256_in_prefix": "3fc4598c94986657788a8a5e036bcf05b4dbb04ed9779f7ba7be15e287d979d3",
+        "size_in_bytes": 1029
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/gcO2.rda",
+        "path_type": "hardlink",
+        "sha256": "13087c795bb87319b281148567fb4b0f8aad75c6dc13c422fb29dfea57c3b3d1",
+        "sha256_in_prefix": "13087c795bb87319b281148567fb4b0f8aad75c6dc13c422fb29dfea57c3b3d1",
+        "size_in_bytes": 6098
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/gcT.rda",
+        "path_type": "hardlink",
+        "sha256": "6de50c8de2e14792b19ffdaf5b071c51bdfa99a967f215214a7aa8f5727771b2",
+        "sha256_in_prefix": "6de50c8de2e14792b19ffdaf5b071c51bdfa99a967f215214a7aa8f5727771b2",
+        "size_in_bytes": 17860
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/gs500liz.RData",
+        "path_type": "hardlink",
+        "sha256": "0413750f73131a24723f36fef028fc4472802b4d18ed6f7951c441b787605454",
+        "sha256_in_prefix": "0413750f73131a24723f36fef028fc4472802b4d18ed6f7951c441b787605454",
+        "size_in_bytes": 176
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/identifiler.RData",
+        "path_type": "hardlink",
+        "sha256": "dc2df538cfb815057f5b6e94c3eadade985ceb2f361b2ac85bd5466cd2acce0c",
+        "sha256_in_prefix": "dc2df538cfb815057f5b6e94c3eadade985ceb2f361b2ac85bd5466cd2acce0c",
+        "size_in_bytes": 554
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/kaksTorture.RData",
+        "path_type": "hardlink",
+        "sha256": "f3e0211e8ca0404fe8d0e16db6686998536e62cec15305c8ab9472303f0ab7fe",
+        "sha256_in_prefix": "f3e0211e8ca0404fe8d0e16db6686998536e62cec15305c8ab9472303f0ab7fe",
+        "size_in_bytes": 2220
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/m16j.RData",
+        "path_type": "hardlink",
+        "sha256": "c5dac71f7786d6e47e217b214539d97bfe7e46845df8903b4fcf72135c91fe01",
+        "sha256_in_prefix": "c5dac71f7786d6e47e217b214539d97bfe7e46845df8903b4fcf72135c91fe01",
+        "size_in_bytes": 418884
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/mase.RData",
+        "path_type": "hardlink",
+        "sha256": "4fab53fe8e3a5d963344731d66492108ce291236ffb57f15391742d5f65885fd",
+        "sha256_in_prefix": "4fab53fe8e3a5d963344731d66492108ce291236ffb57f15391742d5f65885fd",
+        "size_in_bytes": 543
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/msf.RData",
+        "path_type": "hardlink",
+        "sha256": "ab02160011060ef35ed43a6e050b25be629c03fd02e37c6f3c7d35232a1cd446",
+        "sha256_in_prefix": "ab02160011060ef35ed43a6e050b25be629c03fd02e37c6f3c7d35232a1cd446",
+        "size_in_bytes": 838
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/pK.RData",
+        "path_type": "hardlink",
+        "sha256": "47fc494af284de71a902ff30dc4090b0105862c706925cdef02c8a09cd90216f",
+        "sha256_in_prefix": "47fc494af284de71a902ff30dc4090b0105862c706925cdef02c8a09cd90216f",
+        "size_in_bytes": 322
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/phylip.RData",
+        "path_type": "hardlink",
+        "sha256": "43a9883206f9347d6c32c1398cb6787b6016e70b27acb51eefb6454774c03b3f",
+        "sha256_in_prefix": "43a9883206f9347d6c32c1398cb6787b6016e70b27acb51eefb6454774c03b3f",
+        "size_in_bytes": 276
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/prochlo.RData",
+        "path_type": "hardlink",
+        "sha256": "ecbdf86c5bb0de3143961bafb1a5edecf2661940d9b64fd51fa0f9d23d1b8299",
+        "sha256_in_prefix": "ecbdf86c5bb0de3143961bafb1a5edecf2661940d9b64fd51fa0f9d23d1b8299",
+        "size_in_bytes": 412468
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/revaligntest.RData",
+        "path_type": "hardlink",
+        "sha256": "7d73b2948a0f98245ccfb38acf09a6ecc8b0ffd4959ead39bd2c42055ab40c3a",
+        "sha256_in_prefix": "7d73b2948a0f98245ccfb38acf09a6ecc8b0ffd4959ead39bd2c42055ab40c3a",
+        "size_in_bytes": 435
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/sysdata.rda",
+        "path_type": "hardlink",
+        "sha256": "857f08c191d2557a8d1039a7586b1a13ac86434ad19044e5b32388e2700a10a5",
+        "sha256_in_prefix": "857f08c191d2557a8d1039a7586b1a13ac86434ad19044e5b32388e2700a10a5",
+        "size_in_bytes": 1775
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/toyaa.RData",
+        "path_type": "hardlink",
+        "sha256": "0daff69c39f69077858bd9958600f8ae89d4bf1d49c861035da84c132c8b798f",
+        "sha256_in_prefix": "0daff69c39f69077858bd9958600f8ae89d4bf1d49c861035da84c132c8b798f",
+        "size_in_bytes": 164
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/toycodon.RData",
+        "path_type": "hardlink",
+        "sha256": "bc533b9ac353711a4dbb49ecd0aff5d829990264106dbdc8d0188d17e494fa71",
+        "sha256_in_prefix": "bc533b9ac353711a4dbb49ecd0aff5d829990264106dbdc8d0188d17e494fa71",
+        "size_in_bytes": 195
+      },
+      {
+        "_path": "lib/R/library/seqinr/data/waterabs.RData",
+        "path_type": "hardlink",
+        "sha256": "983e26388580faa47854aab44d6f196868fc14e6e785189a88d8d2eb2a04d4a0",
+        "sha256_in_prefix": "983e26388580faa47854aab44d6f196868fc14e6e785189a88d8d2eb2a04d4a0",
+        "size_in_bytes": 568
+      },
+      {
+        "_path": "lib/R/library/seqinr/help/AnIndex",
+        "path_type": "hardlink",
+        "sha256": "0493a45d07cd63a655c1bd8456f103eea80fa5c4cf5d732f39f9e44591470e0c",
+        "sha256_in_prefix": "0493a45d07cd63a655c1bd8456f103eea80fa5c4cf5d732f39f9e44591470e0c",
+        "size_in_bytes": 5231
+      },
+      {
+        "_path": "lib/R/library/seqinr/help/aliases.rds",
+        "path_type": "hardlink",
+        "sha256": "c84fc11267e9ef3153848182a6e5994ade0e1e6d8c5040cacd58fe3ab85aebdd",
+        "sha256_in_prefix": "c84fc11267e9ef3153848182a6e5994ade0e1e6d8c5040cacd58fe3ab85aebdd",
+        "size_in_bytes": 1737
+      },
+      {
+        "_path": "lib/R/library/seqinr/help/figures/aka.pdf",
+        "path_type": "hardlink",
+        "sha256": "a16be4581eb23fb7305906020bb1b1eafbbf17b3237eefa9a6ad6c345825625c",
+        "sha256_in_prefix": "a16be4581eb23fb7305906020bb1b1eafbbf17b3237eefa9a6ad6c345825625c",
+        "size_in_bytes": 17307
+      },
+      {
+        "_path": "lib/R/library/seqinr/help/figures/chargaff.png",
+        "path_type": "hardlink",
+        "sha256": "8b21d22936b8881236cec1a242e55a9c169bf393313377de8e1a36725b4a4b58",
+        "sha256_in_prefix": "8b21d22936b8881236cec1a242e55a9c169bf393313377de8e1a36725b4a4b58",
+        "size_in_bytes": 79475
+      },
+      {
+        "_path": "lib/R/library/seqinr/help/figures/gcskewmbe96.pdf",
+        "path_type": "hardlink",
+        "sha256": "551e141e69c0125b795ac1b229a04a6547d66fd2acc65605dd4395a53a721883",
+        "sha256_in_prefix": "551e141e69c0125b795ac1b229a04a6547d66fd2acc65605dd4395a53a721883",
+        "size_in_bytes": 29632
+      },
+      {
+        "_path": "lib/R/library/seqinr/help/figures/introduction-dbg.pdf",
+        "path_type": "hardlink",
+        "sha256": "25f2a8d006f513071de6a867975d7c1dabb51f1de869d103b4a013358f22e3b5",
+        "sha256_in_prefix": "25f2a8d006f513071de6a867975d7c1dabb51f1de869d103b4a013358f22e3b5",
+        "size_in_bytes": 12554
+      },
+      {
+        "_path": "lib/R/library/seqinr/help/figures/lncs2004.pdf",
+        "path_type": "hardlink",
+        "sha256": "e5d0dbc884121853fd8d0ab47a047f3c165d7b2a525b09b0ede3df4c7a4477dd",
+        "sha256_in_prefix": "e5d0dbc884121853fd8d0ab47a047f3c165d7b2a525b09b0ede3df4c7a4477dd",
+        "size_in_bytes": 54378
+      },
+      {
+        "_path": "lib/R/library/seqinr/help/figures/waterabs.jpg",
+        "path_type": "hardlink",
+        "sha256": "9bbea1e92a086c9730eeeb3e33db441136cd2e98e81ce4d236bbf8bde3eca0b7",
+        "sha256_in_prefix": "9bbea1e92a086c9730eeeb3e33db441136cd2e98e81ce4d236bbf8bde3eca0b7",
+        "size_in_bytes": 59360
+      },
+      {
+        "_path": "lib/R/library/seqinr/help/paths.rds",
+        "path_type": "hardlink",
+        "sha256": "bc82f49521ee34a1aade1c778ad3c36a90619dab4779ee95ab68ddb9ef2578c9",
+        "sha256_in_prefix": "bc82f49521ee34a1aade1c778ad3c36a90619dab4779ee95ab68ddb9ef2578c9",
+        "size_in_bytes": 1222
+      },
+      {
+        "_path": "lib/R/library/seqinr/help/seqinr.rdb",
+        "path_type": "hardlink",
+        "sha256": "e8e1298db28d76f1401692d51008e4bee3d0b7a848fface9d0e80b89ea2187a5",
+        "sha256_in_prefix": "e8e1298db28d76f1401692d51008e4bee3d0b7a848fface9d0e80b89ea2187a5",
+        "size_in_bytes": 443648
+      },
+      {
+        "_path": "lib/R/library/seqinr/help/seqinr.rdx",
+        "path_type": "hardlink",
+        "sha256": "c227c67556274eea711486d785fb276829fe4b0d4375f0e3fe8a6c70569cbecb",
+        "sha256_in_prefix": "c227c67556274eea711486d785fb276829fe4b0d4375f0e3fe8a6c70569cbecb",
+        "size_in_bytes": 3143
+      },
+      {
+        "_path": "lib/R/library/seqinr/html/00Index.html",
+        "path_type": "hardlink",
+        "sha256": "33759a6b6023eecc79a4eb2b4e9057cc241e17e869d7619b15e288a85a3e4286",
+        "sha256_in_prefix": "33759a6b6023eecc79a4eb2b4e9057cc241e17e869d7619b15e288a85a3e4286",
+        "size_in_bytes": 36456
+      },
+      {
+        "_path": "lib/R/library/seqinr/html/R.css",
+        "path_type": "hardlink",
+        "sha256": "0f4849ab1757247808d54da2c371e992364371c942ad7d629dae8d62327ed068",
+        "sha256_in_prefix": "0f4849ab1757247808d54da2c371e992364371c942ad7d629dae8d62327ed068",
+        "size_in_bytes": 1335
+      },
+      {
+        "_path": "lib/R/library/seqinr/libs/seqinr.so",
+        "file_mode": "binary",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/opt/conda/conda-bld/r-seqinr_1507834840198/_b_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_plac",
+        "sha256": "830385d08403ebd1d0d0c1914c57957ac4d72951cd39f1cd6fa1a73abeebb8a5",
+        "sha256_in_prefix": "188b621d2b27d373107437e3564d76227dc361ec914e0c590faf0f250b62613e",
+        "size_in_bytes": 64038
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/Anouk.fasta",
+        "path_type": "hardlink",
+        "sha256": "1e210b86f4e9147bb01b8d671fbbc3b2bfef6192674ab3c71cce483bd731df42",
+        "sha256_in_prefix": "1e210b86f4e9147bb01b8d671fbbc3b2bfef6192674ab3c71cce483bd731df42",
+        "size_in_bytes": 4090
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/DarrenObbard.fasta",
+        "path_type": "hardlink",
+        "sha256": "fdc1d64e8092a529110305c24598a38da3ae191ef145dad0cec56fb3bbee9e08",
+        "sha256_in_prefix": "fdc1d64e8092a529110305c24598a38da3ae191ef145dad0cec56fb3bbee9e08",
+        "size_in_bytes": 213
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/ECOUNC.fsa",
+        "path_type": "hardlink",
+        "sha256": "cfdf9e873bfa7379e26f8646d16ed3a32b8727fb2c3e5fb6e07411666eb5c0fc",
+        "sha256_in_prefix": "cfdf9e873bfa7379e26f8646d16ed3a32b8727fb2c3e5fb6e07411666eb5c0fc",
+        "size_in_bytes": 8021
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/UBIQUITIN.mase",
+        "path_type": "hardlink",
+        "sha256": "77f583ecec8668161c5b9b6867f9995df20eddb4389b252e82e3c2aea167a6ed",
+        "sha256_in_prefix": "77f583ecec8668161c5b9b6867f9995df20eddb4389b252e82e3c2aea167a6ed",
+        "size_in_bytes": 942
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/ame1.gbk",
+        "path_type": "hardlink",
+        "sha256": "2b29986f5e074c4b350de4a45db8a1db8248d7278938f5f6c9c3213e9fcacc56",
+        "sha256_in_prefix": "2b29986f5e074c4b350de4a45db8a1db8248d7278938f5f6c9c3213e9fcacc56",
+        "size_in_bytes": 31612
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/bb.acc",
+        "path_type": "hardlink",
+        "sha256": "bfc493c616a1831f8f594ac2368566c1039857545dd706bd2c6d566421055db3",
+        "sha256_in_prefix": "bfc493c616a1831f8f594ac2368566c1039857545dd706bd2c6d566421055db3",
+        "size_in_bytes": 180
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/bb.kwd",
+        "path_type": "hardlink",
+        "sha256": "f76ace26964801104a60ccf60cb768134222018556d98df985ad8b1b05bd6ea8",
+        "sha256_in_prefix": "f76ace26964801104a60ccf60cb768134222018556d98df985ad8b1b05bd6ea8",
+        "size_in_bytes": 208
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/bb.mne",
+        "path_type": "hardlink",
+        "sha256": "c4ffe85aa257d0f5755103acac033ba2924beabd80de8a7c51635004c50d7b9a",
+        "sha256_in_prefix": "c4ffe85aa257d0f5755103acac033ba2924beabd80de8a7c51635004c50d7b9a",
+        "size_in_bytes": 177
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/bb.sp",
+        "path_type": "hardlink",
+        "sha256": "6efc02724c2272782640e511d2cda2d0ac19cac8d5100c8a114c6343345b3898",
+        "sha256_in_prefix": "6efc02724c2272782640e511d2cda2d0ac19cac8d5100c8a114c6343345b3898",
+        "size_in_bytes": 372
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/bordetella.fasta",
+        "path_type": "hardlink",
+        "sha256": "ae36671e42d4cbc1c224cdc3f9cfe570608dd4d1f966a0fdb045301de1fd1a1f",
+        "sha256_in_prefix": "ae36671e42d4cbc1c224cdc3f9cfe570608dd4d1f966a0fdb045301de1fd1a1f",
+        "size_in_bytes": 2070
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/bordetella.pep.aln",
+        "path_type": "hardlink",
+        "sha256": "20d3db7b9286cb29c30318c5194cabb5510dafe71a9d638f19c0e24d1cf7b10f",
+        "sha256_in_prefix": "20d3db7b9286cb29c30318c5194cabb5510dafe71a9d638f19c0e24d1cf7b10f",
+        "size_in_bytes": 1242
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/ct.bfa",
+        "path_type": "hardlink",
+        "sha256": "642248f0314f3fa5aa5f94c7a9f42ff776b78990205946c33de81c7e573a7c3d",
+        "sha256_in_prefix": "642248f0314f3fa5aa5f94c7a9f42ff776b78990205946c33de81c7e573a7c3d",
+        "size_in_bytes": 521283
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/ct.fasta.gz",
+        "path_type": "hardlink",
+        "sha256": "13b08b6d4b0ea27bdff0a2757cdce9f88c89ce7080ef47db649523349552e5f1",
+        "sha256_in_prefix": "13b08b6d4b0ea27bdff0a2757cdce9f88c89ce7080ef47db649523349552e5f1",
+        "size_in_bytes": 325963
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/ct.gbk.gz",
+        "path_type": "hardlink",
+        "sha256": "0a27196ed2e31f36e3cc358616fff53664a0744105291b2441edab0791187f11",
+        "sha256_in_prefix": "0a27196ed2e31f36e3cc358616fff53664a0744105291b2441edab0791187f11",
+        "size_in_bytes": 678534
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/ct.predict",
+        "path_type": "hardlink",
+        "sha256": "8d7d468ab951de58f921e9574816b47d1abd61a2582a96cdd1db02f4323540f2",
+        "sha256_in_prefix": "8d7d468ab951de58f921e9574816b47d1abd61a2582a96cdd1db02f4323540f2",
+        "size_in_bytes": 37919
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/ecolicgpe5.fasta",
+        "path_type": "hardlink",
+        "sha256": "cc9bdc8e756bad58295f3532ff56ced85738934f9fac0b4d5b279334d11fe15a",
+        "sha256_in_prefix": "cc9bdc8e756bad58295f3532ff56ced85738934f9fac0b4d5b279334d11fe15a",
+        "size_in_bytes": 315
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/gopher.fasta",
+        "path_type": "hardlink",
+        "sha256": "0715ee8277b3dbd3e764dfcb8a0ec5acf8cb6ed8685dda24f2ee5634c24186d5",
+        "sha256_in_prefix": "0715ee8277b3dbd3e764dfcb8a0ec5acf8cb6ed8685dda24f2ee5634c24186d5",
+        "size_in_bytes": 3934
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/gopher.names",
+        "path_type": "hardlink",
+        "sha256": "be48545cfe8f63ad27b80ce7da28438fdd57f1e448dc8f5e0ef88f35fb159e4d",
+        "sha256_in_prefix": "be48545cfe8f63ad27b80ce7da28438fdd57f1e448dc8f5e0ef88f35fb159e4d",
+        "size_in_bytes": 88
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/hannah.txt",
+        "path_type": "hardlink",
+        "sha256": "f5279b49df3b5ddb005a32a19e37ca2f8316c1ea21c5482bcac498536f00e2a9",
+        "sha256_in_prefix": "f5279b49df3b5ddb005a32a19e37ca2f8316c1ea21c5482bcac498536f00e2a9",
+        "size_in_bytes": 37193
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/humanMito.fasta",
+        "path_type": "hardlink",
+        "sha256": "1374b201eccce2ed32014123b64108e73d4b9fffd1053dd86c18f8ea8e41308b",
+        "sha256_in_prefix": "1374b201eccce2ed32014123b64108e73d4b9fffd1053dd86c18f8ea8e41308b",
+        "size_in_bytes": 17065
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/input.dat",
+        "path_type": "hardlink",
+        "sha256": "7364b2f3615edeab739e13e67ad7b6b76f1393f0fd33a0c44cc9c4871e26be7c",
+        "sha256_in_prefix": "7364b2f3615edeab739e13e67ad7b6b76f1393f0fd33a0c44cc9c4871e26be7c",
+        "size_in_bytes": 170293
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/input.out",
+        "path_type": "hardlink",
+        "sha256": "364a076f58998ad1c8c76bfaafec8da4362c8194d1ff830c2e301937612c5aed",
+        "sha256_in_prefix": "364a076f58998ad1c8c76bfaafec8da4362c8194d1ff830c2e301937612c5aed",
+        "size_in_bytes": 4364
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/kaks-torture.fasta",
+        "path_type": "hardlink",
+        "sha256": "ee113d133b59635b4c66051095584417ba2cd38dc6abcc37ee9913bf25afec12",
+        "sha256_in_prefix": "ee113d133b59635b4c66051095584417ba2cd38dc6abcc37ee9913bf25afec12",
+        "size_in_bytes": 1553
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/legacy.fasta",
+        "path_type": "hardlink",
+        "sha256": "cc0835fd8b4514e9b3678343ddd98fd606b0257750a1c3ad575caba27c98d943",
+        "sha256_in_prefix": "cc0835fd8b4514e9b3678343ddd98fd606b0257750a1c3ad575caba27c98d943",
+        "size_in_bytes": 1359
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/louse.fasta",
+        "path_type": "hardlink",
+        "sha256": "ffe125b9441019fee261bb848be54540f4fc3f4b9a84050abe0215c52bdb42d7",
+        "sha256_in_prefix": "ffe125b9441019fee261bb848be54540f4fc3f4b9a84050abe0215c52bdb42d7",
+        "size_in_bytes": 3952
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/louse.names",
+        "path_type": "hardlink",
+        "sha256": "d9c068d3cd758aa0375cf3bbe764b011f69e6d2eb3a26cb0d5d1107174302d91",
+        "sha256_in_prefix": "d9c068d3cd758aa0375cf3bbe764b011f69e6d2eb3a26cb0d5d1107174302d91",
+        "size_in_bytes": 94
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/malM.fasta",
+        "path_type": "hardlink",
+        "sha256": "9c684a3213079433c59ffbeb1b6abfd9917b261ece7870ba788a3c962a84cd49",
+        "sha256_in_prefix": "9c684a3213079433c59ffbeb1b6abfd9917b261ece7870ba788a3c962a84cd49",
+        "size_in_bytes": 986
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/ortho.fasta",
+        "path_type": "hardlink",
+        "sha256": "fa206831c275f9b94d1c355fdee9fe4fb8627007cda63f40238f305bfb29dde3",
+        "sha256_in_prefix": "fa206831c275f9b94d1c355fdee9fe4fb8627007cda63f40238f305bfb29dde3",
+        "size_in_bytes": 1644
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/scuco.txt",
+        "path_type": "hardlink",
+        "sha256": "04729b31a20f78a661fdad5514fb0c0cf82a21b67eabfb72e16e55481223b3ee",
+        "sha256_in_prefix": "04729b31a20f78a661fdad5514fb0c0cf82a21b67eabfb72e16e55481223b3ee",
+        "size_in_bytes": 13207
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/seqAA.fasta",
+        "path_type": "hardlink",
+        "sha256": "caffd8c751e1a7aa230efee3ecdc4a5d724ed6e9cc6e2f7c1cc411ea5c40408e",
+        "sha256_in_prefix": "caffd8c751e1a7aa230efee3ecdc4a5d724ed6e9cc6e2f7c1cc411ea5c40408e",
+        "size_in_bytes": 225
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/smallAA.fasta",
+        "path_type": "hardlink",
+        "sha256": "d1173acb65531fdafe974c5ce8fedff03a261164f11fc5b8a05b21da3c10af07",
+        "sha256_in_prefix": "d1173acb65531fdafe974c5ce8fedff03a261164f11fc5b8a05b21da3c10af07",
+        "size_in_bytes": 75
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/smallAA.fasta.gz",
+        "path_type": "hardlink",
+        "sha256": "3db36f4d6569dcd15c854dbf360830b2f2f28275f54a9e5e7b9c905a9e891f67",
+        "sha256_in_prefix": "3db36f4d6569dcd15c854dbf360830b2f2f28275f54a9e5e7b9c905a9e891f67",
+        "size_in_bytes": 85
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/someORF.fsa",
+        "path_type": "hardlink",
+        "sha256": "581b3897b166d4f2495226d6d083c8b95bf4246e91abdbcb80a4e13af5c4e6b7",
+        "sha256_in_prefix": "581b3897b166d4f2495226d6d083c8b95bf4246e91abdbcb80a4e13af5c4e6b7",
+        "size_in_bytes": 27411
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/test.aln",
+        "path_type": "hardlink",
+        "sha256": "4234ee9e0d2336c8c2888f91115a8d0f0a17d19978ab217f96131cdb838732f2",
+        "sha256_in_prefix": "4234ee9e0d2336c8c2888f91115a8d0f0a17d19978ab217f96131cdb838732f2",
+        "size_in_bytes": 1419
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/test.mase",
+        "path_type": "hardlink",
+        "sha256": "15525ac72033e758ea8ef770d97b2a2b4954b12eb584e0a2c088f46e6a15da7a",
+        "sha256_in_prefix": "15525ac72033e758ea8ef770d97b2a2b4954b12eb584e0a2c088f46e6a15da7a",
+        "size_in_bytes": 898
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/test.msf",
+        "path_type": "hardlink",
+        "sha256": "660d2a918a09fa4e62e228f6ee2c111c5add79992b50daf4e650b28e513752d4",
+        "sha256_in_prefix": "660d2a918a09fa4e62e228f6ee2c111c5add79992b50daf4e650b28e513752d4",
+        "size_in_bytes": 3156
+      },
+      {
+        "_path": "lib/R/library/seqinr/sequences/test.phylip",
+        "path_type": "hardlink",
+        "sha256": "1129cebe3bc89b90026bdb456971e141ceb167682f6998c78e340128214b95ec",
+        "sha256_in_prefix": "1129cebe3bc89b90026bdb456971e141ceb167682f6998c78e340128214b95ec",
+        "size_in_bytes": 296
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "bioconda::r-seqinr",
+  "sha256": "5ff7c81de016e2f99813c11027ec522c61c5e032c4df39596c2f82f51d2dcb56",
+  "size": 3878393,
+  "subdir": "linux-64",
+  "track_features": "",
+  "url": "https://conda.anaconda.org/bioconda/linux-64/r-seqinr-3.4_5-r3.4.1_0.tar.bz2",
+  "version": "3.4_5"
+}

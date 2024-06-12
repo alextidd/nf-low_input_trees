@@ -1,0 +1,5 @@
+#!/nfs/users/nfs_a/at31/miniforge3/envs/sequoia/bin/python2.7
+import sys
+from lib2to3.main import main
+
+sys.exit(main("lib2to3.fixes"))

@@ -1,0 +1,235 @@
+{
+  "build": "r341h6115d3f_0",
+  "build_number": 0,
+  "channel": "https://conda.anaconda.org/conda-forge/linux-64",
+  "constrains": [],
+  "depends": [
+    "r-base >=3.4.1,<3.4.2.0a0"
+  ],
+  "extracted_package_dir": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-segmented-0.5_3.0-r341h6115d3f_0",
+  "features": "",
+  "files": [
+    "lib/R/library/segmented/CITATION",
+    "lib/R/library/segmented/DESCRIPTION",
+    "lib/R/library/segmented/INDEX",
+    "lib/R/library/segmented/Meta/Rd.rds",
+    "lib/R/library/segmented/Meta/data.rds",
+    "lib/R/library/segmented/Meta/features.rds",
+    "lib/R/library/segmented/Meta/hsearch.rds",
+    "lib/R/library/segmented/Meta/links.rds",
+    "lib/R/library/segmented/Meta/nsInfo.rds",
+    "lib/R/library/segmented/Meta/package.rds",
+    "lib/R/library/segmented/NAMESPACE",
+    "lib/R/library/segmented/NEWS",
+    "lib/R/library/segmented/R/segmented",
+    "lib/R/library/segmented/R/segmented.rdb",
+    "lib/R/library/segmented/R/segmented.rdx",
+    "lib/R/library/segmented/data/down.rda",
+    "lib/R/library/segmented/data/plant.rda",
+    "lib/R/library/segmented/data/stagnant.rda",
+    "lib/R/library/segmented/help/AnIndex",
+    "lib/R/library/segmented/help/aliases.rds",
+    "lib/R/library/segmented/help/paths.rds",
+    "lib/R/library/segmented/help/segmented.rdb",
+    "lib/R/library/segmented/help/segmented.rdx",
+    "lib/R/library/segmented/html/00Index.html",
+    "lib/R/library/segmented/html/R.css"
+  ],
+  "fn": "r-segmented-0.5_3.0-r341h6115d3f_0.tar.bz2",
+  "license": "GPL",
+  "link": {
+    "source": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-segmented-0.5_3.0-r341h6115d3f_0",
+    "type": 1
+  },
+  "md5": "f13cf1002223781a56990a3d003bf636",
+  "name": "r-segmented",
+  "package_tarball_full_path": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-segmented-0.5_3.0-r341h6115d3f_0.tar.bz2",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "lib/R/library/segmented/CITATION",
+        "path_type": "hardlink",
+        "sha256": "8b2ca5349068344678fdae5b19aa4b923c5b086a5d97a7495316a98123cb7057",
+        "sha256_in_prefix": "8b2ca5349068344678fdae5b19aa4b923c5b086a5d97a7495316a98123cb7057",
+        "size_in_bytes": 1267
+      },
+      {
+        "_path": "lib/R/library/segmented/DESCRIPTION",
+        "path_type": "hardlink",
+        "sha256": "19229d78afcb5648d31c0a14c18d2a739ad13f9b796e2c4edf9d85a350749482",
+        "sha256_in_prefix": "19229d78afcb5648d31c0a14c18d2a739ad13f9b796e2c4edf9d85a350749482",
+        "size_in_bytes": 740
+      },
+      {
+        "_path": "lib/R/library/segmented/INDEX",
+        "path_type": "hardlink",
+        "sha256": "162832a7badeaa40e6ea9d61985971d9c04fc0f4db92472ff74470a340222df1",
+        "sha256_in_prefix": "162832a7badeaa40e6ea9d61985971d9c04fc0f4db92472ff74470a340222df1",
+        "size_in_bytes": 1585
+      },
+      {
+        "_path": "lib/R/library/segmented/Meta/Rd.rds",
+        "path_type": "hardlink",
+        "sha256": "abac11d880797963b9c45dbe9d4a79f87cf4a49adf880efa137332be11058e39",
+        "sha256_in_prefix": "abac11d880797963b9c45dbe9d4a79f87cf4a49adf880efa137332be11058e39",
+        "size_in_bytes": 1113
+      },
+      {
+        "_path": "lib/R/library/segmented/Meta/data.rds",
+        "path_type": "hardlink",
+        "sha256": "a33b9c12c29ee3b3809396ba8211620ac082534b9f67fdc739b8c0650de0ed40",
+        "sha256_in_prefix": "a33b9c12c29ee3b3809396ba8211620ac082534b9f67fdc739b8c0650de0ed40",
+        "size_in_bytes": 145
+      },
+      {
+        "_path": "lib/R/library/segmented/Meta/features.rds",
+        "path_type": "hardlink",
+        "sha256": "79a0197390e6502dd95396d9acb73882afc9688bcdbf20fbecafd39f92cc9bc3",
+        "sha256_in_prefix": "79a0197390e6502dd95396d9acb73882afc9688bcdbf20fbecafd39f92cc9bc3",
+        "size_in_bytes": 112
+      },
+      {
+        "_path": "lib/R/library/segmented/Meta/hsearch.rds",
+        "path_type": "hardlink",
+        "sha256": "f76b32da8fb7bb0c229f452f3988070cd6392661c1c857215310a299bae7f7de",
+        "sha256_in_prefix": "f76b32da8fb7bb0c229f452f3988070cd6392661c1c857215310a299bae7f7de",
+        "size_in_bytes": 1065
+      },
+      {
+        "_path": "lib/R/library/segmented/Meta/links.rds",
+        "path_type": "hardlink",
+        "sha256": "787121e4be3538f232026f65d1d0eb97b5fc30df2c9c37b4792d662e22f043a6",
+        "sha256_in_prefix": "787121e4be3538f232026f65d1d0eb97b5fc30df2c9c37b4792d662e22f043a6",
+        "size_in_bytes": 470
+      },
+      {
+        "_path": "lib/R/library/segmented/Meta/nsInfo.rds",
+        "path_type": "hardlink",
+        "sha256": "b97550a74a751436ae6dcdc97677b5a2cf07e051877404b1a448f7a627fbd397",
+        "sha256_in_prefix": "b97550a74a751436ae6dcdc97677b5a2cf07e051877404b1a448f7a627fbd397",
+        "size_in_bytes": 783
+      },
+      {
+        "_path": "lib/R/library/segmented/Meta/package.rds",
+        "path_type": "hardlink",
+        "sha256": "fb53d1fa302372fafa42951422cbb038ce04dde2d88ebfa2e9e8a97aaa9b2109",
+        "sha256_in_prefix": "fb53d1fa302372fafa42951422cbb038ce04dde2d88ebfa2e9e8a97aaa9b2109",
+        "size_in_bytes": 758
+      },
+      {
+        "_path": "lib/R/library/segmented/NAMESPACE",
+        "path_type": "hardlink",
+        "sha256": "94c82f413b76501b568a8144081b353de1cdbc4e0349555372a9db8c3ddac9e4",
+        "sha256_in_prefix": "94c82f413b76501b568a8144081b353de1cdbc4e0349555372a9db8c3ddac9e4",
+        "size_in_bytes": 1655
+      },
+      {
+        "_path": "lib/R/library/segmented/NEWS",
+        "path_type": "hardlink",
+        "sha256": "f375b88a1e7c6f30ebb54ecc5dd4aad5f3ba6b079d8d62435961a42170c1fd4d",
+        "sha256_in_prefix": "f375b88a1e7c6f30ebb54ecc5dd4aad5f3ba6b079d8d62435961a42170c1fd4d",
+        "size_in_bytes": 15950
+      },
+      {
+        "_path": "lib/R/library/segmented/R/segmented",
+        "path_type": "hardlink",
+        "sha256": "2fb8b16be23c820daf2e51b7ddfef61ca4978e561b1d228d546d1b356041f79e",
+        "sha256_in_prefix": "2fb8b16be23c820daf2e51b7ddfef61ca4978e561b1d228d546d1b356041f79e",
+        "size_in_bytes": 1056
+      },
+      {
+        "_path": "lib/R/library/segmented/R/segmented.rdb",
+        "path_type": "hardlink",
+        "sha256": "2b259d540fe5c5bee2ce7d872ab9d4f7cf6692b20da2157998279d08662b2034",
+        "sha256_in_prefix": "2b259d540fe5c5bee2ce7d872ab9d4f7cf6692b20da2157998279d08662b2034",
+        "size_in_bytes": 64746
+      },
+      {
+        "_path": "lib/R/library/segmented/R/segmented.rdx",
+        "path_type": "hardlink",
+        "sha256": "d0240468ad723e555c0dae6e97b2497d945f1c8f25ca5bee59d2e0a9703c3429",
+        "sha256_in_prefix": "d0240468ad723e555c0dae6e97b2497d945f1c8f25ca5bee59d2e0a9703c3429",
+        "size_in_bytes": 646
+      },
+      {
+        "_path": "lib/R/library/segmented/data/down.rda",
+        "path_type": "hardlink",
+        "sha256": "47bd571e746478557687bd7fe83849916a3a7c645a62a4a9471ccd49e6b954f0",
+        "sha256_in_prefix": "47bd571e746478557687bd7fe83849916a3a7c645a62a4a9471ccd49e6b954f0",
+        "size_in_bytes": 400
+      },
+      {
+        "_path": "lib/R/library/segmented/data/plant.rda",
+        "path_type": "hardlink",
+        "sha256": "10e0e3e49a6b1085f15578d15fc117bf71b27f340ca70a7db09c83fcd0403619",
+        "sha256_in_prefix": "10e0e3e49a6b1085f15578d15fc117bf71b27f340ca70a7db09c83fcd0403619",
+        "size_in_bytes": 664
+      },
+      {
+        "_path": "lib/R/library/segmented/data/stagnant.rda",
+        "path_type": "hardlink",
+        "sha256": "81ef4fb4ff6d8c19e7aa03bec581b84ee9ee015ff6566f8d716bda5605ac66f9",
+        "sha256_in_prefix": "81ef4fb4ff6d8c19e7aa03bec581b84ee9ee015ff6566f8d716bda5605ac66f9",
+        "size_in_bytes": 352
+      },
+      {
+        "_path": "lib/R/library/segmented/help/AnIndex",
+        "path_type": "hardlink",
+        "sha256": "0f2665ede4954305865ba0bcf7f47ed8c8bf8fbe8d0c86531bcb479f95e1a1b4",
+        "sha256_in_prefix": "0f2665ede4954305865ba0bcf7f47ed8c8bf8fbe8d0c86531bcb479f95e1a1b4",
+        "size_in_bytes": 869
+      },
+      {
+        "_path": "lib/R/library/segmented/help/aliases.rds",
+        "path_type": "hardlink",
+        "sha256": "2e23af7a42aedc57af49b1e6c823968748b2cb61a90ea93bd07c09c77924936a",
+        "sha256_in_prefix": "2e23af7a42aedc57af49b1e6c823968748b2cb61a90ea93bd07c09c77924936a",
+        "size_in_bytes": 327
+      },
+      {
+        "_path": "lib/R/library/segmented/help/paths.rds",
+        "path_type": "hardlink",
+        "sha256": "f60cb12fcf17231e90ab6111ec4ed98a3c636452a7c9986029c5ffb19f05fe8f",
+        "sha256_in_prefix": "f60cb12fcf17231e90ab6111ec4ed98a3c636452a7c9986029c5ffb19f05fe8f",
+        "size_in_bytes": 349
+      },
+      {
+        "_path": "lib/R/library/segmented/help/segmented.rdb",
+        "path_type": "hardlink",
+        "sha256": "30d15df42a0f251b6c61c687259a8b8c47d5c925960656f35e078bf2cd4d8ae9",
+        "sha256_in_prefix": "30d15df42a0f251b6c61c687259a8b8c47d5c925960656f35e078bf2cd4d8ae9",
+        "size_in_bytes": 88754
+      },
+      {
+        "_path": "lib/R/library/segmented/help/segmented.rdx",
+        "path_type": "hardlink",
+        "sha256": "045323ddd67f0c18c874ef718e597ae9acb39bdde42684c18384dc53074c906e",
+        "sha256_in_prefix": "045323ddd67f0c18c874ef718e597ae9acb39bdde42684c18384dc53074c906e",
+        "size_in_bytes": 646
+      },
+      {
+        "_path": "lib/R/library/segmented/html/00Index.html",
+        "path_type": "hardlink",
+        "sha256": "deaedc873c90f309d9dcb294e28b3a54c1dd81b630625ea1f73895969ccf5b26",
+        "sha256_in_prefix": "deaedc873c90f309d9dcb294e28b3a54c1dd81b630625ea1f73895969ccf5b26",
+        "size_in_bytes": 5641
+      },
+      {
+        "_path": "lib/R/library/segmented/html/R.css",
+        "path_type": "hardlink",
+        "sha256": "0f4849ab1757247808d54da2c371e992364371c942ad7d629dae8d62327ed068",
+        "sha256_in_prefix": "0f4849ab1757247808d54da2c371e992364371c942ad7d629dae8d62327ed068",
+        "size_in_bytes": 1335
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "a4d728ed2f3650554e3fae532898d2bf6c69e432f753c8c00ed7d1d4010e7453",
+  "size": 179256,
+  "subdir": "linux-64",
+  "timestamp": 1538382712000,
+  "track_features": "",
+  "url": "https://conda.anaconda.org/conda-forge/linux-64/r-segmented-0.5_3.0-r341h6115d3f_0.tar.bz2",
+  "version": "0.5_3.0"
+}

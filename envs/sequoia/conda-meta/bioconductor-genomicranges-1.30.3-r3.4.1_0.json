@@ -1,0 +1,473 @@
+{
+  "build": "r3.4.1_0",
+  "build_number": 0,
+  "channel": "https://conda.anaconda.org/bioconda/linux-64",
+  "constrains": [],
+  "depends": [
+    "bioconductor-biocgenerics >=0.21.2",
+    "bioconductor-genomeinfodb >=1.13.1",
+    "bioconductor-iranges >=2.11.16",
+    "bioconductor-s4vectors >=0.9.47",
+    "bioconductor-xvector",
+    "r-base 3.4.1*"
+  ],
+  "extracted_package_dir": "/nfs/users/nfs_a/at31/miniforge3/pkgs/bioconductor-genomicranges-1.30.3-r3.4.1_0",
+  "features": "",
+  "files": [
+    "lib/R/library/GenomicRanges/CITATION",
+    "lib/R/library/GenomicRanges/DESCRIPTION",
+    "lib/R/library/GenomicRanges/INDEX",
+    "lib/R/library/GenomicRanges/Meta/Rd.rds",
+    "lib/R/library/GenomicRanges/Meta/features.rds",
+    "lib/R/library/GenomicRanges/Meta/hsearch.rds",
+    "lib/R/library/GenomicRanges/Meta/links.rds",
+    "lib/R/library/GenomicRanges/Meta/nsInfo.rds",
+    "lib/R/library/GenomicRanges/Meta/package.rds",
+    "lib/R/library/GenomicRanges/Meta/vignette.rds",
+    "lib/R/library/GenomicRanges/NAMESPACE",
+    "lib/R/library/GenomicRanges/NEWS",
+    "lib/R/library/GenomicRanges/R/GenomicRanges",
+    "lib/R/library/GenomicRanges/R/GenomicRanges.rdb",
+    "lib/R/library/GenomicRanges/R/GenomicRanges.rdx",
+    "lib/R/library/GenomicRanges/doc/ExtendingGenomicRanges.R",
+    "lib/R/library/GenomicRanges/doc/ExtendingGenomicRanges.Rnw",
+    "lib/R/library/GenomicRanges/doc/ExtendingGenomicRanges.pdf",
+    "lib/R/library/GenomicRanges/doc/GRanges_and_GRangesList_slides.R",
+    "lib/R/library/GenomicRanges/doc/GRanges_and_GRangesList_slides.Rnw",
+    "lib/R/library/GenomicRanges/doc/GRanges_and_GRangesList_slides.pdf",
+    "lib/R/library/GenomicRanges/doc/GenomicRangesHOWTOs.R",
+    "lib/R/library/GenomicRanges/doc/GenomicRangesHOWTOs.Rnw",
+    "lib/R/library/GenomicRanges/doc/GenomicRangesHOWTOs.pdf",
+    "lib/R/library/GenomicRanges/doc/GenomicRangesIntroduction.R",
+    "lib/R/library/GenomicRanges/doc/GenomicRangesIntroduction.Rnw",
+    "lib/R/library/GenomicRanges/doc/GenomicRangesIntroduction.pdf",
+    "lib/R/library/GenomicRanges/doc/Ten_things_slides.R",
+    "lib/R/library/GenomicRanges/doc/Ten_things_slides.Rnw",
+    "lib/R/library/GenomicRanges/doc/Ten_things_slides.pdf",
+    "lib/R/library/GenomicRanges/doc/index.html",
+    "lib/R/library/GenomicRanges/extdata/feature_frags.txt",
+    "lib/R/library/GenomicRanges/help/AnIndex",
+    "lib/R/library/GenomicRanges/help/GenomicRanges.rdb",
+    "lib/R/library/GenomicRanges/help/GenomicRanges.rdx",
+    "lib/R/library/GenomicRanges/help/aliases.rds",
+    "lib/R/library/GenomicRanges/help/paths.rds",
+    "lib/R/library/GenomicRanges/html/00Index.html",
+    "lib/R/library/GenomicRanges/html/R.css",
+    "lib/R/library/GenomicRanges/libs/GenomicRanges.so",
+    "lib/R/library/GenomicRanges/scripts/timing_overlaps.R",
+    "lib/R/library/GenomicRanges/unitTests/test_GNCList-class.R",
+    "lib/R/library/GenomicRanges/unitTests/test_GRanges-class.R",
+    "lib/R/library/GenomicRanges/unitTests/test_GRangesList-class.R",
+    "lib/R/library/GenomicRanges/unitTests/test_GenomicRanges-comparison.R",
+    "lib/R/library/GenomicRanges/unitTests/test_coverage-methods.R",
+    "lib/R/library/GenomicRanges/unitTests/test_findOverlaps-methods.R",
+    "lib/R/library/GenomicRanges/unitTests/test_inter-range-methods.R",
+    "lib/R/library/GenomicRanges/unitTests/test_intra-range-methods.R",
+    "lib/R/library/GenomicRanges/unitTests/test_makeGRangesFromDataFrame.R",
+    "lib/R/library/GenomicRanges/unitTests/test_makeGRangesListFromDataFrame.R",
+    "lib/R/library/GenomicRanges/unitTests/test_nearest-methods.R",
+    "lib/R/library/GenomicRanges/unitTests/test_precede_follow.R",
+    "lib/R/library/GenomicRanges/unitTests/test_setops-methods.R"
+  ],
+  "fn": "bioconductor-genomicranges-1.30.3-r3.4.1_0.tar.bz2",
+  "license": "Artistic-2.0",
+  "link": {
+    "source": "/nfs/users/nfs_a/at31/miniforge3/pkgs/bioconductor-genomicranges-1.30.3-r3.4.1_0",
+    "type": 1
+  },
+  "md5": "da408eea0869a31fe6d915f32247d599",
+  "name": "bioconductor-genomicranges",
+  "package_tarball_full_path": "/nfs/users/nfs_a/at31/miniforge3/pkgs/bioconductor-genomicranges-1.30.3-r3.4.1_0.tar.bz2",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "lib/R/library/GenomicRanges/CITATION",
+        "path_type": "hardlink",
+        "sha256": "9dfd64478cacbf9e9d18c8feecf202e2aa169bd78b068bef032ac5f461d90755",
+        "sha256_in_prefix": "9dfd64478cacbf9e9d18c8feecf202e2aa169bd78b068bef032ac5f461d90755",
+        "size_in_bytes": 940
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/DESCRIPTION",
+        "path_type": "hardlink",
+        "sha256": "77bbb319c0eca35f9c95881da01a6fb94f0365d339c58f6933f8c5a62a797cc0",
+        "sha256_in_prefix": "77bbb319c0eca35f9c95881da01a6fb94f0365d339c58f6933f8c5a62a797cc0",
+        "size_in_bytes": 2824
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/INDEX",
+        "path_type": "hardlink",
+        "sha256": "99c6a948655fa7b8580718d9c64a81af8e8a84f8016d6935bb779df7dc3152ef",
+        "sha256_in_prefix": "99c6a948655fa7b8580718d9c64a81af8e8a84f8016d6935bb779df7dc3152ef",
+        "size_in_bytes": 1802
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/Meta/Rd.rds",
+        "path_type": "hardlink",
+        "sha256": "3256622222207ab6dfd90112ebb52ec9d38402caa70dbe58cd4ace1db0b380ed",
+        "sha256_in_prefix": "3256622222207ab6dfd90112ebb52ec9d38402caa70dbe58cd4ace1db0b380ed",
+        "size_in_bytes": 2794
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/Meta/features.rds",
+        "path_type": "hardlink",
+        "sha256": "79a0197390e6502dd95396d9acb73882afc9688bcdbf20fbecafd39f92cc9bc3",
+        "sha256_in_prefix": "79a0197390e6502dd95396d9acb73882afc9688bcdbf20fbecafd39f92cc9bc3",
+        "size_in_bytes": 112
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/Meta/hsearch.rds",
+        "path_type": "hardlink",
+        "sha256": "b44cfffa5c222059ff681d71dab9445ece7480a5a53a3baee7126a169fb8872c",
+        "sha256_in_prefix": "b44cfffa5c222059ff681d71dab9445ece7480a5a53a3baee7126a169fb8872c",
+        "size_in_bytes": 2891
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/Meta/links.rds",
+        "path_type": "hardlink",
+        "sha256": "e78ad136483c4277cc3cdc0f1165c324eec4191250013f8cc6987d173a134882",
+        "sha256_in_prefix": "e78ad136483c4277cc3cdc0f1165c324eec4191250013f8cc6987d173a134882",
+        "size_in_bytes": 2300
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/Meta/nsInfo.rds",
+        "path_type": "hardlink",
+        "sha256": "ca258e266448566b0cf7abd61c8b6a797f3a521dee5c6e0cf824d34d102ebb02",
+        "sha256_in_prefix": "ca258e266448566b0cf7abd61c8b6a797f3a521dee5c6e0cf824d34d102ebb02",
+        "size_in_bytes": 1083
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/Meta/package.rds",
+        "path_type": "hardlink",
+        "sha256": "f64ca6d582af344e026a5a17537eacf59cda2f18b9a5b7a91f4d5c46b64bdff7",
+        "sha256_in_prefix": "f64ca6d582af344e026a5a17537eacf59cda2f18b9a5b7a91f4d5c46b64bdff7",
+        "size_in_bytes": 2201
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/Meta/vignette.rds",
+        "path_type": "hardlink",
+        "sha256": "bbad667557382f611d654891451e2e9aa53d8f38eb9c3b66076fa7b99411daed",
+        "sha256_in_prefix": "bbad667557382f611d654891451e2e9aa53d8f38eb9c3b66076fa7b99411daed",
+        "size_in_bytes": 697
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/NAMESPACE",
+        "path_type": "hardlink",
+        "sha256": "e3489b0c0433e0677e651d5f57800daa7487a255538953bdbe33d1c527ea0ba8",
+        "sha256_in_prefix": "e3489b0c0433e0677e651d5f57800daa7487a255538953bdbe33d1c527ea0ba8",
+        "size_in_bytes": 3642
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/NEWS",
+        "path_type": "hardlink",
+        "sha256": "fbdc3016f34a73632f0afc530f8f40c470448d7c636fbbf4d7a13ce96eee650c",
+        "sha256_in_prefix": "fbdc3016f34a73632f0afc530f8f40c470448d7c636fbbf4d7a13ce96eee650c",
+        "size_in_bytes": 38711
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/R/GenomicRanges",
+        "path_type": "hardlink",
+        "sha256": "2fb8b16be23c820daf2e51b7ddfef61ca4978e561b1d228d546d1b356041f79e",
+        "sha256_in_prefix": "2fb8b16be23c820daf2e51b7ddfef61ca4978e561b1d228d546d1b356041f79e",
+        "size_in_bytes": 1056
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/R/GenomicRanges.rdb",
+        "path_type": "hardlink",
+        "sha256": "de312d24306029c528b88781b1f178b2b745006fce86edad0c4bbf11220e2b3a",
+        "sha256_in_prefix": "de312d24306029c528b88781b1f178b2b745006fce86edad0c4bbf11220e2b3a",
+        "size_in_bytes": 543317
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/R/GenomicRanges.rdx",
+        "path_type": "hardlink",
+        "sha256": "aaa51ea060e98e781cdd64d3248ea91683b5fb71e82302deb6cfb0a2a0070df0",
+        "sha256_in_prefix": "aaa51ea060e98e781cdd64d3248ea91683b5fb71e82302deb6cfb0a2a0070df0",
+        "size_in_bytes": 7306
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/doc/ExtendingGenomicRanges.R",
+        "path_type": "hardlink",
+        "sha256": "346a5093269548ce7c3a703a0bd2cac04fceb044097679c58fd0b17d9744c178",
+        "sha256_in_prefix": "346a5093269548ce7c3a703a0bd2cac04fceb044097679c58fd0b17d9744c178",
+        "size_in_bytes": 1254
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/doc/ExtendingGenomicRanges.Rnw",
+        "path_type": "hardlink",
+        "sha256": "52e9facc21267d6f8a0d63dd1e02d5638d9a3129ba4d79971134932f7439e4fd",
+        "sha256_in_prefix": "52e9facc21267d6f8a0d63dd1e02d5638d9a3129ba4d79971134932f7439e4fd",
+        "size_in_bytes": 4706
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/doc/ExtendingGenomicRanges.pdf",
+        "path_type": "hardlink",
+        "sha256": "05f0968b225d98210f7dad85a212eff4cd76fb300896c11bee272103dd235807",
+        "sha256_in_prefix": "05f0968b225d98210f7dad85a212eff4cd76fb300896c11bee272103dd235807",
+        "size_in_bytes": 140509
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/doc/GRanges_and_GRangesList_slides.R",
+        "path_type": "hardlink",
+        "sha256": "a8ffbedf69c7462618e7e4572b380194dc9a3bec063c49972fa63b086ef15b07",
+        "sha256_in_prefix": "a8ffbedf69c7462618e7e4572b380194dc9a3bec063c49972fa63b086ef15b07",
+        "size_in_bytes": 12048
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/doc/GRanges_and_GRangesList_slides.Rnw",
+        "path_type": "hardlink",
+        "sha256": "534622264a7397abc1e9c84e23ed74036b827ac68850c7db6c44f1aaa868abc2",
+        "sha256_in_prefix": "534622264a7397abc1e9c84e23ed74036b827ac68850c7db6c44f1aaa868abc2",
+        "size_in_bytes": 27710
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/doc/GRanges_and_GRangesList_slides.pdf",
+        "path_type": "hardlink",
+        "sha256": "836a03c6e74909dbc6ce0f19c9461d43619d6f62e7d1660c189fc8fa875b0f79",
+        "sha256_in_prefix": "836a03c6e74909dbc6ce0f19c9461d43619d6f62e7d1660c189fc8fa875b0f79",
+        "size_in_bytes": 250940
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/doc/GenomicRangesHOWTOs.R",
+        "path_type": "hardlink",
+        "sha256": "856593af7866601f6dd549f0b821488cc13259e62ee0911fbc6b7fde56a00022",
+        "sha256_in_prefix": "856593af7866601f6dd549f0b821488cc13259e62ee0911fbc6b7fde56a00022",
+        "size_in_bytes": 21950
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/doc/GenomicRangesHOWTOs.Rnw",
+        "path_type": "hardlink",
+        "sha256": "78c52deccc7c511815e158bfc18b9ebec24b2fcf617b9ea59a380d1d1b122dab",
+        "sha256_in_prefix": "78c52deccc7c511815e158bfc18b9ebec24b2fcf617b9ea59a380d1d1b122dab",
+        "size_in_bytes": 38807
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/doc/GenomicRangesHOWTOs.pdf",
+        "path_type": "hardlink",
+        "sha256": "71be7df4647f755f04eec8c5ce8feae18b9ab3b86416b0720f6d461948c753eb",
+        "sha256_in_prefix": "71be7df4647f755f04eec8c5ce8feae18b9ab3b86416b0720f6d461948c753eb",
+        "size_in_bytes": 234195
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/doc/GenomicRangesIntroduction.R",
+        "path_type": "hardlink",
+        "sha256": "9fa7eefeb7eeba91703f93d4e2169701d118bec48fd1b34952662f5c7467dca0",
+        "sha256_in_prefix": "9fa7eefeb7eeba91703f93d4e2169701d118bec48fd1b34952662f5c7467dca0",
+        "size_in_bytes": 11025
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/doc/GenomicRangesIntroduction.Rnw",
+        "path_type": "hardlink",
+        "sha256": "eadc936a8b0a37d1855e817c4f75243c2a05d1c75ca20a9c0914f1f7ba7f3b6c",
+        "sha256_in_prefix": "eadc936a8b0a37d1855e817c4f75243c2a05d1c75ca20a9c0914f1f7ba7f3b6c",
+        "size_in_bytes": 20751
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/doc/GenomicRangesIntroduction.pdf",
+        "path_type": "hardlink",
+        "sha256": "917ecbef20fa9149c1ed8b758493ff223b31528cc1c90943f8b029b35dcf8233",
+        "sha256_in_prefix": "917ecbef20fa9149c1ed8b758493ff223b31528cc1c90943f8b029b35dcf8233",
+        "size_in_bytes": 189430
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/doc/Ten_things_slides.R",
+        "path_type": "hardlink",
+        "sha256": "b548f6c4e44afaa9e0e8334fc2803cf69e97a1efcd6ab9d7c9144fad4391d569",
+        "sha256_in_prefix": "b548f6c4e44afaa9e0e8334fc2803cf69e97a1efcd6ab9d7c9144fad4391d569",
+        "size_in_bytes": 7470
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/doc/Ten_things_slides.Rnw",
+        "path_type": "hardlink",
+        "sha256": "caaca56461fd7181a148de2590eb4344b9e4e1805bed0cc225a3f69eb358d165",
+        "sha256_in_prefix": "caaca56461fd7181a148de2590eb4344b9e4e1805bed0cc225a3f69eb358d165",
+        "size_in_bytes": 9050
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/doc/Ten_things_slides.pdf",
+        "path_type": "hardlink",
+        "sha256": "078bd73804134e95b29fc46d1bbc8c3eb28cd48ceb8e713becec31322b1373e0",
+        "sha256_in_prefix": "078bd73804134e95b29fc46d1bbc8c3eb28cd48ceb8e713becec31322b1373e0",
+        "size_in_bytes": 138321
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/doc/index.html",
+        "path_type": "hardlink",
+        "sha256": "2861268656a2e8a578adcd4439b88f3cd1b5513d2f359aaf3408df87c463c370",
+        "sha256_in_prefix": "2861268656a2e8a578adcd4439b88f3cd1b5513d2f359aaf3408df87c463c370",
+        "size_in_bytes": 3852
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/extdata/feature_frags.txt",
+        "path_type": "hardlink",
+        "sha256": "16dec1ebfe4de6dcab8b7b4307196e2f54d80e0102c9b3fc6839917a6303f90f",
+        "sha256_in_prefix": "16dec1ebfe4de6dcab8b7b4307196e2f54d80e0102c9b3fc6839917a6303f90f",
+        "size_in_bytes": 283
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/help/AnIndex",
+        "path_type": "hardlink",
+        "sha256": "c06a6e337f4a01f2de4a1af49ba1823969d438eede032698a5e81364a57eb5b8",
+        "sha256_in_prefix": "c06a6e337f4a01f2de4a1af49ba1823969d438eede032698a5e81364a57eb5b8",
+        "size_in_bytes": 13232
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/help/GenomicRanges.rdb",
+        "path_type": "hardlink",
+        "sha256": "33e9224cd3db140093c71a8a09c27a6ce12e081aca7a149dc4b8b61496cfb355",
+        "sha256_in_prefix": "33e9224cd3db140093c71a8a09c27a6ce12e081aca7a149dc4b8b61496cfb355",
+        "size_in_bytes": 192658
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/help/GenomicRanges.rdx",
+        "path_type": "hardlink",
+        "sha256": "0a5d737c3a73c86e3f5c3780dc158d553461c175034573d741cd820321a5dc21",
+        "sha256_in_prefix": "0a5d737c3a73c86e3f5c3780dc158d553461c175034573d741cd820321a5dc21",
+        "size_in_bytes": 716
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/help/aliases.rds",
+        "path_type": "hardlink",
+        "sha256": "4f7fa73af67e11300925157ea44a1855cd56d74e0c67aadbb890c2ca73e42581",
+        "sha256_in_prefix": "4f7fa73af67e11300925157ea44a1855cd56d74e0c67aadbb890c2ca73e42581",
+        "size_in_bytes": 2365
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/help/paths.rds",
+        "path_type": "hardlink",
+        "sha256": "d0c4fc0ec437636f68ea6bb07102d8992b479a6cee205a1d299fb2942aad0599",
+        "sha256_in_prefix": "d0c4fc0ec437636f68ea6bb07102d8992b479a6cee205a1d299fb2942aad0599",
+        "size_in_bytes": 379
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/html/00Index.html",
+        "path_type": "hardlink",
+        "sha256": "8083f396c6ad544236d7fe8497c4d5b3f863823f33b0757de782e679be14d5d5",
+        "sha256_in_prefix": "8083f396c6ad544236d7fe8497c4d5b3f863823f33b0757de782e679be14d5d5",
+        "size_in_bytes": 32105
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/html/R.css",
+        "path_type": "hardlink",
+        "sha256": "0f4849ab1757247808d54da2c371e992364371c942ad7d629dae8d62327ed068",
+        "sha256_in_prefix": "0f4849ab1757247808d54da2c371e992364371c942ad7d629dae8d62327ed068",
+        "size_in_bytes": 1335
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/libs/GenomicRanges.so",
+        "file_mode": "binary",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/opt/conda/conda-bld/bioconductor-genomicranges_1521746960690/_b_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placeh",
+        "sha256": "a1de42ba71e0a27274d71646d4cdd43565e83560b24680f1923ce43563b2c5a5",
+        "sha256_in_prefix": "580407ae9eb0fe1bf68bc5e29a0a5e97e36c96ee90c50fcd43f2579ed88dedd7",
+        "size_in_bytes": 53732
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/scripts/timing_overlaps.R",
+        "path_type": "hardlink",
+        "sha256": "7957dba7423ae57197041c34f75f53e9d862adb62a64e2188901c2aabcfa4975",
+        "sha256_in_prefix": "7957dba7423ae57197041c34f75f53e9d862adb62a64e2188901c2aabcfa4975",
+        "size_in_bytes": 3878
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/unitTests/test_GNCList-class.R",
+        "path_type": "hardlink",
+        "sha256": "276e45b5016f33b79555a35c9fdb87397ab93883625f377f7d01cd15566c3307",
+        "sha256_in_prefix": "276e45b5016f33b79555a35c9fdb87397ab93883625f377f7d01cd15566c3307",
+        "size_in_bytes": 6067
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/unitTests/test_GRanges-class.R",
+        "path_type": "hardlink",
+        "sha256": "032dade616ee08c29022b049693366a3780739abf38246244ebd74cd3624a9d9",
+        "sha256_in_prefix": "032dade616ee08c29022b049693366a3780739abf38246244ebd74cd3624a9d9",
+        "size_in_bytes": 18835
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/unitTests/test_GRangesList-class.R",
+        "path_type": "hardlink",
+        "sha256": "5b9ccaba0f91774a502ead778834cb2b74271836d697e80eb60a1c3d8dd37674",
+        "sha256_in_prefix": "5b9ccaba0f91774a502ead778834cb2b74271836d697e80eb60a1c3d8dd37674",
+        "size_in_bytes": 7271
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/unitTests/test_GenomicRanges-comparison.R",
+        "path_type": "hardlink",
+        "sha256": "88cfd53a0ab6d8e37bc728c7abda03a018e074ce9b279edd2ad515bcd2967270",
+        "sha256_in_prefix": "88cfd53a0ab6d8e37bc728c7abda03a018e074ce9b279edd2ad515bcd2967270",
+        "size_in_bytes": 3686
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/unitTests/test_coverage-methods.R",
+        "path_type": "hardlink",
+        "sha256": "60a58a062ee04593baf3ee6497a2e9eb5c20ef99ac0021d4172782544a9120fc",
+        "sha256_in_prefix": "60a58a062ee04593baf3ee6497a2e9eb5c20ef99ac0021d4172782544a9120fc",
+        "size_in_bytes": 4898
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/unitTests/test_findOverlaps-methods.R",
+        "path_type": "hardlink",
+        "sha256": "a60d124e68c44821a8418e2e74bb7103cb401e240c2c6f29193f0c44b4b7f87a",
+        "sha256_in_prefix": "a60d124e68c44821a8418e2e74bb7103cb401e240c2c6f29193f0c44b4b7f87a",
+        "size_in_bytes": 13381
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/unitTests/test_inter-range-methods.R",
+        "path_type": "hardlink",
+        "sha256": "b97e6041cc2caa5d2d6fb5b97f7703cc310818c7b4986c55c788d2e162473037",
+        "sha256_in_prefix": "b97e6041cc2caa5d2d6fb5b97f7703cc310818c7b4986c55c788d2e162473037",
+        "size_in_bytes": 5658
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/unitTests/test_intra-range-methods.R",
+        "path_type": "hardlink",
+        "sha256": "2c9ef69c47cbf4361daf8bd28f07771d3e139365f7957f8a31309a3c00b7dcc3",
+        "sha256_in_prefix": "2c9ef69c47cbf4361daf8bd28f07771d3e139365f7957f8a31309a3c00b7dcc3",
+        "size_in_bytes": 10617
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/unitTests/test_makeGRangesFromDataFrame.R",
+        "path_type": "hardlink",
+        "sha256": "fb3d5eff9a02ec1039fa1e7cc2b42263e9e1d2354f45e659224ab3937971ef04",
+        "sha256_in_prefix": "fb3d5eff9a02ec1039fa1e7cc2b42263e9e1d2354f45e659224ab3937971ef04",
+        "size_in_bytes": 6311
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/unitTests/test_makeGRangesListFromDataFrame.R",
+        "path_type": "hardlink",
+        "sha256": "8ea964b07f590e82f611687198c19166527c49a9215a47cc8bbb32d869058619",
+        "sha256_in_prefix": "8ea964b07f590e82f611687198c19166527c49a9215a47cc8bbb32d869058619",
+        "size_in_bytes": 5612
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/unitTests/test_nearest-methods.R",
+        "path_type": "hardlink",
+        "sha256": "63dbc5bb9d0a4dfa86d805f65bc2cd27d915a9ea417a70f705cac75b95ad7c55",
+        "sha256_in_prefix": "63dbc5bb9d0a4dfa86d805f65bc2cd27d915a9ea417a70f705cac75b95ad7c55",
+        "size_in_bytes": 9392
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/unitTests/test_precede_follow.R",
+        "path_type": "hardlink",
+        "sha256": "54eec86f388a8a9b8f1b078978b89cb3b66b9b236ee1a2d9edcea31973e97e35",
+        "sha256_in_prefix": "54eec86f388a8a9b8f1b078978b89cb3b66b9b236ee1a2d9edcea31973e97e35",
+        "size_in_bytes": 13516
+      },
+      {
+        "_path": "lib/R/library/GenomicRanges/unitTests/test_setops-methods.R",
+        "path_type": "hardlink",
+        "sha256": "0c886ef7bf87cc0490ab618cffc1a34ed17615a41afea917a0e53a979dbf468f",
+        "sha256_in_prefix": "0c886ef7bf87cc0490ab618cffc1a34ed17615a41afea917a0e53a979dbf468f",
+        "size_in_bytes": 10945
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "bioconda::bioconductor-genomicranges",
+  "sha256": "e47470fa13a636b3d7f0324910cf9b758b40543511b26b5a2234770a3bc05055",
+  "size": 1689414,
+  "subdir": "linux-64",
+  "track_features": "",
+  "url": "https://conda.anaconda.org/bioconda/linux-64/bioconductor-genomicranges-1.30.3-r3.4.1_0.tar.bz2",
+  "version": "1.30.3"
+}

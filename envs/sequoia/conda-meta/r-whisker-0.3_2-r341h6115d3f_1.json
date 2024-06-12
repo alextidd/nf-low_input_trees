@@ -1,0 +1,363 @@
+{
+  "build": "r341h6115d3f_1",
+  "build_number": 1,
+  "channel": "https://conda.anaconda.org/conda-forge/linux-64",
+  "constrains": [],
+  "depends": [
+    "r-base >=3.4.1,<3.4.2.0a0"
+  ],
+  "extracted_package_dir": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-whisker-0.3_2-r341h6115d3f_1",
+  "features": "",
+  "files": [
+    "lib/R/library/whisker/DESCRIPTION",
+    "lib/R/library/whisker/INDEX",
+    "lib/R/library/whisker/Meta/Rd.rds",
+    "lib/R/library/whisker/Meta/features.rds",
+    "lib/R/library/whisker/Meta/hsearch.rds",
+    "lib/R/library/whisker/Meta/links.rds",
+    "lib/R/library/whisker/Meta/nsInfo.rds",
+    "lib/R/library/whisker/Meta/package.rds",
+    "lib/R/library/whisker/NAMESPACE",
+    "lib/R/library/whisker/NEWS",
+    "lib/R/library/whisker/R/whisker",
+    "lib/R/library/whisker/R/whisker.rdb",
+    "lib/R/library/whisker/R/whisker.rdx",
+    "lib/R/library/whisker/help/AnIndex",
+    "lib/R/library/whisker/help/aliases.rds",
+    "lib/R/library/whisker/help/paths.rds",
+    "lib/R/library/whisker/help/whisker.rdb",
+    "lib/R/library/whisker/help/whisker.rdx",
+    "lib/R/library/whisker/html/00Index.html",
+    "lib/R/library/whisker/html/R.css",
+    "lib/R/library/whisker/specs/comments.json",
+    "lib/R/library/whisker/specs/comments.yml",
+    "lib/R/library/whisker/specs/convert.R",
+    "lib/R/library/whisker/specs/delimiters.json",
+    "lib/R/library/whisker/specs/delimiters.yml",
+    "lib/R/library/whisker/specs/interpolation.json",
+    "lib/R/library/whisker/specs/interpolation.yml",
+    "lib/R/library/whisker/specs/inverted.json",
+    "lib/R/library/whisker/specs/inverted.yml",
+    "lib/R/library/whisker/specs/lambdas.json",
+    "lib/R/library/whisker/specs/lambdas.yml",
+    "lib/R/library/whisker/specs/partials.json",
+    "lib/R/library/whisker/specs/partials.yml",
+    "lib/R/library/whisker/specs/sections.json",
+    "lib/R/library/whisker/specs/sections.yml",
+    "lib/R/library/whisker/tests/testComments.R",
+    "lib/R/library/whisker/tests/testdelimiters.R",
+    "lib/R/library/whisker/tests/testinterpolation.R",
+    "lib/R/library/whisker/tests/testinverted.R",
+    "lib/R/library/whisker/tests/testpartials.R",
+    "lib/R/library/whisker/tests/testsections.R"
+  ],
+  "fn": "r-whisker-0.3_2-r341h6115d3f_1.tar.bz2",
+  "license": "GPL-3",
+  "link": {
+    "source": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-whisker-0.3_2-r341h6115d3f_1",
+    "type": 1
+  },
+  "md5": "96d5d1838bc45751f193ab3b4dbed2e5",
+  "name": "r-whisker",
+  "package_tarball_full_path": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-whisker-0.3_2-r341h6115d3f_1.tar.bz2",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "lib/R/library/whisker/DESCRIPTION",
+        "path_type": "hardlink",
+        "sha256": "9adf0757f8d1904303391803ed5996a3121af1f5d4a4442b1b88cb4b9500c09e",
+        "sha256_in_prefix": "9adf0757f8d1904303391803ed5996a3121af1f5d4a4442b1b88cb4b9500c09e",
+        "size_in_bytes": 691
+      },
+      {
+        "_path": "lib/R/library/whisker/INDEX",
+        "path_type": "hardlink",
+        "sha256": "cb42f7a8c99dcf2936b48ca6a70528033d525b1aa3690311d17f8240bad9dec2",
+        "sha256_in_prefix": "cb42f7a8c99dcf2936b48ca6a70528033d525b1aa3690311d17f8240bad9dec2",
+        "size_in_bytes": 265
+      },
+      {
+        "_path": "lib/R/library/whisker/Meta/Rd.rds",
+        "path_type": "hardlink",
+        "sha256": "8538513eca53ab8010b374df3a67fc31a46a0c7c3519d7c15772e6c2aa2af06d",
+        "sha256_in_prefix": "8538513eca53ab8010b374df3a67fc31a46a0c7c3519d7c15772e6c2aa2af06d",
+        "size_in_bytes": 568
+      },
+      {
+        "_path": "lib/R/library/whisker/Meta/features.rds",
+        "path_type": "hardlink",
+        "sha256": "79a0197390e6502dd95396d9acb73882afc9688bcdbf20fbecafd39f92cc9bc3",
+        "sha256_in_prefix": "79a0197390e6502dd95396d9acb73882afc9688bcdbf20fbecafd39f92cc9bc3",
+        "size_in_bytes": 112
+      },
+      {
+        "_path": "lib/R/library/whisker/Meta/hsearch.rds",
+        "path_type": "hardlink",
+        "sha256": "2cd7959beb56d1413317a5748743246f55f33890ca4b4258497ddd7ff21b12a8",
+        "sha256_in_prefix": "2cd7959beb56d1413317a5748743246f55f33890ca4b4258497ddd7ff21b12a8",
+        "size_in_bytes": 549
+      },
+      {
+        "_path": "lib/R/library/whisker/Meta/links.rds",
+        "path_type": "hardlink",
+        "sha256": "85bc6d40270667150a9708224d1bb4dde883632ecd440dc4033da1d0a822b125",
+        "sha256_in_prefix": "85bc6d40270667150a9708224d1bb4dde883632ecd440dc4033da1d0a822b125",
+        "size_in_bytes": 222
+      },
+      {
+        "_path": "lib/R/library/whisker/Meta/nsInfo.rds",
+        "path_type": "hardlink",
+        "sha256": "0844e355c20b6ecedccd871fa9e1aa1a90817cf8464976835f8c8803de113fc2",
+        "sha256_in_prefix": "0844e355c20b6ecedccd871fa9e1aa1a90817cf8464976835f8c8803de113fc2",
+        "size_in_bytes": 220
+      },
+      {
+        "_path": "lib/R/library/whisker/Meta/package.rds",
+        "path_type": "hardlink",
+        "sha256": "73f7770c35cfbdbfaffa1587f817d97d0d18ba875f82a60227baec5726062439",
+        "sha256_in_prefix": "73f7770c35cfbdbfaffa1587f817d97d0d18ba875f82a60227baec5726062439",
+        "size_in_bytes": 744
+      },
+      {
+        "_path": "lib/R/library/whisker/NAMESPACE",
+        "path_type": "hardlink",
+        "sha256": "f273034289b10d118f8dc46a7d7009186507ae0602a149254e8329e3bebb06e3",
+        "sha256_in_prefix": "f273034289b10d118f8dc46a7d7009186507ae0602a149254e8329e3bebb06e3",
+        "size_in_bytes": 83
+      },
+      {
+        "_path": "lib/R/library/whisker/NEWS",
+        "path_type": "hardlink",
+        "sha256": "809965550498c652b36b8f55542008abd0bbf49f39ec1d8b7a278ff365944cac",
+        "sha256_in_prefix": "809965550498c652b36b8f55542008abd0bbf49f39ec1d8b7a278ff365944cac",
+        "size_in_bytes": 241
+      },
+      {
+        "_path": "lib/R/library/whisker/R/whisker",
+        "path_type": "hardlink",
+        "sha256": "2fb8b16be23c820daf2e51b7ddfef61ca4978e561b1d228d546d1b356041f79e",
+        "sha256_in_prefix": "2fb8b16be23c820daf2e51b7ddfef61ca4978e561b1d228d546d1b356041f79e",
+        "size_in_bytes": 1056
+      },
+      {
+        "_path": "lib/R/library/whisker/R/whisker.rdb",
+        "path_type": "hardlink",
+        "sha256": "432f40a0abd07ce651ae761211dfcb107824c74e19daf0047da28b36c33954b1",
+        "sha256_in_prefix": "432f40a0abd07ce651ae761211dfcb107824c74e19daf0047da28b36c33954b1",
+        "size_in_bytes": 9910
+      },
+      {
+        "_path": "lib/R/library/whisker/R/whisker.rdx",
+        "path_type": "hardlink",
+        "sha256": "670f3f3827489738caa460d4c87f2181e98ee12c7da1c69fd2d90845dfadf517",
+        "sha256_in_prefix": "670f3f3827489738caa460d4c87f2181e98ee12c7da1c69fd2d90845dfadf517",
+        "size_in_bytes": 814
+      },
+      {
+        "_path": "lib/R/library/whisker/help/AnIndex",
+        "path_type": "hardlink",
+        "sha256": "ee3ffcc6024053f5a4b2d491be8e39a15ae5ddb96ec47408a350149a04e1a4af",
+        "sha256_in_prefix": "ee3ffcc6024053f5a4b2d491be8e39a15ae5ddb96ec47408a350149a04e1a4af",
+        "size_in_bytes": 204
+      },
+      {
+        "_path": "lib/R/library/whisker/help/aliases.rds",
+        "path_type": "hardlink",
+        "sha256": "0de0c554f4921d6ceb0d2b11bee9497b67954a1e6565128d3819664824034a06",
+        "sha256_in_prefix": "0de0c554f4921d6ceb0d2b11bee9497b67954a1e6565128d3819664824034a06",
+        "size_in_bytes": 155
+      },
+      {
+        "_path": "lib/R/library/whisker/help/paths.rds",
+        "path_type": "hardlink",
+        "sha256": "bc119b86ef17e75e02c6adcc7de48644ee1f528b4f34aac9b798548a6b13909c",
+        "sha256_in_prefix": "bc119b86ef17e75e02c6adcc7de48644ee1f528b4f34aac9b798548a6b13909c",
+        "size_in_bytes": 238
+      },
+      {
+        "_path": "lib/R/library/whisker/help/whisker.rdb",
+        "path_type": "hardlink",
+        "sha256": "8a3d7ee72a97168ba8a2c7572793db565a707d63ec7cc085509ce6fb8bf89e26",
+        "sha256_in_prefix": "8a3d7ee72a97168ba8a2c7572793db565a707d63ec7cc085509ce6fb8bf89e26",
+        "size_in_bytes": 13065
+      },
+      {
+        "_path": "lib/R/library/whisker/help/whisker.rdx",
+        "path_type": "hardlink",
+        "sha256": "3dcc6a6842d2bb3d48156ea6f752bb56f20d561cc3cf883c1096e8d1f241ea2a",
+        "sha256_in_prefix": "3dcc6a6842d2bb3d48156ea6f752bb56f20d561cc3cf883c1096e8d1f241ea2a",
+        "size_in_bytes": 342
+      },
+      {
+        "_path": "lib/R/library/whisker/html/00Index.html",
+        "path_type": "hardlink",
+        "sha256": "b544033fe7083aca850fb9291c69bb3111af793682936a845b8b468e8d34ea5c",
+        "sha256_in_prefix": "b544033fe7083aca850fb9291c69bb3111af793682936a845b8b468e8d34ea5c",
+        "size_in_bytes": 1609
+      },
+      {
+        "_path": "lib/R/library/whisker/html/R.css",
+        "path_type": "hardlink",
+        "sha256": "0f4849ab1757247808d54da2c371e992364371c942ad7d629dae8d62327ed068",
+        "sha256_in_prefix": "0f4849ab1757247808d54da2c371e992364371c942ad7d629dae8d62327ed068",
+        "size_in_bytes": 1335
+      },
+      {
+        "_path": "lib/R/library/whisker/specs/comments.json",
+        "path_type": "hardlink",
+        "sha256": "2c84e60f59018786579a275c09189134d78e71e146437448aa5b63953d8e9dfe",
+        "sha256_in_prefix": "2c84e60f59018786579a275c09189134d78e71e146437448aa5b63953d8e9dfe",
+        "size_in_bytes": 2326
+      },
+      {
+        "_path": "lib/R/library/whisker/specs/comments.yml",
+        "path_type": "hardlink",
+        "sha256": "a88aa7f7b87c3482eb3b1d8e2ee09536c060ececb391a886d126ea4e5b2ebf92",
+        "sha256_in_prefix": "a88aa7f7b87c3482eb3b1d8e2ee09536c060ececb391a886d126ea4e5b2ebf92",
+        "size_in_bytes": 2495
+      },
+      {
+        "_path": "lib/R/library/whisker/specs/convert.R",
+        "path_type": "hardlink",
+        "sha256": "df7e213475e30cdcf6c65a8bdbe61381a95a6c1cf57fbde3da8d408162f91d59",
+        "sha256_in_prefix": "df7e213475e30cdcf6c65a8bdbe61381a95a6c1cf57fbde3da8d408162f91d59",
+        "size_in_bytes": 1826
+      },
+      {
+        "_path": "lib/R/library/whisker/specs/delimiters.json",
+        "path_type": "hardlink",
+        "sha256": "5d2040a2c1f8563de7dfbe5961defcc4f562f5e33131ccfe9530c812a32bacc9",
+        "sha256_in_prefix": "5d2040a2c1f8563de7dfbe5961defcc4f562f5e33131ccfe9530c812a32bacc9",
+        "size_in_bytes": 3415
+      },
+      {
+        "_path": "lib/R/library/whisker/specs/delimiters.yml",
+        "path_type": "hardlink",
+        "sha256": "f8466aae498e772a928f209309aad4b281e3300e3d46a5165de5e0427e4c29e3",
+        "sha256_in_prefix": "f8466aae498e772a928f209309aad4b281e3300e3d46a5165de5e0427e4c29e3",
+        "size_in_bytes": 3802
+      },
+      {
+        "_path": "lib/R/library/whisker/specs/interpolation.json",
+        "path_type": "hardlink",
+        "sha256": "5d4b573b53097ac4d3b7781a5d405c5d33796097c1c0c0ce303fb6f7dd5359c5",
+        "sha256_in_prefix": "5d4b573b53097ac4d3b7781a5d405c5d33796097c1c0c0ce303fb6f7dd5359c5",
+        "size_in_bytes": 7732
+      },
+      {
+        "_path": "lib/R/library/whisker/specs/interpolation.yml",
+        "path_type": "hardlink",
+        "sha256": "285662f8f5b40a1a4cd57393e25fb5233c06e95cb37a979880c61b014d121744",
+        "sha256_in_prefix": "285662f8f5b40a1a4cd57393e25fb5233c06e95cb37a979880c61b014d121744",
+        "size_in_bytes": 8086
+      },
+      {
+        "_path": "lib/R/library/whisker/specs/inverted.json",
+        "path_type": "hardlink",
+        "sha256": "cb8782d4fc9f3ca8e7339294706ca23cd9fefbe52bfd8cd697fdf6327d9b9203",
+        "sha256_in_prefix": "cb8782d4fc9f3ca8e7339294706ca23cd9fefbe52bfd8cd697fdf6327d9b9203",
+        "size_in_bytes": 6203
+      },
+      {
+        "_path": "lib/R/library/whisker/specs/inverted.yml",
+        "path_type": "hardlink",
+        "sha256": "b467b77e2ef6ffe6cfb069301f1f4ba03821803bd3e9fe13439bfebc3f90dd24",
+        "sha256_in_prefix": "b467b77e2ef6ffe6cfb069301f1f4ba03821803bd3e9fe13439bfebc3f90dd24",
+        "size_in_bytes": 6540
+      },
+      {
+        "_path": "lib/R/library/whisker/specs/lambdas.json",
+        "path_type": "hardlink",
+        "sha256": "8fa6d158ace57e5295e13cbae0cbee32734e34a143c74bf83d036df7063a360c",
+        "sha256_in_prefix": "8fa6d158ace57e5295e13cbae0cbee32734e34a143c74bf83d036df7063a360c",
+        "size_in_bytes": 6968
+      },
+      {
+        "_path": "lib/R/library/whisker/specs/lambdas.yml",
+        "path_type": "hardlink",
+        "sha256": "1d883c54861d2ae1ac7a3e35f0d363cbdd5d264a8c5c950e5904d70063b9f560",
+        "sha256_in_prefix": "1d883c54861d2ae1ac7a3e35f0d363cbdd5d264a8c5c950e5904d70063b9f560",
+        "size_in_bytes": 5418
+      },
+      {
+        "_path": "lib/R/library/whisker/specs/partials.json",
+        "path_type": "hardlink",
+        "sha256": "28ef9da0d1cfea4f7d5ec67d2d64bfff16e2e0d383bfbd26da084d9088d208c1",
+        "sha256_in_prefix": "28ef9da0d1cfea4f7d5ec67d2d64bfff16e2e0d383bfbd26da084d9088d208c1",
+        "size_in_bytes": 2828
+      },
+      {
+        "_path": "lib/R/library/whisker/specs/partials.yml",
+        "path_type": "hardlink",
+        "sha256": "799c4ca1ace6521c76187cf9369079906f28e654aa35f5a5c4c119a0b55d1ea8",
+        "sha256_in_prefix": "799c4ca1ace6521c76187cf9369079906f28e654aa35f5a5c4c119a0b55d1ea8",
+        "size_in_bytes": 3010
+      },
+      {
+        "_path": "lib/R/library/whisker/specs/sections.json",
+        "path_type": "hardlink",
+        "sha256": "d5575236d225d7552c293e06bb2ce29b5613d2b58495f6230a7b8865e583b487",
+        "sha256_in_prefix": "d5575236d225d7552c293e06bb2ce29b5613d2b58495f6230a7b8865e583b487",
+        "size_in_bytes": 7573
+      },
+      {
+        "_path": "lib/R/library/whisker/specs/sections.yml",
+        "path_type": "hardlink",
+        "sha256": "b9de05c4c8ddf02261b404e8a820a47e51bf04afeef899cad8febc0a507c2882",
+        "sha256_in_prefix": "b9de05c4c8ddf02261b404e8a820a47e51bf04afeef899cad8febc0a507c2882",
+        "size_in_bytes": 8161
+      },
+      {
+        "_path": "lib/R/library/whisker/tests/testComments.R",
+        "path_type": "hardlink",
+        "sha256": "8206dbcb4c35d957bc56b17fc46ddd1e3054819810241b353e531e513019a7b5",
+        "sha256_in_prefix": "8206dbcb4c35d957bc56b17fc46ddd1e3054819810241b353e531e513019a7b5",
+        "size_in_bytes": 4186
+      },
+      {
+        "_path": "lib/R/library/whisker/tests/testdelimiters.R",
+        "path_type": "hardlink",
+        "sha256": "5b0c3b79cfeea090080273607234256fd78781d607201a03951caef7794c5bb6",
+        "sha256_in_prefix": "5b0c3b79cfeea090080273607234256fd78781d607201a03951caef7794c5bb6",
+        "size_in_bytes": 5918
+      },
+      {
+        "_path": "lib/R/library/whisker/tests/testinterpolation.R",
+        "path_type": "hardlink",
+        "sha256": "344453507f85f2d6e323a9099652b4bea72ba7d49c847c1a7495a83997e9d618",
+        "sha256_in_prefix": "344453507f85f2d6e323a9099652b4bea72ba7d49c847c1a7495a83997e9d618",
+        "size_in_bytes": 13044
+      },
+      {
+        "_path": "lib/R/library/whisker/tests/testinverted.R",
+        "path_type": "hardlink",
+        "sha256": "024b0d24733c106dbe498c10e5a2632fdf6438b691924138dc7daf0397bb4da7",
+        "sha256_in_prefix": "024b0d24733c106dbe498c10e5a2632fdf6438b691924138dc7daf0397bb4da7",
+        "size_in_bytes": 9890
+      },
+      {
+        "_path": "lib/R/library/whisker/tests/testpartials.R",
+        "path_type": "hardlink",
+        "sha256": "9f2072e4a07f70e405d2f890059390814ab3471e2ae79023facf16cc6a042de5",
+        "sha256_in_prefix": "9f2072e4a07f70e405d2f890059390814ab3471e2ae79023facf16cc6a042de5",
+        "size_in_bytes": 4863
+      },
+      {
+        "_path": "lib/R/library/whisker/tests/testsections.R",
+        "path_type": "hardlink",
+        "sha256": "ecf15747ec9569f665891c77c43d8e4ac3594fbf0d71da21b23f3adf66ac1c1a",
+        "sha256_in_prefix": "ecf15747ec9569f665891c77c43d8e4ac3594fbf0d71da21b23f3adf66ac1c1a",
+        "size_in_bytes": 12011
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "006197093399352ebe50db76b7ed26b8317c1d9dd197d2440efe79f8d1bb8647",
+  "size": 62640,
+  "subdir": "linux-64",
+  "timestamp": 1536410631000,
+  "track_features": "",
+  "url": "https://conda.anaconda.org/conda-forge/linux-64/r-whisker-0.3_2-r341h6115d3f_1.tar.bz2",
+  "version": "0.3_2"
+}

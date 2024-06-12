@@ -1,0 +1,11 @@
+prefix=/nfs/users/nfs_a/at31/miniforge3/envs/sequoia
+exec_prefix=/nfs/users/nfs_a/at31/miniforge3/envs/sequoia
+libdir=/nfs/users/nfs_a/at31/miniforge3/envs/sequoia/lib
+includedir=/nfs/users/nfs_a/at31/miniforge3/envs/sequoia/include
+GSL_CBLAS_LIB=-lgslcblas
+
+Name: GSL
+Description: GNU Scientific Library
+Version: 2.2.1
+Libs: -L/nfs/users/nfs_a/at31/miniforge3/envs/sequoia/lib -lgsl ${GSL_CBLAS_LIB} -lm -lm 
+Cflags: -I/nfs/users/nfs_a/at31/miniforge3/envs/sequoia/include

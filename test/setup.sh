@@ -1,5 +1,5 @@
 #!/bin/bash
-wd=/lustre/scratch126/casm/team154pc/at31/chemo_trees/nf-chemo-trees/test/
+wd=/lustre/scratch126/casm/team154pc/at31/low_input_sanger_filtering/test/
 cd $wd
 
 # modules

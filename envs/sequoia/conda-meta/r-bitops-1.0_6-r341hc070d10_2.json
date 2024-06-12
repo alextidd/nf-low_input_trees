@@ -1,0 +1,196 @@
+{
+  "build": "r341hc070d10_2",
+  "build_number": 2,
+  "channel": "https://conda.anaconda.org/conda-forge/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=4.9",
+    "r-base >=3.4.1,<3.4.2.0a0"
+  ],
+  "extracted_package_dir": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-bitops-1.0_6-r341hc070d10_2",
+  "features": "",
+  "files": [
+    "lib/R/library/bitops/DESCRIPTION",
+    "lib/R/library/bitops/INDEX",
+    "lib/R/library/bitops/Meta/Rd.rds",
+    "lib/R/library/bitops/Meta/features.rds",
+    "lib/R/library/bitops/Meta/hsearch.rds",
+    "lib/R/library/bitops/Meta/links.rds",
+    "lib/R/library/bitops/Meta/nsInfo.rds",
+    "lib/R/library/bitops/Meta/package.rds",
+    "lib/R/library/bitops/NAMESPACE",
+    "lib/R/library/bitops/R/bitops",
+    "lib/R/library/bitops/R/bitops.rdb",
+    "lib/R/library/bitops/R/bitops.rdx",
+    "lib/R/library/bitops/help/AnIndex",
+    "lib/R/library/bitops/help/aliases.rds",
+    "lib/R/library/bitops/help/bitops.rdb",
+    "lib/R/library/bitops/help/bitops.rdx",
+    "lib/R/library/bitops/help/paths.rds",
+    "lib/R/library/bitops/html/00Index.html",
+    "lib/R/library/bitops/html/R.css",
+    "lib/R/library/bitops/libs/bitops.so"
+  ],
+  "fn": "r-bitops-1.0_6-r341hc070d10_2.tar.bz2",
+  "license": "GPL (>= 2)",
+  "link": {
+    "source": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-bitops-1.0_6-r341hc070d10_2",
+    "type": 1
+  },
+  "md5": "ec26ebb4d82cc09818adb31dfee6bfbe",
+  "name": "r-bitops",
+  "package_tarball_full_path": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-bitops-1.0_6-r341hc070d10_2.tar.bz2",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "lib/R/library/bitops/DESCRIPTION",
+        "path_type": "hardlink",
+        "sha256": "3af1d9d4ac0344a63326f629bb1acffc267d920e08cbcc07cc9a34aa0868c5cb",
+        "sha256_in_prefix": "3af1d9d4ac0344a63326f629bb1acffc267d920e08cbcc07cc9a34aa0868c5cb",
+        "size_in_bytes": 567
+      },
+      {
+        "_path": "lib/R/library/bitops/INDEX",
+        "path_type": "hardlink",
+        "sha256": "2a365521325c948b6eb769e296d1a367418f0176d917664b199bdedff86a7a3c",
+        "sha256_in_prefix": "2a365521325c948b6eb769e296d1a367418f0176d917664b199bdedff86a7a3c",
+        "size_in_bytes": 222
+      },
+      {
+        "_path": "lib/R/library/bitops/Meta/Rd.rds",
+        "path_type": "hardlink",
+        "sha256": "ae21d729a71f2c7bf4b6f14e18a994921065178b6a2c44afaa12b8753beaf3d8",
+        "sha256_in_prefix": "ae21d729a71f2c7bf4b6f14e18a994921065178b6a2c44afaa12b8753beaf3d8",
+        "size_in_bytes": 374
+      },
+      {
+        "_path": "lib/R/library/bitops/Meta/features.rds",
+        "path_type": "hardlink",
+        "sha256": "79a0197390e6502dd95396d9acb73882afc9688bcdbf20fbecafd39f92cc9bc3",
+        "sha256_in_prefix": "79a0197390e6502dd95396d9acb73882afc9688bcdbf20fbecafd39f92cc9bc3",
+        "size_in_bytes": 112
+      },
+      {
+        "_path": "lib/R/library/bitops/Meta/hsearch.rds",
+        "path_type": "hardlink",
+        "sha256": "baa3fdbd2b545fa7cc13340c780ffe7632a4ec04fc0194098106215e819073e0",
+        "sha256_in_prefix": "baa3fdbd2b545fa7cc13340c780ffe7632a4ec04fc0194098106215e819073e0",
+        "size_in_bytes": 418
+      },
+      {
+        "_path": "lib/R/library/bitops/Meta/links.rds",
+        "path_type": "hardlink",
+        "sha256": "4f1860cba2e363d93d655ccef9ec584aead6675cd0d15df0a927f181d3a66a87",
+        "sha256_in_prefix": "4f1860cba2e363d93d655ccef9ec584aead6675cd0d15df0a927f181d3a66a87",
+        "size_in_bytes": 153
+      },
+      {
+        "_path": "lib/R/library/bitops/Meta/nsInfo.rds",
+        "path_type": "hardlink",
+        "sha256": "aa916b5d9670656df5d971fdf7932e8f125155df0e1066b259e4f811ba6e73b8",
+        "sha256_in_prefix": "aa916b5d9670656df5d971fdf7932e8f125155df0e1066b259e4f811ba6e73b8",
+        "size_in_bytes": 239
+      },
+      {
+        "_path": "lib/R/library/bitops/Meta/package.rds",
+        "path_type": "hardlink",
+        "sha256": "e2cec6d4ba4f30d76511442edb4639c3ffed36507f71fdaa1cf75df616648e67",
+        "sha256_in_prefix": "e2cec6d4ba4f30d76511442edb4639c3ffed36507f71fdaa1cf75df616648e67",
+        "size_in_bytes": 658
+      },
+      {
+        "_path": "lib/R/library/bitops/NAMESPACE",
+        "path_type": "hardlink",
+        "sha256": "d34316da6db8db6a47cf9f6d70494c60a23d3c6d3a63501de98fcf8a1c9b894a",
+        "sha256_in_prefix": "d34316da6db8db6a47cf9f6d70494c60a23d3c6d3a63501de98fcf8a1c9b894a",
+        "size_in_bytes": 127
+      },
+      {
+        "_path": "lib/R/library/bitops/R/bitops",
+        "path_type": "hardlink",
+        "sha256": "2fb8b16be23c820daf2e51b7ddfef61ca4978e561b1d228d546d1b356041f79e",
+        "sha256_in_prefix": "2fb8b16be23c820daf2e51b7ddfef61ca4978e561b1d228d546d1b356041f79e",
+        "size_in_bytes": 1056
+      },
+      {
+        "_path": "lib/R/library/bitops/R/bitops.rdb",
+        "path_type": "hardlink",
+        "sha256": "ab411b2c7d4e57e5b1aecbdf971fa87ea3625039117744add55f4edaf53410f1",
+        "sha256_in_prefix": "ab411b2c7d4e57e5b1aecbdf971fa87ea3625039117744add55f4edaf53410f1",
+        "size_in_bytes": 1881
+      },
+      {
+        "_path": "lib/R/library/bitops/R/bitops.rdx",
+        "path_type": "hardlink",
+        "sha256": "c6a9beb43465f183f72b7df8158432762fd381aa9b34c914cab4fc2142066469",
+        "sha256_in_prefix": "c6a9beb43465f183f72b7df8158432762fd381aa9b34c914cab4fc2142066469",
+        "size_in_bytes": 314
+      },
+      {
+        "_path": "lib/R/library/bitops/help/AnIndex",
+        "path_type": "hardlink",
+        "sha256": "ff3b1261b15ad4a192f838a2c5ac1a430c5c81c16c5964aee99c223e833916ed",
+        "sha256_in_prefix": "ff3b1261b15ad4a192f838a2c5ac1a430c5c81c16c5964aee99c223e833916ed",
+        "size_in_bytes": 109
+      },
+      {
+        "_path": "lib/R/library/bitops/help/aliases.rds",
+        "path_type": "hardlink",
+        "sha256": "ceb43baca450d77ee666639499f128374a10ec85528ff6c5bd59a3fbe8695e1f",
+        "sha256_in_prefix": "ceb43baca450d77ee666639499f128374a10ec85528ff6c5bd59a3fbe8695e1f",
+        "size_in_bytes": 116
+      },
+      {
+        "_path": "lib/R/library/bitops/help/bitops.rdb",
+        "path_type": "hardlink",
+        "sha256": "385b04ab0f26f35e8ddf9d16a6b7e7f2bf9a9b3becd093a401886a6fd4f73b9c",
+        "sha256_in_prefix": "385b04ab0f26f35e8ddf9d16a6b7e7f2bf9a9b3becd093a401886a6fd4f73b9c",
+        "size_in_bytes": 8223
+      },
+      {
+        "_path": "lib/R/library/bitops/help/bitops.rdx",
+        "path_type": "hardlink",
+        "sha256": "018a3131cfde3d52750ef621ccab2e288cfa2060c863fa591694080e10e487bd",
+        "sha256_in_prefix": "018a3131cfde3d52750ef621ccab2e288cfa2060c863fa591694080e10e487bd",
+        "size_in_bytes": 226
+      },
+      {
+        "_path": "lib/R/library/bitops/help/paths.rds",
+        "path_type": "hardlink",
+        "sha256": "7d17f33d365b94b9b24a8902808fbf94169650a5e18ad6423c9deab80c045a1a",
+        "sha256_in_prefix": "7d17f33d365b94b9b24a8902808fbf94169650a5e18ad6423c9deab80c045a1a",
+        "size_in_bytes": 182
+      },
+      {
+        "_path": "lib/R/library/bitops/html/00Index.html",
+        "path_type": "hardlink",
+        "sha256": "ae593ebb38f4ea95fca84a87b373325b75d2423b804eb55787b26d1823b308a1",
+        "sha256_in_prefix": "ae593ebb38f4ea95fca84a87b373325b75d2423b804eb55787b26d1823b308a1",
+        "size_in_bytes": 1723
+      },
+      {
+        "_path": "lib/R/library/bitops/html/R.css",
+        "path_type": "hardlink",
+        "sha256": "0f4849ab1757247808d54da2c371e992364371c942ad7d629dae8d62327ed068",
+        "sha256_in_prefix": "0f4849ab1757247808d54da2c371e992364371c942ad7d629dae8d62327ed068",
+        "size_in_bytes": 1335
+      },
+      {
+        "_path": "lib/R/library/bitops/libs/bitops.so",
+        "path_type": "hardlink",
+        "sha256": "007f50976bf0ac7dd0cf63c031baeb2742ab31f73da97d919eec548849f23ea2",
+        "sha256_in_prefix": "007f50976bf0ac7dd0cf63c031baeb2742ab31f73da97d919eec548849f23ea2",
+        "size_in_bytes": 14720
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "9f3a6b31777dcc7de0f49406a22bcd2f83d353514db693d338440f3ada29928a",
+  "size": 38035,
+  "subdir": "linux-64",
+  "timestamp": 1536512431000,
+  "track_features": "",
+  "url": "https://conda.anaconda.org/conda-forge/linux-64/r-bitops-1.0_6-r341hc070d10_2.tar.bz2",
+  "version": "1.0_6"
+}

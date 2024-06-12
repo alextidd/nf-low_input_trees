@@ -1,0 +1,255 @@
+{
+  "build": "r341hc070d10_1",
+  "build_number": 1,
+  "channel": "https://conda.anaconda.org/conda-forge/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=4.9",
+    "r-base >=3.4.1,<3.4.2.0a0",
+    "r-magrittr >=1.5",
+    "r-rlang >=0.1",
+    "r-tibble"
+  ],
+  "extracted_package_dir": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-purrr-0.2.5-r341hc070d10_1",
+  "features": "",
+  "files": [
+    "lib/R/library/purrr/DESCRIPTION",
+    "lib/R/library/purrr/INDEX",
+    "lib/R/library/purrr/LICENSE",
+    "lib/R/library/purrr/Meta/Rd.rds",
+    "lib/R/library/purrr/Meta/features.rds",
+    "lib/R/library/purrr/Meta/hsearch.rds",
+    "lib/R/library/purrr/Meta/links.rds",
+    "lib/R/library/purrr/Meta/nsInfo.rds",
+    "lib/R/library/purrr/Meta/package.rds",
+    "lib/R/library/purrr/Meta/vignette.rds",
+    "lib/R/library/purrr/NAMESPACE",
+    "lib/R/library/purrr/NEWS.md",
+    "lib/R/library/purrr/R/purrr",
+    "lib/R/library/purrr/R/purrr.rdb",
+    "lib/R/library/purrr/R/purrr.rdx",
+    "lib/R/library/purrr/doc/index.html",
+    "lib/R/library/purrr/doc/other-langs.Rmd",
+    "lib/R/library/purrr/doc/other-langs.html",
+    "lib/R/library/purrr/help/AnIndex",
+    "lib/R/library/purrr/help/aliases.rds",
+    "lib/R/library/purrr/help/figures/logo.png",
+    "lib/R/library/purrr/help/paths.rds",
+    "lib/R/library/purrr/help/purrr.rdb",
+    "lib/R/library/purrr/help/purrr.rdx",
+    "lib/R/library/purrr/html/00Index.html",
+    "lib/R/library/purrr/html/R.css",
+    "lib/R/library/purrr/libs/purrr.so"
+  ],
+  "fn": "r-purrr-0.2.5-r341hc070d10_1.tar.bz2",
+  "license": "GPL-3",
+  "link": {
+    "source": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-purrr-0.2.5-r341hc070d10_1",
+    "type": 1
+  },
+  "md5": "952d43632e5683a2434b02314028fa70",
+  "name": "r-purrr",
+  "package_tarball_full_path": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-purrr-0.2.5-r341hc070d10_1.tar.bz2",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "lib/R/library/purrr/DESCRIPTION",
+        "path_type": "hardlink",
+        "sha256": "78e070e4699ba8eb338c061e991d7216094e9a12a62774997ffb5b8c26235ef4",
+        "sha256_in_prefix": "78e070e4699ba8eb338c061e991d7216094e9a12a62774997ffb5b8c26235ef4",
+        "size_in_bytes": 1016
+      },
+      {
+        "_path": "lib/R/library/purrr/INDEX",
+        "path_type": "hardlink",
+        "sha256": "a7d9e3c012de3b78d43db8245a1854c69e8819ce37f5e57005b96dac6ada347e",
+        "sha256_in_prefix": "a7d9e3c012de3b78d43db8245a1854c69e8819ce37f5e57005b96dac6ada347e",
+        "size_in_bytes": 2210
+      },
+      {
+        "_path": "lib/R/library/purrr/LICENSE",
+        "path_type": "hardlink",
+        "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+        "sha256_in_prefix": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+        "size_in_bytes": 35147
+      },
+      {
+        "_path": "lib/R/library/purrr/Meta/Rd.rds",
+        "path_type": "hardlink",
+        "sha256": "1a4295a41b99e0eaf2904dd0af37a41b6531edfcebd8a13d459504b2539c5b18",
+        "sha256_in_prefix": "1a4295a41b99e0eaf2904dd0af37a41b6531edfcebd8a13d459504b2539c5b18",
+        "size_in_bytes": 2282
+      },
+      {
+        "_path": "lib/R/library/purrr/Meta/features.rds",
+        "path_type": "hardlink",
+        "sha256": "79a0197390e6502dd95396d9acb73882afc9688bcdbf20fbecafd39f92cc9bc3",
+        "sha256_in_prefix": "79a0197390e6502dd95396d9acb73882afc9688bcdbf20fbecafd39f92cc9bc3",
+        "size_in_bytes": 112
+      },
+      {
+        "_path": "lib/R/library/purrr/Meta/hsearch.rds",
+        "path_type": "hardlink",
+        "sha256": "61d0aa4abdc6f37b3104430c996e1a0b26a20df30ebc9bcdae7036b164a66345",
+        "sha256_in_prefix": "61d0aa4abdc6f37b3104430c996e1a0b26a20df30ebc9bcdae7036b164a66345",
+        "size_in_bytes": 2256
+      },
+      {
+        "_path": "lib/R/library/purrr/Meta/links.rds",
+        "path_type": "hardlink",
+        "sha256": "0142685ad961b10b431da3fc098aee335de3e8edef8556a37b2b2a7b81a74c15",
+        "sha256_in_prefix": "0142685ad961b10b431da3fc098aee335de3e8edef8556a37b2b2a7b81a74c15",
+        "size_in_bytes": 1260
+      },
+      {
+        "_path": "lib/R/library/purrr/Meta/nsInfo.rds",
+        "path_type": "hardlink",
+        "sha256": "06d30f4195fcdfba3a3572661c9904dd47377b74d0cba6a03c3d1ee650ad4dd3",
+        "sha256_in_prefix": "06d30f4195fcdfba3a3572661c9904dd47377b74d0cba6a03c3d1ee650ad4dd3",
+        "size_in_bytes": 1089
+      },
+      {
+        "_path": "lib/R/library/purrr/Meta/package.rds",
+        "path_type": "hardlink",
+        "sha256": "ae5f42d204b2bc22672334d3644f57aca326014bb8582cdb42c7e5838aedae28",
+        "sha256_in_prefix": "ae5f42d204b2bc22672334d3644f57aca326014bb8582cdb42c7e5838aedae28",
+        "size_in_bytes": 1083
+      },
+      {
+        "_path": "lib/R/library/purrr/Meta/vignette.rds",
+        "path_type": "hardlink",
+        "sha256": "538a9970e6250048b0dcb5b145214bd3c1bb5552c63bbfdcc94c428c38598fd1",
+        "sha256_in_prefix": "538a9970e6250048b0dcb5b145214bd3c1bb5552c63bbfdcc94c428c38598fd1",
+        "size_in_bytes": 223
+      },
+      {
+        "_path": "lib/R/library/purrr/NAMESPACE",
+        "path_type": "hardlink",
+        "sha256": "9754d876eac2ead6d7231435a75e9ab0b86e9073fc01126a1c835d04a8ddc78f",
+        "sha256_in_prefix": "9754d876eac2ead6d7231435a75e9ab0b86e9073fc01126a1c835d04a8ddc78f",
+        "size_in_bytes": 3100
+      },
+      {
+        "_path": "lib/R/library/purrr/NEWS.md",
+        "path_type": "hardlink",
+        "sha256": "1f68ed68925b4b5265fb860a170cdffde1f312c988e89846fb1aced0b6fd93ee",
+        "sha256_in_prefix": "1f68ed68925b4b5265fb860a170cdffde1f312c988e89846fb1aced0b6fd93ee",
+        "size_in_bytes": 12374
+      },
+      {
+        "_path": "lib/R/library/purrr/R/purrr",
+        "path_type": "hardlink",
+        "sha256": "2fb8b16be23c820daf2e51b7ddfef61ca4978e561b1d228d546d1b356041f79e",
+        "sha256_in_prefix": "2fb8b16be23c820daf2e51b7ddfef61ca4978e561b1d228d546d1b356041f79e",
+        "size_in_bytes": 1056
+      },
+      {
+        "_path": "lib/R/library/purrr/R/purrr.rdb",
+        "path_type": "hardlink",
+        "sha256": "17dc067b63a417dd37b186133d56f84d3fdf3a94caa020723faa0fd84ea6711b",
+        "sha256_in_prefix": "17dc067b63a417dd37b186133d56f84d3fdf3a94caa020723faa0fd84ea6711b",
+        "size_in_bytes": 35702
+      },
+      {
+        "_path": "lib/R/library/purrr/R/purrr.rdx",
+        "path_type": "hardlink",
+        "sha256": "12ef81cc9c3455e863c8f2753a464841506e85089948fa67fbeb1a22a148b74c",
+        "sha256_in_prefix": "12ef81cc9c3455e863c8f2753a464841506e85089948fa67fbeb1a22a148b74c",
+        "size_in_bytes": 2041
+      },
+      {
+        "_path": "lib/R/library/purrr/doc/index.html",
+        "path_type": "hardlink",
+        "sha256": "46109580aa1cbb93dd7385610a169630a3a4466e6b52d9c901e51a71bd615d0e",
+        "sha256_in_prefix": "46109580aa1cbb93dd7385610a169630a3a4466e6b52d9c901e51a71bd615d0e",
+        "size_in_bytes": 1301
+      },
+      {
+        "_path": "lib/R/library/purrr/doc/other-langs.Rmd",
+        "path_type": "hardlink",
+        "sha256": "3bcfa03f065e6cac04c8c4c121e1821e31c492a17c85c40c2654e43636fcb8cd",
+        "sha256_in_prefix": "3bcfa03f065e6cac04c8c4c121e1821e31c492a17c85c40c2654e43636fcb8cd",
+        "size_in_bytes": 2096
+      },
+      {
+        "_path": "lib/R/library/purrr/doc/other-langs.html",
+        "path_type": "hardlink",
+        "sha256": "0efabc8ee031911575d8d7d38c15ba6a0e989a71b9e2c12a94921cc36dbc64cc",
+        "sha256_in_prefix": "0efabc8ee031911575d8d7d38c15ba6a0e989a71b9e2c12a94921cc36dbc64cc",
+        "size_in_bytes": 9681
+      },
+      {
+        "_path": "lib/R/library/purrr/help/AnIndex",
+        "path_type": "hardlink",
+        "sha256": "c879f466b49cc216a130dd54ec00151a31fb1ace5255d6175ff18e14317da46d",
+        "sha256_in_prefix": "c879f466b49cc216a130dd54ec00151a31fb1ace5255d6175ff18e14317da46d",
+        "size_in_bytes": 2986
+      },
+      {
+        "_path": "lib/R/library/purrr/help/aliases.rds",
+        "path_type": "hardlink",
+        "sha256": "6d98021b1adb2327aa678911dadcea25b0ad112dc20959e3f528b4121e214f9c",
+        "sha256_in_prefix": "6d98021b1adb2327aa678911dadcea25b0ad112dc20959e3f528b4121e214f9c",
+        "size_in_bytes": 1074
+      },
+      {
+        "_path": "lib/R/library/purrr/help/figures/logo.png",
+        "path_type": "hardlink",
+        "sha256": "154ab41b293b801b757abadf855b49f0209203de715d828a93c15b248cf7572e",
+        "sha256_in_prefix": "154ab41b293b801b757abadf855b49f0209203de715d828a93c15b248cf7572e",
+        "size_in_bytes": 31067
+      },
+      {
+        "_path": "lib/R/library/purrr/help/paths.rds",
+        "path_type": "hardlink",
+        "sha256": "7956436c5cda32cb4b44b15181c0a2548d24a1bccbe83fd97b2bff0f6a5f8b73",
+        "sha256_in_prefix": "7956436c5cda32cb4b44b15181c0a2548d24a1bccbe83fd97b2bff0f6a5f8b73",
+        "size_in_bytes": 467
+      },
+      {
+        "_path": "lib/R/library/purrr/help/purrr.rdb",
+        "path_type": "hardlink",
+        "sha256": "c4300202d416486c44aa36346296166555793887a35e044da199fec82bc847db",
+        "sha256_in_prefix": "c4300202d416486c44aa36346296166555793887a35e044da199fec82bc847db",
+        "size_in_bytes": 113110
+      },
+      {
+        "_path": "lib/R/library/purrr/help/purrr.rdx",
+        "path_type": "hardlink",
+        "sha256": "51b5399fb20447d535c9f95a54f66d2b1d976c642e5eaab510dd38e88a037e85",
+        "sha256_in_prefix": "51b5399fb20447d535c9f95a54f66d2b1d976c642e5eaab510dd38e88a037e85",
+        "size_in_bytes": 1020
+      },
+      {
+        "_path": "lib/R/library/purrr/html/00Index.html",
+        "path_type": "hardlink",
+        "sha256": "5e9ad13cca73514f3bca496e43d5c5c5a49b4864dc90437f9fed5bdf64a915c9",
+        "sha256_in_prefix": "5e9ad13cca73514f3bca496e43d5c5c5a49b4864dc90437f9fed5bdf64a915c9",
+        "size_in_bytes": 18321
+      },
+      {
+        "_path": "lib/R/library/purrr/html/R.css",
+        "path_type": "hardlink",
+        "sha256": "0f4849ab1757247808d54da2c371e992364371c942ad7d629dae8d62327ed068",
+        "sha256_in_prefix": "0f4849ab1757247808d54da2c371e992364371c942ad7d629dae8d62327ed068",
+        "size_in_bytes": 1335
+      },
+      {
+        "_path": "lib/R/library/purrr/libs/purrr.so",
+        "path_type": "hardlink",
+        "sha256": "a43821fd63d2b9308a52611d4874f8e9283cd680b0803ce6701ab91035a3b181",
+        "sha256_in_prefix": "a43821fd63d2b9308a52611d4874f8e9283cd680b0803ce6701ab91035a3b181",
+        "size_in_bytes": 30360
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "0d41205a07f4bc56bb1b84dc85547f6179efe2d1ccfe2f40d8c8a425afc66fe0",
+  "size": 237339,
+  "subdir": "linux-64",
+  "timestamp": 1536399752000,
+  "track_features": "",
+  "url": "https://conda.anaconda.org/conda-forge/linux-64/r-purrr-0.2.5-r341hc070d10_1.tar.bz2",
+  "version": "0.2.5"
+}

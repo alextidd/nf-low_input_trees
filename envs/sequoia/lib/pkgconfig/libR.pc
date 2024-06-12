@@ -1,0 +1,10 @@
+rhome=/nfs/users/nfs_a/at31/miniforge3/envs/sequoia/lib/R
+rlibdir=${rhome}/lib
+rincludedir=/nfs/users/nfs_a/at31/miniforge3/envs/sequoia/lib/R/include
+
+Name: libR
+Description: R as a library
+Version: 3.4.1
+Libs: -Wl,--export-dynamic -fopenmp  -Wl,-rpath,/nfs/users/nfs_a/at31/miniforge3/envs/sequoia/lib -L/nfs/users/nfs_a/at31/miniforge3/envs/sequoia/lib -L/nfs/users/nfs_a/at31/miniforge3/envs/sequoia/lib -lgfortran -L${rlibdir} -lR
+Cflags: -I${rincludedir} -I${rincludedir}
+Libs.private:

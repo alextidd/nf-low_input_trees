@@ -1,0 +1,235 @@
+{
+  "build": "r341h6115d3f_1",
+  "build_number": 1,
+  "channel": "https://conda.anaconda.org/conda-forge/linux-64",
+  "constrains": [],
+  "depends": [
+    "r-base >=3.4.1,<3.4.2.0a0"
+  ],
+  "extracted_package_dir": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-magrittr-1.5-r341h6115d3f_1",
+  "features": "",
+  "files": [
+    "lib/R/library/magrittr/DESCRIPTION",
+    "lib/R/library/magrittr/INDEX",
+    "lib/R/library/magrittr/LICENSE",
+    "lib/R/library/magrittr/Meta/Rd.rds",
+    "lib/R/library/magrittr/Meta/features.rds",
+    "lib/R/library/magrittr/Meta/hsearch.rds",
+    "lib/R/library/magrittr/Meta/links.rds",
+    "lib/R/library/magrittr/Meta/nsInfo.rds",
+    "lib/R/library/magrittr/Meta/package.rds",
+    "lib/R/library/magrittr/Meta/vignette.rds",
+    "lib/R/library/magrittr/NAMESPACE",
+    "lib/R/library/magrittr/R/magrittr",
+    "lib/R/library/magrittr/R/magrittr.rdb",
+    "lib/R/library/magrittr/R/magrittr.rdx",
+    "lib/R/library/magrittr/doc/index.html",
+    "lib/R/library/magrittr/doc/magrittr.R",
+    "lib/R/library/magrittr/doc/magrittr.Rmd",
+    "lib/R/library/magrittr/doc/magrittr.html",
+    "lib/R/library/magrittr/help/AnIndex",
+    "lib/R/library/magrittr/help/aliases.rds",
+    "lib/R/library/magrittr/help/magrittr.rdb",
+    "lib/R/library/magrittr/help/magrittr.rdx",
+    "lib/R/library/magrittr/help/paths.rds",
+    "lib/R/library/magrittr/html/00Index.html",
+    "lib/R/library/magrittr/html/R.css"
+  ],
+  "fn": "r-magrittr-1.5-r341h6115d3f_1.tar.bz2",
+  "license": "MIT",
+  "link": {
+    "source": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-magrittr-1.5-r341h6115d3f_1",
+    "type": 1
+  },
+  "md5": "268f339571fa03b1c862a4631cb78592",
+  "name": "r-magrittr",
+  "package_tarball_full_path": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-magrittr-1.5-r341h6115d3f_1.tar.bz2",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "lib/R/library/magrittr/DESCRIPTION",
+        "path_type": "hardlink",
+        "sha256": "7e7807d57ac05231a53492d6a658761a7633e7143675cf5eccac02d12e4f4ee7",
+        "sha256_in_prefix": "7e7807d57ac05231a53492d6a658761a7633e7143675cf5eccac02d12e4f4ee7",
+        "size_in_bytes": 884
+      },
+      {
+        "_path": "lib/R/library/magrittr/INDEX",
+        "path_type": "hardlink",
+        "sha256": "1f93f28458d03c1a4cd4e057ea46f3e328c3867aea9fa32dbfea4fca07acc666",
+        "sha256_in_prefix": "1f93f28458d03c1a4cd4e057ea46f3e328c3867aea9fa32dbfea4fca07acc666",
+        "size_in_bytes": 751
+      },
+      {
+        "_path": "lib/R/library/magrittr/LICENSE",
+        "path_type": "hardlink",
+        "sha256": "8f0ba13da3a5dd1cd5a1e0d93e87d4dd63e68cbb8080b639f30bad2c0fa23745",
+        "sha256_in_prefix": "8f0ba13da3a5dd1cd5a1e0d93e87d4dd63e68cbb8080b639f30bad2c0fa23745",
+        "size_in_bytes": 68
+      },
+      {
+        "_path": "lib/R/library/magrittr/Meta/Rd.rds",
+        "path_type": "hardlink",
+        "sha256": "c595e5717b9baef2930d3c0c284c274d3261e219b3c63ef10c168470c82bafcd",
+        "sha256_in_prefix": "c595e5717b9baef2930d3c0c284c274d3261e219b3c63ef10c168470c82bafcd",
+        "size_in_bytes": 754
+      },
+      {
+        "_path": "lib/R/library/magrittr/Meta/features.rds",
+        "path_type": "hardlink",
+        "sha256": "79a0197390e6502dd95396d9acb73882afc9688bcdbf20fbecafd39f92cc9bc3",
+        "sha256_in_prefix": "79a0197390e6502dd95396d9acb73882afc9688bcdbf20fbecafd39f92cc9bc3",
+        "size_in_bytes": 112
+      },
+      {
+        "_path": "lib/R/library/magrittr/Meta/hsearch.rds",
+        "path_type": "hardlink",
+        "sha256": "5fab5eb8212bac5caf5d25e8429589f2c5f90b75e6e94a7c807acf54320556a5",
+        "sha256_in_prefix": "5fab5eb8212bac5caf5d25e8429589f2c5f90b75e6e94a7c807acf54320556a5",
+        "size_in_bytes": 751
+      },
+      {
+        "_path": "lib/R/library/magrittr/Meta/links.rds",
+        "path_type": "hardlink",
+        "sha256": "2d05a7efc0520e1e3b0f33c8d831d15a15cab35ab7709ec74c2409a090baf2d3",
+        "sha256_in_prefix": "2d05a7efc0520e1e3b0f33c8d831d15a15cab35ab7709ec74c2409a090baf2d3",
+        "size_in_bytes": 446
+      },
+      {
+        "_path": "lib/R/library/magrittr/Meta/nsInfo.rds",
+        "path_type": "hardlink",
+        "sha256": "07e837a10129efb67e48c3dcbc5ef257c79b0b8694d719ba466afa54b1011d1a",
+        "sha256_in_prefix": "07e837a10129efb67e48c3dcbc5ef257c79b0b8694d719ba466afa54b1011d1a",
+        "size_in_bytes": 435
+      },
+      {
+        "_path": "lib/R/library/magrittr/Meta/package.rds",
+        "path_type": "hardlink",
+        "sha256": "29e11b54b3047016111e8e6bc479bb925e2dae3d0b6a4863f882b8b91a62bb58",
+        "sha256_in_prefix": "29e11b54b3047016111e8e6bc479bb925e2dae3d0b6a4863f882b8b91a62bb58",
+        "size_in_bytes": 871
+      },
+      {
+        "_path": "lib/R/library/magrittr/Meta/vignette.rds",
+        "path_type": "hardlink",
+        "sha256": "d816596ef2091e391606676868563432248a8b59921dd4832d121e39237229eb",
+        "sha256_in_prefix": "d816596ef2091e391606676868563432248a8b59921dd4832d121e39237229eb",
+        "size_in_bytes": 209
+      },
+      {
+        "_path": "lib/R/library/magrittr/NAMESPACE",
+        "path_type": "hardlink",
+        "sha256": "942677ac6cd6c0fdb89229ce5b1df11e385a668467e063d2d8c06fb23969b5b6",
+        "sha256_in_prefix": "942677ac6cd6c0fdb89229ce5b1df11e385a668467e063d2d8c06fb23969b5b6",
+        "size_in_bytes": 785
+      },
+      {
+        "_path": "lib/R/library/magrittr/R/magrittr",
+        "path_type": "hardlink",
+        "sha256": "2fb8b16be23c820daf2e51b7ddfef61ca4978e561b1d228d546d1b356041f79e",
+        "sha256_in_prefix": "2fb8b16be23c820daf2e51b7ddfef61ca4978e561b1d228d546d1b356041f79e",
+        "size_in_bytes": 1056
+      },
+      {
+        "_path": "lib/R/library/magrittr/R/magrittr.rdb",
+        "path_type": "hardlink",
+        "sha256": "de8b2a7d549408c2a8d53f7722bfc8cfb449b679c63767431c6bea5568004aae",
+        "sha256_in_prefix": "de8b2a7d549408c2a8d53f7722bfc8cfb449b679c63767431c6bea5568004aae",
+        "size_in_bytes": 24441
+      },
+      {
+        "_path": "lib/R/library/magrittr/R/magrittr.rdx",
+        "path_type": "hardlink",
+        "sha256": "4a301b5c9f124589d468f9bafe6ac2207f0a5da48916bc6091906ee33fc6e34d",
+        "sha256_in_prefix": "4a301b5c9f124589d468f9bafe6ac2207f0a5da48916bc6091906ee33fc6e34d",
+        "size_in_bytes": 899
+      },
+      {
+        "_path": "lib/R/library/magrittr/doc/index.html",
+        "path_type": "hardlink",
+        "sha256": "b7863f458279f45faa5761c6fbe1ef9b9605d87eaf0bec6bd007bf3cefd49874",
+        "sha256_in_prefix": "b7863f458279f45faa5761c6fbe1ef9b9605d87eaf0bec6bd007bf3cefd49874",
+        "size_in_bytes": 1344
+      },
+      {
+        "_path": "lib/R/library/magrittr/doc/magrittr.R",
+        "path_type": "hardlink",
+        "sha256": "b3bc1bd45dbbf254d1566a87323f81afc862c294bb13d2755fe48f17ae52e217",
+        "sha256_in_prefix": "b3bc1bd45dbbf254d1566a87323f81afc862c294bb13d2755fe48f17ae52e217",
+        "size_in_bytes": 2175
+      },
+      {
+        "_path": "lib/R/library/magrittr/doc/magrittr.Rmd",
+        "path_type": "hardlink",
+        "sha256": "3f0936bdbf59ba014e54782d8a101f5494888d3b1facb7322b766ab364e679a7",
+        "sha256_in_prefix": "3f0936bdbf59ba014e54782d8a101f5494888d3b1facb7322b766ab364e679a7",
+        "size_in_bytes": 8134
+      },
+      {
+        "_path": "lib/R/library/magrittr/doc/magrittr.html",
+        "path_type": "hardlink",
+        "sha256": "ce3716665c126addaed8b8feb3e05ad09767ced8e6efd68ae90e535c7772b39e",
+        "sha256_in_prefix": "ce3716665c126addaed8b8feb3e05ad09767ced8e6efd68ae90e535c7772b39e",
+        "size_in_bytes": 149379
+      },
+      {
+        "_path": "lib/R/library/magrittr/help/AnIndex",
+        "path_type": "hardlink",
+        "sha256": "cd28ae86ac32d9e6a0394de17b0db37025255659558252138593d7d32fb2e430",
+        "sha256_in_prefix": "cd28ae86ac32d9e6a0394de17b0db37025255659558252138593d7d32fb2e430",
+        "size_in_bytes": 720
+      },
+      {
+        "_path": "lib/R/library/magrittr/help/aliases.rds",
+        "path_type": "hardlink",
+        "sha256": "13946da01edff5d71d8fbfa96b132dd50a12cf53e981eed0996993fd626f469f",
+        "sha256_in_prefix": "13946da01edff5d71d8fbfa96b132dd50a12cf53e981eed0996993fd626f469f",
+        "size_in_bytes": 408
+      },
+      {
+        "_path": "lib/R/library/magrittr/help/magrittr.rdb",
+        "path_type": "hardlink",
+        "sha256": "3004f4ca964ff357973db85816cd1fbeef1f1e17824b75f1278883c5aeec30ce",
+        "sha256_in_prefix": "3004f4ca964ff357973db85816cd1fbeef1f1e17824b75f1278883c5aeec30ce",
+        "size_in_bytes": 26089
+      },
+      {
+        "_path": "lib/R/library/magrittr/help/magrittr.rdx",
+        "path_type": "hardlink",
+        "sha256": "e58091e43d5e99d5ffde166690c91759fbd3d4acd956e30a910d2001e15789ec",
+        "sha256_in_prefix": "e58091e43d5e99d5ffde166690c91759fbd3d4acd956e30a910d2001e15789ec",
+        "size_in_bytes": 393
+      },
+      {
+        "_path": "lib/R/library/magrittr/help/paths.rds",
+        "path_type": "hardlink",
+        "sha256": "cc8188ecb630838b137f19add3dbc569ac0a01acac99e176364de326342d3a0b",
+        "sha256_in_prefix": "cc8188ecb630838b137f19add3dbc569ac0a01acac99e176364de326342d3a0b",
+        "size_in_bytes": 244
+      },
+      {
+        "_path": "lib/R/library/magrittr/html/00Index.html",
+        "path_type": "hardlink",
+        "sha256": "664bd4f28bf76863d81978448773a30c6d1f9501a56005baade22fdfaf7a9b9d",
+        "sha256_in_prefix": "664bd4f28bf76863d81978448773a30c6d1f9501a56005baade22fdfaf7a9b9d",
+        "size_in_bytes": 5167
+      },
+      {
+        "_path": "lib/R/library/magrittr/html/R.css",
+        "path_type": "hardlink",
+        "sha256": "0f4849ab1757247808d54da2c371e992364371c942ad7d629dae8d62327ed068",
+        "sha256_in_prefix": "0f4849ab1757247808d54da2c371e992364371c942ad7d629dae8d62327ed068",
+        "size_in_bytes": 1335
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "a67a6989fb2c4f86f668affd78ea6da108913b188408dcfcc488adf6a3ce7677",
+  "size": 168153,
+  "subdir": "linux-64",
+  "timestamp": 1535633799000,
+  "track_features": "",
+  "url": "https://conda.anaconda.org/conda-forge/linux-64/r-magrittr-1.5-r341h6115d3f_1.tar.bz2",
+  "version": "1.5"
+}

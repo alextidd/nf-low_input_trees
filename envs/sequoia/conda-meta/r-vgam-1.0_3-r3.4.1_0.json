@@ -1,0 +1,365 @@
+{
+  "build": "r3.4.1_0",
+  "build_number": 0,
+  "channel": "https://conda.anaconda.org/r/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc",
+    "r-base 3.4.1*"
+  ],
+  "extracted_package_dir": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-vgam-1.0_3-r3.4.1_0",
+  "features": "",
+  "files": [
+    "lib/R/library/VGAM/CITATION",
+    "lib/R/library/VGAM/DESCRIPTION",
+    "lib/R/library/VGAM/INDEX",
+    "lib/R/library/VGAM/Meta/Rd.rds",
+    "lib/R/library/VGAM/Meta/data.rds",
+    "lib/R/library/VGAM/Meta/demo.rds",
+    "lib/R/library/VGAM/Meta/features.rds",
+    "lib/R/library/VGAM/Meta/hsearch.rds",
+    "lib/R/library/VGAM/Meta/links.rds",
+    "lib/R/library/VGAM/Meta/nsInfo.rds",
+    "lib/R/library/VGAM/Meta/package.rds",
+    "lib/R/library/VGAM/Meta/vignette.rds",
+    "lib/R/library/VGAM/NAMESPACE",
+    "lib/R/library/VGAM/NEWS",
+    "lib/R/library/VGAM/R/VGAM",
+    "lib/R/library/VGAM/R/VGAM.rdb",
+    "lib/R/library/VGAM/R/VGAM.rdx",
+    "lib/R/library/VGAM/data/Rdata.rdb",
+    "lib/R/library/VGAM/data/Rdata.rds",
+    "lib/R/library/VGAM/data/Rdata.rdx",
+    "lib/R/library/VGAM/demo/binom2.or.R",
+    "lib/R/library/VGAM/demo/cqo.R",
+    "lib/R/library/VGAM/demo/distributions.R",
+    "lib/R/library/VGAM/demo/lmsqreg.R",
+    "lib/R/library/VGAM/demo/vgam.R",
+    "lib/R/library/VGAM/demo/zipoisson.R",
+    "lib/R/library/VGAM/doc/categoricalVGAM.R",
+    "lib/R/library/VGAM/doc/categoricalVGAM.Rnw",
+    "lib/R/library/VGAM/doc/categoricalVGAM.pdf",
+    "lib/R/library/VGAM/doc/crVGAM.R",
+    "lib/R/library/VGAM/doc/crVGAM.Rnw",
+    "lib/R/library/VGAM/doc/crVGAM.pdf",
+    "lib/R/library/VGAM/doc/index.html",
+    "lib/R/library/VGAM/help/AnIndex",
+    "lib/R/library/VGAM/help/VGAM.rdb",
+    "lib/R/library/VGAM/help/VGAM.rdx",
+    "lib/R/library/VGAM/help/aliases.rds",
+    "lib/R/library/VGAM/help/paths.rds",
+    "lib/R/library/VGAM/html/00Index.html",
+    "lib/R/library/VGAM/html/R.css",
+    "lib/R/library/VGAM/libs/VGAM.so"
+  ],
+  "fn": "r-vgam-1.0_3-r3.4.1_0.tar.bz2",
+  "license": "GPL-2 | GPL-3",
+  "link": {
+    "source": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-vgam-1.0_3-r3.4.1_0",
+    "type": 1
+  },
+  "md5": "922ea8fba68374178a36f5a92b8ca343",
+  "name": "r-vgam",
+  "package_tarball_full_path": "/nfs/users/nfs_a/at31/miniforge3/pkgs/r-vgam-1.0_3-r3.4.1_0.tar.bz2",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "lib/R/library/VGAM/CITATION",
+        "path_type": "hardlink",
+        "sha256": "c2beeefffa65fdeb07f1eec7ddad38c159950cd30f4038ace2c89b0f56f66e4a",
+        "sha256_in_prefix": "c2beeefffa65fdeb07f1eec7ddad38c159950cd30f4038ace2c89b0f56f66e4a",
+        "size_in_bytes": 4458
+      },
+      {
+        "_path": "lib/R/library/VGAM/DESCRIPTION",
+        "path_type": "hardlink",
+        "sha256": "87c03ff7148f3cb0030f596c72a7de810164a4a686024564288c5169eca6e925",
+        "sha256_in_prefix": "87c03ff7148f3cb0030f596c72a7de810164a4a686024564288c5169eca6e925",
+        "size_in_bytes": 1739
+      },
+      {
+        "_path": "lib/R/library/VGAM/INDEX",
+        "path_type": "hardlink",
+        "sha256": "48c56f974cb51c8f14c9df87a80e3db4214560a840f3ed30397b98c45c4efd6a",
+        "sha256_in_prefix": "48c56f974cb51c8f14c9df87a80e3db4214560a840f3ed30397b98c45c4efd6a",
+        "size_in_bytes": 32468
+      },
+      {
+        "_path": "lib/R/library/VGAM/Meta/Rd.rds",
+        "path_type": "hardlink",
+        "sha256": "8795517efa9075f3dc3f85c2b797dd9526854321b42dce18da25bf5d0a1203e6",
+        "sha256_in_prefix": "8795517efa9075f3dc3f85c2b797dd9526854321b42dce18da25bf5d0a1203e6",
+        "size_in_bytes": 20099
+      },
+      {
+        "_path": "lib/R/library/VGAM/Meta/data.rds",
+        "path_type": "hardlink",
+        "sha256": "f2e749f95202378b2a8a75c8f2a3afc244a714820a7dee12428a52e43f2fdf38",
+        "sha256_in_prefix": "f2e749f95202378b2a8a75c8f2a3afc244a714820a7dee12428a52e43f2fdf38",
+        "size_in_bytes": 1250
+      },
+      {
+        "_path": "lib/R/library/VGAM/Meta/demo.rds",
+        "path_type": "hardlink",
+        "sha256": "46c995dfe1e664aa93dca027c0b07404ad3d8a1a427900e56bf8ba2e8c4be078",
+        "sha256_in_prefix": "46c995dfe1e664aa93dca027c0b07404ad3d8a1a427900e56bf8ba2e8c4be078",
+        "size_in_bytes": 257
+      },
+      {
+        "_path": "lib/R/library/VGAM/Meta/features.rds",
+        "path_type": "hardlink",
+        "sha256": "79a0197390e6502dd95396d9acb73882afc9688bcdbf20fbecafd39f92cc9bc3",
+        "sha256_in_prefix": "79a0197390e6502dd95396d9acb73882afc9688bcdbf20fbecafd39f92cc9bc3",
+        "size_in_bytes": 112
+      },
+      {
+        "_path": "lib/R/library/VGAM/Meta/hsearch.rds",
+        "path_type": "hardlink",
+        "sha256": "1c69b9a940b8fee80fa6d86ae5bbf21525d5eef3fe88391ddf1cebdee5bfff53",
+        "sha256_in_prefix": "1c69b9a940b8fee80fa6d86ae5bbf21525d5eef3fe88391ddf1cebdee5bfff53",
+        "size_in_bytes": 20249
+      },
+      {
+        "_path": "lib/R/library/VGAM/Meta/links.rds",
+        "path_type": "hardlink",
+        "sha256": "f8ef01d9a6ac797bfdc5f3690200369abed1a5c5fcd5efade3b67ae9a2888dae",
+        "sha256_in_prefix": "f8ef01d9a6ac797bfdc5f3690200369abed1a5c5fcd5efade3b67ae9a2888dae",
+        "size_in_bytes": 12272
+      },
+      {
+        "_path": "lib/R/library/VGAM/Meta/nsInfo.rds",
+        "path_type": "hardlink",
+        "sha256": "9329ca959c5b8af5e9e4d591c6a2254307edb6f6e2ffa84dd85392c25c19e79f",
+        "sha256_in_prefix": "9329ca959c5b8af5e9e4d591c6a2254307edb6f6e2ffa84dd85392c25c19e79f",
+        "size_in_bytes": 6578
+      },
+      {
+        "_path": "lib/R/library/VGAM/Meta/package.rds",
+        "path_type": "hardlink",
+        "sha256": "2aee907a734e9989f8dfe97b63d10cdabbc4f10d4fb831ebeba1965a073874c7",
+        "sha256_in_prefix": "2aee907a734e9989f8dfe97b63d10cdabbc4f10d4fb831ebeba1965a073874c7",
+        "size_in_bytes": 1388
+      },
+      {
+        "_path": "lib/R/library/VGAM/Meta/vignette.rds",
+        "path_type": "hardlink",
+        "sha256": "112a811d67ae6b326c27086b2054a67c70670dedb19c136bda3ae842b9a7c734",
+        "sha256_in_prefix": "112a811d67ae6b326c27086b2054a67c70670dedb19c136bda3ae842b9a7c734",
+        "size_in_bytes": 480
+      },
+      {
+        "_path": "lib/R/library/VGAM/NAMESPACE",
+        "path_type": "hardlink",
+        "sha256": "e7522bca4d7012b68fcb9ce20a85525d0b715b9081ee52fd8b896906b2dc0f4d",
+        "sha256_in_prefix": "e7522bca4d7012b68fcb9ce20a85525d0b715b9081ee52fd8b896906b2dc0f4d",
+        "size_in_bytes": 19792
+      },
+      {
+        "_path": "lib/R/library/VGAM/NEWS",
+        "path_type": "hardlink",
+        "sha256": "32f887e19959cea580b5e96b6a45f548a88a53f8c1d17f8a0560f5615e01cbbf",
+        "sha256_in_prefix": "32f887e19959cea580b5e96b6a45f548a88a53f8c1d17f8a0560f5615e01cbbf",
+        "size_in_bytes": 96488
+      },
+      {
+        "_path": "lib/R/library/VGAM/R/VGAM",
+        "path_type": "hardlink",
+        "sha256": "2fb8b16be23c820daf2e51b7ddfef61ca4978e561b1d228d546d1b356041f79e",
+        "sha256_in_prefix": "2fb8b16be23c820daf2e51b7ddfef61ca4978e561b1d228d546d1b356041f79e",
+        "size_in_bytes": 1056
+      },
+      {
+        "_path": "lib/R/library/VGAM/R/VGAM.rdb",
+        "path_type": "hardlink",
+        "sha256": "15e9fe0abeed45b743b8de7fccb3e4092fb906a04bf852578887c4c9781755ff",
+        "sha256_in_prefix": "15e9fe0abeed45b743b8de7fccb3e4092fb906a04bf852578887c4c9781755ff",
+        "size_in_bytes": 1545993
+      },
+      {
+        "_path": "lib/R/library/VGAM/R/VGAM.rdx",
+        "path_type": "hardlink",
+        "sha256": "bc4f91201ff1561c364cbc339b0ee887fcada1d4ac4cee80b484449137421948",
+        "sha256_in_prefix": "bc4f91201ff1561c364cbc339b0ee887fcada1d4ac4cee80b484449137421948",
+        "size_in_bytes": 19951
+      },
+      {
+        "_path": "lib/R/library/VGAM/data/Rdata.rdb",
+        "path_type": "hardlink",
+        "sha256": "9258c9b304c8ab33f07ed88371792fcd4c14fd11b98cec2d11b620da08fa53b8",
+        "sha256_in_prefix": "9258c9b304c8ab33f07ed88371792fcd4c14fd11b98cec2d11b620da08fa53b8",
+        "size_in_bytes": 89305
+      },
+      {
+        "_path": "lib/R/library/VGAM/data/Rdata.rds",
+        "path_type": "hardlink",
+        "sha256": "24ab1d2d53fd2e5c01ae989a60d024df66f6b18bb30e9ea6828dddcaf356cd2f",
+        "sha256_in_prefix": "24ab1d2d53fd2e5c01ae989a60d024df66f6b18bb30e9ea6828dddcaf356cd2f",
+        "size_in_bytes": 508
+      },
+      {
+        "_path": "lib/R/library/VGAM/data/Rdata.rdx",
+        "path_type": "hardlink",
+        "sha256": "7557c4955fdc463573e10ed62af9d64eea78ccbbfb3877af65f3bb3b38ce03d1",
+        "sha256_in_prefix": "7557c4955fdc463573e10ed62af9d64eea78ccbbfb3877af65f3bb3b38ce03d1",
+        "size_in_bytes": 768
+      },
+      {
+        "_path": "lib/R/library/VGAM/demo/binom2.or.R",
+        "path_type": "hardlink",
+        "sha256": "ac893c69e1c450788aad8068d998d6f38a808429afce723c774e2f53491f574b",
+        "sha256_in_prefix": "ac893c69e1c450788aad8068d998d6f38a808429afce723c774e2f53491f574b",
+        "size_in_bytes": 1080
+      },
+      {
+        "_path": "lib/R/library/VGAM/demo/cqo.R",
+        "path_type": "hardlink",
+        "sha256": "1929b1ed10695bc2a18651d02b09204f5fcb8c9f3cf521fc3aebcc425aba06b7",
+        "sha256_in_prefix": "1929b1ed10695bc2a18651d02b09204f5fcb8c9f3cf521fc3aebcc425aba06b7",
+        "size_in_bytes": 3713
+      },
+      {
+        "_path": "lib/R/library/VGAM/demo/distributions.R",
+        "path_type": "hardlink",
+        "sha256": "a1cd5cbffc941db067a1beb3d25778d872de8d469902a368896154f9fc88f517",
+        "sha256_in_prefix": "a1cd5cbffc941db067a1beb3d25778d872de8d469902a368896154f9fc88f517",
+        "size_in_bytes": 1402
+      },
+      {
+        "_path": "lib/R/library/VGAM/demo/lmsqreg.R",
+        "path_type": "hardlink",
+        "sha256": "521c8993b8cd3fbb09faf0b79b809730f2141ca80e4548615d6352322b0c1495",
+        "sha256_in_prefix": "521c8993b8cd3fbb09faf0b79b809730f2141ca80e4548615d6352322b0c1495",
+        "size_in_bytes": 966
+      },
+      {
+        "_path": "lib/R/library/VGAM/demo/vgam.R",
+        "path_type": "hardlink",
+        "sha256": "bd715a2cee730993f1189ed625c47f266522d0dce416055cc1bf6668ee9ba3aa",
+        "sha256_in_prefix": "bd715a2cee730993f1189ed625c47f266522d0dce416055cc1bf6668ee9ba3aa",
+        "size_in_bytes": 453
+      },
+      {
+        "_path": "lib/R/library/VGAM/demo/zipoisson.R",
+        "path_type": "hardlink",
+        "sha256": "9f56cbbfa1218458fef455b2586f0d171933bae2504c13f7890516446dccfa69",
+        "sha256_in_prefix": "9f56cbbfa1218458fef455b2586f0d171933bae2504c13f7890516446dccfa69",
+        "size_in_bytes": 1148
+      },
+      {
+        "_path": "lib/R/library/VGAM/doc/categoricalVGAM.R",
+        "path_type": "hardlink",
+        "sha256": "a319114703dc874e376162248eca6517e3a4f2c7673d83509845059cbe6c7c5d",
+        "sha256_in_prefix": "a319114703dc874e376162248eca6517e3a4f2c7673d83509845059cbe6c7c5d",
+        "size_in_bytes": 10056
+      },
+      {
+        "_path": "lib/R/library/VGAM/doc/categoricalVGAM.Rnw",
+        "path_type": "hardlink",
+        "sha256": "1bea65bb31eef70bb6117d3bf28878837fe6c298eea6a69b129316ba5010b38b",
+        "sha256_in_prefix": "1bea65bb31eef70bb6117d3bf28878837fe6c298eea6a69b129316ba5010b38b",
+        "size_in_bytes": 79846
+      },
+      {
+        "_path": "lib/R/library/VGAM/doc/categoricalVGAM.pdf",
+        "path_type": "hardlink",
+        "sha256": "4f4076f5b5d89fb8664a3e69e3f91e51bc5c56c9401dbcec7f9493b7e223e0c4",
+        "sha256_in_prefix": "4f4076f5b5d89fb8664a3e69e3f91e51bc5c56c9401dbcec7f9493b7e223e0c4",
+        "size_in_bytes": 648348
+      },
+      {
+        "_path": "lib/R/library/VGAM/doc/crVGAM.R",
+        "path_type": "hardlink",
+        "sha256": "06ec25deb6e58d48aaeef2f4b0b9f7a51a349d12cfecdc8edca4a02bfff4cc2e",
+        "sha256_in_prefix": "06ec25deb6e58d48aaeef2f4b0b9f7a51a349d12cfecdc8edca4a02bfff4cc2e",
+        "size_in_bytes": 18881
+      },
+      {
+        "_path": "lib/R/library/VGAM/doc/crVGAM.Rnw",
+        "path_type": "hardlink",
+        "sha256": "4367073c14444f70b7edc1f1e88a877b168d2adca112bf8d08b71a642b943fdc",
+        "sha256_in_prefix": "4367073c14444f70b7edc1f1e88a877b168d2adca112bf8d08b71a642b943fdc",
+        "size_in_bytes": 91306
+      },
+      {
+        "_path": "lib/R/library/VGAM/doc/crVGAM.pdf",
+        "path_type": "hardlink",
+        "sha256": "5707aef81bc8fb7804d11255272ea250308391ecb8615927b774b11d5436b365",
+        "sha256_in_prefix": "5707aef81bc8fb7804d11255272ea250308391ecb8615927b774b11d5436b365",
+        "size_in_bytes": 421558
+      },
+      {
+        "_path": "lib/R/library/VGAM/doc/index.html",
+        "path_type": "hardlink",
+        "sha256": "42e3e3248383a68a7cf94446b3fc134b0b5873592c826863192cf990d2d0ed47",
+        "sha256_in_prefix": "42e3e3248383a68a7cf94446b3fc134b0b5873592c826863192cf990d2d0ed47",
+        "size_in_bytes": 1880
+      },
+      {
+        "_path": "lib/R/library/VGAM/help/AnIndex",
+        "path_type": "hardlink",
+        "sha256": "12618cea366cf27a83f9d92b36bd3dd32163f49bf376654f20abe6f3e4b9fb1f",
+        "sha256_in_prefix": "12618cea366cf27a83f9d92b36bd3dd32163f49bf376654f20abe6f3e4b9fb1f",
+        "size_in_bytes": 45856
+      },
+      {
+        "_path": "lib/R/library/VGAM/help/VGAM.rdb",
+        "path_type": "hardlink",
+        "sha256": "93112e6d05ca1e2e70e9412accf6bd9617145af71fe5d8becc1a36fa43d58d2b",
+        "sha256_in_prefix": "93112e6d05ca1e2e70e9412accf6bd9617145af71fe5d8becc1a36fa43d58d2b",
+        "size_in_bytes": 2664961
+      },
+      {
+        "_path": "lib/R/library/VGAM/help/VGAM.rdx",
+        "path_type": "hardlink",
+        "sha256": "7effdd6981b9536737b5b85f7518fd4527a80f472e77fb2af96e4d43797529e7",
+        "sha256_in_prefix": "7effdd6981b9536737b5b85f7518fd4527a80f472e77fb2af96e4d43797529e7",
+        "size_in_bytes": 9906
+      },
+      {
+        "_path": "lib/R/library/VGAM/help/aliases.rds",
+        "path_type": "hardlink",
+        "sha256": "ac9b4e1e2db23d3f1ef84fcd9de95ea2b660f6452a7123e0eb4ddceb2058da77",
+        "sha256_in_prefix": "ac9b4e1e2db23d3f1ef84fcd9de95ea2b660f6452a7123e0eb4ddceb2058da77",
+        "size_in_bytes": 12257
+      },
+      {
+        "_path": "lib/R/library/VGAM/help/paths.rds",
+        "path_type": "hardlink",
+        "sha256": "8d00b393a47c3639d41eb62b69071dbe073cc8029b01dbb0a40a4a69a7fc0649",
+        "sha256_in_prefix": "8d00b393a47c3639d41eb62b69071dbe073cc8029b01dbb0a40a4a69a7fc0649",
+        "size_in_bytes": 3305
+      },
+      {
+        "_path": "lib/R/library/VGAM/html/00Index.html",
+        "path_type": "hardlink",
+        "sha256": "615b68cb2c16c47b443df3b0417554ba30e3438f2f714e2a84aa97dbd322fc2a",
+        "sha256_in_prefix": "615b68cb2c16c47b443df3b0417554ba30e3438f2f714e2a84aa97dbd322fc2a",
+        "size_in_bytes": 125814
+      },
+      {
+        "_path": "lib/R/library/VGAM/html/R.css",
+        "path_type": "hardlink",
+        "sha256": "0f4849ab1757247808d54da2c371e992364371c942ad7d629dae8d62327ed068",
+        "sha256_in_prefix": "0f4849ab1757247808d54da2c371e992364371c942ad7d629dae8d62327ed068",
+        "size_in_bytes": 1335
+      },
+      {
+        "_path": "lib/R/library/VGAM/libs/VGAM.so",
+        "file_mode": "binary",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/home/rdonnelly/mc-x64-3.6/conda-bld/r-vgam_1498846993089/_b_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_",
+        "sha256": "657b0c5ff0154291e4ccec626ac170ad3b5baa47c47e120e364694368d11132a",
+        "sha256_in_prefix": "ae8ffdd0ed1820921b976abfd986214738743ccc1b89652e126848754e6298c6",
+        "size_in_bytes": 377152
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "r::r-vgam",
+  "sha256": "fec40ace3f4a57caa80c61d2fae4d3a1030c2c9af1b1ae2fb61774efc96ac98f",
+  "size": 5581898,
+  "subdir": "linux-64",
+  "track_features": "",
+  "url": "https://conda.anaconda.org/r/linux-64/r-vgam-1.0_3-r3.4.1_0.tar.bz2",
+  "version": "1.0_3"
+}
