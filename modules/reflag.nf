@@ -26,7 +26,7 @@ process reflag_run {
       flags = "FF016,FF018"
     } 
   } else if (vcf_type == "caveman") {
-    // turn off MNP flag (requires VAF > 0.2 if any muntant reads in normal)
+    // turn off MNP flag (requires VAF > 0.2 if any mutant reads in normal)
     flags = "MNP"
   }
   """

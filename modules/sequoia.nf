@@ -2,7 +2,6 @@ process sequoia_run {
   tag "${meta.donor_id}"
   label "week100gb"
   publishDir "${params.outdir}/${meta.donor_id}/", mode: 'copy'
-  conda "$projectDir/envs/sequoia"
   errorStrategy = 'retry'
 
   input:
@@ -16,7 +15,7 @@ process sequoia_run {
   script:
   """
   # plot trees of SNVs and indels separately
-  build_phylogeny.R \
+  Rscript build_phylogeny.R \
     --donor_id ${meta.donor_id} \
     --cgpvaf_output ${cgpVAF_out.join(',')} \
     --genomeFile ${fasta} \
@@ -24,7 +23,7 @@ process sequoia_run {
     --ncores $task.cpus
   
   # plot tree integrating SNVs and indels
-  build_phylogeny.R \
+  Rscript build_phylogeny.R \
     --donor_id ${meta.donor_id} \
     --cgpvaf_output ${cgpVAF_out.join(',')} \
     --genomeFile ${fasta} \
