@@ -1,5 +1,7 @@
 # Building trees from low-input DNA
 
+## Pipeline steps
+
 This [Nextflow](https://www.nextflow.io/) pipeline was written to generate
 phylogenetic trees from low input WGS/WES. It takes as input `CaVEMAN` (SNV) 
 and `Pindel` (indel) VCF files generated from the alignment files from 
@@ -28,3 +30,15 @@ unbiased `pileup` (SNVs) and `exonerate` (indels)-based VAF calculation for the
 union of variant sites in the set of related samples from each donor. 
 
 4. Run [Sequoia](https://github.com/TimCoorens/Sequoia) for tree building.
+
+## Usage
+
+Here is an example command to run the pipeline.
+
+```
+nextflow run . \
+  -profile test \
+  --sample_sheet sample_sheet.csv \
+  --project_type WGS \
+  --outdir out/
+```
