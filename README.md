@@ -31,6 +31,18 @@ union of variant sites in the set of related samples from each donor.
 
 4. Run [Sequoia](https://github.com/TimCoorens/Sequoia) for tree building.
 
+## Requirements
+
+In order to run the pipeline you must have 
+[Nextflow](https://www.nextflow.io/docs/latest/install.html) and 
+[Singularity](https://docs.sylabs.io/guides/3.5/user-guide/introduction.html) 
+installed. If running from the Sanger farm, simply load the Singularity module 
+before running the Nextflow command:
+
+```
+$ module load singularity
+```
+
 ## Usage
 
 Here is an example command to run the pipeline:
