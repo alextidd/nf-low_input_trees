@@ -36,9 +36,5 @@ union of variant sites in the set of related samples from each donor.
 Here is an example command to run the pipeline.
 
 ```
-nextflow run . \
-  -profile test \
-  --sample_sheet sample_sheet.csv \
-  --sequencing_type WGS \
-  --outdir out/
+nextflow run . -profile test -w test/work/
 ```

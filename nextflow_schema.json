@@ -10,7 +10,7 @@
       "type": "object",
       "fa_icon": "fas fa-terminal",
       "description": "Define where the pipeline should find input data and save output data.",
-      "required": ["sample_sheet", "project_type", "outdir"],
+      "required": ["sample_sheet", "sequencing_type", "outdir"],
       "properties": {
         "sample_sheet": {
           "type": "string",
