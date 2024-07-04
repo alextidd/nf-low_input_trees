@@ -121,7 +121,6 @@ Sequoia options
   --sequoia_min_variant_reads_shared       [integer] Minimum variant reads used in generating a probabilistic genotype matrix [default: 2]
   --sequoia_min_vaf_shared                 [integer] Minimum VAF used in generating a probabilistic genotype matrix [default: 2]
   --sequoia_create_multi_tree              [boolean] Convert dichotomous tree from MPBoot to polytomous tree [default: true]
-  --sequoia_mpboot_path                    [string]  Path to MPBoot executable [default: ./]
   --sequoia_germline_cutoff                [integer] Log10 of germline qval cutoff [default: -5]
   --sequoia_plot_spectra                   [boolean] Plot mutational spectra?
   --sequoia_max_muts_plot                  [integer] Maximum number of SNVs to plot in mutational spectra [default: 5000]

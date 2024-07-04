@@ -41,7 +41,6 @@ process sequoia_run {
     --min_variant_reads_shared ${params.sequoia_min_variant_reads_shared} \
     --min_vaf_shared ${params.sequoia_min_vaf_shared} \
     --create_multi_tree ${params.sequoia_create_multi_tree} \
-    --mpboot_path ${params.sequoia_mpboot_path} \
     --germline_cutoff ${params.sequoia_germline_cutoff} \
     --plot_spectra ${params.sequoia_plot_spectra} \
     --max_muts_plot ${params.sequoia_max_muts_plot} \
@@ -77,7 +76,6 @@ process sequoia_run {
     --min_variant_reads_shared ${params.sequoia_min_variant_reads_shared} \
     --min_vaf_shared ${params.sequoia_min_vaf_shared} \
     --create_multi_tree ${params.sequoia_create_multi_tree} \
-    --mpboot_path ${params.sequoia_mpboot_path} \
     --germline_cutoff ${params.sequoia_germline_cutoff} \
     --plot_spectra ${params.sequoia_plot_spectra} \
     --max_muts_plot ${params.sequoia_max_muts_plot} \

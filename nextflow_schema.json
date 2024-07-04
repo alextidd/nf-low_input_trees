@@ -204,11 +204,6 @@
           "default": true,
           "description": "Convert dichotomous tree from MPBoot to polytomous tree"
         },
-        "sequoia_mpboot_path": {
-          "type": "string",
-          "default": "./",
-          "description": "Path to MPBoot executable"
-        },
         "sequoia_germline_cutoff": {
           "type": "integer",
           "default": -5,
