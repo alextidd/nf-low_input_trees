@@ -4,18 +4,18 @@ workflow preprocess {
   main:
   
   // get fasta + fai
-  Channel.fromPath(params.fasta, checkIfExists: true)
+  Channel.fromPath(params.fasta)
   | map { fasta -> [fasta, file(fasta + ".fai", checkIfExists: true)] } 
   | set { ch_fasta }
 
   // get bed + tbi
-  Channel.fromPath(params.high_depth_bed, checkIfExists: true)
+  Channel.fromPath(params.high_depth_bed)
   | map { bed -> [bed, file(bed + ".tbi", checkIfExists: true)] }
   | set { ch_high_depth_bed }
 
   // get cgpVAF normal bam + bai
   Channel.of(
-    [file(params.cgpVAF_normal_bam, checkIfExists: true), 
+    [file(params.cgpVAF_normal_bam), 
      file(params.cgpVAF_normal_bam + ".bas", checkIfExists: true),
      file(params.cgpVAF_normal_bam + ".bai", checkIfExists: true),
      file(params.cgpVAF_normal_bam + ".met.gz", checkIfExists: true)])

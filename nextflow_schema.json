@@ -95,11 +95,15 @@
       "properties": {
         "cgpVAF_normal_bam": {
           "type": "string",
+          "format": "file-path",
+          "exists": true,
           "description": "Path to the in silico normal BAM."
         },
         "high_depth_bed": {
           "type": "string",
-          "description": "Path to a reference BED file of high depth regions."
+          "format": "file-path",
+          "exists": true,
+          "description": "Path to a reference BED file of high depth regions. A matching index file (*.tbi) must be present in the same directory."
         }
       },
       "required": ["cgpVAF_normal_bam", "high_depth_bed"]
