@@ -26,8 +26,7 @@
         "sequencing_type": {
           "type": "string",
           "description": "The type of sequencing done in the project. Must be one of \"WGS\" (whole genome sequencing) or \"WES\" (whole exome sequencing). Default is WGS.",
-          "enum": ["WGS", "WES"],
-          "default": "WGS"
+          "enum": ["WGS", "WES"]
         },
         "outdir": {
           "type": "string",
@@ -52,7 +51,6 @@
       "properties": {
         "genome_build": {
           "type": "string",
-          "default": "hg38",
           "description": "The genome build. Must be one of \"hg19\" or \"hg38\".",
           "enum": ["hg19", "hg38"]
         },
@@ -64,8 +62,7 @@
           "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
           "description": "Path to FASTA genome file. A matching index file (*.fai) must be present in the same directory.",
           "help_text": "This parameter is *mandatory* if `--genome` is not specified. If you don't have a BWA index available this will be generated for you automatically. Combine with `--save_reference` to save BWA index for future runs.",
-          "fa_icon": "far fa-file-code",
-          "default": "/lustre/scratch126/casm/team273jn/share/pileups/reference_data/hg38/genome.fa"
+          "fa_icon": "far fa-file-code"
         }
       },
       "required": ["genome_build", "fasta"]
@@ -78,11 +75,14 @@
       "properties": {
         "snp_database": {
           "type": "string",
-          "default": "/lustre/scratch126/casm/team273jn/share/pileups/reference_data/hg38/SNP.vcf.gz"
+          "format": "file-path",
+          "exists": true,
+          "description": "Path to the SNP database file required by hairpin"
         },
         "fragment_threshold": {
           "type": "integer",
-          "default": 4
+          "default": 4,
+          "description": "Fragment threshold use for filtering (Default: 4). Decrease in the context of low coverage or small clones. Lowering will result in the inclusion of more artefacts."
         }
       },
       "required": ["snp_database", "fragment_threshold"]
@@ -95,12 +95,10 @@
       "properties": {
         "cgpVAF_normal_bam": {
           "type": "string",
-          "default": "/nfs/cancer_ref01/nst_links/live/2480/PDv38is_wgs/PDv38is_wgs.sample.dupmarked.bam",
           "description": "Path to the in silico normal BAM."
         },
         "high_depth_bed": {
           "type": "string",
-          "default": "/lustre/scratch126/casm/team273jn/share/pileups/reference_data/hg38/highdepth.bed.gz",
           "description": "Path to a reference BED file of high depth regions."
         }
       },

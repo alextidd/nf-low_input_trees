@@ -4,7 +4,7 @@
 
 This [Nextflow](https://www.nextflow.io/) pipeline was written to generate
 phylogenetic trees from low input WGS/WES. It takes as input `CaVEMAN` (SNV) 
-and `Pindel` (indel) VCF files generated from the alignment files from 
+and `Pindel` (indel) VCF files generated from the aligned `BAM` files from 
 sequencing. The steps are as follows.
 
 1. Reflag the VCFs to remove some filters that have been found to be too 
@@ -45,10 +45,23 @@ $ module load singularity
 
 ## Usage
 
-Here is an example command to run the pipeline:
+It is most important to set the `--genome_build` and `--sequencing_type`
+correctly and to provide reference files. If running from the Sanger farm and
+using build hg38, paths to the reference files used by `hairpin`, `cgpVAF`, and
+`Sequoia` can be set using the `sanger_hg38` profile:
 
 ```
-$ nextflow run . -profile test -w test/work/
+$ nextflow run . \
+  --sample_sheet sample_sheet.csv \
+  --genome_build hg38 \
+  --sequencing_type WGS \
+  -profile sanger_hg38
+```
+
+Here is an example command to run the pipeline in `test` mode:
+
+```
+$ nextflow run . -profile test,sanger_hg38 -w test/work/
 ```
 
 For a list of all parameters, run the command with the `--help` option:
@@ -58,7 +71,7 @@ $ nextflow run . --help
 
  N E X T F L O W   ~  version 24.04.2
 
-Launching `./main.nf` [maniac_venter] DSL2 - revision: 51676fd9a6
+Launching `./main.nf` [golden_cray] DSL2 - revision: 51676fd9a6
 
 Typical pipeline command:
 
@@ -67,24 +80,22 @@ Typical pipeline command:
 Input/output options
   --sample_sheet                           [string]  Path to comma-separated file containing metadata and file paths the samples in the experiment.
   --sequencing_type                        [string]  The type of sequencing done in the project. Must be one of "WGS" (whole genome sequencing) or "WES" (whole 
-                                                     exome sequencing). Default is WGS. (accepted: WGS, WES) [default: WGS] 
+                                                     exome sequencing). Default is WGS. (accepted: WGS, WES) 
   --outdir                                 [string]  The output directory where the results will be saved.
   --email                                  [string]  Email address for completion summary.
 
 Reference genome options
-  --genome_build                           [string]  The genome build. Must be one of "hg19" or "hg38". (accepted: hg19, hg38) [default: hg38]
-  --fasta                                  [string]  Path to FASTA genome file. A matching index file (*.fai) must be present in the same directory. 
-                                                     [default: /lustre/scratch126/casm/team273jn/share/pileups/reference_data/hg38/genome.fa] 
+  --genome_build                           [string]  The genome build. Must be one of "hg19" or "hg38". (accepted: hg19, hg38)
+  --fasta                                  [string]  Path to FASTA genome file. A matching index file (*.fai) must be present in the same directory.
 
 hairpin options
-  --snp_database                           [string]  null [default: /lustre/scratch126/casm/team273jn/share/pileups/reference_data/hg38/SNP.vcf.gz]
-  --fragment_threshold                     [integer] null [default: 4]
+  --snp_database                           [string]  Path to the SNP database file required by hairpin
+  --fragment_threshold                     [integer] Fragment threshold use for filtering (Default: 4). Decrease in the context of low coverage or small clones. 
+                                                     Lowering will result in the inclusion of more artefacts. [default: 4] 
 
 cgpVAF options
-  --cgpVAF_normal_bam                      [string]  Path to the in silico normal BAM. [default: 
-                                                     /nfs/cancer_ref01/nst_links/live/2480/PDv38is_wgs/PDv38is_wgs.sample.dupmarked.bam] 
-  --high_depth_bed                         [string]  Path to a reference BED file of high depth regions. [default: 
-                                                     /lustre/scratch126/casm/team273jn/share/pileups/reference_data/hg38/highdepth.bed.gz] 
+  --cgpVAF_normal_bam                      [string]  Path to the in silico normal BAM.
+  --high_depth_bed                         [string]  Path to a reference BED file of high depth regions.
 
 Sequoia options
   --sequoia_beta_binom_shared              [boolean] Only run beta-binomial filter on shared mutations. If FALSE, run on all mutations, before germline / depth 
