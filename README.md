@@ -39,6 +39,6 @@ Here is an example command to run the pipeline.
 nextflow run . \
   -profile test \
   --sample_sheet sample_sheet.csv \
-  --project_type WGS \
+  --sequencing_type WGS \
   --outdir out/
 ```

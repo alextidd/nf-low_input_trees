@@ -17,10 +17,10 @@ process reflag_run {
 
   script:
   if (vcf_type == "pindel") {
-    if (params.project_type == "TGS" || params.project_type == "WES") {
+    if (params.sequencing_type == "TGS" || params.sequencing_type == "WES") {
       // remove FF009 (required exonic)
       flags = "FF009"
-    } else if (params.project_type == "WGS") {
+    } else if (params.sequencing_type == "WGS") {
       // turn off FF016 flag (min 5 reads)  
       // turn off FF018 flag (min depth 10 in query and normal)
       flags = "FF016,FF018"

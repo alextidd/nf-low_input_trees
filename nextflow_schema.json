@@ -4,7 +4,7 @@
   "title": "nf-core/chemotrees pipeline parameters",
   "description": "Use Sequoia to construct phylogenetic trees for blood-derived single cell colonies pre- and post-chemo",
   "type": "object",
-  "definitions": {
+  "defs": {
     "input_output_options": {
       "title": "Input/output options",
       "type": "object",
@@ -23,10 +23,11 @@
           "help_text": "You will need to create a file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row. See [usage docs](https://nf-co.re/chemotrees/usage#samplesheet-input).",
           "fa_icon": "fas fa-file-csv"
         },
-        "project_type": {
+        "sequencing_type": {
           "type": "string",
-          "description": "The type of sequencing done in the project. Must be one of \"WGS\" (whole genome sequencing), \"WES\" (whole exome sequencing) or \"TGS\" (targeted genome sequencing). Default is WGS.",
-          "enum": ["WGS", "WES", "TGS"]
+          "description": "The type of sequencing done in the project. Must be one of \"WGS\" (whole genome sequencing) or \"WES\" (whole exome sequencing). Default is WGS.",
+          "enum": ["WGS", "WES"],
+          "default": "WGS"
         },
         "outdir": {
           "type": "string",
@@ -106,115 +107,138 @@
       "required": ["cgpVAF_normal_bam", "high_depth_bed"]
     },
     "sequoia_options": {
-      "title": "sequoia options",
+      "title": "Sequoia options",
       "type": "object",
-      "description": "Parameters passed to the Sequoia run",
+      "description": "",
       "default": "",
       "properties": {
         "sequoia_beta_binom_shared": {
           "type": "boolean",
-          "default": true
+          "default": true,
+          "description": "Only run beta-binomial filter on shared mutations. If FALSE, run on all mutations, before germline / depth filtering"
         },
         "sequoia_normal_flt": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the dummy normal to exclude from cgpVAF output"
         },
         "sequoia_snv_rho": {
           "type": "number",
-          "default": 0.1
+          "default": 0.1,
+          "description": "Rho value threshold for SNVs"
         },
         "sequoia_indel_rho": {
           "type": "number",
-          "default": 0.15
+          "default": 0.15,
+          "description": "Rho value threshold for indels"
         },
         "sequoia_min_cov": {
           "type": "integer",
-          "default": 10
+          "default": 10,
+          "description": "Lower threshold for mean coverage across variant site"
         },
         "sequoia_max_cov": {
           "type": "integer",
-          "default": 500
+          "default": 500,
+          "description": "Upper threshold for mean coverage across variant site"
         },
         "sequoia_only_snvs": {
           "type": "boolean",
-          "default": true
-        },
-        "sequoia_split_trees": {
-          "type": "boolean",
-          "default": true
+          "default": true,
+          "description": "If indel file is provided, only use SNVs to construct the tree (indels will still be mapped to branches)"
         },
         "sequoia_keep_ancestral": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Keep an ancestral branch in the phylogeny for mutation mapping"
         },
         "sequoia_exclude_samples": {
-          "type": "string"
+          "type": "string",
+          "description": "Option to manually exclude certain samples from the analysis, separate with a comma"
         },
         "sequoia_cnv_samples": {
-          "type": "string"
+          "type": "string",
+          "description": "Samples with CNVs, exclude from germline / depth-based filtering, separate with a comma"
         },
         "sequoia_vaf_absent": {
           "type": "number",
-          "default": 0.1
+          "default": 0.1,
+          "description": "VAF threshold (autosomal) below which a variant is absent"
         },
         "sequoia_vaf_present": {
           "type": "number",
-          "default": 0.3
+          "default": 0.3,
+          "description": "VAF threshold (autosomal) above which a variant is present"
         },
         "sequoia_mixmodel": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Use a binomial mixture model to filter out non-clonal samples?"
         },
         "sequoia_min_clonal_mut": {
           "type": "integer",
-          "default": 35
+          "default": 35,
+          "description": "If using binomial mixture model, minimum number of clonal mutations (in cluster higher than --VAF_treshold_mixmodel) needed to include sample"
         },
         "sequoia_tree_mut_pval": {
           "type": "number",
-          "default": 0.01
+          "default": 0.01,
+          "description": "Pval threshold for treemut's mutation assignment"
         },
         "sequoia_genotype_conv_prob": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Use a binomial mixture model to filter out non-clonal samples?"
         },
         "sequoia_min_pval_for_true_somatic": {
           "type": "number",
-          "default": 0.05
+          "default": 0.05,
+          "description": "Pval threshold for somatic presence if generating a probabilistic genotype matrix"
         },
         "sequoia_min_variant_reads_shared": {
           "type": "integer",
-          "default": 2
+          "default": 2,
+          "description": "Minimum variant reads used in generating a probabilistic genotype matrix"
         },
         "sequoia_min_vaf_shared": {
           "type": "integer",
-          "default": 2
+          "default": 2,
+          "description": "Minimum VAF used in generating a probabilistic genotype matrix"
         },
         "sequoia_create_multi_tree": {
           "type": "boolean",
-          "default": true
+          "default": true,
+          "description": "Convert dichotomous tree from MPBoot to polytomous tree"
         },
         "sequoia_mpboot_path": {
           "type": "string",
-          "default": "./"
+          "default": "./",
+          "description": "Path to MPBoot executable"
         },
         "sequoia_germline_cutoff": {
           "type": "integer",
-          "default": -5
+          "default": -5,
+          "description": "Log10 of germline qval cutoff"
         },
         "sequoia_plot_spectra": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Plot mutational spectra?"
         },
         "sequoia_max_muts_plot": {
           "type": "integer",
-          "default": 5000
+          "default": 5000,
+          "description": "Maximum number of SNVs to plot in mutational spectra"
         },
         "sequoia_lowVAF_filter": {
           "type": "integer",
-          "default": 0
+          "default": 0,
+          "description": "Minimum VAF threshold to filter out subclonal variants. Disabled by default."
         },
         "sequoia_lowVAF_filter_positive_samples": {
           "type": "integer",
-          "default": 0
+          "default": 0,
+          "description": "Read number to apply exact binomial filter for samples with more than given number of reads. Disabled by default."
         },
         "sequoia_VAF_treshold_mixmodel": {
           "type": "number",
-          "default": 0.3
+          "default": 0.3,
+          "description": "VAF threshold for the mixture modelling step to consider a sample clonal"
         }
       }
     },
@@ -350,12 +374,6 @@
           "fa_icon": "fas fa-remove-format",
           "hidden": true
         },
-        "monochrome_logs": {
-          "type": "boolean",
-          "description": "Do not use coloured log outputs.",
-          "fa_icon": "fas fa-palette",
-          "hidden": true
-        },
         "hook_url": {
           "type": "string",
           "description": "Incoming hook URL for messaging service",
@@ -392,41 +410,44 @@
           "help_text": "Allows string values that are parseable as numbers or booleans. For further information see [JSONSchema docs](https://github.com/everit-org/json-schema#lenient-mode)."
         },
         "validationS3PathCheck": {
-          "type": "boolean"
+          "type": "boolean",
+          "hidden": true
         },
         "validationSkipDuplicateCheck": {
-          "type": "boolean"
+          "type": "boolean",
+          "hidden": true
         },
         "monochromeLogs": {
-          "type": "boolean"
+          "type": "boolean",
+          "hidden": true
         }
       }
     }
   },
   "allOf": [
     {
-      "$ref": "#/definitions/input_output_options"
+      "$ref": "#/defs/input_output_options"
     },
     {
-      "$ref": "#/definitions/reference_genome_options"
+      "$ref": "#/defs/reference_genome_options"
     },
     {
-      "$ref": "#/definitions/hairpin_options"
+      "$ref": "#/defs/hairpin_options"
     },
     {
-      "$ref": "#/definitions/cgpvaf_options"
+      "$ref": "#/defs/cgpvaf_options"
     },
     {
-      "$ref": "#/definitions/sequoia_options"
+      "$ref": "#/defs/sequoia_options"
     },
     {
-      "$ref": "#/definitions/institutional_config_options"
+      "$ref": "#/defs/institutional_config_options"
     },
     {
-      "$ref": "#/definitions/max_job_request_options"
+      "$ref": "#/defs/max_job_request_options"
     },
     {
-      "$ref": "#/definitions/generic_options"
+      "$ref": "#/defs/generic_options"
     }
   ]
 }
