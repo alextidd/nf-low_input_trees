@@ -1,6 +1,9 @@
 #!/bin/bash
 
-# use first 3 samples from 1st donor from sample sheet for test run
-cat /lustre/scratch126/casm/team154pc/at31/chemo_trees/out/metadata/sample_sheet.csv |
-head -4 \
-> test/data/sample_sheet.csv
+# use 4 samples from 2 donor from sample sheet for test run (must test both
+# inter-sample handling and inter-donor handling of channel behaviour)
+# TODO: try to subsample (once met/bas requirement sorted out) for quicker tests
+ss=/lustre/scratch126/casm/team154pc/at31/chemo_trees/out/metadata/sample_sheet.csv
+( head -1 $ss ;
+  grep 'PD63266ar\|PD63266ac\|PD63268bf\|PD63268ac' $ss ;
+) | cat > test/data/sample_sheet.csv

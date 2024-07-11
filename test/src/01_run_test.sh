@@ -4,4 +4,10 @@
 module load singularity
 
 # run the nextflow test
-nextflow run . -profile test -w test/work/
+nextflow run . \
+  -profile test,sanger_hg38 \
+  -w test/work/ \
+  -with-trace \
+  -with-dag test/dag.png \
+  -with-report test/report.html \
+  -resume
