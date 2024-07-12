@@ -46,9 +46,10 @@ $ module load singularity
 ## Usage
 
 It is most important to set the `--genome_build` and `--sequencing_type`
-correctly and to provide reference files. If running from the Sanger farm and
-using build hg38, paths to the reference files used by `hairpin`, `cgpVAF`, and
-`Sequoia` can be set using the `sanger_hg38` profile:
+correctly and to provide reference files. If running from the Wellcome Sanger
+Institute's LSF cluter and using build hg38, paths to the reference files used
+by `hairpin`, `cgpVAF`, and `Sequoia` can be set using the `sanger_hg38`
+profile:
 
 ```
 $ nextflow run . \
@@ -56,6 +57,18 @@ $ nextflow run . \
   --genome_build hg38 \
   --sequencing_type WGS \
   -profile sanger_hg38
+```
+
+The sample sheet must be a CSV file containing the ID columns `donor_id` and 
+`sample_id`, and the file path columns `bam`, `pindel_vcf`, and `caveman_vcf`. 
+Here is an example sample sheet:
+
+```
+donor_id,sample_id,bam,pindel_vcf,caveman_vcf
+PD63266,PD63266ac,/path/to/PD63266ac.sample.dupmarked.bam,/path/to/PD63266ac.pindel.annot.vcf.gz,/path/to/PD63266ac.caveman_c.annot.vcf.gz
+PD63266,PD63266ar,/path/to/PD63266ar.sample.dupmarked.bam,/path/to/PD63266ar.pindel.annot.vcf.gz,/path/to/PD63266ar.caveman_c.annot.vcf.gz
+PD63268,PD63268ac,/path/to/PD63268ac.sample.dupmarked.bam,/path/to/PD63268ac.pindel.annot.vcf.gz,/path/to/PD63268ac.caveman_c.annot.vcf.gz
+PD63268,PD63268bf,/path/to/PD63268bf.sample.dupmarked.bam,/path/to/PD63268bf.pindel.annot.vcf.gz,/path/to/PD63268bf.caveman_c.annot.vcf.gz
 ```
 
 Here is an example command to run the pipeline in `test` mode:
