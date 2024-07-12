@@ -9,7 +9,7 @@ sequencing. The steps are as follows.
 
 1. Reflag the VCFs to remove some filters that have been found to be too 
 stringent. The flags that are removed depend on the type of experiment (WGS vs
-WES vs TGS) and the variant type (SNV vs indel).
+WES) and the variant type (SNV vs indel).
 
 2. Filter the variants.
 
@@ -33,11 +33,11 @@ union of variant sites in the set of related samples from each donor.
 
 ## Requirements
 
-In order to run the pipeline you must have 
-[Nextflow](https://www.nextflow.io/docs/latest/install.html) and 
-[Singularity](https://docs.sylabs.io/guides/3.5/user-guide/introduction.html) 
-installed. If running from the Sanger farm, simply load the Singularity module 
-before running the Nextflow command:
+In order to run the pipeline you must have
+[Nextflow](https://www.nextflow.io/docs/latest/install.html) and
+[Singularity](https://docs.sylabs.io/guides/3.5/user-guide/introduction.html)
+installed. If running from the Wellcome Sanger Institute's LSF cluster, simply
+load the Singularity module before running the Nextflow command:
 
 ```
 $ module load singularity
@@ -47,7 +47,7 @@ $ module load singularity
 
 It is most important to set the `--genome_build` and `--sequencing_type`
 correctly and to provide reference files. If running from the Wellcome Sanger
-Institute's LSF cluter and using build hg38, paths to the reference files used
+Institute's LSF cluster and using build hg38, paths to the reference files used
 by `hairpin`, `cgpVAF`, and `Sequoia` can be set using the `sanger_hg38`
 profile:
 
