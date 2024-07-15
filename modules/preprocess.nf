@@ -22,6 +22,7 @@ workflow preprocess {
   | set { ch_cgpVAF_normal_bam }
 
   // get metadata + bam paths
+  // TODO: check if we actually need bas and met files
   Channel.fromList(samplesheetToList(params.sample_sheet, "./assets/schema_sample_sheet.json"))
   | map { meta, bam, caveman_vcf, pindel_vcf ->
           [meta, 
@@ -37,14 +38,14 @@ workflow preprocess {
   // get caveman vcfs
   ch_samples 
   | map { meta, caveman_vcf, pindel_vcf, bam, bai, bas, met ->
-          [meta, "caveman", caveman_vcf, bam, bai, bas, met]
+          [meta + [vcf_type: "caveman"], caveman_vcf, bam, bai, bas, met]
   }
   | set { ch_caveman }
 
   // get pindel vcfs
   ch_samples 
   | map { meta, caveman_vcf, pindel_vcf, bam, bai, bas, met ->
-          [meta, "pindel", pindel_vcf, bam, bai, bas, met]
+          [meta + [vcf_type: "pindel"], pindel_vcf, bam, bai, bas, met]
   }
   | set { ch_pindel }
 

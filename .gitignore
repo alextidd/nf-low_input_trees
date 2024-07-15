@@ -4,3 +4,5 @@ out/
 .nextflow.log*
 .nextflow/
 log/
+trace-*
+report.html

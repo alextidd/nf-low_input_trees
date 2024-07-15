@@ -1,16 +1,16 @@
 // filter VCF on FILTER=PASS and CLPM=0 and ASMD > 140
 process hairpin_preselect {
-  tag "${meta.sample_id}:${vcf_type}"
+  tag "${meta.sample_id}:${meta.vcf_type}"
   label "normal"
 
   input:
   tuple val(meta), 
-        val(vcf_type), path(vcf), 
+        path(vcf), 
         path(bam), path(bai), path(bas), path(met)
 
   output:
   tuple val(meta), 
-        val(vcf_type), path(vcf), 
+        path(vcf), 
         path(bam), path(bai), path(bas), path(met),
         path("${meta.sample_id}.preselected.vcf")
 
@@ -24,18 +24,18 @@ process hairpin_preselect {
 
 // convert the VCF file to ANNOVAR format (Chr,Start,End,Ref,Alt)
 process hairpin_imitateANNOVAR {
-    tag "${meta.sample_id}:${vcf_type}"
+    tag "${meta.sample_id}:${meta.vcf_type}"
     label "normal"
 
     input:
     tuple val(meta), 
-          val(vcf_type), path(vcf),
+          path(vcf),
           path(bam), path(bai), path(bas), path(met),
           path(preselected_vcf)
 
     output:
     tuple val(meta), 
-          val(vcf_type), path(vcf),
+          path(vcf),
           path(bam), path(bai), path(bas), path(met),
           path(preselected_vcf), 
           path("${meta.sample_id}.preselected.annovar.txt")
@@ -49,19 +49,19 @@ process hairpin_imitateANNOVAR {
 }
 
 process hairpin_annotateBAMStatistics {
-  tag "${meta.sample_id}:${vcf_type}"
+  tag "${meta.sample_id}:${meta.vcf_type}"
   label "normal"
 
   input:
   tuple val(meta), 
-        val(vcf_type), path(vcf), 
+        path(vcf), 
         path(bam), path(bai), path(bas), path(met),
         path(preselected_vcf), 
         path(pre_annovar)
 
   output:
   tuple val(meta), 
-        val(vcf_type), path(vcf), 
+        path(vcf), 
         path(bam), path(bai), path(bas), path(met),
         path(preselected_vcf), 
         path(pre_annovar), 
@@ -78,12 +78,12 @@ process hairpin_annotateBAMStatistics {
 }
 
 process hairpin_additionalBAMStatistics {
-  tag "${meta.sample_id}:${vcf_type}"
+  tag "${meta.sample_id}:${meta.vcf_type}"
   label "normal10gb"
   
   input:
   tuple val(meta), 
-        val(vcf_type), path(vcf), 
+        path(vcf), 
         path(bam), path(bai), path(bas), path(met),
         path(preselected_vcf), 
         path(pre_annovar), 
@@ -93,7 +93,7 @@ process hairpin_additionalBAMStatistics {
 
   output:
   tuple val(meta), 
-        val(vcf_type), path(vcf), 
+        path(vcf), 
         path(bam), path(bai), path(bas), path(met),
         path(preselected_vcf), 
         path(pre_annovar), 
@@ -113,15 +113,15 @@ process hairpin_additionalBAMStatistics {
 }
 
 process hairpin_filtering {
-  tag "${meta.sample_id}:${vcf_type}"
+  tag "${meta.sample_id}:${meta.vcf_type}"
   label "normal"
-  publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
+  publishDir "${params.outdir}/${meta.donor_id}/${meta.vcf_type}/${meta.sample_id}", 
     mode: "copy",
     pattern: "*_passed.vcf"
 
   input:
   tuple val(meta), 
-        val(vcf_type), path(vcf), 
+        path(vcf), 
         path(bam), path(bai), path(bas), path(met),
         path(preselected_vcf), 
         path(pre_annovar), 
@@ -130,7 +130,7 @@ process hairpin_filtering {
 
   output:
   tuple val(meta), 
-        val(vcf_type), path(vcf), 
+        path(vcf), 
         path(bam), path(bai), path(bas), path(met),
         path("${meta.sample_id}_passed.vcf")
 
@@ -146,17 +146,17 @@ process hairpin_filtering {
 }
 
 process sync_pindels {
-  tag "${meta.sample_id}:${vcf_type}"
+  tag "${meta.sample_id}:${meta.vcf_type}"
   label "normal"
   
   input:
   tuple val(meta), 
-        val(vcf_type), path(vcf), 
+        path(vcf), 
         path(bam), path(bai), path(bas), path(met)
 
   output:
   tuple val(meta), 
-        val(vcf_type), path(vcf), 
+        path(vcf), 
         path(bam), path(bai), path(bas), path(met),
         path("${meta.sample_id}_passed.vcf")
 
@@ -174,11 +174,11 @@ workflow hairpin {
   // branch caveman and pindel outputs
   ch_input
   | branch {
-      meta, vcf_type, vcf, bam, bai, bas, met ->
-      caveman: vcf_type == "caveman"
-        return tuple(meta, vcf_type, vcf, bam, bai, bas, met)
-      pindel: vcf_type == "pindel"
-        return tuple(meta, vcf_type, vcf, bam, bai, bas, met)
+      meta, vcf, bam, bai, bas, met ->
+      caveman: meta.vcf_type == "caveman"
+        return tuple(meta, vcf, bam, bai, bas, met)
+      pindel: meta.vcf_type == "pindel"
+        return tuple(meta, vcf, bam, bai, bas, met)
   } | set { ch_branched }
 
   // run hairpin on caveman
@@ -195,7 +195,7 @@ workflow hairpin {
   | hairpin_filtering
 
   // get pindel channel into same format as hairpin output
-  // (meta, vcf_type, vcf, bam, bai, bas, met, vcf_passed)
+  // (meta, vcf, bam, bai, bas, met, vcf_passed)
   // (vcf_passed here is the same file as vcf, but unzipped and renamed)
   ch_branched.pindel
   | sync_pindels

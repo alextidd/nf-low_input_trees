@@ -1,11 +1,10 @@
 process cgpVAF_run {
-  tag "${meta.donor_id}:${vcf_type}:${chr}"
+  tag "${meta.donor_id}:${meta.vcf_type}:${chr}"
   label "week100gb"
   errorStrategy = 'retry'
 
   input: 
   tuple val(meta),
-        val(vcf_type), 
         val(sample_ids),
         path(vcfs), 
         path(bams), path(bais), path(bass), path(mets),
@@ -20,13 +19,12 @@ process cgpVAF_run {
 
   output:
   tuple val(meta),
-        val(vcf_type),
         path("tmpvaf_*/${chr}_progress.out"),
         path("tmpvaf_*/tmp_${chr}.tsv"),
         path("tmpvaf_*/tmp_${chr}.vcf")
 
   script:
-  def variant_type = (vcf_type == "caveman") ? "snp" : (vcf_type == "pindel") ? "indel" : ""
+  def variant_type = (meta.vcf_type == "caveman") ? "snp" : (meta.vcf_type == "pindel") ? "indel" : ""
   """
   module load cgpVAFcommand/2.5.0
 
@@ -51,19 +49,14 @@ process cgpVAF_run {
 }
 
 process cgpVAF_concat {
-  tag "${meta.donor_id}:${vcf_type}"
+  tag "${meta.donor_id}:${meta.vcf_type}"
   label "week100gb"
   errorStrategy = "retry"
-  publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/", 
+  publishDir "${params.outdir}/${meta.donor_id}/${meta.vcf_type}/", 
     mode: "copy"
 
   input: 
   tuple val(meta),
-        val(vcf_type), 
-        val(sample_ids),
-        path(vcfs), 
-        path(bams), path(bais), path(bass), path(mets),
-        path(bed_intervals),
         path(tmpvaf_progress),
         path(tmpvaf_tsv),
         path(tmpvaf_vcf),
@@ -76,10 +69,10 @@ process cgpVAF_concat {
 
   output:
   tuple val(meta),   
-        path("${meta.donor_id}_${vcf_type}_vaf.tsv")
+        path("${meta.donor_id}_${meta.vcf_type}_vaf.tsv")
   
   script:
-  def variant_type = (vcf_type == "caveman") ? "snp" : (vcf_type == "pindel") ? "indel" : ""
+  def variant_type = (meta.vcf_type == "caveman") ? "snp" : (meta.vcf_type == "pindel") ? "indel" : ""
   """
   module load cgpVAFcommand/2.5.0
   
@@ -114,7 +107,7 @@ process cgpVAF_concat {
     exit 1
   elif (( n_files == 1 )) ; then
     grep -v '^##' \${cgpVAF_out[0]} \
-    > ${meta.donor_id}_${vcf_type}_vaf.tsv
+    > ${meta.donor_id}_${meta.vcf_type}_vaf.tsv
   else
     echo "Error: No files match the pattern *_vaf.tsv"
     exit 1
@@ -137,21 +130,25 @@ workflow cgpVAF {
   }
 
   // run cgpVAF by chromosome
+  // TODO: figure out how to run cgpVAF in batches within patients
   ch_input 
   | combine(ch_fasta)
   | combine(ch_high_depth_bed)
   | combine(ch_cgpVAF_normal_bam)
-  | combine(chromosomes) 
+  | combine(chromosomes)
   | cgpVAF_run
 
   // combine chromosomal channels
   cgpVAF_run.out
-  | groupTuple(by: [0,1])
+  | view
+  | map { meta, chr_progress, chr_tsv, chr_vcf ->
+          [groupKey(meta, 24), chr_progress, chr_tsv, chr_vcf] } 
+  | groupTuple
   | set { ch_cgpVAF_chrs }
 
   // concat cgpVAF outputs
   ch_input
-  | combine(ch_cgpVAF_chrs, by: [0,1])
+  | combine(ch_cgpVAF_chrs)
   | combine(ch_fasta)
   | combine(ch_high_depth_bed)
   | combine(ch_cgpVAF_normal_bam)

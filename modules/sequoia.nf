@@ -20,7 +20,7 @@ process sequoia_run {
     --cgpvaf_output ${cgpVAF_out.join(',')} \
     --genomeFile ${fasta} \
     --output_dir sequoia/ \
-    --ncores $task.cpus \
+    --ncores ${task.cpus} \
     --beta_binom_shared ${params.sequoia_beta_binom_shared} \
     --normal_flt ${params.sequoia_normal_flt} \
     --snv_rho ${params.sequoia_snv_rho} \
@@ -55,7 +55,7 @@ process sequoia_run {
     --genomeFile ${fasta} \
     --output_dir sequoia/ \
     --split_trees F \
-    --ncores $task.cpus \
+    --ncores ${task.cpus} \
     --beta_binom_shared ${params.sequoia_beta_binom_shared} \
     --normal_flt ${params.sequoia_normal_flt} \
     --snv_rho ${params.sequoia_snv_rho} \

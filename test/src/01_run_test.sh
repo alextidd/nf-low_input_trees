@@ -8,6 +8,6 @@ nextflow run . \
   -profile test,sanger_hg38 \
   -w test/work/ \
   -with-trace \
-  -with-dag test/dag.png \
+  -with-dag test/dag.html \
   -with-report test/report.html \
   -resume

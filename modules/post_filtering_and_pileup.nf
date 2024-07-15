@@ -1,24 +1,24 @@
 process post_filtering {
-  tag "${meta.sample_id}:${vcf_type}"
+  tag "${meta.sample_id}:${meta.vcf_type}"
   label "normal"
-  publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
+  publishDir "${params.outdir}/${meta.donor_id}/${meta.vcf_type}/${meta.sample_id}", 
     mode: "copy",
     pattern: "*_postfiltered.vcf"
 
   input:
   tuple val(meta),
-        val(vcf_type), path(vcf), 
+        path(vcf), 
         path(bam), path(bai), path(bas), path(met),
         path(vcf_passed, stageAs: "passed.vcf")
 
   output:
   tuple val(meta),
-        val(vcf_type), path(vcf), 
+        path(vcf), 
         path(bam), path(bai), path(bas), path(met),
         path("${meta.sample_id}_postfiltered.vcf")
 
   script:
-  if (vcf_type == "caveman") {
+  if (meta.vcf_type == "caveman") {
     """
     # apply filters as described in https://confluence.sanger.ac.uk/display/CAS/hairpin
     # FILTER = PASS
@@ -31,7 +31,7 @@ process post_filtering {
       ${vcf_passed} \
     > ${meta.sample_id}_postfiltered.vcf
     """
-  } else if (vcf_type == "pindel") {
+  } else if (meta.vcf_type == "pindel") {
     """
     # apply pass filter (FILTER = PASS)
 
@@ -45,15 +45,14 @@ process post_filtering {
 }
 
 process pileup {
-  tag "${meta.donor_id}:${vcf_type}"
+  tag "${meta.donor_id}:${meta.vcf_type}"
   label "normal"
-  publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/", 
+  publishDir "${params.outdir}/${meta.donor_id}/${meta.vcf_type}/", 
     mode: "copy",
     pattern: "*_intervals.bed"
   
   input:
   tuple val(meta),
-        val(vcf_type), 
         val(sample_ids),
         path(vcfs), 
         path(bams), path(bais), path(bass), path(mets),
@@ -61,7 +60,6 @@ process pileup {
 
   output:
   tuple val(meta),
-        val(vcf_type), 
         val(sample_ids),
         path(vcfs), 
         path(bams), path(bais), path(bass), path(mets),
@@ -85,28 +83,11 @@ workflow post_filtering_and_pileup {
   ch_input
   | post_filtering
   // group vcfs by donor, pileup
-  | map { meta, vcf_type, vcf, bam, bai, bas, met, vcf_postfiltered ->
-          [meta.subMap('donor_id'), 
-           vcf_type, meta.sample_id, vcf, bam, bai, bas, met, vcf_postfiltered] }
-  | groupTuple(by: [0,1])
+  | map { meta, vcf, bam, bai, bas, met, vcf_postfiltered ->
+          [meta.subMap("donor_id", "vcf_type"), 
+           meta.sample_id, vcf, bam, bai, bas, met, vcf_postfiltered] }
+  | groupTuple
   | pileup
-
-  // ch_input
-  // | post_filtering
-  // | map { meta, vcf_type, vcf, bam, bai, bas, met, vcf_postfiltered ->
-  //         [meta.subMap('donor_id'), 
-  //          vcf_type, meta.sample_id, vcf, bam, bai, bas, met, vcf_postfiltered] }
-  // | set { ch_to_batch }
-
-  // // group vcfs by donor, pileup intervals
-  // ch_to_batch
-  // | groupTuple(by: [0,1])
-  // | pileup
-
-  // // batch vcfs / bams by 10 within donors, combine with bed intervals
-  // ch_to_batch
-  // | flatMap { meta, vcf_type, vcf, bam, bai, bas, met, vcf_postfiltered -> 
-  //             vcf.collate(50).collect { chunk -> [id, chunk] } }
 
   emit:
   pileup.out

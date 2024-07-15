@@ -1,23 +1,23 @@
 process reflag_run {
-  tag "${meta.sample_id}:${vcf_type}"
+  tag "${meta.sample_id}:${meta.vcf_type}"
   label "normal4core"
-  publishDir "${params.outdir}/${meta.donor_id}/${vcf_type}/${meta.sample_id}", 
+  publishDir "${params.outdir}/${meta.donor_id}/${meta.vcf_type}/${meta.sample_id}", 
     mode: "copy",
     pattern: "*_reflagged.vcf.gz"
 
   input:
   tuple val(meta), 
-        val(vcf_type), path(vcf), 
+        path(vcf), 
         path(bam), path(bai), path(bas), path(met)
 
   output:
   tuple val(meta), 
-        val(vcf_type), path("${meta.sample_id}_reflagged.vcf.gz"), 
+        path("${meta.sample_id}_reflagged.vcf.gz"), 
         path(bam), path(bai), path(bas), path(met)
 
   script:
-  if (vcf_type == "pindel") {
-    if (params.sequencing_type == "TGS" || params.sequencing_type == "WES") {
+  if (meta.vcf_type == "pindel") {
+    if (params.sequencing_type == "WES") {
       // remove FF009 (required exonic)
       flags = "FF009"
     } else if (params.sequencing_type == "WGS") {
@@ -25,7 +25,7 @@ process reflag_run {
       // turn off FF018 flag (min depth 10 in query and normal)
       flags = "FF016,FF018"
     } 
-  } else if (vcf_type == "caveman") {
+  } else if (meta.vcf_type == "caveman") {
     // turn off MNP flag (requires VAF > 0.2 if any mutant reads in normal)
     flags = "MNP"
   }

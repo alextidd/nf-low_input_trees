@@ -23,7 +23,6 @@ workflow {
       exit 0
     }
 
-
     // validate the input parameters
     validateParameters()
 
