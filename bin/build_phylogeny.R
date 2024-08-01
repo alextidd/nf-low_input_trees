@@ -1,12 +1,12 @@
 #!/usr/bin/env Rscript
-if(!require("optparse", character.only=T,quietly = T, warn.conflicts = F)){
-  install.packages("optparse",repos = "http://cran.us.r-project.org")
-  library("optparse", character.only=T,quietly = T, warn.conflicts = F)
+if(!require("optparse", character.only = T, quietly = T, warn.conflicts = F)){
+  install.packages("optparse", repos = "http://cran.us.r-project.org")
+  library("optparse", character.only = T, quietly = T, warn.conflicts = F)
 }
 #----------------------------------
 # Input options
 #----------------------------------
-option_list = list(
+option_list <- list(
   make_option(c("-i", "--donor_id"), action="store", default='Patient', type='character', help="Patient/donor ID to add to names of output files"),
   make_option(c("-v", "--input_nv"), action="store", default=NULL, type='character', help="Input NV matrix (rows are variants, columns are samples)"),
   make_option(c("-r", "--input_nr"), action="store", default=NULL, type='character', help="Input NR matrix (rows are variants, columns are samples)"),
@@ -43,7 +43,7 @@ option_list = list(
   make_option(c("--lowVAF_filter_positive_samples"), action="store", default=0, type='numeric', help="Read number to apply exact binomial filter for samples with more than given number of reads. Disabled by default."),
   make_option(c("--VAF_treshold_mixmodel"), action="store", default=0.3, type='numeric', help="VAF threshold for the mixture modelling step to consider a sample clonal")
 )
-opt = parse_args(OptionParser(option_list=option_list, add_help_option=T))
+opt <- parse_args(OptionParser(option_list = option_list, add_help_option = TRUE))
 
 print(opt)
 

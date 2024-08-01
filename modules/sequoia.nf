@@ -6,8 +6,8 @@ process sequoia_run {
 
   input:
   tuple val(meta),
-        path(cgpVAF_out)
-  tuple path(fasta), path(fai)
+        path(cgpVAF_out),
+        path(fasta), path(fai)
   
   output:
     path("sequoia/*")
@@ -15,7 +15,7 @@ process sequoia_run {
   script:
   """
   # plot trees of SNVs and indels separately
-  Rscript build_phylogeny.R \
+  build_phylogeny.R \
     --donor_id ${meta.donor_id} \
     --cgpvaf_output ${cgpVAF_out.join(',')} \
     --genomeFile ${fasta} \
@@ -49,7 +49,7 @@ process sequoia_run {
     --VAF_treshold_mixmodel ${params.sequoia_VAF_treshold_mixmodel}
   
   # plot tree integrating SNVs and indels
-  Rscript build_phylogeny.R \
+  build_phylogeny.R \
     --donor_id ${meta.donor_id} \
     --cgpvaf_output ${cgpVAF_out.join(',')} \
     --genomeFile ${fasta} \
@@ -91,6 +91,7 @@ workflow sequoia {
   ch_fasta
 
   main:
-  sequoia_run(ch_input,
-              ch_fasta)
+  ch_input 
+  | combine(ch_fasta)
+  | sequoia_run
 }

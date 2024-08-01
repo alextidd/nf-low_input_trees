@@ -57,6 +57,10 @@ process cgpVAF_concat {
 
   input: 
   tuple val(meta),
+        val(sample_ids),
+        path(vcfs),
+        path(bams), path(bais), path(bass), path(mets),
+        path(bed_intervals),
         path(tmpvaf_progress),
         path(tmpvaf_tsv),
         path(tmpvaf_vcf),
@@ -140,20 +144,22 @@ workflow cgpVAF {
 
   // combine chromosomal channels
   cgpVAF_run.out
-  | view
   | map { meta, chr_progress, chr_tsv, chr_vcf ->
           [groupKey(meta, 24), chr_progress, chr_tsv, chr_vcf] } 
   | groupTuple
   | set { ch_cgpVAF_chrs }
 
-  // concat cgpVAF outputs
+  // concat cgpVAF outputs, group channels by donor
   ch_input
-  | combine(ch_cgpVAF_chrs)
+  | combine(ch_cgpVAF_chrs, by: 0)
   | combine(ch_fasta)
   | combine(ch_high_depth_bed)
   | combine(ch_cgpVAF_normal_bam)
   | cgpVAF_concat
+  | map { meta, cgpVAF_out -> 
+          [meta.subMap("donor_id", "vcf_type"), cgpVAF_out]}
   | groupTuple
+  | view
   | set { ch_cgpVAF_out }
 
   emit:
