@@ -3,6 +3,7 @@ include { samplesheetToList } from 'plugin/nf-schema'
 workflow preprocess {
   main:
   
+  // TODO: change these reference files from channels to files
   // get fasta + fai
   Channel.fromPath(params.fasta)
   | map { fasta -> [fasta, file(fasta + ".fai", checkIfExists: true)] } 
