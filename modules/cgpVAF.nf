@@ -1,7 +1,7 @@
 process cgpVAF_run {
   tag "${meta.donor_id}:${meta.vcf_type}:${chr}"
   label "week100gb"
-  errorStrategy = 'retry'
+  errorStrategy { (task.attempt < 5) ? 'retry' : 'ignore' }
 
   input: 
   tuple val(meta),
