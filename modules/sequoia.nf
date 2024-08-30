@@ -10,7 +10,7 @@ process sequoia_run {
         path(fasta), path(fai)
   
   output:
-    path("sequoia/*")
+  path("sequoia/*")
 
   script:
   """
