@@ -7,6 +7,4 @@ module load singularity
 nextflow run . \
   -profile test,sanger_hg38 \
   -w test/work/ \
-  -with-dag test/dag.html \
-  -with-report test/report.html \
   -resume

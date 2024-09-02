@@ -1,0 +1,2 @@
+[console_scripts]
+hairpin2 = hairpin2.main:main_cli

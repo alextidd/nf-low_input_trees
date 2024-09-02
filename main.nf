@@ -9,7 +9,7 @@ nextflow.enable.dsl=2
 include { validateParameters; paramsHelp; paramsSummaryLog; samplesheetToList } from 'plugin/nf-schema'
 include { preprocess                } from './modules/preprocess.nf'
 include { reflag                    } from './modules/reflag.nf'
-include { hairpin                   } from './modules/hairpin.nf'
+include { hairpin2                  } from './modules/hairpin2.nf'
 include { post_filtering_and_pileup } from './modules/post_filtering_and_pileup.nf'
 include { cgpVAF                    } from './modules/cgpVAF.nf'
 include { sequoia                   } from './modules/sequoia.nf'
@@ -38,10 +38,10 @@ workflow {
     reflag(preprocess.out.ch_input)
 
     // run hairpin
-    hairpin(reflag.out)
+    hairpin2(reflag.out)
 
     // run post-filtering and pileup
-    post_filtering_and_pileup(hairpin.out)
+    post_filtering_and_pileup(hairpin2.out)
 
     // run cgpVAF
     cgpVAF(post_filtering_and_pileup.out, 
