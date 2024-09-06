@@ -38,14 +38,14 @@ process reflag_run {
     fi
   done
 
-  # if flags exist reflag
+  # if flags exist, reflag
   if [ \${#present_flags[@]} -gt 0 ]; then
     vcf_flag_modifier.py \
       -f ${vcf} \
       -o ${meta.sample_id}_reflagged.vcf \
       \${present_flags[@]}
   else 
-    zcat ${vcf} > ${meta.sample_id}_reflagged.vcf
+    cp ${vcf} ${meta.sample_id}_reflagged.vcf
   fi
   """
 }
