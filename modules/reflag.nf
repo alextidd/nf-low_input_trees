@@ -1,9 +1,6 @@
 process reflag_run {
   tag "${meta.sample_id}:${meta.vcf_type}"
   label "normal4core"
-  publishDir "${params.outdir}/${meta.donor_id}/${meta.vcf_type}/${meta.sample_id}", 
-    mode: "copy",
-    pattern: "*_reflagged.vcf.gz"
 
   input:
   tuple val(meta), 
@@ -12,7 +9,7 @@ process reflag_run {
 
   output:
   tuple val(meta), 
-        path("${meta.sample_id}_reflagged.vcf.gz"), 
+        path("${meta.sample_id}_reflagged.vcf"), 
         path(bam), path(bai), path(bas), path(met)
 
   script:
@@ -47,10 +44,8 @@ process reflag_run {
       -f ${vcf} \
       -o ${meta.sample_id}_reflagged.vcf \
       \${present_flags[@]}
-    # must restore vcf naming convention
-    gzip ${meta.sample_id}_reflagged.vcf 
   else 
-    cp ${vcf} ${meta.sample_id}_reflagged.vcf.gz
+    zcat ${vcf} > ${meta.sample_id}_reflagged.vcf
   fi
   """
 }
