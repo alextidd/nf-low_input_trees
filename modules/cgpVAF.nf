@@ -10,12 +10,18 @@ process cgpVAF_run {
         path(bams), path(bais), path(bass), path(mets),
         path(bed_intervals),
         path(fasta), path(fai),
+        val(chr),
         path(high_depth_bed), path(high_depth_tbi),
         path(cgpVAF_normal_bam), 
         path(cgpVAF_normal_bas), 
         path(cgpVAF_normal_bai),
-        path(cgpVAF_normal_met),
-        val(chr)
+        path(cgpVAF_normal_met)
+  tuple path(fasta), path(fai)
+  tuple path(high_depth_bed), path(high_depth_tbi)
+  tuple path(cgpVAF_normal_bam),
+        path(cgpVAF_normal_bas),
+        path(cgpVAF_normal_bai),
+        path(cgpVAF_normal_met)
 
   output:
   tuple val(meta),
@@ -64,10 +70,10 @@ process cgpVAF_concat {
         path(tmpvaf_progress),
         path(tmpvaf_tsv),
         path(tmpvaf_vcf),
-        path(fasta), path(fai),
-        path(high_depth_bed), path(high_depth_tbi),
-        path(cgpVAF_normal_bam), 
-        path(cgpVAF_normal_bas), 
+  tuple path(fasta), path(fai)
+  tuple path(high_depth_bed), path(high_depth_tbi)
+  tuple path(cgpVAF_normal_bam),
+        path(cgpVAF_normal_bas),
         path(cgpVAF_normal_bai),
         path(cgpVAF_normal_met)
 
@@ -122,9 +128,9 @@ process cgpVAF_concat {
 workflow cgpVAF {
   take:
   ch_input
-  ch_fasta
-  ch_high_depth_bed
-  ch_cgpVAF_normal_bam
+  fasta
+  high_depth_bed
+  cgpVAF_normal_bam
 
   main:
   // create value channel of the chromosomes
@@ -135,12 +141,8 @@ workflow cgpVAF {
 
   // run cgpVAF by chromosome
   // TODO: figure out how to run cgpVAF in batches within patients
-  ch_input 
-  | combine(ch_fasta)
-  | combine(ch_high_depth_bed)
-  | combine(ch_cgpVAF_normal_bam)
-  | combine(chromosomes)
-  | cgpVAF_run
+  cgpVAF_run(ch_input.combine(chromosomes),
+             fasta, high_depth_bed, cgpVAF_normal_bam)
 
   // combine chromosomal channels
   cgpVAF_run.out
@@ -150,12 +152,8 @@ workflow cgpVAF {
   | set { ch_cgpVAF_chrs }
 
   // concat cgpVAF outputs, group channels by donor
-  ch_input
-  | combine(ch_cgpVAF_chrs, by: 0)
-  | combine(ch_fasta)
-  | combine(ch_high_depth_bed)
-  | combine(ch_cgpVAF_normal_bam)
-  | cgpVAF_concat
+  cgpVAF_concat(ch_input.combine(ch_cgpVAF_chrs, by: 0),
+                fasta, high_depth_bed, cgpVAF_normal_bam)
   | map { meta, cgpVAF_out -> 
           [meta.subMap("donor_id", "vcf_type"), cgpVAF_out]}
   | groupTuple

@@ -45,12 +45,12 @@ workflow {
 
     // run cgpVAF
     cgpVAF(post_filtering_and_pileup.out, 
-           preprocess.out.ch_fasta, 
-           preprocess.out.ch_high_depth_bed,
-           preprocess.out.ch_cgpVAF_normal_bam)
+           preprocess.out.fasta, 
+           preprocess.out.high_depth_bed,
+           preprocess.out.cgpVAF_normal_bam)
 
     // run sequoia
     sequoia(cgpVAF.out,
-            preprocess.out.ch_fasta) 
+            preprocess.out.fasta)
 }
 

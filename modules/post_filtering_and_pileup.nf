@@ -9,11 +9,10 @@ process post_filtering {
   tuple val(meta),
         path(vcf), 
         path(bam), path(bai), path(bas), path(met),
-        path(vcf_passed, stageAs: "passed.vcf")
 
   output:
   tuple val(meta),
-        path(vcf), 
+        path(vcf),
         path(bam), path(bai), path(bas), path(met),
         path("${meta.sample_id}_postfiltered.vcf")
 
@@ -26,9 +25,9 @@ process post_filtering {
     # INFO/ASRD>=0.87 (A soft flag median (read length adjusted) alignment score of reads showing the variant allele)
 
     module load bcftools-1.9/python-3.11.6
-    bcftools filter \
-      -i 'FILTER="PASS" && INFO/CLPM="0.00" && INFO/ASRD>=0.87' \
-      ${vcf_passed} \
+    bcftools filter \\
+      -i 'FILTER="PASS" && INFO/CLPM="0.00" && INFO/ASRD>=0.87' \\
+      ${vcf} \\
     > ${meta.sample_id}_postfiltered.vcf
     """
   } else if (meta.vcf_type == "pindel") {
@@ -36,9 +35,9 @@ process post_filtering {
     # apply pass filter (FILTER = PASS)
 
     module load bcftools-1.9/python-3.11.6
-    bcftools filter \
-      -i 'FILTER="PASS"' \
-      ${vcf_passed} \
+    bcftools filter \\
+      -i 'FILTER="PASS"' \\
+      ${vcf} \\
     > ${meta.sample_id}_postfiltered.vcf
     """
   }

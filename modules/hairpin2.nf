@@ -10,41 +10,17 @@ process hairpin2 {
 
   output:
   tuple val(meta), 
-        path(vcf), 
-        path(bam), path(bai), path(bas), path(met),
         path("${meta.sample_id}_hairpin.vcf")
-
+        path(bam), path(bai), path(bas), path(met)
+  
   script:
   """
-  zcat ${vcf} > ${meta.sample_id}_reflagged.vcf
   hairpin2 \\
-    --vcf-in ${meta.sample_id}_reflagged.vcf \\
+    --vcf-in ${vcf} \\
     --vcf-out ${meta.sample_id}_hairpin.vcf \\
     --alignments ${bam} \\
     --format b \\
     --name-mapping TUMOUR:${meta.sample_id}
-  """
-}
-
-
-process sync_pindels {
-  tag "${meta.sample_id}:${meta.vcf_type}"
-  label "normal"
-  
-  input:
-  tuple val(meta), 
-        path(vcf), 
-        path(bam), path(bai), path(bas), path(met)
-
-  output:
-  tuple val(meta), 
-        path(vcf), 
-        path(bam), path(bai), path(bas), path(met),
-        path("${meta.sample_id}_hairpin.vcf")
-
-  script:
-  """
-  zcat $vcf > ${meta.sample_id}_hairpin.vcf
   """
 }
 
@@ -67,13 +43,8 @@ workflow hairpin {
   ch_branched.caveman 
   | hairpin2
 
-  // get pindel channel into same format as hairpin2 output
-  // (meta, vcf, bam, bai, bas, met, vcf_hairpin2)
-  // (vcf_hairpin2 here is the same file as vcf, but unzipped and renamed)
-  ch_branched.pindel
-  | sync_pindels
-
-  sync_pindels.out.concat(hairpin2.out) 
+  // concat channels
+  ch_branched.pindel.concat(hairpin2.out) 
   | set { ch_hairpin2 } 
 
   emit:
