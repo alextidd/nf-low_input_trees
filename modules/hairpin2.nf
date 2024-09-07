@@ -10,7 +10,7 @@ process hairpin2 {
 
   output:
   tuple val(meta), 
-        path("${meta.sample_id}_hairpin.vcf")
+        path("${meta.sample_id}_hairpin.vcf"),
         path(bam), path(bai), path(bas), path(met)
   
   script:

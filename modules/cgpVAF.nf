@@ -69,7 +69,7 @@ process cgpVAF_concat {
         path(bed_intervals),
         path(tmpvaf_progress),
         path(tmpvaf_tsv),
-        path(tmpvaf_vcf),
+        path(tmpvaf_vcf)
   tuple path(fasta), path(fai)
   tuple path(high_depth_bed), path(high_depth_tbi)
   tuple path(cgpVAF_normal_bam),

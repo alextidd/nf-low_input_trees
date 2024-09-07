@@ -8,13 +8,12 @@ process post_filtering {
   input:
   tuple val(meta),
         path(vcf), 
-        path(bam), path(bai), path(bas), path(met),
+        path(bam), path(bai), path(bas), path(met)
 
   output:
   tuple val(meta),
-        path(vcf),
-        path(bam), path(bai), path(bas), path(met),
-        path("${meta.sample_id}_postfiltered.vcf")
+        path("${meta.sample_id}_postfiltered.vcf"),
+        path(bam), path(bai), path(bas), path(met)
 
   script:
   if (meta.vcf_type == "caveman") {
@@ -53,14 +52,13 @@ process pileup {
   input:
   tuple val(meta),
         val(sample_ids),
-        path(vcfs), 
-        path(bams), path(bais), path(bass), path(mets),
-        path(vcfs_postfiltered)
+        path(vcfs_postfiltered), 
+        path(bams), path(bais), path(bass), path(mets)
 
   output:
   tuple val(meta),
         val(sample_ids),
-        path(vcfs), 
+        path(vcfs_postfiltered), 
         path(bams), path(bais), path(bass), path(mets),
         path("${meta.donor_id}_intervals.bed")
 
@@ -82,9 +80,9 @@ workflow post_filtering_and_pileup {
   ch_input
   | post_filtering
   // group vcfs by donor, pileup
-  | map { meta, vcf, bam, bai, bas, met, vcf_postfiltered ->
+  | map { meta, vcf_postfiltered, bam, bai, bas, met  ->
           [meta.subMap("donor_id", "vcf_type"), 
-           meta.sample_id, vcf, bam, bai, bas, met, vcf_postfiltered] }
+           meta.sample_id, vcf_postfiltered, bam, bai, bas, met] }
   | groupTuple
   | pileup
 
