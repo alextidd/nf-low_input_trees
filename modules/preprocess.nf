@@ -5,7 +5,7 @@ workflow preprocess {
   
   // TODO: change these reference files from channels to files
   // get fasta + fai
-  faste = \
+  fasta = \
     [file(params.fasta, checkIfExists: true),
      file(params.fasta + ".fai", checkIfExists: true)]
 
