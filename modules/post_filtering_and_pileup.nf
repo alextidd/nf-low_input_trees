@@ -57,10 +57,10 @@ process pileup {
 
   output:
   tuple val(meta),
+        path("${meta.donor_id}_intervals.bed"),
         val(sample_ids),
         path(vcfs_postfiltered), 
-        path(bams), path(bais), path(bass), path(mets),
-        path("${meta.donor_id}_intervals.bed")
+        path(bams), path(bais), path(bass), path(mets)
 
   script:
   """
@@ -85,6 +85,10 @@ workflow post_filtering_and_pileup {
            meta.sample_id, vcf_postfiltered, bam, bai, bas, met] }
   | groupTuple
   | pileup
+  | transpose
+
+  // split into batches of 10 samples per patient
+
 
   emit:
   pileup.out

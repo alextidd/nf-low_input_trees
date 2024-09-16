@@ -35,10 +35,16 @@ workflow {
     preprocess()
 
     // reflag
-    reflag(preprocess.out.ch_input)
-
+      if ( params.reflag ) {
+        reflag(preprocess.out.ch_input)
+        hairpin2_ch = reflag.out
+      }
+      else {
+        hairpin2_ch = preprocess.out.ch_input
+      }
+    
     // run hairpin
-    hairpin2(reflag.out)
+    hairpin2(hairpin2_ch)
 
     // run post-filtering and pileup
     post_filtering_and_pileup(hairpin2.out)

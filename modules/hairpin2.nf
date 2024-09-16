@@ -1,5 +1,5 @@
 // filter VCF on FILTER=PASS and CLPM=0 and ASMD > 140
-process hairpin2 {
+process hairpin2_run {
   tag "${meta.sample_id}:${meta.vcf_type}"
   label "normal"
 
@@ -15,7 +15,8 @@ process hairpin2 {
   
   script:
   """
-  hairpin2 \\
+  module load hairpin2-alpha/hairpin2-0.0.2a-img-0.0.2 
+  hairpin2-alpha \\
     --vcf-in ${vcf} \\
     --vcf-out ${meta.sample_id}_hairpin.vcf \\
     --alignments ${bam} \\
@@ -24,7 +25,7 @@ process hairpin2 {
   """
 }
 
-workflow hairpin {
+workflow hairpin2 {
   take: 
   ch_input
 
@@ -41,10 +42,10 @@ workflow hairpin {
 
   // run hairpin on caveman
   ch_branched.caveman 
-  | hairpin2
+  | hairpin2_run
 
   // concat channels
-  ch_branched.pindel.concat(hairpin2.out) 
+  ch_branched.pindel.concat(hairpin2_run.out) 
   | set { ch_hairpin2 } 
 
   emit:

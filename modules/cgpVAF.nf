@@ -9,13 +9,7 @@ process cgpVAF_run {
         path(vcfs), 
         path(bams), path(bais), path(bass), path(mets),
         path(bed_intervals),
-        path(fasta), path(fai),
-        val(chr),
-        path(high_depth_bed), path(high_depth_tbi),
-        path(cgpVAF_normal_bam), 
-        path(cgpVAF_normal_bas), 
-        path(cgpVAF_normal_bai),
-        path(cgpVAF_normal_met)
+        val(chr)
   tuple path(fasta), path(fai)
   tuple path(high_depth_bed), path(high_depth_tbi)
   tuple path(cgpVAF_normal_bam),
