@@ -35,14 +35,14 @@ workflow {
     preprocess()
 
     // reflag
-      if ( params.reflag ) {
-        reflag(preprocess.out.ch_input)
-        hairpin2_ch = reflag.out
-      }
-      else {
-        hairpin2_ch = preprocess.out.ch_input
-      }
-    
+    if ( params.reflag ) {
+      reflag(preprocess.out.ch_input)
+      hairpin2_ch = reflag.out
+    }
+    else {
+      hairpin2_ch = preprocess.out.ch_input
+    }
+
     // run hairpin
     hairpin2(hairpin2_ch)
 
