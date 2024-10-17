@@ -79,7 +79,7 @@ process hairpin_annotateBAMStatistics {
 
 process hairpin_additionalBAMStatistics {
   tag "${meta.sample_id}:${meta.vcf_type}"
-  label "normal10gb"
+  label "normal20gb"
   
   input:
   tuple val(meta), 

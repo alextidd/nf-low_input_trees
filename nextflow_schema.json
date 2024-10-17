@@ -67,6 +67,19 @@
       },
       "required": ["genome_build", "fasta"]
     },
+    "reflag_options": {
+      "title": "reflag options",
+      "type": "object",
+      "description": "",
+      "default": "",
+      "properties": {
+        "reflag": {
+          "type": "boolean",
+          "default": false,
+          "description": "Run reflag?"
+        }
+      }
+    },
     "hairpin_options": {
       "title": "hairpin options",
       "type": "object",
