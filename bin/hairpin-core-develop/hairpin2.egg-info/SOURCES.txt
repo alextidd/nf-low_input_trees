@@ -1,0 +1,13 @@
+README.md
+pyproject.toml
+hairpin2/__init__.py
+hairpin2/constants.py
+hairpin2/helpers.py
+hairpin2/main.py
+hairpin2/ref2seq.py
+hairpin2.egg-info/PKG-INFO
+hairpin2.egg-info/SOURCES.txt
+hairpin2.egg-info/dependency_links.txt
+hairpin2.egg-info/entry_points.txt
+hairpin2.egg-info/requires.txt
+hairpin2.egg-info/top_level.txt
