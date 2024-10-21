@@ -5,17 +5,19 @@ process hairpin2_run {
 
   input:
   tuple val(meta), 
-        path(vcf), path(tbi),
+        path(vcf),
         path(bam), path(bai), path(bas), path(met)
 
   output:
   tuple val(meta), 
-        path("${meta.sample_id}_hairpin2.vcf"), path(tbi),
+        path("${meta.sample_id}_hairpin2.vcf"),
         path(bam), path(bai), path(bas), path(met)
   
   script:
   """
   module load hairpin2-alpha/hairpin2-0.0.2a-img-0.0.2 
+  module load samtools-1.19/python-3.12.0
+  tabix -p vcf ${vcf}
   hairpin2-alpha \\
     --vcf-in ${vcf} \\
     --vcf-out ${meta.sample_id}_hairpin2.vcf \\
@@ -34,11 +36,11 @@ workflow hairpin2 {
   // branch caveman and pindel outputs
   ch_input
   | branch {
-      meta, vcf, tbi, bam, bai, bas, met ->
+      meta, vcf, bam, bai, bas, met ->
       caveman: meta.vcf_type == "caveman"
-        return tuple(meta, vcf, tbi, bam, bai, bas, met)
+        return tuple(meta, vcf, bam, bai, bas, met)
       pindel: meta.vcf_type == "pindel"
-        return tuple(meta, vcf, tbi, bam, bai, bas, met)
+        return tuple(meta, vcf, bam, bai, bas, met)
   } | set { ch_branched }
 
   // run hairpin on caveman

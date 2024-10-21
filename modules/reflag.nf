@@ -4,12 +4,12 @@ process reflag_run {
 
   input:
   tuple val(meta), 
-        path(vcf), path(tbi),
+        path(vcf),
         path(bam), path(bai), path(bas), path(met)
 
   output:
   tuple val(meta), 
-        path("${meta.sample_id}_reflagged.vcf"), path(tbi),
+        path("${meta.sample_id}_reflagged.vcf"),
         path(bam), path(bai), path(bas), path(met)
 
   script:

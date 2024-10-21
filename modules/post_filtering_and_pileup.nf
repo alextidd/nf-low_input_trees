@@ -57,10 +57,10 @@ process pileup {
 
   output:
   tuple val(meta),
-        path("${meta.donor_id}_intervals.bed"),
         val(sample_ids),
         path(vcfs_postfiltered), 
-        path(bams), path(bais), path(bass), path(mets)
+        path(bams), path(bais), path(bass), path(mets),
+        path("${meta.donor_id}_intervals.bed")
 
   script:
   """

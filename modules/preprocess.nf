@@ -27,9 +27,7 @@ workflow preprocess {
   | map { meta, bam, caveman_vcf, pindel_vcf ->
           [meta, 
           file(caveman_vcf),
-          file(caveman_vcf + ".tbi", checkIfExists: true),
           file(pindel_vcf),
-          file(pindel_vcf + ".tbi", checkIfExists: true),
           file(bam),
           // get bams' index, bas and met files
           file(bam + ".bai", checkIfExists: true),
@@ -39,9 +37,9 @@ workflow preprocess {
 
   // get caveman vcfs
   ch_samples 
-  | map { meta, caveman_vcf, caveman_tbi, pindel_vcf, pindel_tbi,
+  | map { meta, caveman_vcf, pindel_vcf,
           bam, bai, bas, met ->
-          [meta + [vcf_type: "caveman"], caveman_vcf, caveman_tbi,
+          [meta + [vcf_type: "caveman"], caveman_vcf,
            bam, bai, bas, met]
   }
   | set { ch_caveman }
@@ -49,7 +47,7 @@ workflow preprocess {
   // get pindel vcfs
   ch_samples 
   | map { meta, caveman_vcf, pindel_vcf, bam, bai, bas, met ->
-          [meta + [vcf_type: "pindel"], pindel_vcf, pindel_tbi,
+          [meta + [vcf_type: "pindel"], pindel_vcf,
            bam, bai, bas, met]
   }
   | set { ch_pindel }

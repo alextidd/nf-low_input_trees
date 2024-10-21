@@ -1,7 +1,7 @@
 process cgpVAF_run {
   tag "${meta.donor_id}:${meta.vcf_type}:${chr}"
-  label "basement100gb"
-  errorStrategy { (task.attempt < 5) ? 'retry' : 'ignore' }
+  label "week50gb"
+  maxRetries 3
 
   input: 
   tuple val(meta),
@@ -28,6 +28,11 @@ process cgpVAF_run {
   """
   module load cgpVAFcommand/2.5.0
 
+  # gzip the vcfs
+  for file in *.vcf ; do
+    gzip -f \${file}
+  done
+
   # run cgpVAF
   cgpVaf.pl \
     --inputDir ./ \
@@ -43,7 +48,7 @@ process cgpVAF_run {
     --tumour_bam ${bams.join(' ')} \
     --normal_name "normal" \
     --normal_bam ${cgpVAF_normal_bam} \
-    --vcf ${vcfs.join(' ')} \
+    --vcf ${vcfs.collect { it + '.gz' }.join(' ')} \
     -chr ${chr}
   """
 }
@@ -79,7 +84,7 @@ process cgpVAF_concat {
   def variant_type = (meta.vcf_type == "caveman") ? "snp" : (meta.vcf_type == "pindel") ? "indel" : ""
   """
   module load cgpVAFcommand/2.5.0
-  
+
   # stage in tmpvaf dir 
   # (cgpVAF uses the first sample id as the output directory suffix)
   mkdir -p tmpvaf_${sample_ids[0]}
