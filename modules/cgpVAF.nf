@@ -90,6 +90,11 @@ process cgpVAF_concat {
   mkdir -p tmpvaf_${sample_ids[0]}
   mv tmp*{.vcf,.tsv} *_progress.out tmpvaf_${sample_ids[0]}
 
+  # gzip the vcfs
+  for file in *.vcf ; do
+    gzip -f \${file}
+  done
+
   # run cgpVAF concat
   cgpVaf.pl \
     --inputDir ./ \
@@ -105,7 +110,7 @@ process cgpVAF_concat {
     --tumour_bam ${bams.join(' ')} \
     --normal_name "normal" \
     --normal_bam ${cgpVAF_normal_bam} \
-    --vcf ${vcfs.join(' ')} \
+    --vcf ${vcfs.collect { it + '.gz' }.join(' ')} \
     -ct 1
   
   # rename output and remove vcf header
@@ -154,7 +159,7 @@ workflow cgpVAF {
   cgpVAF_concat(ch_input.combine(ch_cgpVAF_chrs, by: 0),
                 fasta, high_depth_bed, cgpVAF_normal_bam)
   | map { meta, cgpVAF_out -> 
-          [meta.subMap("donor_id", "vcf_type"), cgpVAF_out]}
+          [meta.subMap("donor_id"), cgpVAF_out]}
   | groupTuple
   | view
   | set { ch_cgpVAF_out }

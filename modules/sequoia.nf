@@ -1,8 +1,7 @@
 process sequoia_run {
   tag "${meta.donor_id}"
-  label "week100gb"
+  label "normal20gb"
   publishDir "${params.outdir}/${meta.donor_id}/", mode: 'copy'
-  errorStrategy = 'retry'
 
   input:
   tuple val(meta),
@@ -14,6 +13,9 @@ process sequoia_run {
 
   script:
   """
+  # add r location to path
+  export PATH=/opt/conda/bin:\$PATH
+
   # plot trees of SNVs and indels separately
   build_phylogeny.R \
     --donor_id ${meta.donor_id} \
