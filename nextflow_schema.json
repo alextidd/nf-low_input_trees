@@ -68,7 +68,7 @@
       "required": ["genome_build", "fasta"]
     },
     "reflag_options": {
-      "title": "reflag options",
+      "title": "Reflag options",
       "type": "object",
       "description": "",
       "default": "",
@@ -440,6 +440,9 @@
     },
     {
       "$ref": "#/defs/reference_genome_options"
+    },
+    {
+      "$ref": "#/defs/reflag_options"
     },
     {
       "$ref": "#/defs/hairpin_options"

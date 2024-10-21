@@ -9,7 +9,7 @@ nextflow.enable.dsl=2
 include { validateParameters; paramsHelp; paramsSummaryLog; samplesheetToList } from 'plugin/nf-schema'
 include { preprocess                } from './modules/preprocess.nf'
 include { reflag                    } from './modules/reflag.nf'
-include { hairpin                   } from './modules/hairpin.nf'
+include { hairpin2                  } from './modules/hairpin2.nf'
 include { post_filtering_and_pileup } from './modules/post_filtering_and_pileup.nf'
 include { cgpVAF                    } from './modules/cgpVAF.nf'
 include { sequoia                   } from './modules/sequoia.nf'
@@ -37,26 +37,26 @@ workflow {
     // reflag
     if ( params.reflag ) {
       reflag(preprocess.out.ch_input)
-      hairpin_ch = reflag.out
+      hairpin2_ch = reflag.out
     }
     else {
-      hairpin_ch = preprocess.out.ch_input
+      hairpin2_ch = preprocess.out.ch_input
     }
 
     // run hairpin
-    hairpin(hairpin_ch)
+    hairpin2(hairpin2_ch)
 
     // run post-filtering and pileup
-    post_filtering_and_pileup(hairpin.out)
+    post_filtering_and_pileup(hairpin2.out)
 
     // run cgpVAF
     cgpVAF(post_filtering_and_pileup.out, 
-           preprocess.out.ch_fasta, 
-           preprocess.out.ch_high_depth_bed,
-           preprocess.out.ch_cgpVAF_normal_bam)
+           preprocess.out.fasta, 
+           preprocess.out.high_depth_bed,
+           preprocess.out.cgpVAF_normal_bam)
 
     // run sequoia
     sequoia(cgpVAF.out,
-            preprocess.out.ch_fasta) 
+            preprocess.out.fasta)
 }
 

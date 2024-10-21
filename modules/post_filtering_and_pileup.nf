@@ -8,14 +8,12 @@ process post_filtering {
   input:
   tuple val(meta),
         path(vcf), 
-        path(bam), path(bai), path(bas), path(met),
-        path(vcf_passed, stageAs: "passed.vcf")
+        path(bam), path(bai), path(bas), path(met)
 
   output:
   tuple val(meta),
-        path(vcf), 
-        path(bam), path(bai), path(bas), path(met),
-        path("${meta.sample_id}_postfiltered.vcf")
+        path("${meta.sample_id}_postfiltered.vcf"),
+        path(bam), path(bai), path(bas), path(met)
 
   script:
   if (meta.vcf_type == "caveman") {
@@ -26,9 +24,9 @@ process post_filtering {
     # INFO/ASRD>=0.87 (A soft flag median (read length adjusted) alignment score of reads showing the variant allele)
 
     module load bcftools-1.9/python-3.11.6
-    bcftools filter \
-      -i 'FILTER="PASS" && INFO/CLPM="0.00" && INFO/ASRD>=0.87' \
-      ${vcf_passed} \
+    bcftools filter \\
+      -i 'FILTER="PASS" && INFO/CLPM="0.00" && INFO/ASRD>=0.87' \\
+      ${vcf} \\
     > ${meta.sample_id}_postfiltered.vcf
     """
   } else if (meta.vcf_type == "pindel") {
@@ -36,9 +34,9 @@ process post_filtering {
     # apply pass filter (FILTER = PASS)
 
     module load bcftools-1.9/python-3.11.6
-    bcftools filter \
-      -i 'FILTER="PASS"' \
-      ${vcf_passed} \
+    bcftools filter \\
+      -i 'FILTER="PASS"' \\
+      ${vcf} \\
     > ${meta.sample_id}_postfiltered.vcf
     """
   }
@@ -54,14 +52,13 @@ process pileup {
   input:
   tuple val(meta),
         val(sample_ids),
-        path(vcfs), 
-        path(bams), path(bais), path(bass), path(mets),
-        path(vcfs_postfiltered)
+        path(vcfs_postfiltered), 
+        path(bams), path(bais), path(bass), path(mets)
 
   output:
   tuple val(meta),
         val(sample_ids),
-        path(vcfs), 
+        path(vcfs_postfiltered), 
         path(bams), path(bais), path(bass), path(mets),
         path("${meta.donor_id}_intervals.bed")
 
@@ -83,11 +80,15 @@ workflow post_filtering_and_pileup {
   ch_input
   | post_filtering
   // group vcfs by donor, pileup
-  | map { meta, vcf, bam, bai, bas, met, vcf_postfiltered ->
+  | map { meta, vcf_postfiltered, bam, bai, bas, met  ->
           [meta.subMap("donor_id", "vcf_type"), 
-           meta.sample_id, vcf, bam, bai, bas, met, vcf_postfiltered] }
+           meta.sample_id, vcf_postfiltered, bam, bai, bas, met] }
   | groupTuple
   | pileup
+  | transpose
+
+  // split into batches of 10 samples per patient
+
 
   emit:
   pileup.out
