@@ -10,7 +10,7 @@ include { validateParameters; paramsHelp; paramsSummaryLog; samplesheetToList } 
 include { preprocess                } from './modules/preprocess.nf'
 include { reflag                    } from './modules/reflag.nf'
 include { hairpin2                  } from './modules/hairpin2.nf'
-include { post_filtering_and_pileup } from './modules/post_filtering_and_pileup.nf'
+include { filtering                 } from './modules/filtering.nf'
 include { cgpVAF                    } from './modules/cgpVAF.nf'
 include { sequoia                   } from './modules/sequoia.nf'
 
@@ -43,15 +43,15 @@ workflow {
       hairpin2_ch = preprocess.out.ch_input
     }
 
-    // run hairpin
+    // run hairpin2
     hairpin2(hairpin2_ch)
 
     // run post-filtering and pileup
-    post_filtering_and_pileup(hairpin2.out)
+    filtering(hairpin2.out)
 
     // run cgpVAF
-    cgpVAF(post_filtering_and_pileup.out, 
-           preprocess.out.fasta, 
+    cgpVAF(filtering.out,
+           preprocess.out.fasta,
            preprocess.out.high_depth_bed,
            preprocess.out.cgpVAF_normal_bam)
 

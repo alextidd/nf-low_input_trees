@@ -1,4 +1,4 @@
-process post_filtering {
+process filtering_run {
   tag "${meta.sample_id}:${meta.vcf_type}"
   label "normal"
   publishDir "${params.outdir}/${meta.donor_id}/${meta.vcf_type}/${meta.sample_id}", 
@@ -42,54 +42,15 @@ process post_filtering {
   }
 }
 
-process pileup {
-  tag "${meta.donor_id}:${meta.vcf_type}"
-  label "normal"
-  publishDir "${params.outdir}/${meta.donor_id}/${meta.vcf_type}/", 
-    mode: "copy",
-    pattern: "*_intervals.bed"
-  
-  input:
-  tuple val(meta),
-        val(sample_ids),
-        path(vcfs_postfiltered), 
-        path(bams), path(bais), path(bass), path(mets)
-
-  output:
-  tuple val(meta),
-        val(sample_ids),
-        path(vcfs_postfiltered), 
-        path(bams), path(bais), path(bass), path(mets),
-        path("${meta.donor_id}_intervals.bed")
-
-  script:
-  """
-  (for file in *_postfiltered.vcf ; do
-    grep -v '^#' \$file | cut -f 1,2,4,5 ;
-  done) | cat | sort | uniq \
-  > ${meta.donor_id}_intervals.bed
-  """
-}
-
-workflow post_filtering_and_pileup {
+workflow filtering {
   take:
   ch_input
 
   main:
   // run post-filtering
   ch_input
-  | post_filtering
-  // group vcfs by donor, pileup
-  | map { meta, vcf_postfiltered, bam, bai, bas, met  ->
-          [meta.subMap("donor_id", "vcf_type"), 
-           meta.sample_id, vcf_postfiltered, bam, bai, bas, met] }
-  | groupTuple
-  | pileup
-  | transpose
-
-  // split into batches of 10 samples per patient
-
+  | filtering_run
 
   emit:
-  pileup.out
+  filtering_run.out
 }

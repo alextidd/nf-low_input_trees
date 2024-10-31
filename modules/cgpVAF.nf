@@ -1,3 +1,32 @@
+process pileup {
+  tag "${meta.donor_id}:${meta.vcf_type}"
+  label "normal"
+  publishDir "${params.outdir}/${meta.donor_id}/${meta.vcf_type}/", 
+    mode: "copy",
+    pattern: "*_intervals.bed"
+  
+  input:
+  tuple val(meta),
+        val(sample_ids),
+        path(vcfs_postfiltered), 
+        path(bams), path(bais), path(bass), path(mets)
+
+  output:
+  tuple val(meta),
+        val(sample_ids),
+        path(vcfs_postfiltered), 
+        path(bams), path(bais), path(bass), path(mets),
+        path("${meta.donor_id}_intervals.bed")
+
+  script:
+  """
+  (for file in *_postfiltered.vcf ; do
+    grep -v '^#' \$file | cut -f 1,2,4,5 ;
+  done) | cat | sort | uniq \
+  > ${meta.donor_id}_intervals.bed
+  """
+}
+
 process cgpVAF_run {
   tag "${meta.donor_id}:${meta.vcf_type}:${chr}"
   label "week50gb"
@@ -137,6 +166,17 @@ workflow cgpVAF {
   cgpVAF_normal_bam
 
   main:
+
+  // group vcfs by donor, pileup
+  ch_input
+  | map { meta, vcf_postfiltered, bam, bai, bas, met  ->
+          [meta.subMap("donor_id", "vcf_type"), 
+           meta.sample_id, vcf_postfiltered, bam, bai, bas, met] }
+  | groupTuple
+  | pileup
+
+  // TODO: split into batches of 10 samples per patient
+
   // create value channel of the chromosomes
   Channel.of(1..22).concat(Channel.of('X', 'Y')) | set { chromosomes }
   if (params.genome_build == 'hg38') {
@@ -144,8 +184,7 @@ workflow cgpVAF {
   }
 
   // run cgpVAF by chromosome
-  // TODO: figure out how to run cgpVAF in batches within patients
-  cgpVAF_run(ch_input.combine(chromosomes),
+  cgpVAF_run(pileup.out.combine(chromosomes),
              fasta, high_depth_bed, cgpVAF_normal_bam)
 
   // combine chromosomal channels
@@ -154,14 +193,13 @@ workflow cgpVAF {
           [groupKey(meta, 24), chr_progress, chr_tsv, chr_vcf] } 
   | groupTuple
   | set { ch_cgpVAF_chrs }
-
+  
   // concat cgpVAF outputs, group channels by donor
-  cgpVAF_concat(ch_input.combine(ch_cgpVAF_chrs, by: 0),
+  cgpVAF_concat(pileup.out.combine(ch_cgpVAF_chrs, by: 0),
                 fasta, high_depth_bed, cgpVAF_normal_bam)
   | map { meta, cgpVAF_out -> 
           [meta.subMap("donor_id"), cgpVAF_out]}
   | groupTuple
-  | view
   | set { ch_cgpVAF_out }
 
   emit:

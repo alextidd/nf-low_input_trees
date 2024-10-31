@@ -6,10 +6,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install required CRAN packages and Bioconductor packages
 RUN Rscript -e " \
-    install.packages(c('seqinr', 'stringr', 'tidyr', 'dplyr', 'data.table', 'VGAM', 'MASS'), repos='http://cran.r-project.org'); \
+    install.packages(c('optparse', 'seqinr', 'stringr', 'tidyr', 'dplyr', 'data.table', 'VGAM', 'MASS'), repos='http://cran.r-project.org'); \
     if (!requireNamespace('BiocManager', quietly = TRUE)) install.packages('BiocManager'); \
     BiocManager::install(c('Rsamtools', 'GenomicRanges')) \
 "
 
 # Confirm installation by running Rscript with the installed packages
-CMD ["Rscript", "-e", "library(seqinr); library(tidyverse); library(data.table); library(VGAM); library(MASS); library(Rsamtools); library(GenomicRanges); print('Required packages installed successfully!')"]
+CMD ["Rscript", "-e", "library(optparse); library(seqinr); library(tidyverse); library(data.table); library(VGAM); library(MASS); library(Rsamtools); library(GenomicRanges); print('Required packages installed successfully!')"]

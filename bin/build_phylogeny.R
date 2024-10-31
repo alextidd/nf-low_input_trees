@@ -1,8 +1,9 @@
 #!/usr/bin/env Rscript
-if(!require("optparse", character.only = T, quietly = T, warn.conflicts = F)){
-  install.packages("optparse", repos = "http://cran.us.r-project.org")
-  library("optparse", character.only = T, quietly = T, warn.conflicts = F)
-}
+# if(!require("optparse", character.only = T, quietly = T, warn.conflicts = F)){
+#   install.packages("optparse", repos = "http://cran.us.r-project.org")
+#   library("optparse", character.only = T, quietly = T, warn.conflicts = F)
+# }
+library("optparse", character.only = T, quietly = T, warn.conflicts = F)
 #----------------------------------
 # Input options
 #----------------------------------
@@ -46,6 +47,7 @@ option_list <- list(
 opt <- parse_args(OptionParser(option_list = option_list, add_help_option = TRUE))
 
 print(opt)
+saveRDS(opt, "opt.rds")
 
 dp_pos=opt$lowVAF_filter_positive_samples
 ncores=opt$ncores
