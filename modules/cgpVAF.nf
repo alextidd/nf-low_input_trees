@@ -7,15 +7,10 @@ process pileup {
   
   input:
   tuple val(meta),
-        val(sample_ids),
-        path(vcfs_postfiltered), 
-        path(bams), path(bais), path(bass), path(mets)
+        path(vcfs_postfiltered)
 
   output:
   tuple val(meta),
-        val(sample_ids),
-        path(vcfs_postfiltered), 
-        path(bams), path(bais), path(bass), path(mets),
         path("${meta.donor_id}_intervals.bed")
 
   script:
@@ -28,8 +23,8 @@ process pileup {
 }
 
 process cgpVAF_run {
-  tag "${meta.donor_id}:${meta.vcf_type}:${chr}"
-  label "week50gb"
+  tag "${meta.donor_id}:${meta.vcf_type}"
+  label "normal" // label "week50gb"
   maxRetries 3
 
   input: 
@@ -37,8 +32,7 @@ process cgpVAF_run {
         val(sample_ids),
         path(vcfs), 
         path(bams), path(bais), path(bass), path(mets),
-        path(bed_intervals),
-        val(chr)
+        path(intervals_bed)
   tuple path(fasta), path(fai)
   tuple path(high_depth_bed), path(high_depth_tbi)
   tuple path(cgpVAF_normal_bam),
@@ -47,10 +41,8 @@ process cgpVAF_run {
         path(cgpVAF_normal_met)
 
   output:
-  tuple val(meta),
-        path("tmpvaf_*/${chr}_progress.out"),
-        path("tmpvaf_*/tmp_${chr}.tsv"),
-        path("tmpvaf_*/tmp_${chr}.vcf")
+  tuple val(meta),   
+        path("${meta.donor_id}_${meta.vcf_type}_vaf.tsv")
 
   script:
   def variant_type = (meta.vcf_type == "caveman") ? "snp" : (meta.vcf_type == "pindel") ? "indel" : ""
@@ -70,78 +62,15 @@ process cgpVAF_run {
     --genome ${fasta} \
     --high_depth_bed ${high_depth_bed} \
     --bed_only 1 \
-    --bedIntervals ${bed_intervals} \
+    --bedIntervals ${intervals_bed} \
     --base_quality 25 \
     --map_quality 30 \
     --tumour_name ${sample_ids.join(' ')} \
     --tumour_bam ${bams.join(' ')} \
     --normal_name "normal" \
     --normal_bam ${cgpVAF_normal_bam} \
-    --vcf ${vcfs.collect { it + '.gz' }.join(' ')} \
-    -chr ${chr}
-  """
-}
+    --vcf ${vcfs.collect { it + '.gz' }.join(' ')}
 
-process cgpVAF_concat {
-  tag "${meta.donor_id}:${meta.vcf_type}"
-  label "week100gb"
-  errorStrategy = "retry"
-  publishDir "${params.outdir}/${meta.donor_id}/${meta.vcf_type}/", 
-    mode: "copy"
-
-  input: 
-  tuple val(meta),
-        val(sample_ids),
-        path(vcfs),
-        path(bams), path(bais), path(bass), path(mets),
-        path(bed_intervals),
-        path(tmpvaf_progress),
-        path(tmpvaf_tsv),
-        path(tmpvaf_vcf)
-  tuple path(fasta), path(fai)
-  tuple path(high_depth_bed), path(high_depth_tbi)
-  tuple path(cgpVAF_normal_bam),
-        path(cgpVAF_normal_bas),
-        path(cgpVAF_normal_bai),
-        path(cgpVAF_normal_met)
-
-  output:
-  tuple val(meta),   
-        path("${meta.donor_id}_${meta.vcf_type}_vaf.tsv")
-  
-  script:
-  def variant_type = (meta.vcf_type == "caveman") ? "snp" : (meta.vcf_type == "pindel") ? "indel" : ""
-  """
-  module load cgpVAFcommand/2.5.0
-
-  # stage in tmpvaf dir 
-  # (cgpVAF uses the first sample id as the output directory suffix)
-  mkdir -p tmpvaf_${sample_ids[0]}
-  mv tmp*{.vcf,.tsv} *_progress.out tmpvaf_${sample_ids[0]}
-
-  # gzip the vcfs
-  for file in *.vcf ; do
-    gzip -f \${file}
-  done
-
-  # run cgpVAF concat
-  cgpVaf.pl \
-    --inputDir ./ \
-    --outDir ./ \
-    --variant_type ${variant_type} \
-    --genome ${fasta} \
-    --high_depth_bed ${high_depth_bed} \
-    --bed_only 1 \
-    --bedIntervals ${bed_intervals} \
-    --base_quality 25 \
-    --map_quality 30 \
-    --tumour_name ${sample_ids.join(' ')} \
-    --tumour_bam ${bams.join(' ')} \
-    --normal_name "normal" \
-    --normal_bam ${cgpVAF_normal_bam} \
-    --vcf ${vcfs.collect { it + '.gz' }.join(' ')} \
-    -ct 1
-  
   # rename output and remove vcf header
   cgpVAF_out=(`ls *_vaf.tsv`)
   n_files=\${#cgpVAF_out[@]}
@@ -170,37 +99,27 @@ workflow cgpVAF {
   // group vcfs by donor, pileup
   ch_input
   | map { meta, vcf_postfiltered, bam, bai, bas, met  ->
-          [meta.subMap("donor_id", "vcf_type"), 
-           meta.sample_id, vcf_postfiltered, bam, bai, bas, met] }
+          [meta.subMap("donor_id", "vcf_type"), vcf_postfiltered] }
   | groupTuple
   | pileup
 
-  // TODO: split into batches of 10 samples per patient
+  // batch samples per donor
+  ch_input
+  | map { meta, vcf_postfiltered, bam, bai, bas, met  ->
+          [meta.subMap("donor_id", "vcf_type"), 
+           meta.sample_id, vcf_postfiltered, bam, bai, bas, met] }
+  | groupTuple(size: params.cgpVAF_sample_batch_size, remainder: true)
+  | combine(pileup.out, by: 0)
+  | set { ch_batched_samples }
 
-  // create value channel of the chromosomes
-  Channel.of(1..22).concat(Channel.of('X', 'Y')) | set { chromosomes }
-  if (params.genome_build == 'hg38') {
-   chromosomes = chromosomes | map { 'chr' + it }
-  }
-
-  // run cgpVAF by chromosome
-  cgpVAF_run(pileup.out.combine(chromosomes),
-             fasta, high_depth_bed, cgpVAF_normal_bam)
-
-  // combine chromosomal channels
-  cgpVAF_run.out
-  | map { meta, chr_progress, chr_tsv, chr_vcf ->
-          [groupKey(meta, 24), chr_progress, chr_tsv, chr_vcf] } 
-  | groupTuple
-  | set { ch_cgpVAF_chrs }
-  
-  // concat cgpVAF outputs, group channels by donor
-  cgpVAF_concat(pileup.out.combine(ch_cgpVAF_chrs, by: 0),
-                fasta, high_depth_bed, cgpVAF_normal_bam)
+  // run cgpVAF, group outputs by donor
+  cgpVAF_run(ch_batched_samples, fasta, high_depth_bed, cgpVAF_normal_bam)
   | map { meta, cgpVAF_out -> 
           [meta.subMap("donor_id"), cgpVAF_out]}
   | groupTuple
   | set { ch_cgpVAF_out }
+
+  ch_cgpVAF_out.view()
 
   emit:
   ch_cgpVAF_out

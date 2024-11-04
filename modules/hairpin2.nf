@@ -17,7 +17,7 @@ process hairpin2_run {
   """
   module load hairpin2-alpha/hairpin2-0.0.2a-img-0.0.2 
   module load samtools-1.19/python-3.12.0
-  tabix -p vcf ${vcf}
+  tabix -f -p vcf ${vcf}
   hairpin2-alpha \\
     --vcf-in ${vcf} \\
     --vcf-out ${meta.sample_id}_hairpin2.vcf \\

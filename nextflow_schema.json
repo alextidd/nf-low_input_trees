@@ -4,7 +4,7 @@
   "title": "nf-core/chemotrees pipeline parameters",
   "description": "Use Sequoia to construct phylogenetic trees for blood-derived single cell colonies pre- and post-chemo",
   "type": "object",
-  "defs": {
+  "$defs": {
     "input_output_options": {
       "title": "Input/output options",
       "type": "object",
@@ -75,10 +75,10 @@
       "properties": {
         "reflag": {
           "type": "boolean",
-          "default": false,
           "description": "Run reflag?"
         }
-      }
+      },
+      "required": ["reflag"]
     },
     "hairpin_options": {
       "title": "hairpin options",
@@ -112,14 +112,23 @@
           "exists": true,
           "description": "Path to the in silico normal BAM."
         },
-        "high_depth_bed": {
+        "cgpVAF_high_depth_bed": {
           "type": "string",
           "format": "file-path",
           "exists": true,
           "description": "Path to a reference BED file of high depth regions. A matching index file (*.tbi) must be present in the same directory."
+        },
+        "cgpVAF_sample_batch_size": {
+          "type": "integer",
+          "default": 5,
+          "description": "The size of sample batches within donors for the cgpVAF run."
         }
       },
-      "required": ["cgpVAF_normal_bam", "high_depth_bed"]
+      "required": [
+        "cgpVAF_normal_bam",
+        "cgpVAF_high_depth_bed",
+        "cgpVAF_sample_batch_size"
+      ]
     },
     "sequoia_options": {
       "title": "Sequoia options",
@@ -436,31 +445,31 @@
   },
   "allOf": [
     {
-      "$ref": "#/defs/input_output_options"
+      "$ref": "#/$defs/input_output_options"
     },
     {
-      "$ref": "#/defs/reference_genome_options"
+      "$ref": "#/$defs/reference_genome_options"
     },
     {
-      "$ref": "#/defs/reflag_options"
+      "$ref": "#/$defs/reflag_options"
     },
     {
-      "$ref": "#/defs/hairpin_options"
+      "$ref": "#/$defs/hairpin_options"
     },
     {
-      "$ref": "#/defs/cgpvaf_options"
+      "$ref": "#/$defs/cgpvaf_options"
     },
     {
-      "$ref": "#/defs/sequoia_options"
+      "$ref": "#/$defs/sequoia_options"
     },
     {
-      "$ref": "#/defs/institutional_config_options"
+      "$ref": "#/$defs/institutional_config_options"
     },
     {
-      "$ref": "#/defs/max_job_request_options"
+      "$ref": "#/$defs/max_job_request_options"
     },
     {
-      "$ref": "#/defs/generic_options"
+      "$ref": "#/$defs/generic_options"
     }
   ]
 }
