@@ -15,10 +15,15 @@ process hairpin2_run {
   
   script:
   """
-  module load hairpin2-alpha/hairpin2-0.0.2a-img-0.0.2 
+  # modules
+  module load hairpin2/hairpin2-1.0.0
   module load samtools-1.19/python-3.12.0
+
+  # index
   tabix -f -p vcf ${vcf}
-  hairpin2-alpha \\
+  
+  # run hairpin2
+  hairpin2 \\
     --vcf-in ${vcf} \\
     --vcf-out ${meta.sample_id}_hairpin2.vcf \\
     --alignments ${bam} \\

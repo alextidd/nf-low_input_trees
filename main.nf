@@ -20,7 +20,7 @@ if (params.help) {
   exit 0
 }
 
-// validate input parameters
+// validate input params
 if (params.validate_params) {
     validateParameters()
 }
@@ -52,8 +52,8 @@ workflow {
     // run cgpVAF
     cgpVAF(filtering.out,
            preprocess.out.fasta,
-           preprocess.out.high_depth_bed,
-           preprocess.out.cgpVAF_normal_bam)
+           preprocess.out.cgpvaf_high_depth_bed,
+           preprocess.out.cgpvaf_normal_bam)
 
     // run sequoia
     sequoia(cgpVAF.out,

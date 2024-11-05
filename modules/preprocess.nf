@@ -10,16 +10,16 @@ workflow preprocess {
      file(params.fasta + ".fai", checkIfExists: true)]
 
   // get bed + tbi
-  high_depth_bed = \
-    [file(params.high_depth_bed, checkIfExists: true),
-     file(params.high_depth_bed + ".tbi", checkIfExists: true)]
+  cgpvaf_high_depth_bed = \
+    [file(params.cgpvaf_high_depth_bed, checkIfExists: true),
+     file(params.cgpvaf_high_depth_bed + ".tbi", checkIfExists: true)]
 
   // get cgpVAF normal bam + bai
-  cgpVAF_normal_bam = \
-    [file(params.cgpVAF_normal_bam),
-     file(params.cgpVAF_normal_bam + ".bas", checkIfExists: true),
-     file(params.cgpVAF_normal_bam + ".bai", checkIfExists: true),
-     file(params.cgpVAF_normal_bam + ".met.gz", checkIfExists: true)]
+  cgpvaf_normal_bam = \
+    [file(params.cgpvaf_normal_bam),
+     file(params.cgpvaf_normal_bam + ".bas", checkIfExists: true),
+     file(params.cgpvaf_normal_bam + ".bai", checkIfExists: true),
+     file(params.cgpvaf_normal_bam + ".met.gz", checkIfExists: true)]
 
   // get metadata + bam paths
   // TODO: check if we actually need bas and met files
@@ -59,6 +59,6 @@ workflow preprocess {
   emit:
   ch_input = ch_input
   fasta = fasta
-  high_depth_bed = high_depth_bed
-  cgpVAF_normal_bam = cgpVAF_normal_bam
+  cgpvaf_high_depth_bed = cgpvaf_high_depth_bed
+  cgpvaf_normal_bam = cgpvaf_normal_bam
 }

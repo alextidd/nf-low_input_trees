@@ -75,10 +75,10 @@
       "properties": {
         "reflag": {
           "type": "boolean",
+          "default": false,
           "description": "Run reflag?"
         }
-      },
-      "required": ["reflag"]
+      }
     },
     "hairpin_options": {
       "title": "hairpin options",
@@ -106,28 +106,28 @@
       "description": "",
       "default": "",
       "properties": {
-        "cgpVAF_normal_bam": {
+        "cgpvaf_normal_bam": {
           "type": "string",
           "format": "file-path",
           "exists": true,
           "description": "Path to the in silico normal BAM."
         },
-        "cgpVAF_high_depth_bed": {
+        "cgpvaf_high_depth_bed": {
           "type": "string",
           "format": "file-path",
           "exists": true,
           "description": "Path to a reference BED file of high depth regions. A matching index file (*.tbi) must be present in the same directory."
         },
-        "cgpVAF_sample_batch_size": {
+        "cgpvaf_sample_batch_size": {
           "type": "integer",
           "default": 5,
           "description": "The size of sample batches within donors for the cgpVAF run."
         }
       },
       "required": [
-        "cgpVAF_normal_bam",
-        "cgpVAF_high_depth_bed",
-        "cgpVAF_sample_batch_size"
+        "cgpvaf_normal_bam",
+        "cgpvaf_high_depth_bed",
+        "cgpvaf_sample_batch_size"
       ]
     },
     "sequoia_options": {

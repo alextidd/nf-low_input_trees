@@ -7,7 +7,7 @@ process pileup {
   
   input:
   tuple val(meta),
-        path(vcfs_postfiltered)
+        path(vcfs_filtered), path(tbis_filtered)
 
   output:
   tuple val(meta),
@@ -15,8 +15,8 @@ process pileup {
 
   script:
   """
-  (for file in *_postfiltered.vcf ; do
-    grep -v '^#' \$file | cut -f 1,2,4,5 ;
+  (for file in *_filtered.vcf.gz ; do
+    zgrep -v '^#' \$file | cut -f 1,2,4,5 ;
   done) | cat | sort | uniq \
   > ${meta.donor_id}_intervals.bed
   """
@@ -30,12 +30,12 @@ process cgpVAF_run {
   input: 
   tuple val(meta),
         val(sample_ids),
-        path(vcfs), 
+        path(vcfs), path(tbis),
         path(bams), path(bais), path(bass), path(mets),
         path(intervals_bed)
   tuple path(fasta), path(fai)
-  tuple path(high_depth_bed), path(high_depth_tbi)
-  tuple path(cgpVAF_normal_bam),
+  tuple path(cgpvaf_high_depth_bed), path(high_depth_tbi)
+  tuple path(cgpvaf_normal_bam),
         path(cgpVAF_normal_bas),
         path(cgpVAF_normal_bai),
         path(cgpVAF_normal_met)
@@ -47,12 +47,8 @@ process cgpVAF_run {
   script:
   def variant_type = (meta.vcf_type == "caveman") ? "snp" : (meta.vcf_type == "pindel") ? "indel" : ""
   """
+  # modules
   module load cgpVAFcommand/2.5.0
-
-  # gzip the vcfs
-  for file in *.vcf ; do
-    gzip -f \${file}
-  done
 
   # run cgpVAF
   cgpVaf.pl \
@@ -60,7 +56,7 @@ process cgpVAF_run {
     --outDir ./ \
     --variant_type ${variant_type} \
     --genome ${fasta} \
-    --high_depth_bed ${high_depth_bed} \
+    --cgpvaf_high_depth_bed ${cgpvaf_high_depth_bed} \
     --bed_only 1 \
     --bedIntervals ${intervals_bed} \
     --base_quality 25 \
@@ -68,8 +64,8 @@ process cgpVAF_run {
     --tumour_name ${sample_ids.join(' ')} \
     --tumour_bam ${bams.join(' ')} \
     --normal_name "normal" \
-    --normal_bam ${cgpVAF_normal_bam} \
-    --vcf ${vcfs.collect { it + '.gz' }.join(' ')}
+    --normal_bam ${cgpvaf_normal_bam} \
+    --vcf ${vcfs}.join(' ')}
 
   # rename output and remove vcf header
   cgpVAF_out=(`ls *_vaf.tsv`)
@@ -91,35 +87,34 @@ workflow cgpVAF {
   take:
   ch_input
   fasta
-  high_depth_bed
-  cgpVAF_normal_bam
+  cgpvaf_high_depth_bed
+  cgpvaf_normal_bam
 
   main:
 
   // group vcfs by donor, pileup
   ch_input
-  | map { meta, vcf_postfiltered, bam, bai, bas, met  ->
-          [meta.subMap("donor_id", "vcf_type"), vcf_postfiltered] }
+  | map { meta, vcf_filtered, tbi_filtered, bam, bai, bas, met  ->
+          [meta.subMap("donor_id", "vcf_type"), vcf_filtered, tbi_filtered] }
   | groupTuple
   | pileup
 
   // batch samples per donor
   ch_input
-  | map { meta, vcf_postfiltered, bam, bai, bas, met  ->
+  | map { meta, vcf_filtered, tbi_filtered, bam, bai, bas, met  ->
           [meta.subMap("donor_id", "vcf_type"), 
-           meta.sample_id, vcf_postfiltered, bam, bai, bas, met] }
-  | groupTuple(size: params.cgpVAF_sample_batch_size, remainder: true)
+           meta.sample_id, vcf_filtered, tbi_filtered, bam, bai, bas, met] }
+  | groupTuple(size: params.cgpvaf_sample_batch_size, remainder: true)
   | combine(pileup.out, by: 0)
   | set { ch_batched_samples }
 
   // run cgpVAF, group outputs by donor
-  cgpVAF_run(ch_batched_samples, fasta, high_depth_bed, cgpVAF_normal_bam)
+  // TODO: move bgzip and tabix of filtered vcfs outside cgpVAF_run
+  cgpVAF_run(ch_batched_samples, fasta, cgpvaf_high_depth_bed, cgpvaf_normal_bam)
   | map { meta, cgpVAF_out -> 
           [meta.subMap("donor_id"), cgpVAF_out]}
   | groupTuple
   | set { ch_cgpVAF_out }
-
-  ch_cgpVAF_out.view()
 
   emit:
   ch_cgpVAF_out

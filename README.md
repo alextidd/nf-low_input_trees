@@ -107,8 +107,8 @@ hairpin options
                                                      Lowering will result in the inclusion of more artefacts. [default: 4] 
 
 cgpVAF options
-  --cgpVAF_normal_bam                      [string]  Path to the in silico normal BAM.
-  --high_depth_bed                         [string]  Path to a reference BED file of high depth regions.
+  --cgpvaf_normal_bam                      [string]  Path to the in silico normal BAM.
+  --cgpvaf_high_depth_bed                         [string]  Path to a reference BED file of high depth regions.
 
 Sequoia options
   --sequoia_beta_binom_shared              [boolean] Only run beta-binomial filter on shared mutations. If FALSE, run on all mutations, before germline / depth 
