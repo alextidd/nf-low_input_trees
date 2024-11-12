@@ -2,6 +2,7 @@
 process hairpin2_run {
   tag "${meta.sample_id}:${meta.vcf_type}"
   label "normal"
+  errorStrategy 'retry'
 
   input:
   tuple val(meta), 

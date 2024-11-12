@@ -51,21 +51,21 @@ process cgpVAF_run {
   module load cgpVAFcommand/2.5.0
 
   # run cgpVAF
-  cgpVaf.pl \
-    --inputDir ./ \
-    --outDir ./ \
-    --variant_type ${variant_type} \
-    --genome ${fasta} \
-    --cgpvaf_high_depth_bed ${cgpvaf_high_depth_bed} \
-    --bed_only 1 \
-    --bedIntervals ${intervals_bed} \
-    --base_quality 25 \
-    --map_quality 30 \
-    --tumour_name ${sample_ids.join(' ')} \
-    --tumour_bam ${bams.join(' ')} \
-    --normal_name "normal" \
-    --normal_bam ${cgpvaf_normal_bam} \
-    --vcf ${vcfs}.join(' ')}
+  cgpVaf.pl \\
+    --inputDir ./ \\
+    --outDir ./ \\
+    --variant_type ${variant_type} \\
+    --genome ${fasta} \\
+    --cgpvaf_high_depth_bed ${cgpvaf_high_depth_bed} \\
+    --bed_only 1 \\
+    --bedIntervals ${intervals_bed} \\
+    --base_quality 25 \\
+    --map_quality 30 \\
+    --tumour_name ${sample_ids.join(' ')} \\
+    --tumour_bam ${bams.join(' ')} \\
+    --normal_name "normal" \\
+    --normal_bam ${cgpvaf_normal_bam} \\
+    --vcf ${vcfs.join(' ')}
 
   # rename output and remove vcf header
   cgpVAF_out=(`ls *_vaf.tsv`)
