@@ -14,19 +14,19 @@ include { filtering                 } from './modules/filtering.nf'
 include { cgpVAF                    } from './modules/cgpVAF.nf'
 include { sequoia                   } from './modules/sequoia.nf'
 
-// print help message, return typical command line usage for the pipeline
-if (params.help) {
-  log.info paramsHelp("nextflow run low_input_trees --sample_sheet sample_sheet.csv --sequencing_type WGS --outdir out/")
-  exit 0
-}
-
-// validate input params
-if (params.validate_params) {
-    validateParameters()
-}
-
 // Main workflow
 workflow {
+
+    // print help message, return typical command line usage for the pipeline
+    if (params.help) {
+      log.info paramsHelp("nextflow run low_input_trees --sample_sheet sample_sheet.csv --sequencing_type WGS --outdir out/")
+      exit 0
+    }
+
+    // validate input params
+    if (params.validate_params) {
+        validateParameters()
+    }
 
     // print summary of supplied parameters
     log.info paramsSummaryLog(workflow)
