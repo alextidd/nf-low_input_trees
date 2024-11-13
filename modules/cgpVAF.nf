@@ -83,6 +83,43 @@ process cgpVAF_run {
   """
 }
 
+process cgpVAF_merge {
+  tag "${meta.donor_id}"
+  label "normal"
+  publishDir "${params.outdir}/${meta.donor_id}/${meta.vcf_type}/", mode: 'copy' 
+
+  input:
+  tuple val(meta),
+        path(vafs, stageAs: "vaf??.tsv")
+
+  output:
+  tuple val(meta),
+        path("${meta.donor_id}_${meta.vcf_type}_vaf.tsv")
+
+  script:
+  """
+  # get variant info cols: Chrom Pos Ref Alt normal_MTR normal_DEP
+  var_cols=\$(head -1 ${vafs[0]} \\
+    | tr '\\t' '\\n' \\
+    | grep -n 'Chrom\\|Pos\\|Ref\\|Alt\\|normal_MTR\\|normal_DEP' \\
+    | cut -d: -f1 | tr '\\n' ',' | sed 's/,\$//')
+  cut -f\$var_cols ${vafs[0]} \\
+  > tmp.1.cut
+
+  # for all files, get *_MTR and *_DEP columns
+  for file in ${vafs.join(' ')} ; do
+    cols=\$(head -1 \$file | tr '\\t' '\\n' \\
+      | grep -n '_\\(MTR\\|DEP\\)\$' \\
+      | grep -v '^.*normal_\\(DEP\\|MTR\\)\$' \\
+      | cut -d: -f1 | tr '\\n' ',' | sed 's/,\$//')
+    cut -f\$cols \$file > tmp.\$file.cut
+  done
+
+  # combine all extracted columns
+  paste tmp.*.cut > ${meta.donor_id}_${meta.vcf_type}_vaf.tsv
+  """
+}
+
 workflow cgpVAF {
   take:
   ch_input
@@ -108,9 +145,11 @@ workflow cgpVAF {
   | combine(pileup.out, by: 0)
   | set { ch_batched_samples }
 
-  // run cgpVAF, group outputs by donor
+  // run batched cgpvaf and then merge
   // TODO: move bgzip and tabix of filtered vcfs outside cgpVAF_run
   cgpVAF_run(ch_batched_samples, fasta, cgpvaf_high_depth_bed, cgpvaf_normal_bam)
+  | groupTuple
+  | cgpVAF_merge
   | map { meta, cgpVAF_out -> 
           [meta.subMap("donor_id"), cgpVAF_out]}
   | groupTuple
