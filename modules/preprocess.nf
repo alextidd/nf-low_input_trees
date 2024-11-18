@@ -33,12 +33,23 @@ workflow preprocess {
           file(bam + ".bai", checkIfExists: true),
           file(bam + ".bas", checkIfExists: true),
           file(bam + ".met.gz", checkIfExists: true)]}
+  // get number of samples per donor
+  | map { meta, caveman_vcf, pindel_vcf, bam, bai, bas, met ->
+          [meta.subMap("donor_id"), meta.sample_id,
+           caveman_vcf, pindel_vcf, bam, bai, bas, met] }
+  | groupTuple
+  | map { meta, sample_id, caveman_vcf, pindel_vcf, bam, bai, bas, met ->
+          [meta + [count: sample_id.size()], sample_id,
+           caveman_vcf, pindel_vcf, bam, bai, bas, met] }
+  | transpose
+  | map { meta, sample_id, caveman_vcf, pindel_vcf, bam, bai, bas, met ->
+          [meta + [sample_id: sample_id],
+           caveman_vcf, pindel_vcf, bam, bai, bas, met] }
   | set { ch_samples }
 
   // get caveman vcfs
   ch_samples 
-  | map { meta, caveman_vcf, pindel_vcf,
-          bam, bai, bas, met ->
+  | map { meta, caveman_vcf, pindel_vcf, bam, bai, bas, met ->
           [meta + [vcf_type: "caveman"], caveman_vcf,
            bam, bai, bas, met]
   }
